@@ -1,0 +1,379 @@
+\documentclass[a4paper]{article}
+\usepackage{pgf,tikz,pgfplots}
+\usetikzlibrary{arrows,decorations.markings}
+\pgfplotsset{compat=1.15}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+%% Language and font encodings
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{float}
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+%% Useful packages
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{eqnarray}
+\usepackage{float}
+\usepackage{esint}
+\usepackage{wrapfig}
+\usepackage{gensymb}
+\usepackage{lipsum}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{mathtools}
+\DeclareMathOperator{\Proj}{Proj}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\cosec}{cosec}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\nullity}{nullity}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclareMathOperator{\Res}{Res}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\R}{R}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Log}{Log}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\Var}{Var}
+\newtheorem{ans}{Answer}[section]
+
+\definecolor{darkblue}{RGB}{	0, 0, 139}
+\newtheoremstyle{new}% <name>
+{2pt}% <Space above>
+{2pt}% <Space below>
+{\color{darkblue}}% Body font
+{}% <Indent amount>
+{\bfseries\color{black}}% Theorem head font
+{:}% <Punctuation after theorem head>
+{.5em}% <Space after theorem headi>
+{}% <Theorem head spec (can be left empty, meaning `normal')>
+\theoremstyle{new}
+\newtheorem{qns}{Problem}[section]
+\setlength{\parindent}{0cm}
+\title{\textbf{Part II TSP Problem Sheet Solutions}}
+\author{Tai Yingzhe, Tommy (ytt26)}
+\date{}
+\setlength{\parindent}{0cm}
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+\section{Problem Sheet 1: Thermodynamics}
+\begin{qns}[Van der Waals gas]
+Show that, for a van der Waals gas, the specific heat at constant volume, $C_V$ , obeys 
+$$\bigg(\frac{\partial C_V}{\partial V}\bigg)_T=0$$
+\end{qns}
+\begin{ans}
+The heat capacity at constant volume is defined to be
+$$C_V=\bigg(\frac{\partial U}{\partial T}\bigg)_V=T\bigg(\frac{\partial S}{\partial T}\bigg)_V$$
+Take the partial derivative
+$$\bigg(\frac{\partial C_V}{\partial V}\bigg)_T=T\bigg(\frac{\partial}{\partial T}\bigg)_V\bigg(\frac{\partial S}{\partial V}\bigg)_T=T\bigg(\frac{\partial^2p}{\partial T^2}\bigg)_V$$
+where we used the Maxwell relation $(\frac{\partial S}{\partial V})_T=(\frac{\partial p}{\partial T})_V$. But the van der Waals equation of state is
+$$p=\frac{Nk_BT}{V-Nb}-\frac{N^2a}{V^2}\implies\bigg(\frac{\partial p}{\partial T}\bigg)_V=\frac{Nk_B}{V-Nb}\implies\bigg(\frac{\partial C_V}{\partial V}\bigg)_T=T\bigg(\frac{\partial^2p}{\partial T^2}\bigg)_V=0$$
+\end{ans}
+\begin{qns}[Potentials and thermodynamic variables]
+The Gibbs free energy of an imperfect gas containing $N$ molecules is given, in terms of its natural variables $T$, $p$ and $N$, by
+$$G=Nk_BT\ln\frac{p}{p_0}-NA(T)p$$
+where $p_0$ is a constant and $A$ is a function of $T$ only. Derive expressions in terms of $T$, $p$, $V$, and $N$ for:
+\begin{enumerate}[label=(\alph*)]
+\item the equation of state of the gas;
+\item the entropy, $S$;
+\item the enthalpy, $H$;
+\item the internal energy, $U$;
+\item the Helmholtz free energy, $F$.
+\end{enumerate}
+Can all equilibrium thermodynamic information about the gas be obtained from a knowledge of: (i) $F(T, V, N)$; (ii) the equation of state and $U(T, p, N)$?
+\end{qns}
+\begin{ans}
+Note that $dG=-SdT+Vdp$.
+\begin{enumerate}[label=(\alph*)]
+\item To find the equation of state (function of $p$, $T$ and $V$), we have
+$$V=\bigg(\frac{\partial G}{\partial p}\bigg)_{T,N}=\frac{Nk_BT}{p}-NA$$
+\item The entropy is a conjugate variable with temperature
+$$S=-\bigg(\frac{\partial G}{\partial T}\bigg)_{p,N}=-Nk_B\ln\frac{p}{p_0}+Np\bigg(\frac{\partial A}{\partial T}\bigg)_{p,N}$$
+\item By definition, the enthalpy is
+$$H=G+TS=Nk_BT\ln\frac{p}{p_0}-NA(T)p+T\bigg\{-Nk_B\ln\frac{p}{p_0}+Np\bigg(\frac{\partial A}{\partial T}\bigg)_{p,N}\bigg\}=Np\bigg(\bigg(\frac{\partial A}{\partial T}\bigg)_{p,N}T-A\bigg)$$
+\item By definition, the internal energy is
+$$U=H-pV=Np\bigg(\bigg(\frac{\partial A}{\partial T}\bigg)_{p,N}T-A\bigg)-(Nk_BT-NpA)=TN\bigg[p\bigg(\frac{\partial A}{\partial T}\bigg)_{p,N}-k_B\bigg]$$
+\item By definition, the Helmholtz free energy is
+$$F=U-TS=TN\bigg[p\bigg(\frac{\partial A}{\partial T}\bigg)_{p,N}-k_B\bigg]+TNk_B\ln\frac{p}{p_0}-NpT\bigg(\frac{\partial A}{\partial T}\bigg)_{p,N}=Nk_BT\bigg(\ln\frac{p}{p_0}-1\bigg)$$
+\end{enumerate}
+\begin{enumerate}[label=\roman*]
+\item We have the free energy to be
+$$dF=dU-d(TS)=-SdT-pdV+\mu dN$$
+So, $T$, $V$ and $N$ are natural variables of $F$. Hence, all equilibrium thermodynamic information can be obtained.
+\item Internal energy is however, $dU=TdS-pdV+\mu dN$ and so the natural variables of $U$ are $S$, $V$ and $N$. We need to change $T\rightarrow S$ and $p\rightarrow V$. But, the equation of state only allow one such change.
+\end{enumerate}
+\end{ans}
+\begin{qns}[Entropy of the monatomic gas]
+The entropy of a monatomic ideal gas is given by the Sackur-Tetrode equation which can be written in the form:
+$$S(U,V,N)=Nk_B\ln\bigg\{\alpha\frac{V}{N}\bigg(\frac{U}{N}\bigg)^{3/2}\bigg\}$$
+where $\alpha$ is a constant to be derived later in the course. Invert this expression to get $U(S, V, N)$. From this, obtain the equation of state expressing $p$ as a function of $V$, $N$ and $T$.
+\end{qns}
+\begin{ans}
+Invert the expression:
+$$S(U,V,N)=\frac{3}{2}Nk_B\ln\bigg\{\bigg(\alpha\frac{V}{N}\bigg)^{2/3}\frac{U}{N}\bigg\}\implies U(S,V,N)=e^{2S/3Nk_B}\bigg(\frac{N}{\alpha V}\bigg)^{2/3}N$$
+But we have $dU=TdS-pdV+\mu dN$ and so
+$$p=-\bigg(\frac{\partial U}{\partial V}\bigg)_{S,N}=\frac{2U}{3V},\quad T=\bigg(\frac{\partial U}{\partial S}\bigg)_{V,N}=\frac{2}{3Nk_B}U$$
+which separately gives $p=\frac{2}{3}U/V$ and $U=\frac{3}{2}Nk_BT$. The lattonsistent er is cwith the equipartition of energy while the former $p=\frac{2}{3}\frac{3}{2}\frac{N}{V}k_BT\implies Nk_BT=pV$ is consistent with the ideal gas law.
+\end{ans}
+\begin{qns}[Analytic thermodynamics]
+Use a Maxwell relation and the chain rule to show that for any substance the rate of change of $T$ with $p$ in a reversible adiabatic compression is given by
+$$\bigg(\frac{\partial T}{\partial p}\bigg)_S=\frac{T}{C_p}\bigg(\frac{\partial V}{\partial T}\bigg)_p$$
+Find an equivalent expression for the adiabatic rate of change of $T$ with $V$ , and check that both results are valid for an ideal monatomic gas.
+\end{qns}
+\begin{ans}
+We have $dH=TdS+vdp$, which gives the Maxwell relation
+$$\bigg(\frac{\partial T}{\partial p}\bigg)_S=\bigg(\frac{\partial V}{\partial S}\bigg)_p=\bigg(\frac{\partial V}{\partial T}\bigg)_p\bigg(\frac{\partial T}{\partial S}\bigg)_p$$
+But, $C_p=(\frac{\partial U}{\partial T})_p=T(\frac{\partial S}{\partial T})_p$, which gives our relation. Next, we want to find $(\frac{\partial T}{\partial V})_S$. We have $dU=TdS-pdV$, which gives the Maxwell relation
+$$\bigg(\frac{\partial T}{\partial V}\bigg)_S=-\bigg(\frac{\partial p}{\partial S}\bigg)_V=-\bigg(\frac{\partial p}{\partial T}\bigg)_V\bigg(\frac{\partial T}{\partial S}\bigg)_V=-\frac{T}{C_V}\bigg(\frac{\partial p}{\partial T}\bigg)_V$$
+where $C_V=(\frac{\partial U}{\partial T})_V=T(\frac{\partial S}{\partial T})_V$. For ideal gas, the equation of state is $pV=Nk_BT$. For an adiabatic process, $pV^\gamma=\text{const.}$ we have
+$$0=d(pV^\gamma)=d[(Nk_BT)^\gamma p^{1-\gamma}]=\gamma T^{\gamma-1}p^{1-\gamma}dT+(1-\gamma)T^\gamma p^{-\gamma}dp$$
+For monatomic gas, we have $\gamma=5/3$. We show:
+$$\bigg(\frac{\partial T}{\partial p}\bigg)_S=-\frac{1-\gamma}{\gamma}\frac{T}{p}=\frac{2T}{5p},\quad \frac{T}{C_p}\bigg(\frac{\partial V}{\partial T}\bigg)_p=\frac{T}{2.5Nk_B}\frac{Nk_B}{p}=\frac{2T}{5p}$$
+We can also write the adiabatic process as
+$$0=d(pV^\gamma)=V^{\gamma-1}dT+TV^{\gamma-2}(\gamma-1)dV$$
+which gives
+$$\bigg(\frac{\partial T}{\partial V}\bigg)_S=-(\gamma-1)\frac{T}{V}=-\frac{2T}{3V},\quad -\frac{T}{C_p}\bigg(\frac{\partial p}{\partial T}\bigg)_V=-\frac{T}{1.5Nk_B}\frac{Nk_B}{V}=-\frac{2T}{3V}$$
+\end{ans}
+\begin{qns}[Brief Notes]
+Write brief notes on thermodynamic equilibrium in closed and open systems.
+\end{qns}
+\begin{ans}
+Closed systems can only exchange energy with their surroundings. Energy is not conserved; if the system is in equilibrium with its surroundings, mean value of energy is related to the temperature of the system or the surroundings.\\[5pt]
+Open systems can exchange energy and matter with their surroundings; energy and particle number are not conserved; if the system is in equilibrium with its surroundings, mean values of energy and the particle number are related to the temperature and chemical potential of the system or of the surroundings.\\[5pt]
+Thermodynamic equilibrium state is defined as the one macroscopic state of a system which is automatically attained after a sufficiently long period of time such that the macroscopic properties of the system no longer change with time.\\[5pt]
+By Second Law of thermodyamics, we can show that the equilibrium state is the state at which $S$ has a global maximum. Since $S$ is a monotonically increasing function of $U$, then the condition for equilibrium is $(\Delta U)_{S,V,N_i}\geq0$. By first-order variational displacement of $E$:
+$$\delta U=\sum_{\alpha=1}^\mu[T^{(\alpha)}\delta S^{(\alpha)}-p^{(\alpha)}\delta V^{(\alpha)}+\sum_{i=1}^r\mu_i^{(\alpha)}\delta N_i^{(\alpha)}]$$
+From the condition of equilibrium, i.e. consider process that repartition individual quantities, keeping the corresponding total fixed. Then we have
+$$\sum_{\alpha=1}^\nu\delta S^{(\alpha)}=0,\quad\sum_{\alpha=1}^\nu\delta V^{(\alpha)}=0,\quad\sum_{\alpha=1}^\nu\delta N_i^{(\alpha)}=0,\text{ for }i=1,2,...,r$$
+For $\nu=2$, we can easily demonstrate 
+$$\delta S^{(1)}=-\delta S^{(2)},\quad\delta V^{(1)}=-\delta V^{(2)},\quad\delta N_j^{(1)}=-\delta N_j^{(2)}$$
+The first-order displacements require
+$$(T^{(1)}-T^{(2)})\delta S^{(1)}-(p^{(1)}-p^{(2)})\delta V^{(1)}+\sum_{i=1}^r(\mu_i^{(1)}-\mu_i^{(2)})\delta N_i^{(1)}\geq0$$
+The fluctuations are independent of each other. So the only acceptable solutions are $T^{(1)}=T^{(2)}$, $p^{(1)}=p^{(2)}$, $\mu_i^{(1)}=\mu_i^{(2)}$ for $i=1,2,...,r$. We can generalize for arbitrary $\mu$.
+\end{ans}
+\newpage
+\begin{qns}[Bubble]
+Under what conditions is the Helmholtz free energy $F$ a minimum for a system in equilibrium? The work corresponding to an increase in the surface area of a liquid is $dW = \Gamma dA$, where $\Gamma$ is the surface tension, and $A$ is the area of the surface.\\[5pt]
+Consider a bubble of air in a large container of liquid in equilibrium. Write the total Helmholtz free energy of the system as the sum of contributions from the air in the bubble, $F_a$, the surface of the bubble, $F_s$, and the surrounding liquid, $F_l$. Show that the pressure of the air inside the bubble is equal to $p_l + 2\Gamma/r$, where $p_l$ is the pressure of the liquid.
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\begin{qns}[Oxygen extraction]
+What is the minimum work required to extract 1 mole of pure O$_2$ from a large volume of air at the same temperature and pressure, if air is regarded as being composed of 1 volume of O$_2$ mixed with 4 volumes of $N_2$. 
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\newpage
+\begin{qns}[Fuel cell]
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\begin{qns}[Superconductor]
+The heat capacities of the superconducting and normal phases of a metal at low temperatures are given approximately by
+$$C_s(T)=V\alpha T^3\text{ superconducting phase}$$
+$$C_n(T)=V\beta T^3+V\gamma T\text{ normal phase}$$
+where $V$ is the volume and $\alpha$, $\beta$, and $\gamma$ are constants. Above a temperature $T_c$, the normal phase is stable. At low temperatures the superconducting phase is stable, but it can be suppressed in high magnetic fields, which enabled the experimental determination of $C_n(T)$ given above.\\[5pt]
+Experiments indicate that the latent heat for the transition is zero. What does this imply for the entropy of the normal and of the superconducting phase at $T_c$? Find an expression for $T_c$.
+\end{qns}
+\begin{ans}
+The heat capacity is $C=T\frac{dS}{dT}$, so the entropy is
+$$S_{s}(T)=\int\frac{C_{s}}{T}dT=\frac{1}{3}V\alpha T^3+S^{(0)}_{s}$$
+$$S_{n}(T)=\int\frac{C_{n}}{T}dT=\frac{1}{3}V\beta T^3+V\gamma T+S^{(0)}_{n}$$
+The Third Law tells us that at $T=0$, $S_n(T=0)=S_s(T=0)=0$. The latent heat is given to be zero at the phase transition, so
+$$0=L=T_c[S_n(T_c)-S_s(T_c)]=T_c\bigg[(\beta-\alpha)\frac{V}{3}T_c^3+V\gamma T_c\bigg]\implies T_c=\sqrt{\frac{3\gamma}{\alpha-\beta}}$$
+\end{ans}
+\newpage
+\section{Problem Sheet 2: Equilibrium thermodynamics, basic statistical physics}
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\newpage
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\newpage
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\newpage
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\newpage
+\section{Problem Sheet 3: Quantum Statistics}
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\newpage
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\newpage
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\newpage
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+
+\newpage
+\section{Problem Sheet 4: Interacting systems, stochastic physics}
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\newpage
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\newpage
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\newpage
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\newpage
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\begin{qns}
+
+\end{qns}
+\begin{ans}
+
+\end{ans}
+\end{document}
