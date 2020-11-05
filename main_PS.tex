@@ -73,7 +73,8 @@
 \maketitle
 \tableofcontents
 \newpage
-\section{Problem Sheet 1: Thermodynamics}
+\section{Problem Sheet 1}
+\subsection*{Thermodynamics}
 \begin{qns}[Van der Waals gas]
 Show that, for a van der Waals gas, the specific heat at constant volume, $C_V$ , obeys 
 $$\bigg(\frac{\partial C_V}{\partial V}\bigg)_T=0$$
@@ -174,7 +175,13 @@ Under what conditions is the Helmholtz free energy $F$ a minimum for a system in
 Consider a bubble of air in a large container of liquid in equilibrium. Write the total Helmholtz free energy of the system as the sum of contributions from the air in the bubble, $F_a$, the surface of the bubble, $F_s$, and the surrounding liquid, $F_l$. Show that the pressure of the air inside the bubble is equal to $p_l + 2\Gamma/r$, where $p_l$ is the pressure of the liquid.
 \end{qns}
 \begin{ans}
-
+We have
+$$dF=-SdT-pdV+\mu dN$$
+so $F$ is minimum for a system at constant $T$, $V$ and $N$. Take the entire system to be the bubble and its surrounding liquid, and assume it is at fixed volume and temperature. Our goal is thus to minimize $F$ - for both bulk systems and their interface. The interface has a work contribution $-pdV=\Gamma dA$ where $\Gamma$ is the surface tension.
+$$0=dF=dF_l+dF_a+dF_{\text{surface}}=p_ldV_a-p_adV_a+\Gamma dA$$
+where we have $dT=0$, $dV_l=-dV_a$, $dN_i=0$ $\forall i$. For a spherical bubble, we have $dA=8\pi rdr$ and $dV_a=4\pi r^2dr$, and so
+$$0=(p_l-p_a)rdr+2\Gamma dr\implies p_a=p_l+\frac{2\Gamma}{r}$$
+The pressure inside the bubble is higher than the outside.
 \end{ans}
 \begin{qns}[Oxygen extraction]
 What is the minimum work required to extract 1 mole of pure O$_2$ from a large volume of air at the same temperature and pressure, if air is regarded as being composed of 1 volume of O$_2$ mixed with 4 volumes of $N_2$. 
@@ -184,11 +191,39 @@ What is the minimum work required to extract 1 mole of pure O$_2$ from a large v
 \end{ans}
 \newpage
 \begin{qns}[Fuel cell]
-
+Consider the reaction
+$$\text{H}_2+\text{O}_2\rightarrow\text{H}_2\text{O}$$
+The following table lists parameters for this reaction at constant temperature $T = 298 K$ and pressure $p = 1 atm$.
+\begin{table}[H]
+\begin{tabular}{lllll}
+         & H$_2$    & O$_2$    & H$_2$O (liquid)    &  \\
+enthalpy $H_n^{(m)}$ (kJ/mol) & 0     & 0     & -285.8 &  \\
+entropy $S_n^{(m)}$ (J/mol K) & 130.7 & 205.1 & 69.9   & 
+\end{tabular}
+\end{table}
+We first consider a process, in which the reactants are mixed and the reaction proceeds towards equilibrium at constant pressure and temperature. Calculate the Gibbs free energies per mole, $G_n^{(m)}$ . Calculate the equilibrium constant $K_c(p,T)$. What does its value tell us about the nature of the reaction?\\[5pt]
+We now consider an ideal fuel cell operating at the same pressure and temperature, in which the reaction proceeds via an electrolyte. What are the maximum possible electric work extracted and the corresponding heat produced when forming one mol of H$_2$O. What is the efficiency and the voltage of an ideal fuel cell?
 \end{qns}
 \begin{ans}
-
+We have $G=H-TS$
+$$G_{H_2}^{(m)}=0-298(130.7)=-38.9~kJ/mol,\quad G_{O_2}^{(m)}=0-298(205.1)=-61.1~kJ/mol$$
+$$G_{H_2O}^{(m)}=-285.8\times10^3-298(69.9)=-306.6~kJ/mol$$
+The chemical potential is the Gibbs free energy per particle, i.e. $\mu=G/N=N_A\mu_0$, where $\mu_0$ is the chemical potential at 1 atm and 298 K. The equilibrium constant is
+$$k_BT\ln K_c(p,T)=-\sum_i\nu_i\mu_{0i}\implies K_c=\exp\bigg(-\frac{1}{RT}\bigg(2G_{H_2}^{(m)}+G_{O_2}^{(m)}-2G_{H_2O}^{(m)}\bigg)\bigg)=e^{-303.7}<<1$$
+Since $K_c$ is very small, the reaction is pushed to the right, i.e. water is much favorably formed.\\[5pt]
+The change in Gibbs free energy (from the formation of 1 mole of water) is the maximal reversible work that can be done by the system at the same pressure and temperature. 
+$$\Delta G^{(m)}=G^{(m)}_{H_2O}-(G_{H_2}^{(m)}+\frac{1}{2}G_{O_2}^{(m)})=-306.6\times10^3-(-61.1(0.5)-38.9)\times10^3=-237~\text{kJ/mol}$$
+The heat evolved from the reaction is
+$$Q^{(m)}=T\Delta S^{(m)}=T(S_{H_2O}^{(m)}-S_{H_2}^{(m)}-\frac{1}{2}S_{O_2}^{(m)})=298(69.9-(130.7+0.5(205.1)))=-48.7~\text{kJ/mol}$$
+If the reaction were allowed to proceed without extracting work. 
+$$Q_{\text{irrev}}^{(m)}=H_{H_2O}^{(m)}-(H_{H_2}^{(m)}+0.5H_{O_2}^{(m)})=-285.58~\text{kJ/mol}$$
+The efficiency of the ideal fuel cell is
+$$\eta=\frac{\Delta G^{(m)}}{Q_{\text{irrev}}^{(m)}}=\frac{-237}{-285.58}=0.83$$
+with the remaining 17 percent being released as heat. Assuming the fuel cell is reversible, the maximally available work will be electrical work done.
+$$W'=\Delta G=QV=2N_AeV\implies-237.28\times10^3=2(6.02\times10^{23})(-1.6\times10^{-19})V\implies V=1.23V$$
+where 2 moles of electron is involved.
 \end{ans}
+\newpage
 \begin{qns}[Superconductor]
 The heat capacities of the superconducting and normal phases of a metal at low temperatures are given approximately by
 $$C_s(T)=V\alpha T^3\text{ superconducting phase}$$
@@ -204,7 +239,8 @@ The Third Law tells us that at $T=0$, $S_n(T=0)=S_s(T=0)=0$. The latent heat is 
 $$0=L=T_c[S_n(T_c)-S_s(T_c)]=T_c\bigg[(\beta-\alpha)\frac{V}{3}T_c^3+V\gamma T_c\bigg]\implies T_c=\sqrt{\frac{3\gamma}{\alpha-\beta}}$$
 \end{ans}
 \newpage
-\section{Problem Sheet 2: Equilibrium thermodynamics, basic statistical physics}
+\section{Problem Sheet 2}
+\subsection*{Equilibrium thermodynamics, basic statistical physics}
 \begin{qns}
 
 \end{qns}
@@ -251,7 +287,8 @@ $$0=L=T_c[S_n(T_c)-S_s(T_c)]=T_c\bigg[(\beta-\alpha)\frac{V}{3}T_c^3+V\gamma T_c
 
 \end{ans}
 \newpage
-\section{Problem Sheet 3: Quantum Statistics}
+\section{Problem Sheet 3}
+\subsection*{Quantum Statistics}
 \begin{qns}
 
 \end{qns}
@@ -305,7 +342,8 @@ $$0=L=T_c[S_n(T_c)-S_s(T_c)]=T_c\bigg[(\beta-\alpha)\frac{V}{3}T_c^3+V\gamma T_c
 \end{ans}
 
 \newpage
-\section{Problem Sheet 4: Interacting systems, stochastic physics}
+\section{Problem Sheet 4}
+\subsection*{Interacting systems, stochastic physics}
 \begin{qns}
 
 \end{qns}
