@@ -465,6 +465,28 @@ $$U=TS-PV+\mu N$$
 \begin{proof}
 Follows from Euler's theorem.
 \end{proof}
+\begin{prop}
+For a reversible chemical reaction, we must have $\sum_i\nu_i\mu_i=0$.
+\end{prop}
+\begin{proof}
+By Gibbs-Duhem equation, we have $d\mu_i=-s_idT+v_idp$. The change in chemical potential is thus zero at constant $T$ and $P$. The variation of $G$ about the equilibrium ratio of chemical components satisfies
+$$dG=\sum_i\mu_idN_i=0$$
+But the $dN_i$'s are related by matter conservation, so $dN_i/\nu_i$ is a constant. We then have 
+$$\sum_i\nu_i\mu_i=0$$
+where $\nu_i$'s are the ratios, with $\nu>0$ for reactants and $\nu<0$ for products. 
+\end{proof}
+\begin{defi}[Equilibrium constant for concentration]
+$$K_c(T):=\prod_ic_i^{\nu_i}$$
+\end{defi}
+\begin{prop}
+$$\ln K_c(T)=-\frac{1}{k_BT}\sum_i\nu_i\mu_{0,i}(T,P)$$
+\end{prop}
+\begin{proof}
+Combining $\sum_i\nu_i\mu_i=0$ and $\mu_i(P_i,T)=\mu_{0,i}(P,T)+k_BT\ln c_i$, we have
+$$0=\sum_i\nu_i\mu_{0,i}+k_BT\sum_i\nu_i\ln c_i=\sum_i\nu_i\mu_{0,i}+k_BT\ln\prod_i c_i^{\nu_i}$$
+Hence, $\ln K_c(T)=-\frac{1}{k_BT}\sum_i\nu_i\mu_{0,i}(T,P)$.
+\end{proof}
+\newpage
 \subsection{Potentials and Availability}
 \subsubsection*{Availability}
 \begin{prop}
@@ -1019,6 +1041,48 @@ Consider identical, weakly interacting, localized harmonic oscillators, each wit
 $$\Phi(T,\mu)=-k_BT\log\mathcal{Z}(T,\mu)=-k_BT\log\bigg(\frac{1-e^{-\beta\hbar\omega}}{1-e^{\beta\mu}-e^{-\beta\hbar\omega}}\bigg)$$
 where $\frac{e^{\beta\mu}}{1-e^{-\beta\hbar\omega}}<1$. We have $Z(T,N_S)=\prod_{i=1}^N\sum_{n_i=0}^\infty e^{-\beta\hbar\omega n_i}=(\frac{1}{1-e^{-\beta\hbar\omega}})^N$. We then have $\mathcal{Z}(T,\mu)=\sum_{N_S=0}^\infty (e^{\beta\mu})^{N_S}Z(T,N_S)=\frac{1-e^{-\beta\hbar\omega}}{1-e^{\beta\mu}-e^{-\beta\hbar\omega}}$.
 \end{eg}
+\begin{cor}
+Suppose we have numerous species of particles, the grand potential is the sum of that of the individual species.
+\end{cor}
+\begin{proof}
+Noting that $N=n_1+n_2+\dots$, we have
+$$\mathcal{Z}(T,\mu,V)=\sum_{N=0}^\infty\sum_{n_1,n_2,\dots}^Ne^{-\beta(n_1E_1+n_2E_2+\dots-\mu N)}=\sum_{n_1,n_2,\dots}e^{-\beta(E_1-\mu)n_1}e^{-\beta(E_2-\mu)n_2}\dots=\prod_i\mathcal{Z}_i$$
+where $\mathcal{Z}_i=\sum_{n_i}e^{-\beta(E_i-\mu)n_i}$. Finally, $\Phi=-k_BT\log\mathcal{Z}$, so $\Phi=-k_BT\log\prod_i\mathcal{Z}_i=-k_BT\sum_i\log\mathcal{Z}_i=\sum_i\Phi_i$.
+\end{proof}
+\begin{remarks}
+Suppose our system have internal degrees of freedom and external degrees of freedom, which are described by the partition functions $Z_{\text{int}}$ and $Z_{\text{ext}}$ respectively. If they are independent degrees of freedom, we may multiply to the existing partition function $Z$.
+\end{remarks}
+\begin{eg}
+Suppose we have a diatomic molecule with internal degrees of freedom (rotational and vibrational) in an external potential. The energy of the molecule is
+$$E=E_{\mathbf{k}}+E_{\text{int}}+E_{\text{ext}},\quad E_{\text{int}}=(n+0.5)\hbar\omega_0+\frac{\hbar^2J(J+1)}{2I}$$
+An example of an external potential is gravity. The gravitational field does not affect the internal degrees of freedom because the gravitational potential does not vary significantly over the size of the molecule. But for an external magnetic field, it interacts with the rotational states, lifting their degeneracies, hence affecting the internal degrees of freedom. Consider the former where we have a small volume of gas at height $h$, the grand partition function for energy level $E_{\mathbf{k}}$ in the classical limit is
+\begin{align}
+\mathcal{Z}_{\mathbf{k}}(h)&=1+\sum_{\text{int}}e^{-\beta(E_{\mathbf{k}}+E_{\text{int}}+E_{\text{ext}}-\mu)}=1+Z_{\text{int}}Z_{\text{ext}}(h)e^{-\beta(E_{\mathbf{k}}-\mu)}\nonumber\\\implies\Phi_{\mathbf{k}}(h)&=-k_BT\ln\mathcal{Z}_{\mathbf{k}}(h)\approx-k_BTZ_{\text{int}}Z_{\text{ext}}(h)e^{-\beta(E_{\mathbf{k}}-\mu)}\nonumber
+\end{align}
+The chemical potential of the gas for fixed particle number $N$ is
+$$N=-\bigg(\frac{\partial\Phi}{\partial\mu}\bigg)_{T,V}\implies\mu=k_BT\bigg[\ln\bigg(\frac{N(h)\lambda^3}{\sigma V}\bigg)-\ln Z_{\text{int}}-\ln Z_{\text{ext}}(h)\bigg]$$
+where $E_{\text{ext}}=mgh\implies-k_BT\ln Z_{\text{ext}}(h)=mgh$. Now, consider the variation of particle number with height in an ideal classical gas in a gravitational field. In equilibrium, the temperature must be independent of height. In equilibrium $\mu$ must also be independent of height, and we see 
+$$N(h)=N(0)e^{-mgh/k_BT}$$
+\end{eg}
+\begin{prop}[Law of mass action]
+Let the equilibrium constant be $K_N(T)=\prod_iN_i^{\nu_i}$, then
+$$K_N(T)=\prod_i(Z_1^i)^{\nu_i}$$
+where $Z_1$ is the single-particle partition function for species $i$.
+\end{prop}
+\begin{proof}
+The chemical potential for each species is $\mu_i=k_BT(\ln N_i-\ln Z_1^i)$. where $Z_1^i$ is the single-particle partition function for a single molecule of species $i$, confined to a volume $V$, which includes all degrees of freedom. By the condition of chemical equilibrium, $\sum_i\nu_i\mu_i=0$, we have $K_N(T)=\prod_iN_i^{\nu_i}=\prod_i(Z_1^i)^{\nu_i}$.
+\end{proof}
+\begin{eg}[Langmuir adsorption isotherm]
+Suppose a vapour is in thermal equilibrium with a surface, and that a molecule of the vapour may attach itself to the surface at one of the $N_s$ surface sites, which lowers its energy by an amount $\varepsilon$. The internal degrees of freedom of the molecule can be neglected in the vapour phase, but when the molecule is attached to the surface it vibrates against it, and the partition function of a single adsorbed molecule is $z_s(T)$. The partition function for $N$ adsorbed molecules is $Z_N=\frac{N_s!}{(N_s-N)N!}z_s^Ne^{-\beta(-N\varepsilon)}$. Using Stirling's approximation, we obtain
+$$F=-k_BT\ln Z_N=-N\varepsilon-k_BT(N\ln z_s+N_s\ln N_s-(N_s-N)\ln(N_s-N)-N\ln N)$$
+The chemical potential is
+$$\mu_s=\frac{\partial F}{\partial N}=-\varepsilon-k_BT\bigg(\ln z_s+\ln\frac{N_s-N}{N}\bigg)=-\varepsilon+k_BT\ln\frac{\theta}{(1-\theta)z_s}$$
+where $\theta=N/N_s$ is the fraction of the surface sites occupied by molecules. Equivalently, we use the grand partition function is
+$$\mathcal{Z}=\sum_ie^{-\beta(E_i-\mu_sN_i)}Z_{\text{int}}^{(i)}=1+z_se^{\beta(\varepsilon+\mu_s)}$$
+where each site (the surface sites are independent) has two states: $i=0$ empty and $i=1$ full. The corresponding grand potential is $\Phi=-k_BT\ln\mathcal{Z}$ and the average occupation of the site is
+$$\theta=\frac{N}{N_s}=-\bigg(\frac{\partial\Phi}{\partial\mu_s}\bigg)_{T,V}=\frac{z_se^{\beta(\varepsilon+\mu_s)}}{1+z_se^{\beta(\varepsilon+\mu_s)}}\implies\mu_s=-\varepsilon+k_BT\ln\frac{\theta}{(1-\theta)z_s}$$
+But the chemical potential of an ideal gas (later) is $\mu=k_BT\ln\frac{p\lambda^3}{k_BT}$ and so the Langmuir adsorption isotherm is characterized by $p=\frac{\theta}{1-\theta}\frac{k_BT}{z_s\lambda^3}e^{-\beta\varepsilon}$.
+\end{eg}
 \newpage
 \section{Classical Statistical Mechanics}
 \subsection{Phase Space}
@@ -1226,13 +1290,302 @@ The crossover occur when $\langle n\rangle\sim 1$. $1/\lambda^3$ is sometimes ca
 \newpage
 \section{Quantum Statistical Mechanics}
 \subsection{Density of states}
-The density of states appear a lot in this chapter when computing sums over states. Consider an ideal gas trapped in the box of volume $V=L^3$ and impose periodic boundary conditions. The energy eigenstates are $\psi=\frac{1}{\sqrt{V}}e^{i\mathbf{k}\cdot\mathbf{x}}$ with quantized wavevectors $k_i=\frac{2\pi n_i}{L}$, $n_i\in\mathbb{Z}$. The energy would be $E_n=\frac{\hbar^2k^2}{2m}=\frac{\pi^2\hbar^2}{2mL^2}(n_1^2+n_2^2+n_3^2)$. The single particle partition function is $Z_1=\sum_ne^{-\beta E_n}$. For any macroscopic size box $(\lambda<<L)$, there are many states with $E_n\leq T$ all of which contributes to the sum. Hence, we may approximate the discrete sum to an integral:
+The density of states appear a lot in this chapter when computing sums over states. Consider an ideal gas trapped in a box of volume $V=L^3$.
+\subsubsection{Open Boundary Conditions}
+If we assert the wavefunction must vanish at the walls of the box, then it must be standing waves. The eigenstates and eigenvalues are
+$$\psi=\sqrt{\frac{8}{V}}\sin(k_xx)\sin(k_yy)\sin(k_zz),\quad E_{\mathbf{k}}=\frac{\hbar^2}{2m}(k_x^2+k_y^2+k_z^2)$$
+In order to satisfy the boundary conditions, we need $\psi(x_i=0)=\psi(x_i=L_i)=0$, $k_i=\frac{n\pi}{L_i}$. The allowed values of the $\mathbf{k}$-vector form a lattice in $\mathbf{k}$-space, with volume per point $\Delta k_x\Delta k_y\Delta k_z=\frac{\pi^3}{V}$. The density of allowed $\mathbf{k}$-vectors will be the inverse of this, multiplied by the spin degeneracy factor $g_s$.
+\subsubsection{Periodic Boundary conditions}
+Now, since $\psi(x_i+L_i)=\psi(x_i)$, the eigenstates must be travelling waves $\psi=\frac{1}{\sqrt{V}}e^{i\mathbf{k}\cdot\mathbf{r}}$. The allowed values of the wavevector $\mathbf{k}$ again form a lattice, but now the spacing between lattice points is $2\pi/L_i$, giving a larger volume per lattice point $(2\pi)^3/V$ and a smaller density $g_sV/(2\pi)^3$. Since we count $\mathbf{k}$ from all eight octants of the 3D wavevector space, whereas for the open boundary conditions, states with wavevector $(\pm k_x,\pm k_y,\pm k_z)$ are actually the same, and so we have to limit our sums to one octant.
+\subsubsection{Integral conversion}
+For any macroscopic size box $(\lambda<<L)$, there are many states with $E_n\leq k_BT$ all of which contributes to the sum. Hence, we may approximate the discrete sum to an integral:
 $$\sum_n\rightarrow\int d^3n=\frac{V}{(2\pi)^3}\int d^3k=\frac{4\pi V}{(2\pi)^3}\int_0^\infty k^2dk$$
 It is thus easier to change variables to $dE=\frac{\hbar^2k}{m}dk$, so the density of states is
 $$\int d^3n=\int g(E)dE,\quad g(E)=\frac{V}{4\pi^2}\bigg(\frac{2m}{\hbar^2}\bigg)^{3/2}E^{1/2}$$
-where $g(E)dE$ counts the number of states with energy between $E$ and $E+dE$. For massless particles, the density of states is
+where $g(E)dE$ counts the number of states with energy between $E$ and $E+dE$. On the other hand, for massless particles, the density of states is
 $$g(E)=\frac{VE^2}{2\pi^2\hbar^3c^3}$$
+\begin{remarks}
+This conversion is necessary in order to compute the grand potential later. Recall that the full grand potential is summed over all energy states, i.e. $\Phi=\sum_k\Phi_k$. For a continuous non-relativistic gas in 3D, we can cast the discrete sum into an integral over available phase space.
+$$\Phi=\sum_k\Phi_k=\int\Phi(E)\frac{d^3xd^3p}{(2\pi\hbar)^3}=\frac{V}{(2\pi\hbar)^3}\int^\infty_0 e^{-\beta(E-\mu)}4\pi p^2dp=\frac{V}{4\pi^2}\bigg(\frac{2m}{\hbar^2}\bigg)^{3/2}\int_0^\infty\sqrt{E}e^{-\beta(E-\mu)}dE$$
+which gives $-k_BTVe^{\beta\mu}/\lambda^3$. 
+\end{remarks}
+\begin{eg}
+Consider the partition function of a single particle of mass $m$ in a box of volume $V$,
+$$Z_1=\sum_{k_x,k_y,k_z}e^{-\beta\varepsilon_{\mathbf{k}}}=\frac{V}{4\pi^2}\bigg(\frac{2m}{\hbar^2}\bigg)^{3/2}\int_0^\infty e^{-\beta\varepsilon}\sqrt{\varepsilon}d\varepsilon=\frac{V}{4\pi^2}\bigg(\frac{2mk_BT}{\hbar^2}\bigg)^{3/2}2\int_0^\infty e^{-x^2}x^2dx=\frac{V}{\lambda^3}$$
+where we substituted $x^2=\varepsilon/k_BT$ and the integral is equal to $\sqrt{\pi}/4$. We have $n_Q(T)=1/\lambda^3$ to be the quantum concentration.
+\end{eg}
+
+\newpage
+\subsection{Bosons and Fermions}
+If particles are non-interacting and $\lambda\sim(V/N)^{1/3}$ at sufficiently low temperature, then we need to consider quantum statistics. Consider $N$ identical particles, which may be interacting with each other. Due to spin-statistics theorem, the quantum wavefunctions must obey the symmetry property (depending on the quantum statistics)
+$$\Psi(\mathbf{x^1},...,\mathbf{x^i},...,\mathbf{x^j},...,\mathbf{x^N})=\pm\Psi(\mathbf{x^1},...,\mathbf{x^j},...,\mathbf{x^i},...,\mathbf{x^N})$$
+Bosonic (integer spins) wavefunctions are even under exchange, whereas fermionic (half-integer spins) wavefunctions are odd under exchange. We can construct the basis of $N$-particle states $\Psi$ from independent 1-particle states $\{\psi^1, \psi^2,...\}$.  We do this by specifying the occupation numbers of $N$-particle states, constrained by the total number of particles $N$ being fixed, i.e. $\sum_\alpha n^\alpha=N$. The occupancy for bosons and fermions satisfy respectively $n^\alpha\in\mathbb{Z}^+\cup\{0\}$ and $n^\alpha\in\{0,1\}$. The latter is due to Pauli exclusion principle:
+\begin{eg}[Pauli exclusion principle]
+Consider the two-particle state constructed using $\psi^\alpha$ and $\psi^\beta$:
+$$\Psi(\mathbf{x^1},\mathbf{x^2})=\psi^\alpha(\mathbf{x^1})\psi^\beta(\mathbf{x^2})\pm\psi^\alpha(\mathbf{x^2})\psi^\beta(\mathbf{x^1}),\quad\alpha\neq\beta$$
+and $\Psi$ has the required symmetry in accordance to the spin-statistics theorem. Let the occupation numbers be $n^\alpha=1$ and $n^\beta =1$. If $\alpha=\beta$, $\Psi(\mathbf{x^1},\mathbf{x^2})=\psi^\alpha(\mathbf{x^1})\psi^\alpha(\mathbf{x^2})$. This is okay for bosons since $n^\alpha=2$ is allowed. But, no state with $n^\alpha=2$ is allowed for fermions.
+\end{eg}
+\begin{eg}
+Consider two non-interacting quantum particles in a box, in states $|\mathbf{k_1}\rangle$ and $|\mathbf{k_2}\rangle$ with positions $\mathbf{r_1}$ and $\mathbf{r_2}$. Since the particles are indistinguishable, then the state $\Psi_{\mathbf{k_1},\mathbf{k_2}}(\mathbf{r_1},\mathbf{r_2})=e^{i\mathbf{k_1}\cdot\mathbf{r_1}}e^{i\mathbf{k_2}\cdot\mathbf{r_2}}$ is different from $\Psi_{\mathbf{k_2},\mathbf{k_1}}(\mathbf{r_1},\mathbf{r_2})=e^{i\mathbf{k_2}\cdot\mathbf{r_1}}e^{i\mathbf{k_1}\cdot\mathbf{r_2}}$. The wavefunction is
+$$\Psi_{\mathbf{k_1},\mathbf{k_2}}(\mathbf{r_1},\mathbf{r_2})=\frac{1}{\sqrt{2}}\bigg(e^{i\mathbf{k_1}\cdot\mathbf{r_1}}e^{i\mathbf{k_2}\cdot\mathbf{r_2}}|s_1;s_2\rangle\pm e^{i\mathbf{k_2}\cdot\mathbf{r_1}}e^{i\mathbf{k_1}\cdot\mathbf{r_2}}|s_2;s_1\rangle\bigg)$$
+where the plus sign refers to bosons, and the minus to fermions. The joint probability density $P_{\mathbf{k_1},\mathbf{k_2}}(\mathbf{r_1},\mathbf{r_2})$ for the state $\Psi_{\mathbf{k_1},\mathbf{k_2}}(\mathbf{r_1},\mathbf{r_2})$ of finding one particle at $\mathbf{r_1}$ and the other at $\mathbf{r_2}$ is
+$$\frac{1}{2}(1+1\pm\delta_{s_1,s_2}(e^{-i\mathbf{k_1}\cdot(\mathbf{r_1}-\mathbf{r_2})}e^{-i\mathbf{k_2}\cdot(\mathbf{r_2}-\mathbf{r_1})}+e^{-i\mathbf{k_2}\cdot(\mathbf{r_1}-\mathbf{r_2})}e^{-i\mathbf{k_1}\cdot(\mathbf{r_2}-\mathbf{r_1})}))=(1\pm\delta_{s_1,s_2}\cos[(\mathbf{k_1}-\mathbf{k_2})\cdot(\mathbf{r_1}-\mathbf{r_2})])$$
+which is called the pair-correlation function.
+\end{eg}
+Using the canonical ensemble framework, the partition function is
+$$Z=\sum_{\{n_r\}}e^{-\beta n_rE_r}$$
+where $n_r$ is the number of particles in the state $|r\rangle$, with $\sum_rn_r=N$ being the total number of particles. Imposing quantum statistics on this sum is tricky, so it is much easier if we use a chemical potential $\mu$ and allow the total number of particles $N$ to fluctuate, i.e. grand canonical ensemble framework. Treat each one-particle energy level to be in contact with a heat and particle reservoir of temperature $T$ and chemical potential $\mu$. There is no need to constrain total $E$ and $N$. Essentially, instead of treating the particles as independent thermodynamic systems, we treat the energy levels as independent thermodynamic systems, which contain particles and energy.
+\begin{prop}
+The macroscopic grand partition functions for bosons and fermions respectively are:
+$$\mathcal{Z}_B=\frac{1}{1-e^{n\beta(\mu-E)}},\quad\mathcal{Z}_F=1+e^{n(\mu-E)\beta}$$
+\end{prop}
+\begin{proof}
+For bosons, consider state $|r\rangle$ which may be populated by an arbitrary number of particles:
+$$\mathcal{Z}^{\text{boson}}_r=\sum_{n_r}e^{-\beta n_r(E_r-\mu)}=\frac{1}{1-e^{-\beta(E_r-\mu)}},\quad n_r\in\mathbb{Z}^+\cup\{0\}$$
+The sum does converge if $E_r-\mu>0$ which is true $\forall E_r$. But, the ground state is $E_0=0$, so we require $\mu<0$. On the other hand, for fermions, $|r\rangle$ is either occupied or not:
+$$\mathcal{Z}^{\text{fermion}}_r=\sum_{n_r=0,1}e^{-\beta n_r(E_r-\mu)}=1+e^{-\beta(E_r-\mu)},\quad n_r\in\{0,1\}$$
+There is no convergence issue in defining $\mathcal{Z}_r$, so there is no constraint on the sign of $\mu$.
+\end{proof}
+\begin{remarks}
+We are summing over the number of particles in a given state, rather than summing over the states for a single particle. For photons or phonons (examples of bosons), since the particle number is not conserved, we have to set $\mu=0$ in order to use the grand canonical ensemble approach.
+\end{remarks}
+\begin{prop}
+The Bose-Einstein distribution and Fermi-Dirac distribution are respectively
+$$n_B(E)=\frac{1}{e^{\beta(E-\mu)}-1},\quad n_F(E)=\frac{1}{e^{\beta(E-\mu)}+1}$$
+\end{prop}
+\begin{proof}
+Using results from the grand canonical ensemble: the mean occupation number for bosons and fermions are respectively:
+$$n_B(E)=T\frac{\partial}{\partial\mu}\log \mathcal{Z}_B=-T\frac{\partial}{\partial\mu}\log(1-e^{(\mu-E)/T})=\frac{1}{e^{(E-\mu)/T}-1}$$
+$$n_F(E)=T\frac{\partial}{\partial\mu}\log\mathcal{Z}_F=T\frac{\partial}{\partial\mu}(1+e^{n(\mu-E)/T})=\frac{e^{(\mu-E)/T}}{1+e^{(\mu-E)/T}}=\frac{1}{e^{(E-\mu)/T}+1}$$
+\end{proof}
+\begin{cor}
+The quantum gas distributions reduce to the Maxwell-Boltzmann distribution.
+\end{cor}
+\begin{proof}
+$$n\approx e^{-(E-\mu)/T},\quad \beta(E-\mu)>>1$$
+\end{proof}
+\begin{eg}
+The Maxwell-Boltzmann probability distribution is obtained by
+$$P(E)dE=\frac{1}{N}e^{-\beta(E-\mu)}g(E)dE=\frac{1}{N}\frac{V}{4\pi^2}\bigg(\frac{2m}{\hbar^2}\bigg)^{3/2}\frac{N\lambda^3}{V}e^{-\beta E}\sqrt{E}dE$$
+which gives $P(v)dv=(\frac{m}{2\pi k_BT})^{3/2}e^{-\beta mv^2/2}4\pi v^2dv$, as expected.
+\end{eg}
+\begin{remarks}
+As we will see later:
+\begin{enumerate}
+    \item The Bose-Einstein distribution diverges for $E=\mu$, and meaningless for $E<\mu$, where the reservoir floods the energy levels. Hence, we required $\mu<E_0$, where $E_0$ is the ground state energy. $\mu$ is determined by total particle number $N$, or vice-versa. $n_B$ decreases rapidly with $E$ if $T$ is small. We require $\mu\rightarrow E_0$ as $T\rightarrow 0$ for $N$ to remain fixed. Most particles then occupy ground state $E_0$ and the energy states similar in energy. 
+    \item $n_F=0.5$ for $E=\mu$. The steepness of $n_F(E)$ increases as $T\rightarrow 0$. The levels are mostly filled for $E<\mu$ and empty for $E>\mu$. $\mu$ can take any value. The Fermi gas becomes degenerate at $T=0$. All states occupied up to energy $E_F=\mu$ (Fermi Energy) and empty above.
+\end{enumerate}
+\end{remarks}
+\begin{prop}
+Suppose we have a quasi-continuous density of 1-particle energy levels $g(E)$. The total particle number and total energy are respectively
+$$N=\int_{E_{0}}^\infty\frac{g(E)dE}{e^{\beta(E-\mu)}\mp 1},\quad E=\int_{E_{0}}^\infty\frac{E g(E)dE}{e^{\beta(E-\mu)}\mp 1}$$
+The negative branch is for bosons and positive branch is for fermions. 
+\end{prop}
+\begin{remarks}
+In general, the two integrals have no closed form, but we can simplify it under certain regimes (as we will see later). For a gas of non-relativistic particles, $E=\frac{p^2}{2m}$, the density of states $g(E)$ is given to be
+$$g(E)dE=g_s\frac{V}{(2\pi\hbar)^3}d^3p=\frac{g_sV4\pi p^2dp}{(2\pi\hbar)^3}=\frac{g_sV}{4\pi^2}\bigg(\frac{2m}{\hbar^2}\bigg)^{3/2}E^{1/2}dE:=K'E^{1/2}dE$$
+where $g_s$ is the degeneracy of the particles.
+\end{remarks} 
+\begin{prop}
+$PV=\frac{2}{3}E$ is true for bosons and fermions.
+\end{prop}
+\begin{proof}
+$\Phi$ is extensive and a function of $T$, $\mu$ and $V$, i.e. $\Phi=Vf(T,\mu)$. Recall $P=-\frac{\partial\Phi}{\partial V}|_{T,\mu}=-f(T,\mu)$ and for boson/fermion gases, the grand potential $\Phi$ is
+$$\Phi=-T\log\mathcal{Z}=-T\int g(E)\log(1\pm\xi e^{-E/T})dE=-TK'\int E^{1/2}\log(1\pm\xi e^{-E/T})dE$$
+where $\xi=e^{\mu/T}$ is defined as the fugacity. Perform an integration by parts:
+$$PV=-\Phi=T\log\mathcal{Z}=-TK'\int E^{1/2}\log(1\pm\xi e^{-\beta E})dE=K'\frac{2}{3}\int\frac{E^{3/2}dE}{\xi^{-1}e^{\beta E}\pm1}=\frac{2}{3}E$$
+\end{proof}
+\begin{defi}[Gamma function]
+The Gamma function is defined to be
+$$\Gamma(s)=\int_0^\infty t^{s-1}e^{-t}dt$$
+with the familiar results:
+$$\Gamma(n)=(n-1)!,\quad n\in\mathbb{Z}^+,\quad\Gamma(1/2)=\sqrt{\pi},\quad\Gamma(3/2)=\frac{\sqrt{\pi}}{2},\quad\Gamma(5/2)=\frac{3\sqrt{\pi}}{4}$$
+\end{defi}
+\begin{prop}
+Let $x=\beta E$ and recall the thermal wavelength to be $\lambda=\sqrt{2\pi\hbar^2\beta/m}$. Then, $\frac{N}{V}$ and $\frac{P}{T}$ of fermions/bosons can be elegantly written as
+$$\frac{N}{V}=\frac{g_s}{\lambda^3}f_{3/2}^{F/B}(\xi),\quad\frac{P}{T}=\frac{g_s}{\lambda^3}f_{5/2}^{F/B}(\xi)$$
+where
+$$f_\nu^F(\xi):=\frac{1}{\Gamma(\nu)}\int_0^\infty\frac{x^{\nu-1}}{\xi^{-1}e^x+1}dx,\quad f_\nu^B(\xi):=\frac{1}{\Gamma(\nu)}\int_0^\infty\frac{x^{\nu-1}}{\xi^{-1}e^x-1}dx$$
+where $\Gamma(\nu)$ is the Gamma function.
+\end{prop}
+\begin{proof}
+use the definition of $f_{3/2}^{F/B}(\xi)$, $f_{5/2}^{F/B}(\xi)$ and $\Gamma(3/2)=\sqrt{\pi}/2$, $\Gamma(5/2)=3\sqrt{\pi}/4$:
+$$\frac{N}{V}=\int_0^\infty\frac{g(E)dE}{\xi^{-1}e^{\beta E}\mp 1}dE=\frac{g_s}{4\pi^2}\bigg(\frac{2m}{\hbar^2}\bigg)^{3/2}\int_0^\infty\frac{E^{1/2}dE}{\xi^{-1}e^{\beta E}\mp 1}=\frac{g_s}{4\pi^2}\bigg(\frac{2m}{\hbar^2\beta}\bigg)^{3/2}\int_0^\infty\frac{x^{1/2}dx}{\xi^{-1}e^x\mp 1}=\frac{g_s}{\lambda^3}f_{3/2}^{F/B}(\xi)$$
+$$\frac{E}{V}=\int_0^\infty\frac{Eg(E)dE}{\xi^{-1}e^{\beta E}\mp 1}dE=\frac{g_s}{4\pi^2}\bigg(\frac{2m}{\hbar^2}\bigg)^{3/2}\int_0^\infty\frac{E^{3/2}dE}{\xi^{-1}e^{\beta E}\mp 1}=\frac{g_s}{4\pi^2}\bigg(\frac{2m}{\hbar^2\beta}\bigg)^{3/2}\frac{1}{\beta}\int_0^\infty\frac{x^{3/2}dx}{\xi^{-1}e^x\mp 1}=\frac{g_s}{\lambda^3}\frac{3}{2\beta}f_{5/2}^{F/B}(\xi)$$
+But $PV=\frac{2}{3}E$ for quantum gases, so $\frac{P}{T}=\frac{g_s}{\lambda^3}\frac{2}{3}\frac{3}{2}f_{5/2}^{F/B}(\xi)$.
+\end{proof}
+\begin{remarks}
+When $\xi=1$, we obtain the Riemann Zeta function
+$$f_\nu^B(\xi=1)=\zeta(\nu)=\frac{1}{\Gamma(\nu)}\int_0^\infty\frac{x^{\nu-1}}{e^x-1}dx$$
+In general, it is tricky to obtain analytical solutions, hence we shall only consider limiting cases.
+\end{remarks}
+\newpage
+\subsection{Ideal Fermi Gas}
+\begin{prop}
+Fermionic particles repel in a low density fermionic gas.
+\end{prop}
+\begin{proof}
+For low density, expand the Fermi-Dirac function for small $\xi$:
+$$\frac{1}{\xi^{-1}e^x+1}=\xi e^{-x}(1-\xi e^{-x}+...)\implies f_\nu^F(\xi)=\frac{1}{\Gamma(\nu)}\int_0^\infty x^{\nu-1}(\xi e^{-x}-\xi^2e^{-2x}+...)d\xi=\xi-\frac{\xi^2}{2^\nu}+...$$
+This gives
+$$\frac{N}{V}=\frac{g_s}{\lambda^3}\bigg(\xi-\frac{\xi^2}{2^{3/2}}+\dots\bigg),\quad\frac{P}{T}=\frac{g_s}{\lambda^3}\bigg(\xi-\frac{\xi^2}{2^{5/2}}+\dots\bigg)$$
+For dilute gas (low density) $\frac{N}{V}<<\frac{1}{\lambda^3}$, so $\xi<<1$. The leading result is $\frac{P}{T}=\frac{N}{V}$ as expected. The next leading term is obtained by eliminating $\xi$:
+$$P=\frac{NT}{V}\bigg(1+\frac{1}{2^{5/2}}\frac{\lambda^3}{g_s}\frac{N}{V}\bigg)=\frac{NT}{V}\bigg(1+\frac{\pi^{3/2}\hbar^3}{2m^{3/2}T^{3/2}g_s}\frac{N}{V}\bigg)$$
+The second Virial coefficient $B(T)$ (we will see later) is directly proportional to $T^{-3/2}$. This is small for large $T$, so $B(T)>0$, so pressure increase, i.e. fermions repel.
+\end{proof}
+\begin{prop}
+Chemical potential is negative for a dilute fermionic gas.
+\end{prop}
+\begin{proof}
+$\xi=e^{\mu/T}\approx\frac{\lambda^3N}{g_sV}<<1$ for dilute gas, hence $\mu\approx T\log\frac{\lambda^3N}{g_sV}<0$ and $n_F(\xi)$ is small for $\xi\geq0$. As $T$ decreases, $\lambda$ increases, so $\mu$ increases and becomes positive. 
+\end{proof}
+\begin{remarks}
+To keep $N$ fixed, we have to adjust $\mu$ as the temperature changes. As the temperature is increased, the chemical potential (originally positive) shifts to lower values, and ultimately becomes negative.
+\end{remarks}
+\begin{eg}
+$^3$He is well described by the ideal Fermi gas. It is gaseous down to $T=3$K. The atom has two protons, 1 neutron, 2 electrons, so it is a fermion of spin $\frac{1}{2}$. The mass $m$ is small, so $\lambda$ is relatively large for $T\sim 10$ K, i.e. quantum effects are significant.
+\end{eg}
+\begin{Note}[Fermi sphere]
+For electronic gas, the degeneracy is $g_s=2$ since electrons have spin-$1/2$. At $T=0$, the Fermi-Dirac distribution is a step function, i.e. energy levels $E<\mu$ is filled while $E>\mu$ is empty. $\mu$ is called the Fermi energy $E_F$. Each fermion we add into the system settle into the lowest available energy state. These are successively filled until we run out of particles. the energy of the last filled state is called the Fermi energy, $E_F$ where $\mu$ at $T=0$ is $E_F$. Note that $\mu$ and $T$ are independent variables in the grand canonical ensemble.\\[5pt]
+The energy states of the free particles are not localized in position space, but localized in momentum space. Successive fermions sit in states with ever-increasing momentum. Fermions fill out a ball in momentum space with the momentum of the final fermion called the Fermi momentum $k_F=\sqrt{2mE_F}/\hbar$. All states with wavevector $k\leq k_F$ are filled and are said to form the Fermi sphere.
+\end{Note}
+\begin{prop}
+At $T=0$, electronic gas is degenerate and exhibit degeneracy pressure.
+\end{prop}
+\begin{proof}
+For a fixed total particle number $N$ and $g_s=2$, the Fermi momentum satisfy
+$$N=\frac{V}{\pi^2\hbar^3}\int_0^{p_F}p^2dp=\frac{Vp_F^3}{3\pi^2\hbar^3}$$
+For non-relativistic particles, $E_F=\frac{p_F^2}{2m}$, so $N=\frac{V}{3\pi^2 h^3}(2mE_F)^{3/2}\implies E_F=\frac{\hbar^2}{2m}(3\pi^2)^{2/3}\frac{N^{2/3}}{V^{2/3}}$. The result for total particle number is also valid for highly relativistic particles, $E_F=cp_F$. The total energy is
+$$E=\frac{V}{\pi^2\hbar^3}\int_0^{p_F}\frac{p^2}{2m}p^2dp=\frac{V}{10\pi^2m\hbar^3}p_F^5=\frac{V}{10\pi^2m\hbar^3}(2mE_F)^{5/2}\implies\frac{E}{N}=\frac{3}{10m}(2mE_F)=\frac{3}{5}E_F$$
+The pressure is given by $$PV=\frac{2}{3}E=\frac{2}{5}NE_F\implies P=\frac{\hbar^2}{5m}(3\pi^2)^{2/3}\frac{N^{5/3}}{V^{5/3}}>0$$ 
+This is the degeneracy pressure.
+\end{proof}
+\begin{remarks}
+The repulsion of particles in Fermi gas produces pressure, even when $T=0$ due to Pauli Exclusion Principle. This effect is important for stabilizing white dwarf stars (degenerate electron gas) and neutron stars against gravitational collapse (i.e. becoming black hole).
+\end{remarks}
+\begin{prop}
+For metals, the electronic contribution to the heat capacity dominates at low temperatures.
+\end{prop}
+\begin{proof}
+The density of states $g(E)$ is independent of temperature $T$. For small $T$, the slope of $n_F$ at $E=\mu$ is $O(1/T)$ large. Between temperatures 0 and $T$, the number of particles that move is $O(g(E_F)k_BT)$. As $g(E)$ is approximately constant around $E_F$, $\mu$ does not need to change much to keep $N$ fixed. The increase in total energy between temperatures 0 and $T$ is $O(T^2g(E_F)k_B^2)$, i.e. $E(T)=E(0)+O(g(E_F)T^2k_B^2)\implies C=O(g(E_F)Tk_B^2)$. 
+\end{proof}
+\begin{center}
+  \begin{tikzpicture}
+    \draw [->] (0, 0) -- (5, 0) node [right] {$E$};
+    \draw [->] (0, 0) -- (0, 3) node [above] {$n_F(E)$};
+
+    \draw [thick](0, 2) -- (2, 2) -- (2, 0) node [below] {$E_f$} -- (4.9, 0);
+  \end{tikzpicture}
+  \begin{tikzpicture}
+    \draw [->] (0, 0) -- (5, 0) node [right] {$E$};
+    \draw [->] (0, 0) -- (0, 3) node [above] {$n_F(E)$};
+
+    \draw [thick] (0, 2) -- (1.8, 2) .. controls (2, 2) and (2, 0) .. (2.2, 0) -- (4.9, 0);
+
+    \node [below] at (2, 0) {$E_f$};
+    \draw [decoration={markings, mark=at position 0 with {\arrowreversed{latex'}}, mark=at position 1 with {\arrow{latex'}}}, postaction={decorate}] (1.8, 2.2) -- (2.2, 2.2) node [pos=0.5, above] {$k_BT$};
+  \end{tikzpicture}
+\end{center}
+\begin{remarks}\leavevmode
+\begin{enumerate}
+\item A more rigorous proof to the above is via the Sommerfield expansion. 
+$$\int_0^\infty\frac{g(E)dE}{e^{\beta(E-\mu)}+1}\approx\int_0^{E_F}g(E)dE+\frac{\pi^2}{6}k_B^2T^2g'(E_F)+\frac{7\pi^4}{360}k_B^4T^4g^{(3)}(E_F)+\dots$$
+To get the grand potential $\Phi$ to second order in $k_BT$, we substitute $g(E)=E^{3/2}$ to obtain
+$$\Phi(T)=\Phi(0)-\frac{Vk_B^2T^2}{12}\bigg(\frac{2m}{\hbar^2}\bigg)^{3/2}E_F^{1/2}$$
+and hence the heat capacity at constant volume is
+$$C_V=T\bigg(\frac{\partial S}{\partial T}\bigg)_{V,\mu}=-T\bigg(\frac{\partial^2\Phi}{\partial T^2}\bigg)_{V,\mu}=T\frac{\partial}{\partial T}\frac{k_B^2T}{3}\frac{V}{2}\bigg(\frac{2m}{\hbar^2}\bigg)^{3/2}\sqrt{E_F}=\frac{\pi^2}{3}g(E_F)k_B^2T$$
+\item In solid metal, the contributions to $C$ are $O(T)$ from non-degenerate electrons and $O(T^2)$ from lattice vibrations. The electronic contribution to the heat capacity dominates at low temperatures. The Fermi temperature $T_F$ is very large for metals, typically 50,000 K.
+\end{enumerate}
+\end{remarks}
+\newpage
+\subsection{Ideal Bose Gas}
+\begin{prop}
+Bosonic particles attract in a low density bosonic gas.
+\end{prop}
+\begin{proof}
+Set $g_s=1$. For low density, expand Bose-Einstein function for small $\xi$:
+$$\frac{N}{V}=\frac{1}{\lambda^3}f_{3/2}^B(\xi)=\frac{1}{\lambda^3}\bigg(\xi+\frac{\xi^2}{2^{3/2}}+...\bigg),\quad \frac{P}{T}=\frac{1}{\lambda^3}f_{5/2}^B(\xi)=\frac{1}{\lambda^3}\bigg(\xi+\frac{\xi^2}{2^{5/2}}+...\bigg)$$
+At low density, $\xi<<1$. Eliminating $\xi$ gives
+$$P=\frac{NT}{V}\bigg(1-\frac{\lambda^3}{2^{5/2}}\frac{N}{V}+...\bigg)$$
+The second Virial coefficient (as we will see later) $B(T)=O(T^{-3/2})$ and is negative, i.e. Bosons are attractive.
+\end{proof}
+\begin{defi}[Bose-Einstein Condensation]
+Bose-Einstein condensation is a condensate in momentum/energy space where a macroscopic number of particles occupy the ground state.
+\end{defi}
+\begin{prop}
+At a critical temperature $T_c$, we will obtain Bose-Einstein condensation.
+\end{prop}
+\begin{proof}
+Recall $\frac{N}{V}=\frac{1}{\lambda^3}f_{3/2}^B(\xi)$. As $T$ decreases, $\frac{1}{\lambda^3}$ decreases, so $\xi$ must increase to keep $\frac{N}{V}$ fixed. After $\xi$ reaches to 1, this equation breaks down (see $f_\nu^B$ integral). The critical temperature $T_c$ is given by
+$$\frac{N}{V}=\frac{1}{[\lambda(T=T_c)]^3}f_{3/2}^B(1)=\bigg(\frac{mk_BT_c}{2\pi\hbar^2}\bigg)^{3/2}\zeta(1.5)\implies T_c=\frac{2\pi\hbar^2}{k_Bm}\bigg(\frac{1}{\xi(1.5)}\frac{N}{V}\bigg)^{2/3}$$
+where $\zeta(1.5)=2.612$. $T_c$ is called the Bose-Einstein Condensation temperature, related to the number density $\frac{N}{V}$. Naively, we see that as we reduce $T$ below $T_c$, the number of particles $N$ should decrease. This is erroneous since in approximating the finite sum $\sum_k\rightarrow\frac{V(2m)^{3/2}}{4\pi^2\hbar^2}\int E^{1/2}dE$, $E=0$ does not contribute to the integral. The `missing' states have $E=0$ which does not contribute to the integral. Using the Bose-Einstein distribution, the ground state occupancy is predicted to be
+$$n_B(E=0)=\frac{1}{\xi^{-1}-1}$$
+which diverges at $\xi=0$. As $T\rightarrow T_c$ from above, one crudely approximate by setting $\xi\approx1-(1/N)$ so $n_B=O(N)$, i.e. the ground state have macroscopic occupation. 
+\end{proof}
+\begin{remarks}\leavevmode
+\begin{enumerate}
+    \item At low temperatures, $\mu\approx 0$ and it becomes more negative as temperature increases. $\mu\geq0$ cannot be true, otherwise the occupation number at $E=\mu$ would become infinite, contradicting our assumption on fixed total $N$.
+    \item The correct approach for $T\leq T_c$: separate ground state from the quasi-continuum of positive energy states. Then,
+$$\frac{N}{V}=\frac{N_0}{V}+\frac{1}{\lambda^3}f_{3/2}^B(\xi=1)\implies\frac{N_0}{V}=\frac{N}{V}-2.612\bigg(\frac{mk_BT}{2\pi\hbar^2}\bigg)^{3/2}\implies\frac{N_0}{N}=1-\bigg(\frac{T}{T_c}\bigg)^{3/2}$$
+This gives us the fraction of particles in the ground state. At $T=0$, all particles will be in the ground state.
+\begin{center}
+  \begin{tikzpicture}
+    \draw [->] (0, 0) -- (3, 0) node [right] {$T$};
+    \draw [->] (0, 0) -- (0, 2) node [above] {$N_0/N$};
+    \draw (0, 1) node [left] {1};
+    \draw (1, 0) node [below] {$T_c$};
+    \draw [thick, domain=0:1] plot [smooth] (\x, {1-\x^(3/2)});
+  \end{tikzpicture}
+\end{center}
+\item The pressure is given by
+$$\frac{P}{T}=\frac{g_s}{\lambda^3}f_{5/2}^B(\xi)=\frac{g_s}{\lambda^3}\zeta(5/2)$$
+so $P$ is directly proportional to $T^{5/2}$ for $T\leq T_c$. Earlier, $PV=\frac{2}{3}E$, so $E$ is directly proportional to $VT^{5/2}$. This is true for $T< T_c$ and $\xi\approx 1$. 
+\item At low temperatures and below $T_c$, set $\mu=0$, we have
+$$U=\frac{2Vk_BT}{\sqrt{\pi}\lambda^3}\int_0^\infty\frac{x^{3/2}dx}{e^x-1}\approx\frac{2V}{\lambda^3}k_BT\propto T^{5/2}$$
+and so the heat capacity is
+$$C_V=\frac{\partial E}{\partial T}|_V=\frac{5}{2}\frac{k_BV}{\sqrt{2}\lambda^3}\propto T^{3/2}$$
+For large $T$, estimate $C_V$ using virial expansion (see later):
+$$E=\frac{3}{2}PV=\frac{3}{2}NT\bigg(1-O\bigg(\frac{N}{V}\frac{1}{T^{3/2}}\bigg)\bigg)\implies C_V=\frac{\partial E}{\partial T}\bigg|_V=\frac{3}{2}N\bigg(1+O\bigg(\frac{N}{V}\frac{1}{T^{3/2}}\bigg)\bigg)$$
+\begin{center}
+  \begin{tikzpicture}
+    \draw [->] (0, 0) -- (6, 0) node [right] {$T$};
+    \draw [->] (0, 0) -- (0, 4) node [above] {$C_V/N$};
+
+    \draw [thick, domain=0.001:2] plot [smooth] (\x, {\x^(3/2)});
+
+    \draw [dashed] (2, 0) node [below] {$T_c$} -- (2, 2.83);
+
+    \draw [thick] (2, 2.83) .. controls (2.5, 2) .. (6, 2);
+
+    \draw [dashed] (0, 2) node [left] {$\frac{3}{2}$} -- (6, 2);
+  \end{tikzpicture}
+\end{center}
+\end{enumerate}
+\item $C_V$ is continuous but have a discontinuous derivative at $T=T_c$. We call this a phase transition, and that $T_c$ depends on $\frac{N}{V}$.
+\end{remarks}
+\begin{eg}
+$^4$He undergoes transition from normal liquid to a superfluid (related to Bose Einstein condensation, but interactions are really quite strong). Using the density of normal liquid at pressure 1 atm, we predict the Bose Einstein transition temperature $T_c=3.13$ K. Experimentally, we see a discontinuity in $C_V$ at $T=2.19$ K. The experimental measurements show a `$\lambda$' transition at $T_c$. This is because in our calculations, interactions are not accounted for. Better examples of BEC are dilute gases of heavy atoms in harmonic traps, like Rubidium-87 which have a $T_c\sim 10^{-7}$ K with a macroscopic occupation of $N\sim10^4$ to $10^7$, i.e. density of $2.5\times10^{12}$ atoms per cubic centimetres. 
+\end{eg}
+\begin{Note}
+The exact description of interacting particles is very difficult. Commonly, we can take a system which is close to its ground state and subject it to a weak external influence, and are interested in the small changes to the system caused by the external influence. These are the excited states or excitations of the system, which interact only weakly with one another. We thus approximate them as non-interacting ideal gases. We interpret their low temperature properties in terms of approximate normal modes, or `elementary excitations'. These are characterized by the zero rest mass (infinite de Broglie wavelength, hence always in the quantum regime) and are always bosons (most have no spins).
+\end{Note}
+\begin{eg}[Spin waves]
+The elementary excitations of a ferromagnetic systems, in which the size of the moments is fixed, are `spin waves'. The simplest dispersion relation is $E_k\propto k^2$. The result will be $C\propto T^{3/2}$, which agrees with experimental measurements.
+\end{eg}
+Below, we consider two other examples: photons and phonons.
+\newpage
 \subsection{Blackbody radiation}
+\begin{defi}[Blackbody radiation]
+Blackbody radiation can be thought of as an ideal gas of photons, with integer angular momentum and obey Bose statistics. To come into equilibrium, they have to interact with a reservoir, which is taken to be the walls of the blackbody cavity.
+\end{defi}
+\begin{prop}
+The chemical potential of blackbody radiation is zero.
+\end{prop}
+\begin{proof}
+Thermal equilibrium is reached by absorption and emission of photons by the walls, so we cannot take $N$, the number of photons in the gas, to be constant. $\mu$ is obtained by minimizing the Helmholtz free energy, with respect to the variations in the average number of photons, i.e.
+$$\bigg(\frac{\partial F}{\partial N}\bigg)_{T,V}=0$$
+But this is actually $\mu$ by definition of free energy. In this case, the grand potential and the free energy is the same.
+\end{proof}
 \begin{prop}
 The Planck distribution $E(\omega)$ is given by
 $$E=\int_0^\infty E(\omega)d\omega,\quad E(\omega)=\frac{V\hbar}{\pi^2c^3}\frac{\omega^3}{e^{\beta\hbar\omega}-1}$$
@@ -1242,7 +1595,7 @@ Consider electromagnetic radiation filling a volume $V=L^3$ at temperature $T$. 
 $$g(k)dk=2\frac{V}{(2\pi)^3}4\pi k^2dk=\frac{Vk^2}{\pi^2}dk$$
 Correspondingly, the number of modes between $\omega$ and $\omega+d\omega$ is 
 $$g(\omega)d\omega=\frac{V\omega^2}{\pi^2c^3}d\omega$$
-We start by summing photons with a definite frequency $\omega$. A state with $N$ such photons has energy $E=N\hbar\omega$.
+where we used $\omega=ck$, i.e. relativistic. We start by summing photons with a definite frequency $\omega$. A state with $N$ such photons has energy $E=N\hbar\omega$.
 $$Z_\omega=\sum_{N=0}^\infty e^{-\beta N\hbar\omega}=\frac{1}{1-e^{-\beta\hbar\omega}}$$
 Sum over all possible frequencies:
 $$\ln Z=\int_0^\infty g(\omega)\ln Z_\omega d\omega=-\frac{V}{\pi^2c^3}\int_0^\infty\omega^2\ln(1-e^{-\beta\hbar\omega})d\omega$$
@@ -1288,14 +1641,20 @@ $$P=-\frac{\partial E}{\partial V}\bigg|_S\implies PV=\frac{1}{3}E$$
 Hence, in an adiabatic change (slowly enlarge box with radiation inside), $PV^{4/3}$ is a constant and $TV^{1/3}$ is another constant. Hence, radiation cools as box expands.
 \item We can also work out
 $$S=-\bigg(\frac{\partial F}{\partial T}\bigg)_V=\frac{16V\sigma}{3c}T^3,\quad C_V=\bigg(\frac{\partial E}{\partial T}\bigg)_V=\frac{16V\sigma}{c}T^3$$
-\item See II Cosmology for the application of these results on the Cosmic Microwave Background Radiation.
 \item In the classical limit $\hbar\omega<<T$, we have
 $$\frac{1}{e^{\beta\hbar\omega}-1}\approx\frac{1}{\beta\hbar\omega}\implies E(\omega)\approx\frac{V\omega^2T}{\pi^2c^3}$$
 which is the Rayleigh-Jeans law for the classical distribution of radiation. This leads to the Ultraviolet catastrophe since $\int_0^\infty E(\omega)d\omega$ diverges.
+\item Alternatively, we may compute the total number and energy of photon gas respectively to be:
+$$N=\frac{V}{\pi^2c^3}\int_0^\infty\frac{\omega^2d\omega}{e^{\hbar\omega/T}-1}=\frac{VT^3}{\pi^2\hbar^3c^3}\int_0^\infty\frac{x^2dx}{e^x-1}=\frac{2\zeta(3)T^3}{\pi^2\hbar^3c^3}V$$
+$$E=\frac{V\hbar}{\pi^2c^3}\int_0^\infty\frac{\omega^3d\omega}{e^{\hbar\omega/T}-1}=\frac{VT^4}{\pi^2\hbar^3c^3}\int_0^\infty\frac{x^3dx}{e^x-1}=\frac{\pi^2T^4}{15\hbar^3c^3}V$$
+where $\zeta(\nu)=\int_0^\infty\frac{x^{\nu-1}}{e^x-1}dx$, is the Riemann zeta function such that $\zeta(3)\approx 0.244$ and $\zeta(4)=\frac{\pi^4}{15}$.
 \end{enumerate}
 \end{remarks}
 \subsection{Vibrational Energy of Solids}
-Sound waves in solids come in discrete packets. Consider an atomic crystal with $N$ atoms such that the vibrational modes are $\mathbf{A}e^{i(\mathbf{k}\cdot\mathbf{x}-\omega t)}$. The frequency $\omega$ is related to $\hbar|\mathbf{k}|$ in some complicated way. At long wavelengths, we have sound waves $\omega=v_s|\mathbf{k}|$. The degeneracy is 3, i.e. $g_s=3$, with a total of one longitudinal and two transverse polarizations. Assume small speed $v_s$, the number of modes between frequencies $\omega$ and $\omega+d\omega$ is
+\begin{defi}[Phonons]
+The atoms of a solid interact very strongly with one another. Sound waves in solids come in discrete packets, called phonons.
+\end{defi}
+Consider an atomic crystal with $N$ atoms such that the vibrational modes are $\mathbf{A}e^{i(\mathbf{k}\cdot\mathbf{x}-\omega t)}$. The degeneracy is 3, i.e. $g_s=3$, with a total of one longitudinal and two transverse polarizations. The frequency $\omega$ is related to $\hbar|\mathbf{k}|$ in some complicated way. At long wavelengths, we have sound waves $\omega=v_s|\mathbf{k}|$ where $v_s$ is an effective velocity ($3/v_s^3=(1/v_L^3)+(2/v_T^3)$ where $v_L$ and $v_T$ are longitudinal and transverse velocities respectively).  Assume small speed $v_s$, the number of modes between frequencies $\omega$ and $\omega+d\omega$ is
 $$g(\omega)d\omega=\frac{3V\omega^2d\omega}{2\pi^2v_s^2}$$
 Each mode of frequency $\omega$ can be excited to any $n$-phonon state of energy $n\hbar\omega$. 
 \begin{prop}
@@ -1315,241 +1674,13 @@ The vibrational heat capacity scales with $T^3$ for low temperatures and is a co
 Since the number of phonons is not conserved, we perform a similar procedure as that of photons.
 $$\log Z_{\text{phonon}}=\int_0^{\omega_D}g(\omega)\log Z_\omega d\omega,\quad Z_\omega=\frac{1}{1-e^{-\beta\hbar\omega}}$$
 The energy is then
-$$E=\int_0^{\omega_D}\frac{\hbar\omega g(\omega)}{e^{\beta\hbar\omega}-1}d\omega=\frac{3V\hbar}{2\pi^2c_s^3}\int_0^{\omega_D}\frac{\omega^3d\omega}{e^{\beta\hbar\omega}-1}=\frac{3VT^4}{2\pi^2\hbar^3c_s^3}\int_0^{T_D/T}\frac{x^3}{e^x-1}dx$$
+$$E=\int_0^{\omega_D}\frac{\hbar\omega g(\omega)}{e^{\beta\hbar\omega}-1}d\omega=\frac{3V\hbar}{2\pi^2c_s^3}\int_0^{\omega_D}\frac{\omega^3d\omega}{e^{\beta\hbar\omega}-1}=\frac{3Vk_BT^4}{2\pi^2\hbar^3c_s^3}\int_0^{T_D/T}\frac{x^3}{e^x-1}dx$$
 where we substituted $x=\beta\hbar\omega$. This however has no analytical solution. For low temperatures, $T<<T_D$, the upper integration limit approaches infinity. Like before, the integral is thus $\frac{\pi^4}{15}$. The heat capacity is then
-$$C_V=\bigg(\frac{\partial E}{\partial T}\bigg)_V=\frac{2\pi^2VT^3}{5\hbar^3c_s^3}=\frac{12\pi^4N}{5T_D^3}T^3$$
+$$C_V=\bigg(\frac{\partial E}{\partial T}\bigg)_V=\frac{2\pi^2VT^3}{5\hbar^3c_s^3}=\frac{12\pi^4Nk_B}{5T_D^3}T^3$$
 For high temperatures, $T>>T_D$, we Taylor expand the integrand,
-$$\int_0^{T_D/T}\frac{x^3}{e^x-1}dx\approx\int_0^{T_D/T}x^2+...~dx=\frac{T_D^3}{3T^3}+...\implies C_V=\frac{VT_D^3}{2\pi^2\hbar^3c_s^3}=3N$$
-where we invoked the definition of Debye temperature, i.e. $T_D^3=\hbar^3\omega_D^3=\hbar^3(3N2)\pi^2c_s^3/V$
+$$\int_0^{T_D/T}\frac{x^3}{e^x-1}dx\approx\int_0^{T_D/T}x^2+...~dx=\frac{T_D^3}{3T^3}+...\implies C_V=\frac{Vk_BT_D^3}{2\pi^2\hbar^3c_s^3}=3Nk_B$$
+where we invoked the definition of Debye temperature, i.e. $T_D^3=\hbar^3\omega_D^3=\hbar^3(3N)2\pi^2c_s^3/V$
 \end{proof}
-\subsection{Diatomic gases revisited}
-We revisit the results for diatomic gases, but with quantum mechanics. The rotational energy eigenvalue is
-$$E_{\text{rot}}=\frac{\hbar^2}{2I}j(j+1),\quad j\in\mathbb{Z}^+\cup\{0\}$$
-which has degeneracy $2j+1$. The partition function is
-$$Z_{\text{rot}}=\sum_{j=0}^\infty(2j+1)e^{-\beta\hbar^2j(j+1)/2I}$$
-When $T>>\frac{\hbar^2}{2I}$, we recover the classical result:
-$$Z_{\text{rot}}\approx\int_0^\infty (2x+1)e^{-\beta\hbar^2x(x+1)/2I}dx=\frac{2I}{\beta\hbar^2}$$
-When $T<<\frac{\hbar^2}{2I}$, all states apart from $j=0$ effectively decouple and $Z_{\text{rot}}\approx1$. The vibrational energy eigenvalue is
-$$E_{\text{vib}}=\hbar\omega(n+0.5),\quad n\in\mathbb{Z}^+\cup\{0\}$$
-The partition function is then
-$$Z_{\text{vib}}=\sum_ne^{-\beta\hbar\omega(n+0.5)}=\frac{e^{-\beta\hbar\omega/2}}{1-e^{-\beta\hbar\omega}}=\frac{1}{2\sinh(\beta\hbar\omega/2)}$$
-When $\beta\hbar\omega<<1$, $Z_{\text{vib}}\approx\frac{1}{\beta\hbar\omega}$. When $\beta\hbar\omega>>1$, $Z_{\text{vib}}\approx e^{-\beta\hbar\omega/2}$. In this classical limit, $E_{\text{vib}}=-\frac{\partial}{\partial\beta}\log Z_{\text{vib}}\approx\frac{1}{2}\hbar\omega$.
-\subsection{Bosons and Fermions}
-If particles are non-interacting and $\lambda\sim(V/N)^{1/3}$ at sufficiently low temperature, then we need to consider quantum statistics. Consider $N$ identical particles, which may be interacting with each other. Due to spin-statistics theorem, the quantum wavefunctions must obey the symmetry property (depending on the quantum statistics)
-$$\Psi(\mathbf{x^1},...,\mathbf{x^i},...,\mathbf{x^j},...,\mathbf{x^N})=\pm\Psi(\mathbf{x^1},...,\mathbf{x^j},...,\mathbf{x^i},...,\mathbf{x^N})$$
-Bosonic (integer spins) wavefunctions are even under exchange, whereas fermionic (half-integer spins) wavefunctions are odd under exchange. See II Principle of Quantum Mechanics. We can construct the basis of $N$-particle states $\Psi$ from independent 1-particle states $\{\psi^1, \psi^2,...\}$.  We do this by specifying the occupation numbers of $N$-particle states, constrained by the total number of particles $N$ being fixed, i.e. $\sum_\alpha n^\alpha=N$. The occupany for bosons and fermions satisfy respectively $n^\alpha\in\mathbb{Z}^+\cup\{0\}$ and $n^\alpha\in\{0,1\}$. the latter is due to Pauli exclusion principle:
-\begin{eg}[Pauli exclusion principle]
-Consider the two-particle state constructed using $\psi^\alpha$ and $\psi^\beta$:
-$$\Psi(\mathbf{x^1},\mathbf{x^2})=\psi^\alpha(\mathbf{x^1})\psi^\beta(\mathbf{x^2})\pm\psi^\alpha(\mathbf{x^2})\psi^\beta(\mathbf{x^1}),\quad\alpha\neq\beta$$
-and $\Psi$ has the required symmetry in accordance to the spin-statistics theorem. Let the occupation numbers be $n^\alpha=1$ and $n^\beta =1$. If $\alpha=\beta$, $\Psi(\mathbf{x^1},\mathbf{x^2})=\psi^\alpha(\mathbf{x^1})\psi^\alpha(\mathbf{x^2})$. This is okay for bosons since $n^\alpha=2$ is allowed. But, no state with $n^\alpha=2$ is allowed for fermions.
-\end{eg}
-\newpage
-\subsection{Statistical Physics of Non-Interacting Bosonic and Fermionic Gases}
-Using the canonical ensemble framework, the partition function is
-$$Z=\sum_{\{n_r\}}e^{-\beta n_rE_r}$$
-where $n_r$ is the number of particles in the state $|r\rangle$, with $\sum_rn_r=N$ being the total number of particles. Imposing quantum statistics on this sum is tricky, so it is much easier if we use a chemical potential $\mu$ and allow the total number of particles $N$ to fluctuate, i.e. grand canonical ensemble framework. Treat each one-particle energy level to be in contact with a heat and particle reservoir of temperature $T$ and chemical potential $\mu$. There is no need to constrain total $E$ and $N$. 
-\begin{prop}
-The macroscopic grand partition functions for bosons and fermions respectively are:
-$$\mathcal{Z}_B=\frac{1}{1-e^{n\beta(\mu-E)}},\quad\mathcal{Z}_F=1+e^{n(\mu-E)\beta}$$
-\end{prop}
-\begin{proof}
-For bosons, consider state $|r\rangle$ which may be populated by an arbitrary number of particles:
-$$\mathcal{Z}^{\text{boson}}_r=\sum_{n_r}e^{-\beta n_r(E_r-\mu)}=\frac{1}{1-e^{-\beta(E_r-\mu)}},\quad n_r\in\mathbb{Z}^+\cup\{0\}$$
-The sum does converge if $E_r-\mu>0$ which is true $\forall E_r$. But, the ground state is $E_0=0$, so we require $\mu<0$. On the other hand, for fermions, $|r\rangle$ is either occupied or not:
-$$\mathcal{Z}^{\text{fermion}}_r=\sum_{n_r=0,1}e^{-\beta n_r(E_r-\mu)}=1+e^{-\beta(E_r-\mu)},\quad n_r\in\{0,1\}$$
-There is no convergence issue in defining $\mathcal{Z}_r$, so there is no constraint on the sign of $\mu$.
-\end{proof}
-\begin{remarks}
-We are summing over the number of particles in a given state, rather than summing over the states for a single particle. For photons or phonons, since the particle number is not conserved, we have to set $\mu=0$ in order to use the grand canonical ensemble approach.
-\end{remarks}
-\begin{prop}
-The Bose-Einstein distribution and Fermi-Dirac distribution are respectively
-$$n_B(E)=\frac{1}{e^{\beta(E-\mu)}-1},\quad n_F(E)=\frac{1}{e^{\beta(E-\mu)}+1}$$
-\end{prop}
-\begin{proof}
-Using results from the grand canonical ensemble: the mean occupation number for bosons and fermions are respectively:
-$$n_B(E)=T\frac{\partial}{\partial\mu}\log \mathcal{Z}_B=-T\frac{\partial}{\partial\mu}\log(1-e^{(\mu-E)/T})=\frac{1}{e^{(E-\mu)/T}-1}$$
-$$n_F(E)=T\frac{\partial}{\partial\mu}\log\mathcal{Z}_F=T\frac{\partial}{\partial\mu}(1+e^{n(\mu-E)/T})=\frac{e^{(\mu-E)/T}}{1+e^{(\mu-E)/T}}=\frac{1}{e^{(E-\mu)/T}+1}$$
-\end{proof}
-\begin{remarks}
-As we will see later:
-\begin{enumerate}
-    \item The Bose-Einstein distribution diverges for $E=\mu$, and meaningless for $E<\mu$, where the reservoir floods the energy levels. Hence, we required $\mu<E_0$, where $E_0$ is the ground state energy. $\mu$ is determined by total particle number $N$, or vice-versa. $n_B$ decreases rapidly with $E$ if $T$ is small. We require $\mu\rightarrow E_0$ as $T\rightarrow 0$ for $N$ to remain fixed. Most particles then occupy ground state $E_0$ and the energy states similar in energy. 
-    \item $n_F=0.5$ for $E=\mu$. The steepness of $n_F(E)$ increases as $T\rightarrow 0$. The levels are mostly filled for $E<\mu$ and empty for $E>\mu$. $\mu$ can take any value. The Fermi gas becomes degenerate at $T=0$. All states occupied up to energy $E_F=\mu$ (Fermi Energy) and empty above.
-\end{enumerate}
-\end{remarks}
-\begin{prop}
-Suppose we have a quasi-continuous density of 1-particle energy levels $g(E)$. The total particle number and total energy are respectively
-$$N=\int_{E_{0}}^\infty\frac{g(E)dE}{e^{\beta(E-\mu)}\mp 1},\quad E=\int_{E_{0}}^\infty\frac{E g(E)dE}{e^{\beta(E-\mu)}\mp 1}$$
-The negative branch is for bosons and positive branch is for fermions. 
-\end{prop}
-\begin{eg}
-The total number and energy of photon gas are respectively: 
-$$N=\frac{V}{\pi^2c^3}\int_0^\infty\frac{\omega^2d\omega}{e^{\hbar\omega/T}-1}=\frac{VT^3}{\pi^2\hbar^3c^3}\int_0^\infty\frac{x^2dx}{e^x-1}=\frac{2\zeta(3)T^3}{\pi^2\hbar^3c^3}V$$
-$$E=\frac{V\hbar}{\pi^2c^3}\int_0^\infty\frac{\omega^3d\omega}{e^{\hbar\omega/T}-1}=\frac{VT^4}{\pi^2\hbar^3c^3}\int_0^\infty\frac{x^3dx}{e^x-1}=\frac{\pi^2T^4}{15\hbar^3c^3}V$$
-where $\zeta(\nu)=\int_0^\infty\frac{x^{\nu-1}}{e^x-1}dx$, is the Riemann zeta function such that $\zeta(3)\approx 0.244$ and $\zeta(4)=\frac{\pi^4}{15}$.
-\end{eg}
-\subsection{Grand Potential and Equation of State}
-For a gas of non-relativistic particles, $E=\frac{p^2}{2m}$, the density of states is
-$$g(E)dE=g_s\frac{V}{(2\pi\hbar)^3}d^3p=\frac{g_sV4\pi p^2dp}{(2\pi\hbar)^3}=\frac{g_sV}{4\pi^2}\bigg(\frac{2m}{\hbar^2}\bigg)^{3/2}E^{1/2}dE:=K'E^{1/2}dE$$
-where $g_s$ is the degeneracy of the particles. For boson/fermion gases, the grand potential $\Phi$ is
-$$\Phi=-T\log\mathcal{Z}=-T\int g(E)\log(1\pm\xi e^{-E/T})dE=-TK'\int E^{1/2}\log(1\pm\xi e^{-E/T})dE$$
-where $\xi=e^{\mu/T}$ is defined as the fugacity. 
-\begin{prop}
-$PV=\frac{2}{3}E$ is true for bosons and fermions.
-\end{prop}
-\begin{proof}
-$\Phi$ is extensive and a function of $T$, $\mu$ and $V$, i.e. $\Phi=Vf(T,\mu)$. Recall $P=-\frac{\partial\Phi}{\partial V}|_{T,\mu}=-f(T,\mu)$ and hence by integration by parts
-$$PV=-\Phi=T\log\mathcal{Z}=-TK'\int E^{1/2}\log(1\pm\xi e^{-\beta E})dE=K'\frac{2}{3}\int\frac{E^{3/2}dE}{\xi^{-1}e^{\beta E}\pm1}=\frac{2}{3}E$$
-\end{proof}
-\begin{defi}[Gamma function]
-The Gamma function is defined to be
-$$\Gamma(s)=\int_0^\infty t^{s-1}e^{-t}dt$$
-with the familiar results:
-$$\Gamma(n)=(n-1)!,\quad n\in\mathbb{Z}^+,\quad\Gamma(1/2)=\sqrt{\pi},\quad\Gamma(3/2)=\frac{\sqrt{\pi}}{2},\quad\Gamma(5/2)=\frac{3\sqrt{\pi}}{4}$$
-\end{defi}
-\begin{prop}
-Let $x=\beta E$ and recall the thermal wavelength to be $\lambda=\sqrt{2\pi\hbar^2\beta/m}$. Then, $\frac{N}{V}$ and $\frac{P}{T}$ of fermions/bosons can be elegantly written as $\frac{N}{V}=\frac{g_s}{\lambda^3}f_{3/2}^{F/B}(\xi)$ and $\frac{P}{T}=\frac{g_s}{\lambda^3}f_{5/2}^{F/B}(\xi)$, where
-$$f_\nu^F(\xi):=\frac{1}{\Gamma(\nu)}\int_0^\infty\frac{x^{\nu-1}}{\xi^{-1}e^x+1}dx,\quad f_\nu^B(\xi):=\frac{1}{\Gamma(\nu)}\int_0^\infty\frac{x^{\nu-1}}{\xi^{-1}e^x-1}dx$$
-where $\Gamma(\nu)$ is the Gamma function.
-\end{prop}
-\begin{proof}
-use the definition of $f_{3/2}^{F/B}(\xi)$, $f_{5/2}^{F/B}(\xi)$ and $\Gamma(3/2)=\sqrt{\pi}/2$, $\Gamma(5/2)=3\sqrt{\pi}/4$:
-$$\frac{N}{V}=\int_0^\infty\frac{g(E)dE}{\xi^{-1}e^{\beta E}\mp 1}dE=\frac{g_s}{4\pi^2}\bigg(\frac{2m}{\hbar^2}\bigg)^{3/2}\int_0^\infty\frac{E^{1/2}dE}{\xi^{-1}e^{\beta E}\mp 1}=\frac{g_s}{4\pi^2}\bigg(\frac{2m}{\hbar^2\beta}\bigg)^{3/2}\int_0^\infty\frac{x^{1/2}dx}{\xi^{-1}e^x\mp 1}=\frac{g_s}{\lambda^3}f_{3/2}^{F/B}(\xi)$$
-$$\frac{E}{V}=\int_0^\infty\frac{Eg(E)dE}{\xi^{-1}e^{\beta E}\mp 1}dE=\frac{g_s}{4\pi^2}\bigg(\frac{2m}{\hbar^2}\bigg)^{3/2}\int_0^\infty\frac{E^{3/2}dE}{\xi^{-1}e^{\beta E}\mp 1}=\frac{g_s}{4\pi^2}\bigg(\frac{2m}{\hbar^2\beta}\bigg)^{3/2}\frac{1}{\beta}\int_0^\infty\frac{x^{3/2}dx}{\xi^{-1}e^x\mp 1}=\frac{g_s}{\lambda^3}\frac{3}{2\beta}f_{5/2}^{F/B}(\xi)$$
-But $PV=\frac{2}{3}E$ for quantum gases, so $\frac{P}{T}=\frac{g_s}{\lambda^3}\frac{2}{3}\frac{3}{2}f_{5/2}^{F/B}(\xi)$.
-\end{proof}
-\begin{remarks}
-When $\xi=1$, we obtain the Riemann Zeta function $f_\nu^B(\xi)=\zeta(\nu)=\frac{1}{\Gamma(\nu)}\int_0^\infty\frac{x^{\nu-1}}{e^x-1}dx$. In general, it is tricky to obtain analytical solutions, hence we shall only consider limiting cases.
-\end{remarks}
-\subsection{Ideal (Non-Interacting) Fermi Gas}
-\begin{prop}
-Fermionic particles repel in a low density fermionic gas.
-\end{prop}
-\begin{proof}
-For low density, expand Fermi-Dirac function for small $\xi$:
-$$\frac{1}{\xi^{-1}e^x+1}=\xi e^{-x}(1-\xi e^{-x}+...)\implies f_\nu^F(\xi)=\frac{1}{\Gamma(\nu)}\int_0^\infty x^{\nu-1}(\xi e^{-x}-\xi^2e^{-2x}+...)d\xi=\xi-\frac{\xi^2}{2^\nu}+...$$
-This gives
-$$\frac{N}{V}=\frac{g_s}{\lambda^3}\bigg(\xi-\frac{\xi^2}{2^{3/2}}+\dots\bigg),\quad\frac{P}{T}=\frac{g_s}{\lambda^3}\bigg(\xi-\frac{\xi^2}{2^{5/2}}+\dots\bigg)$$
-For dilute gas (low density) $\frac{N}{V}<<\frac{1}{\lambda^3}$, so $\xi<<1$. The leading result is $\frac{P}{T}=\frac{N}{V}$ as expected. The next leading term is obtained by eliminating $\xi$:
-$$P=\frac{NT}{V}\bigg(1+\frac{1}{2^{5/2}}\frac{\lambda^3}{g_s}\frac{N}{V}\bigg)=\frac{NT}{V}\bigg(1+\frac{\pi^{3/2}\hbar^3}{2m^{3/2}T^{3/2}g_s}\frac{N}{V}\bigg)$$
-The second Virial coefficient $B(T)$ is directly proportional to $T^{-3/2}$. This is small for large $T$, so $B(T)>0$, so pressure increase, i.e. fermions repel.
-\end{proof}
-\begin{prop}
-Chemical potential is negative for a dilute fermionic gas.
-\end{prop}
-\begin{proof}
-$\xi=e^{\mu/T}\approx\frac{\lambda^3N}{g_sV}<<1$ for dilute gas, hence $\mu\approx T\log\frac{\lambda^3N}{g_sV}<0$ and $n_F(\xi)$ is small for $\xi\geq0$. As $T$ decreases, $\lambda$ increases, so $\mu$ increases and becomes positive. 
-\end{proof}
-$^3$He is well described by the ideal Fermi gas. It is gaseous down to $T=3$K. The atom has two protons, 1 neutron, 2 electrons, so it is a fermion of spin $\frac{1}{2}$. The mass $m$ is small, so $\lambda$ is relatively large for $T\sim 10$ K, i.e. quantum effects are significant.
-\begin{remarks}
-For electronic gas, the degeneracy is $g_s=2$ since electrons have spin-$1/2$. At $T=0$, the Fermi-Dirac distribution is a step function, i.e. energy levels $E<\mu$ is filled while $E>\mu$ is empty. $\mu$ is called the Fermi energy $E_F$. Each fermion we add into the system settle into the lowest available energy state. These are successively filled until we run out of particles. the energy of the last filled state is called the Fermi energy, $E_F$ where $\mu$ at $T=0$ is $E_F$. Note that $\mu$ and $T$ are independent variables in the grand canonical ensemble.\\[5pt]
-The energy states of the free particles are not localized in position space, but localized in momentum space. Successive fermions sit in states with ever-increasing momentum. Fermions fill out a ball in momentum space with the momentum of the final fermion called the Fermi momentum $k_F=\sqrt{2mE_F}/\hbar$. All states with wavevector $k\leq k_F$ are filled and are said to form the Fermi sphere.
-\end{remarks}
-\begin{prop}
-At $T=0$, electronic gas is degenerate and exhibit degeneracy pressure.
-\end{prop}
-\begin{proof}
-For a fixed total particle number $N$, the Fermi momentum satisfy
-$$N=\frac{V}{\pi^2\hbar^3}\int_0^{p_F}p^2dp=\frac{Vp_F^3}{3\pi^2\hbar^3}$$
-For non-relativistic particles, $\epsilon_F=\frac{p_F^2}{2m}$, so $N=\frac{V}{3\pi^2 h^3}(2mE_F)^{3/2}\implies E_F=\frac{\hbar^2}{2m}(3\pi^2)^{2/3}\frac{N^{2/3}}{V^{2/3}}$. The result for total particle number is also valid for highly relativistic particles, $E_F=cp_F$. The total energy is
-$$E=\frac{V}{\pi^2\hbar^3}\int_0^{p_F}\frac{p^2}{2m}p^2dp=\frac{V}{10\pi^2m\hbar^3}p_F^5=\frac{V}{10\pi^2m\hbar^3}(2mE_F)^{5/2}\implies\frac{E}{N}=\frac{3}{10m}(2mE_F)=\frac{3}{5}E_F$$
-The pressure is given by $$PV=\frac{2}{3}E=\frac{2}{5}NE_F\implies P=\frac{\hbar^2}{5m}(3\pi^2)^{2/3}\frac{N^{5/3}}{V^{5/3}}>0$$ 
-This is the degeneracy pressure.
-\end{proof}
-\begin{remarks}
-The repulsion of particles in Fermi gas produces pressure, even when $T=0$ due to Pauli Exclusion Principle. This effect is important for stabilizing white dwarf stars (degenerate electron gas) and neutron stars against gravitational collapse (i.e. becoming black hole).
-\end{remarks}
-\begin{prop}
-For metals, the electronic contribution to the heat capacity dominates at low temperatures.
-\end{prop}
-\begin{proof}
-The density of states $g(E)$ is independent of temperature $T$. For small $T$, the slope of $n_F$ at $E=\mu$ is $O(1/T)$ large. Between temperatures 0 and $T$, the number of particles that move is $O(g(E_F)T)$. As $g(E)$ is approximately constant around $E_F$, $\mu$ does not need to change much to keep $N$ fixed. The increase in total energy between temperatures 0 and $T$ is $O(T^2g(E_F))$, i.e. $E(T)=E(0)+O(g(E_F)T^2)\implies C=O(g(E_F)T)$. 
-\end{proof}
-\begin{center}
-  \begin{tikzpicture}
-    \draw [->] (0, 0) -- (5, 0) node [right] {$E$};
-    \draw [->] (0, 0) -- (0, 3) node [above] {$n_F(E)$};
-
-    \draw [thick](0, 2) -- (2, 2) -- (2, 0) node [below] {$E_f$} -- (4.9, 0);
-  \end{tikzpicture}
-  \begin{tikzpicture}
-    \draw [->] (0, 0) -- (5, 0) node [right] {$E$};
-    \draw [->] (0, 0) -- (0, 3) node [above] {$n_F(E)$};
-
-    \draw [thick] (0, 2) -- (1.8, 2) .. controls (2, 2) and (2, 0) .. (2.2, 0) -- (4.9, 0);
-
-    \node [below] at (2, 0) {$E_f$};
-    \draw [decoration={markings, mark=at position 0 with {\arrowreversed{latex'}}, mark=at position 1 with {\arrow{latex'}}}, postaction={decorate}] (1.8, 2.2) -- (2.2, 2.2) node [pos=0.5, above] {$kT$};
-  \end{tikzpicture}
-\end{center}
-\begin{remarks}
-A more rigorous proof to the above is via the Sommerfield expansion. In solid metal, the contributions to $C$ are $O(T)$ from non-degenerate electrons and $O(T^2)$ from lattice vibrations. The electronic contribution to the heat capacity dominates at low temperatures.
-\end{remarks}
-\newpage
-\subsection{Ideal Bose Gas and Bose-Einstein Condensation}
-\begin{prop}
-Bosonic particles attract in a low density bosonic gas.
-\end{prop}
-\begin{proof}
-Set $g_s=1$. For low density, expand Bose-Einstein function for small $\xi$:
-$$\frac{N}{V}=\frac{1}{\lambda^3}f_{3/2}^B(\xi)=\frac{1}{\lambda^3}\bigg(\xi+\frac{\xi^2}{2^{3/2}}+...\bigg),\quad \frac{P}{T}=\frac{1}{\lambda^3}f_{5/2}^B(\xi)=\frac{1}{\lambda^3}\bigg(\xi+\frac{\xi^2}{2^{5/2}}+...\bigg)$$
-At low density, $\xi<<1$. Eliminating $\xi$ gives
-$$P=\frac{NT}{V}\bigg(1-\frac{\lambda^3}{2^{5/2}}\frac{N}{V}+...\bigg)$$
-The second Virial coefficient $B(T)=O(T^{-3/2})$ and is negative, i.e. Bosons are attractive.
-\end{proof}
-\begin{defi}[Bose-Einstein Condensation]
-Bose-Einstein condensation is a condensate in momentum/energy space where a macroscopic number of particles occupy the ground state.
-\end{defi}
-\begin{prop}
-At a critical temperature $T_c$, we will obtain Bose-Einstein condensation.
-\end{prop}
-\begin{proof}
-Recall $\frac{N}{V}=\frac{1}{\lambda^3}f_{3/2}^B(\xi)$. As $T$ decreases, $\frac{1}{\lambda^3}$ decreases, so $\xi$ must increase to keep $\frac{N}{V}$ fixed. After $\xi$ reaches to 1, this equation breaks down (see $f_\nu^B$ integral). The critical temperature $T_c$ is given by
-$$\frac{N}{V}=\frac{1}{[\lambda(T=T_c)]^3}f_{3/2}^B(1)=\bigg(\frac{mT_c}{2\pi\hbar^2}\bigg)^{3/2}\zeta(1.5)\implies T_c=\frac{2\pi\hbar^2}{m}\bigg(\frac{1}{\xi(1.5)}\frac{N}{V}\bigg)^{2/3}$$
-where $\zeta(1.5)=2.612$. $T_c$ is called the Bose-Einstein Condensation temperature, related to the number density $\frac{N}{V}$. Naively, we see that as we reduce $T$ below $T_c$, the number of particles $N$ should decrease. This is erroneous since in approximating the finite sum $\sum_k\rightarrow\frac{V(2m)^{3/2}}{4\pi^2\hbar^2}\int E^{1/2}dE$, $E=0$ does not contribute to the integral. The `missing' states have $E=0$ which does not contribute to the integral. Using the Bose-Einstein distribution, the ground state occupancy is predicted to be
-$$n_B(E=0)=\frac{1}{\xi^{-1}-1}$$
-which diverges at $\xi=0$. As $T\rightarrow T_c$ from above, one crudely approximate by setting $\xi\approx1-(1/N)$ so $n_B=O(N)$, i.e. the ground state have macroscopic occupation. 
-\end{proof}
-\begin{remarks}\leavevmode
-\begin{enumerate}
-    \item The correct approach for $T\leq T_c$: separate ground state from the quasi-continuum of positive energy states. Then,
-$$\frac{N}{V}=\frac{N_0}{V}+\frac{1}{\lambda^3}f_{3/2}^B(\xi=1)\implies\frac{N_0}{V}=\frac{N}{V}-2.612\bigg(\frac{mT}{2\pi\hbar^2}\bigg)^{3/2}\implies\frac{N_0}{N}=1-\bigg(\frac{T}{T_c}\bigg)^{3/2}$$
-This gives us the fraction of particles in the ground state. At $T=0$, all particles will be in the ground state.
-\begin{center}
-  \begin{tikzpicture}
-    \draw [->] (0, 0) -- (3, 0) node [right] {$T$};
-    \draw [->] (0, 0) -- (0, 2) node [above] {$N_0/N$};
-    \draw (0, 1) node [left] {1};
-    \draw (1, 0) node [below] {$T_c$};
-    \draw [thick, domain=0:1] plot [smooth] (\x, {1-\x^(3/2)});
-  \end{tikzpicture}
-\end{center}
-\item The pressure is given by
-$$\frac{P}{T}=\frac{g_s}{\lambda^3}f_{5/2}^B(\xi)=\frac{g_s}{\lambda^3}\zeta(5/2)$$
-so $P$ is directly proportional to $T^{5/2}$ for $T\leq T_c$. Earlier, $PV=\frac{2}{3}E$, so $E$ is directly proportional to $VT^{5/2}$. This is true for $T< T_c$ and $\xi\approx 1$. 
-\item In this regime, the heat capacity $C_V=\frac{\partial E}{\partial T}|_V$ is directly proportional to $VT^{3/2}$. For large $T$, estimate $C_V$ using virial expansion:
-$$E=\frac{3}{2}PV=\frac{3}{2}NT\bigg(1-O\bigg(\frac{N}{V}\frac{1}{T^{3/2}}\bigg)\bigg)\implies C_V=\frac{\partial E}{\partial T}\bigg|_V=\frac{3}{2}N\bigg(1+O\bigg(\frac{N}{V}\frac{1}{T^{3/2}}\bigg)\bigg)$$
-\begin{center}
-  \begin{tikzpicture}
-    \draw [->] (0, 0) -- (6, 0) node [right] {$T$};
-    \draw [->] (0, 0) -- (0, 4) node [above] {$C_V/N$};
-
-    \draw [thick, domain=0.001:2] plot [smooth] (\x, {\x^(3/2)});
-
-    \draw [dashed] (2, 0) node [below] {$T_c$} -- (2, 2.83);
-
-    \draw [thick] (2, 2.83) .. controls (2.5, 2) .. (6, 2);
-
-    \draw [dashed] (0, 2) node [left] {$\frac{3}{2}$} -- (6, 2);
-  \end{tikzpicture}
-\end{center}
-\end{enumerate}
-\item $C_V$ is continuous but have a discontinuous derivative at $T=T_c$. We call this a phase transition, and that $T_c$ depends on $\frac{N}{V}$.
-\end{remarks}
-\begin{eg}
-$^4$He undergoes transition from normal liquid to a superfluid (related to Bose Einstein condensation, but interactions are really quite strong). Using the density of normal liquid at pressure 1 atm, we predict the Bose Einstein transition temperature $T_c=3.13$ K. Experimentally, we see a discontinuity in $C_V$ at $T=2.19$ K. Better examples of BEC are dilute gases of heavy atoms in harmonic traps, like Rubidium which have a $T_c\sim 10^{-7}$ K with a macroscopic occupation of $N\sim10^4$ to $10^7$.
-\end{eg}
 \newpage
 \section{Classical Interacting Systems}
 \subsection{Mixing and Phase Separation}
@@ -1576,247 +1707,6 @@ how about fluctuation-dissipation theorem, response functions, absorption, frict
 
 \appendix
 \newpage
-
-\begin{Note}[Grand Canonical Ensemble from Microcanonical Ensemble]
-Consider an isolated system with fixed energy $E_T$ and a fixed number of particles $N_T$ consisting of a reservoir R and a system of interest $S$. $E_\alpha$ is the energy of S at a definite microstate, i.e. $E_T=E_R+E_{N_S,\alpha}$, where $E_{N_S,\alpha}=E_\alpha(N_S)$.\\[5pt]
-The number of microstates of the isolated system is $\Omega_T(E_T,N_T;E_{N_S,\alpha})=\Omega_R(E_T-E_{N_S,\alpha},N_T-N_S)\Omega(E_{N_S,\alpha},N_S)=\Omega_R(E_T-E_{N_S,\alpha},N_T-N_S)$. The probability of S to be in a definite microstate of energy $E_\alpha$: $\Omega_T(E_T)$ is the total number of microstates when S is not restricted to a specific microstate.
-$$p_{N_S,\alpha}=\frac{\Omega_T(E_T,N_T;E_{N_S,\alpha})}{\Omega_T(E_T,N_T)}=\frac{e^{S_R(E_T-E_{N_S,\alpha},N_T-N_S)/k_B}}{e^{S_T(E_T,N_T)/k_B}}$$
-Entropy is additive. 
-$$S_T(E_T,N_T)=S_R(E_T-\langle E\rangle,N_T-\langle N\rangle)+S(\langle E\rangle,\langle N\rangle)$$
-where $\langle E\rangle$ is the average internal energy of $S$ at equilibrium in its unrestricted state. The entropy of the reservoir where $\frac{|\langle E\rangle-E_\alpha|}{|E_T-\langle E\rangle|}<<1$ and $\frac{|\langle N\rangle-N_S|}{|N_T-\langle N\rangle|}<<1$:
-\begin{eqnarray}
-S_R(E_T-E_{N_S,\alpha},N_T-N_S)&=&S_R[(E_T-\langle E\rangle)+(\langle E\rangle-E_\alpha),(N_T-\langle N\rangle)+(\langle N\rangle-N_S)]\nonumber\\&\approx&S_R(E_T-\langle E\rangle,N_T-\langle N\rangle)+\frac{\langle E\rangle-E_\alpha}{T_R}-\frac{\mu_R(\langle N\rangle-N_S)}{T_R}\nonumber
-\end{eqnarray}
-The grand canonical probability gives the probability of a system to be in a definite microstate of energy $E_{N_S,\alpha}$ at which the system is in contact with a reservoir of fixed temperature $T$ and chemical potential $\mu$. $p_{N_S,\alpha}=e^{\beta(\langle E\rangle-TS(\langle E\rangle)-\mu\langle N\rangle)}e^{-\beta E_{N_S,\alpha}}e^{\beta\mu N_S}$ where $\beta=\frac{1}{kT}$.
-\end{Note}
-
-\begin{thm}[Gibbs Phase Rule]
-For a system with $m$ species, the system can only support an equilibrium state with $r\leq m+2$ coexisting phases.
-\end{thm}
-\begin{proof}
-Consider a system of $m$ species, each of which can be in $r$ phases. The number of unknowns is $2+r(m-1)$ where there are two intensive variables $P$ and $T$, and the mole fractions of $m-1$ of the components (since $\sum_{i=1}^rx_i=1$) for each of the $r$ phases. Then in equilibrium, $\mu_i^{(1)}=...=\mu_i^{(r)}$ where the superscript represents the phase number and subscript represents the species number. We thus have $m(r-1)$ equations for $2+r(m-1)$ unknowns. In order for the system of equations to have a solution, the number of equations must not exceed the number of unknowns, i.e. $r\leq m+2$. In another words there are $r-m+2$ number of degrees of freedom. (2 for whole plane, 1 for common line of co-existence, 0 for common point of coexistence)
-\end{proof}
-\begin{thm}[Chemical Equilibrium]
-$$\sum_s\mu_s\nu_s=0$$
-where $\nu_s$ is the relative amounts of species $s$ participating in the chemical reaction.
-\end{thm}
-\begin{proof}
-At constant $T$ and $P$, in order to find equilibrium, one must maximize Gibbs free energy, i.e. $\sum_s\mu_sd\langle N_s\rangle=0$.
-\end{proof}
-\newpage
-\subsection{Thermodynamics of Non-Interacting Systems}
-\subsubsection*{Classical Monoatomic Ideal Gas}
-\begin{thm}
-Counting by designating particles by lists of momenta of individual particles is incorrect.
-\end{thm}
-Proof: Suppose we designate microstates $\alpha=\{k_1,...,k_N\}$ where $E_\alpha=\sum_{i=1}^N\epsilon_{k_i}$. Under this scheme, the partition function becomes $Z_1^N$, where $Z_1$ is the single particle function. We do so by approximating $\sum_k$ with an integral.
-$$Z_1=\sum_ke^{-\beta\epsilon_k}\approx\frac{V}{(2\pi)^3}\int e^{-\beta\hbar^2k^2/2m}d^3k$$
-The continuous approximation is good as long as the typical scale of variation of $k$ in the integrand is much larger than the $k$-grid spacing. $k\sim\frac{\sqrt{2mkT}}{\hbar}>>\Delta k\sim\frac{2\pi}{V^{1/3}}\implies T>>\frac{\hbar^2}{mkV^{2/3}}=\frac{\hbar^2n^{2/3}}{mk}\frac{1}{N^{2/3}}$. Since $N>>1$, we clearly have $T>>\frac{\hbar^2n^{2/3}}{mk}$, which the $T_{deg}$, degeneration temperature. The triple Gaussian integral will be $Z_1=\frac{V}{(2\pi)^3}(\int e^{-\beta\hbar^2k_x^2/2m}dk_x)^3=\frac{V}{\hbar^3}(\frac{mkT}{2\pi})^{1.5}:=\frac{V}{\lambda_{th}^3}$ where $\lambda_{th}=\hbar\sqrt{2\pi/mkT}$ is the thermal wavelength. Then, we have $F=-kT\log Z=-kTN\log(V/\lambda^3_{th})$. The entropy will be $S=-(\frac{\partial F}{\partial T})_V=kN\log(V/\lambda_{th}^3)+\frac{3}{2}kN=kN(\log(N)+1.5-\log(n\lambda_{th}^3)$, where $n=N/V$. This is a complete disaster since the entropy is not additive. Doubling the amount of gas while keeping the density constant, we have an increase in entropy.
-\begin{Note}[Gibbs Paradox]
-Two identical adjacent containers of an ideal gas are partitioned. There is a certain amount of entropy $S$ associated with each container of gas, and this depends on the volume of each container. Now the partition is removed to allow the gas particles to mix between the containers. No macroscopic changes occur, as the system is in equilibrium. The entropy of the gas in the two-container system can be easily calculated, but if the equation is not extensive, the entropy would not be $2S$. In fact, the non-extensive entropy quantity defined and studied by Gibbs would predict additional entropy. Partitioning again then reduces the entropy again to $2S$, in supposed violation of the Second Law of Thermodynamics.\\[5pt]
-Another situation is consider mixing two different gases, which is equivalent to the irreversible Joule expansion of each of the gases and hence $\Delta S=2Nk\log(2)$, but yet mixing two identical gases will just yield $\Delta S=0$ simply because the gas particles are indistinguishable.
-\end{Note}
-\begin{thm}
-When we factor in distinguishability, we obtain the Sackur-Tetrode Equation
-$$S=kN(2.5-\log(n\lambda_{th}^3))$$
-where the entropy is additive.
-\end{thm}
-Proof: Designating particles by occupation numbers of the single-particle microstates $\alpha=\{n_{k_1},n_{k_2},...\}$, such that $\sum_kn_k=N$. The corresponding collective energy levels are $E_\alpha=\sum_kn_k\epsilon_k$. Suppose we are allowed to neglect all those collective microstates in which more than one particle occupies the same single-particle microstate, i.e. $\forall k$, $n_k=0$ or 1. The correct, collective microstates are in fact the same old, wrong ones. This time the order in which we list the particles ought not to matter. To eliminate the overcounting, we divide $Z_1^N$ by $N!$. This is correct when the number of available single-particle states is much greater than the number of particles $N$, i.e. $V/\lambda_{th}^3>>N\implies n\lambda_{th}^3<<1$, i.e. for classical limit to hold, $T>>T_{deg}$. The free energy is
-$$F=-kT(N\log(V/\lambda_{th}^3)-\log(N!))\approx -kTN(1-\log(n\lambda_{th}^3))$$
-where we used Stirling's approximation. We then have $S=-(\frac{\partial F}{\partial T})_V=kN(2.5-\log(n\lambda_{th}^3)$, as desired. Moreover, the mean energy is $U=F+TS=\frac{3}{2}kTN$ as expected. Finally, the equation of state is $P=-(\frac{\partial F}{\partial V})_T=nkT$ as expected.
-\begin{defi}[Quantum Concentration]
-Quantum concentration is the number of single-particle states per unit volume.
-\end{defi}
-\newpage
-\subsubsection*{Quantum Ideal Fluids}
-\begin{Note}[Spin-Statistic Theorem]
-Bosonic and fermionic particles obey different statistics. Spin-statistic theorem is the consequence of causality principle (relationship between cause and effect) in quantum field theory. 
-\end{Note}
-\begin{eg}[Quantum Ideal Gas]
-Consider identical, weakly interacting, quantum particles, each with non-degenerate set of energy levels $\epsilon_n$, where $n\in\mathbb{Z}^+$. Each possible microstate is specified by $\alpha_{N_S}=(N_1,N_2,...)$ where $N_i$ is the occupation number for energy level $\epsilon_i$. We have $N_S=\sum_{i=1}N_i$ and $E_{N_S,\alpha}=\sum_{i=1}N_i\epsilon_i$. The grand canonical partition function for quantum ideal gas is
-$$\mathcal{Z}(T,V,\mu)=\sum_{N_S,\alpha}e^{-\beta E_{N_S,\alpha}}e^{\beta\mu N_S}=\prod_i\sum_{N_i}e^{\beta(\mu-\epsilon_i)N_i}$$
-The probability of the microstate $\alpha_{N_S}$ is $p_{N_S,\alpha}=\prod_ip_i(N_i)$ such that $p_i(N_i)=\frac{1}{\mathcal{Z}_i}e^{\beta(\mu-\epsilon_i)N_i}$ such that $\sum_{N_i}p_i(N_i)=1$. The factorization of the grand canonical probability means that the probability for energy level $\epsilon_i$ to have occupation number $N_i$ is independent of the occupation numbers $N_{j\neq i}$ of all other energy levels $\epsilon_{j\neq i}$.
-\end{eg}
-\begin{cor}[Bose-Einstein Distribution]
-The allowed occupation number for bosons is $N_i\in\mathbb{Z}^+\cup\{0\}$ $\forall i$. The grand canonical partition function is
-$$\mathcal{Z}_{BE}(T,V,\mu)=\prod_i\frac{1}{1-e^{\beta(\mu-\epsilon_i)}}$$
-for $\mu<\epsilon_i$. The mean occupation number of respective energy level is
-$$\langle N_i\rangle_{BE}=\frac{1}{e^{\beta(\epsilon_i-\mu)}-1}$$
-\end{cor}
-Proof: We have $\mathcal{Z}(T,V,\mu)=\prod_i\mathcal{Z}_i$ with $\mathcal{Z}_i=\sum_{N_i=0}^\infty e^{\beta(\mu-\epsilon_i)N_i}=\frac{1}{1-e^{\beta(\mu-\epsilon_i)}}$. Also, $\langle N_i\rangle_{BE}=\sum_{N_i=0}^\infty p_i(N_i)N_i=kT(\frac{\partial\log\mathcal{Z}_i}{\partial\mu})_{T,V}=\frac{1}{e^{\beta(\epsilon_i-\mu)}-1}$.
-\begin{cor}[Fermi-Dirac Distribution]
-The allowed occupation number for fermions is $N_i\in[0,1]$ $\forall i$. The grand canonical partition function is
-$$\mathcal{Z}_{FD}(T,V,\mu)=\prod_i[1+e^{\beta(\mu-\epsilon_i)}]$$
-The mean occupation number of respective energy level is
-$$\langle N_i\rangle_{FD}=\frac{1}{e^{\beta(\epsilon_i-\mu)}+1}$$
-\end{cor}
-Proof: We have $\mathcal{Z}(T,V,\mu)=\prod_i\mathcal{Z}_i$ with $\mathcal{Z}_i=\sum_{N_i=0}^1e^{\beta(\mu-\epsilon_i)N_i}=\frac{1}{1+e^{\beta(\mu-\epsilon_i)}}$. Also, $\langle N_i\rangle_{FD}=\sum_{N_i=0}^1p_i(N_i)N_i=kT(\frac{\partial\log\mathcal{Z}_i}{\partial\mu})_{T,V}=\frac{1}{e^{\beta(\epsilon_i-\mu)}+1}$.
-\begin{cor}
-For massive quantum particles with spin $s$, the grand canonical partition function is $\mathcal{Z}(T,V,\mu)=\prod_i(\sum_{N_i}e^{\beta(\mu-\epsilon_i)N_i})^{2s+1}$ and mean occupation number is $\langle N_i\rangle=\frac{2s+1}{e^{\beta(\epsilon_i-\mu)}+a}$.
-\end{cor}
-Proof: Spin $s$ has $2s+1$-fold degeneracy to each energy level.
-\begin{thm}
-The grand potential of a quantum ideal gas, is $-\frac{2}{3}$ of its internal energy $U$.
-\end{thm}
-Proof: We have $\log\mathcal{Z}=\pm\sum_i\log[1\pm e^{-\beta(\epsilon_i-\mu)}]$ for either Bose-Einstein or Fermi-Dirac gas. Since $\Phi=-kT\log\mathcal{Z}$, so under the continuum limit,
-$$\Phi=\mp kT\int_0^\infty g(\epsilon)\log[1\pm e^{-\beta(\epsilon-\mu)}]d\epsilon$$
-The density of states per unit energy $g(\epsilon)$ is $g(\epsilon)=(2s+1)\frac{Vm^{3/2}}{\sqrt{2}\pi^2\hbar^3}\sqrt{\epsilon}$ since $k=\frac{\sqrt{2m\epsilon}}{\hbar}$ and also, we use $\lambda_{th}=\hbar\sqrt{2\pi\beta/m}$ and get
-$$g(\epsilon)=\frac{2(2s+1)}{\sqrt{\pi}}\frac{V}{\lambda_{th}^3}\sqrt{\epsilon}\beta^{1.5}$$
-The total number is $$\int_0^\infty\frac{g(\epsilon)d\epsilon}{e^{\beta(\epsilon-\mu)}\pm1}=\frac{2(2s+1)}{\sqrt{\pi}}\frac{V}{\lambda_{th}^3}\int_0^\infty\frac{\sqrt{\epsilon}\beta^{1.5}d\epsilon}{e^{\beta(\epsilon-\mu)}\pm1}=\frac{2(2s+1)V}{\sqrt{\pi}\lambda_{th}^3}\int_0^\infty\frac{\sqrt{x}dx}{e^{x-\beta\mu}\pm1}$$
-where $x=\beta\epsilon$. Similarly, the internal energy is
-$$\int_0^\infty\frac{\epsilon g(\epsilon)d\epsilon}{e^{\beta(\epsilon-\mu)}\pm1}=\frac{2(2s+1)}{\sqrt{\pi}}\frac{V}{\lambda_{th}^3}\int_0^\infty\frac{\epsilon^{1.5}\beta^{2.5}d\epsilon}{e^{\beta(\epsilon-\mu)}\pm1}=\frac{2(2s+1)V}{\sqrt{\pi}\lambda_{th}^3}\int_0^\infty\frac{x^{1.5}dx}{e^{x-\beta\mu}\pm1}$$
-We see that the grand potential will be
-\begin{eqnarray}
-\Phi&=&-kT\log\mathcal{Z}=\mp kT\int_0^\infty g(\epsilon)\log[1\pm e^{-\beta(\epsilon-\mu)}]d\epsilon\nonumber\\&=&\mp NkT\frac{2s+1}{n\lambda_{th}^3}\frac{2}{\sqrt{\pi}}\int_0^\infty\sqrt{x}\log[1\pm e^{-x+\beta\mu}]dx\nonumber\\&=&-\frac{2}{3}NkT\frac{2s+1}{n\lambda_{th}^3}\frac{2}{\sqrt{\pi}}\int_0^\infty\frac{x^{3/2}dx}{e^{x-\beta\mu}\pm1}\nonumber\\&=&-\frac{2}{3}U\nonumber
-\end{eqnarray}
-where we integrated by parts. Since $\Phi=-PV$, $P=\frac{2}{3}V$ for a non-relativistic quantum ideal gas in 3D. For relativistic quantum ideal gas, we take $\epsilon\approx\hbar kc$.
-\begin{cor}
-For an adibatic process, we have $PV^{5/3}$ being a constant for a non-relativistic quantum ideal gas in 3D.
-\end{cor}
-Proof: $S=\frac{U-\Phi-\mu N}{T}=\frac{5U/3-\mu N}{T}$. With $S$ and $N$ constant, we have $\frac{U}{NT}$ being a function of $\mu/T$. So $VT^{3/2}$ is a constant and hence $PVT^{-1}$ a constant, and then as desired. For the relativistic version, it is $PV^{4/3}$.
-\begin{cor}[Maxwell-Boltzmann Distribution]
-In the limit of $\langle N_i\rangle<<1$ $\forall i$ (classical limit), the Bose-Einstein and Fermi-Dirac distributions both reduce to Maxwell-Boltzmann distribution.
-\end{cor}
-Proof: $(e^{\beta(\epsilon_i-\mu)}\pm1)^{-1}\rightarrow\langle N_i\rangle_{MB}=e^{\beta(\mu-\epsilon_i)}$, which is the Maxwell-Boltzmann distribution (more later). Note that: $\langle N_i\rangle_{FD}<1$ and $\langle N_i\rangle_{BE}\rightarrow\infty$ when $\epsilon_i=\mu$.
-\begin{cor}
-The relative mean square fluctuation is $\langle(\Delta N_i)^2\rangle=kT(\frac{\partial\langle N_i\rangle}{\partial\mu})_{T,V}$ and for the three cases:
-\begin{itemize}
-    \item Classical: Relative fluctuation is normal.
-    \item Bosonic: Bosons tend to bunch together, hence above normal.
-    \item Fermionic: Fermions tend to repel together, hence below normal.
-\end{itemize}
-\end{cor}
-Proof: $\frac{\langle(\Delta N_i)^2\rangle}{\langle N_i\rangle^2}=\frac{1}{\langle N_i\rangle}-a$, with $a=0$ for classical and $a=\pm1$ (plus for fermions, minus for bosons). 
-\begin{eg}[Degenerate Fermi Gas]
-Consider an ideal gas of fermions at very low temperature, $\beta\rightarrow\infty$, then the distribution is approximately 1 if $\epsilon<\mu(T=0)$, and 0 otherwise. At $T=0$, the fermions stack up to occupy all the vailable single-particle states from the lowest energy one to the maximum energy, equal to $\mu(T=0)$. This is called the Fermi energy. The number of particles contained in the step distribution is
-$$N=\int_0^{\epsilon_F}g(\epsilon)d\epsilon=\frac{2(2s+1)}{\sqrt{\pi}}\frac{V}{\lambda_{th}^3}\beta^{3/2}\int_0^{\epsilon_F}\sqrt{\epsilon}d\epsilon=\frac{2(2s_1)Vm^{3/2}}{3\sqrt{2}\pi^2\hbar^3}\epsilon_F^{3/2}$$
-where $g(\epsilon)$ is directly proportional to $\sqrt{E}$. Rewritting, we have $\epsilon_F=\frac{\hbar^2}{2m}(\frac{6\pi^2n}{2s+1})^{2/3}$, with $n=N/V$ and in another words, $\epsilon_F=\hbar^2k_F^2/2m$. The width of the step in the distribution is approximately $kT$ and so the $T=0$ limit applies to temperatures satisfying $T<<T_F=\frac{\epsilon_F}{k}\approx \frac{\hbar^2n^{2/3}}{mk}\approx T_{deg}$, precisely the degeneration temperature. The mean energy will be $N\frac{\int_0^{\epsilon_F}\epsilon^{1.5}d\epsilon}{\int_0^{\epsilon_F}\sqrt{\epsilon}d\epsilon}=\frac{3}{5}N\epsilon_F$. The equation of state is $P=\frac{2}{3}\frac{U}{V}=\frac{2}{5}n\epsilon_F$. For the heat capacity, there are two ways of calculating. We first do this qualitatively.\\[5pt]
-At small but non-zero temperatures, i.e. $T<<\epsilon_F/k$, the Fermi distribution has a step-like shape, but the step is not sharp at $\epsilon_F$. It is slightly worn and has a width of order $kT$. A small number of fermions with energies $\sim\epsilon_F$ can be kicked out of the ground state to slightly higher energies. This number is $\sim g(\epsilon_F)\Delta\epsilon$. The excess mean energy is $\sim g(\epsilon_F)(kT)^2$ and so the finite $T$ correction to energy is quadratic in $T$, and we have $C_V$ proportional to $T$ since $\frac{\partial U}{\partial T}$.\\[5pt]
-Next, we try a more quantitative theory. We attempt to compute $\int_0^\infty\frac{f(\epsilon)d\epsilon}{e^{\beta(\epsilon-\mu)}+1}$. We start by changing variable to $x=\beta(\epsilon-\mu)$ so $\epsilon=\mu+kTx$.
-\begin{eqnarray}
-I&=&kT\int_{-\mu/kT}^\infty\frac{f(\mu+kTx)}{e^x+1}dx\nonumber\\&=&kT\int_0^\infty\frac{f(\mu+kTx)}{e^x+1}dx+kT\int_0^{\mu/kT}\frac{f(\mu-kTx)}{e^{-x}+1}dx\nonumber\\&=&kT\int_0^{\mu/kT}f(\mu-kTx)dx+kT\bigg(\int_0^\infty\frac{f(\mu+kTx)dx}{e^x+1}-\int_0^{\mu/kT}\frac{f(\mu-kTx)dx}{e^x+1}\nonumber\\&\approx&\int_0^\mu f(\epsilon)d\epsilon+kT\int_0^\infty\frac{2kTxf'(\mu)dx}{e^x+1}\nonumber\\&=&\int_0^\mu f(\epsilon)d\epsilon+2(kT)^2f'(\mu)\int_0^\infty\frac{xdx}{e^x+1}+O(k^4T^4\mu^{-4})\nonumber\\&=&\int_0^\mu f(\epsilon)d\epsilon+\frac{\pi^2}{6}f'(\mu)k^2T^2\nonumber
-\end{eqnarray}
-This is the Sommerfeld expansion, allowing us to calculate finite $T$ corrections. To find chemical potential and mean energy, we use $f(\epsilon)=g(\epsilon)=\frac{N}{(2/3)\epsilon_F^{3/2}}\sqrt{\epsilon}$ and $f(\epsilon)=\epsilon g(\epsilon)=\frac{N}{(2/3)\epsilon_F^{3/2}}\epsilon^{3/2}$ respectively to get $\mu\approx\epsilon_F(1-(\pi^2/12)(kT/\epsilon_F)^2)$ and $U\approx\frac{3}{5}N\epsilon_F(1+(5\pi^2/12)(kT/\epsilon_F)^2)$ respectively. In the lowest order, $C_V=0.5Nk\pi^2kT/\epsilon_F$, $P=\frac{2U}{3V}=\frac{2}{5}n\epsilon_F(1+(5\pi^2/12)(kT/\epsilon_F)^2$ and $S=\frac{1}{T}(\frac{5}{3}U-\mu N)=Nk\frac{\pi^2}{2}\frac{kT}{\epsilon_F}$ which tends to zero as $T\rightarrow 0$. We note that for $T\rightarrow 0$, the Fermi gas exerts a much larger pressure than it would have done had it been classical due to stacking of particles via Pauli exclusion principle.
-\end{eg}
-\begin{eg}[Degenerate Bose Gas]
-Given the distribution, we require $\mu<\epsilon_i$ for all single particle states $i$. So $\mu<\min(\epsilon_i)=\epsilon_0=0$. As $T\rightarrow0$, the lower is the energy the larger is the occupation number and so at $T\rightarrow +0$, we expect all particles to drop to the ground state. The chemical potential starts off at $\mu=0$, eventually decaying further with increasing $T$ to its classical value. Essentially, at low temperatures, the lowest energy state becomes macroscopically occupied. 
-$$f(\beta\mu)\leq f(0)=\frac{2}{\sqrt{\pi}}\int_0^\infty\frac{\sqrt{x}dx}{e^x-1}$$
-Since there is no physically legitimate positive values of $\mu$ and so $f(\beta\mu)$ has a finite upper limit. The right hand side is evaluated to be 2.612 (Riemann zeta function for 1.5). But $f(\beta\mu)=\frac{n}{n_Q}$ where $n_Q$ the quantum concentration is a function of temperature. The resultant critical temperature will be $T_c\approx\frac{2\pi\hbar^2}{mk}(\frac{n}{2.612(2s+1)})^{2/3}$. So $T<T_C$, we must set $\mu=0$. The number of particles in the excited state $(\epsilon>0)$ will be $N_{excited}=n_QVf(0)<N$ and so $\frac{N_{excited}}{N}\approx2.612\frac{2s+1}{n\lambda_{th}^3}=(T/T_c)^{1.5}$. The phenomenon of a macroscopic number of particles collecting in the lowest energy state is called the Bose-Einstein condensation. This is a kind of phase transition which occurs at the critical temperature.\\[5pt]
-The mean energy will be $\frac{2s+1}{\lambda_{th}^3}VkT1.5\times$ Riemann zeta for 2.5 and so $U\approx0.77NkT_c(T/T_c)^{2.5}$. The heat capacity will be $\frac{5}{2}\frac{U}{T}\approx1.93Nk(T/T_c)^{1.5}$. It turns out that $C_V$ has a maximum and a discontinuous derivative, and hence a third-order phase transition since the third derivative of $\Phi$ is discontinuous. Finally, the equation of state is found using $\Phi=-2U/3$ and so $P\approx0.51nkT_c(T/T_c)^{2.5}$. Hence, pressure is independent of the particle density and depends on temperature only.
-\end{eg}
-\newpage
-
-\subsubsection*{Radiation}
-\begin{defi}
-Photon is a massless boson with spin $s=1$ (two spin degree of freedoms, corresponding to polarization) and has zero chemical potential energy, i.e. particle number is not conserved.
-\end{defi}
-\begin{thm}
-The logarithm of the grand canonical partition function for photon is
-$$\log\mathcal{Z}(T,V)=-2\sum_{i=1}^\infty\log[1-e^{-\beta\epsilon_i}]$$
-\end{thm}
-Proof: Since the Bose-Einstein distribution for spin $s$ is $\mathcal{Z}_{BE}(T,V,\mu)=\prod_i\bigg(\frac{1}{1-e^{\beta(\mu-\epsilon_i)}}\bigg)^{2s+1}$. With $s=1$ and $\mu=0$, we have $\mathcal{Z}(T,V)=\prod_{i=1}^\infty(1-e^{-\beta\epsilon_i})^{-2}$. 
-\begin{cor}
-The average energy for photon is $\langle E\rangle=2\sum_{i=1}^\infty\frac{\hbar\omega_i}{e^{\beta\hbar\omega_i}-1}$.
-\end{cor}
-Proof: The average energy is 
-$$\langle E\rangle=-\bigg(\frac{\partial\log\mathcal{Z}}{\partial\beta}\bigg)_V=2\sum_{i=1}^\infty\frac{-e^{-\beta\hbar\omega_i}(-\hbar\omega_i)}{1-e^{-\beta\hbar\omega_i}}=2\sum_{i=1}^\infty\frac{\hbar\omega_i}{e^{\beta\hbar\omega_i}-1}$$
-where $\log\mathcal{Z}(T,V)=-2\sum_{i=1}^\infty\log(1-e^{-\beta\epsilon_i})$ for $\epsilon_i=\hbar\omega_i$. 
-\begin{thm}
-In the continuum limit, we have
-$$S(T,V)=\frac{32}{45}\frac{\pi^5k^4}{h^3c^3}VT^3,\text{    }P(T,V)=\frac{8}{45}\frac{\pi^5k^4}{h^3c^3}T^4$$
-\end{thm}
-Proof: To obtain the equation of state, we need to construct $\Phi$ from $\mathcal{Z}$. We had $\log\mathcal{Z}(T,V)=-2\sum_{i=1}^\infty\log(1-e^{-\beta\hbar\omega_i})$. Now, taking the continuum limit, we have $\Sigma(E)=\frac{V}{h^3}\int 4\pi p^2dp$ such that $V$ is the volume and the density of states $g(p)$ is $\frac{V4\pi p^2}{h^3}$, which becomes $\frac{V\omega^2}{2\pi^2c^3}$ for $p=\hbar\omega/c$. We then have
-\begin{eqnarray}
-\log\mathcal{Z}(T,V)&=&-2\int_{\omega=0}^\infty\log(1-e^{-\beta\hbar\omega})g(\omega)d\omega\nonumber\\&=&-\frac{V}{\pi^2c^3}\int_{\omega=0}^\infty \omega^2\log(1-e^{-\beta\hbar\omega})d\omega\nonumber\\&=&-\frac{V\omega^3}{3\pi^2c^3}[\log(1-e^{-\beta\hbar\omega})]^\infty_0+\frac{V}{\pi^2c^3}\int_0^\infty\frac{\omega^3}{3}\frac{\beta\hbar e^{-\hbar\omega\beta}}{1-e^{-\beta\hbar\omega}}\nonumber\\&=&\frac{8\pi^5k^3}{45h^3c^3}VT^3\nonumber
-\end{eqnarray}
-where we invoked the identity $\int_0^\infty\frac{x^3}{e^x-1}dx=\frac{\pi^4}{15}$. Now, since $\Phi(T,V)=-kT\log\mathcal{Z}(T,V)$, we have $S(T,V)=-(\frac{\partial\Phi}{\partial T})_V$ and $P(T,V)=-(\frac{\partial\Phi}{\partial V})_T$.
-\begin{thm}[Radiation Pressure]
-The radiation pressure is one-third of the energy density.
-\end{thm}
-Proof: Suppose the number of photons per unit volume with an energy in the range $[\epsilon,\epsilon+d\epsilon]$ is $n_\epsilon(\epsilon)d\epsilon$. Consider photons approaching the surface at an angle $\theta$ to the normal. In unit times, photons in volume $c\cos\theta$ will hit a unit area. Considering the solid angle of a thin ring of thickness $d\theta$, the number of photons hitting a unit area per unit time with energy in that range and angles in the range $[\theta,\theta+d\theta]$ is $n_\epsilon(\epsilon)d\epsilon c\cos\theta\frac{1}{2}\sin\theta d\theta$. For perfectly reflecting surfaces, the momentum change is $2\epsilon\cos\theta/c$ and the pressure is
-$$p=\int_0^\infty\int_0^{\pi/2}2\frac{1}{2}\sin\theta\cos^2\theta d\theta\epsilon n_\epsilon(\epsilon)d\epsilon=\frac{1}{3}u$$
-as desired.
-\begin{cor}
-The average energy is $\frac{8\pi^5k^4}{15h^3c^3}VT^4$ and hence pressure of photon gas is $\frac{8\pi^5k^4T^4}{45h^3c^3}$
-\end{cor}
-Proof: We take
-$\langle E\rangle=kT^2(\frac{\partial\log\mathcal{Z}}{\partial T})_V$ and then $P=\frac{1}{3}\frac{\langle E\rangle}{V}$. Alternatively, we could have used first law, $u=T(\frac{\partial P}{\partial T})_V-P$, where we have used a Maxwell relation. Since $P=u/3$, upon integration, we have $u=AT^4$, where $A$ is some constant. 
-\begin{cor}
-The entropy of a photon gas is $\frac{4}{3}u/T$ and the Gibbs free energy per unit volume is 0.
-\end{cor}
-Proof: We have $dq=du=4AT^3dT$ and since $dS=dq/T\implies S=\frac{4}{3}AT^3$. THe Gibbs free energy per unit volume is $u+P-TS=AT^4+\frac{1}{3}AT^4-T\frac{4}{3}AT^3=0$, consistent with photons' chemical potential being zero.
-\begin{cor}
-The energy density per unit wavelength is
-$$u_\lambda(\lambda,T)=\frac{8\pi hc}{\lambda^5}\bigg(e^{hc/\lambda kT}-1\bigg)^{-1}$$
-\end{cor}
-Proof: The average energy of radiation can be rewritten as
-$$\langle E\rangle=2\int_0^\infty\frac{\hbar\omega}{e^{\beta\hbar\omega}-1}g(\omega)d\omega=\frac{V\hbar}{\pi^2c^3}\int_0^\infty\frac{\omega^3}{e^{\beta\hbar\omega}-1}d\omega=\frac{Vh}{2\pi^2c^3}\int_0^\infty\bigg(\frac{2\pi c}{\lambda}\bigg)^3\frac{1}{e^{hc/(\lambda kT)}-1}\frac{2\pi c}{\lambda^2}d\lambda$$
-If we define $u_\lambda$ such that $\frac{\langle E\rangle}{V}=\int_0^\infty u_\lambda(\lambda,T)d\lambda$, we obtain our desired form.
-\begin{defi}[Blackbody]
-A blackbody is an idealized physical body that absorbs all incident electromagnetic radiation, regardless of frequency or angle of incidence. An ideal black body in thermal equilibrium has two notable properties:
-\begin{itemize}
-    \item It is an ideal emitter: at every frequency, it emits as much or more thermal radiative energy as any other body at the same temperature.
-    \item It is a diffuse emitter: the energy is radiated isotropically, independent of direction.
-\end{itemize}
-An approximate realization of a black surface is a hole in the wall of a large insulated enclosure. Any light entering the hole is reflected or absorbed at the internal surfaces of the body and is unlikely to re-emerge, making the hole a nearly perfect absorber. When the radiation confined in such an enclosure is in thermal equilibrium, the radiation emitted from the hole will be as great as from any body at that equilibrium temperature.
-\end{defi}
-\begin{law}[Stefan-Boltzmann's Law]
-The Stefan–Boltzmann law states that the power radiated from a black body is directly proportional to the fourth power of temperature, with the proportionality constant being the Stefan-Boltzmann constant, which is $\sigma=\frac{2\pi^5k^4}{15h^3c^2}=5.67\time10^{-8}$Wm$^{-2}$K$^{-4}$. 
-\end{law}
-\begin{law}[Rayleigh-Jeans Law]
-The Rayleigh–Jeans Law is an approximation to the spectral radiance of electromagnetic radiation as a function of wavelength from a black body at a given temperature through classical arguments. Using $g(\epsilon)$ and working with $\lambda$, we then have $u_\lambda:=\frac{du}{d\lambda}=kTg(\lambda)$, the predicted energy density per unit wavelength is $u_\lambda=\frac{8\pi kT}{\lambda^4}$.
-\end{law}
-\begin{Note}[Ultraviolet Catastrophe]
-The Rayleigh Jeans law is only correct for long wavelength. The classical result implied leads to an infinite total energy density
-$$\frac{\langle E\rangle}{V}=\int_0^\infty u_\lambda(\lambda,T)d\lambda=8\pi kT\int_0^\infty\lambda^{-4}d\lambda$$
-which is infinity, a contradiction indeed.
-\end{Note}
-\begin{law}[Planck's Law]
-Planck's law describes the spectral density of electromagnetic radiation emitted by a black body in thermal equilibrium at a given temperature T, when there is no net flow of matter or energy between the body and its environment. The law assumes quantized energy $\hbar\omega_i$ and the energy density per unit wavelength is $\frac{8\pi hc}{\lambda^5}\frac{1}{e^{hc/\lambda kT}-1}$.
-\end{law}
-\begin{thm}[Wien's Displacement Law]
-The peak of the energy density per unit wavelength occurs at a wavelength $2.898\times10^{-3}/T$ with units mK.
-\end{thm}
-Proof: $(\frac{\partial u_\lambda}{\partial\lambda})_T=0$ would mean
-$$\bigg(\frac{hc}{\lambda kT}-5\bigg)e^{hc/\lambda kT}+5=0$$
-The numerical solution is $\frac{hc}{\lambda_{peak}kT}=4.965$ which gives us our desired form.
-\begin{law}[Kirchhoff's Laws]
-Kirchhoff's law states that for a body of any arbitrary material emitting and absorbing thermal electromagnetic radiation at every wavelength in thermodynamic equilibrium, the ratio of its emissive power to its dimensionless coefficient of absorption is equal to a universal function only of radiative wavelength and temperature.
-\end{law}
-\begin{thm}
-The ratio of spectral emissive power $e_\lambda(\lambda,T)$ (fraction of incident radiation that is absorbed at wavelength $\lambda$) to spectral absorptivity $\alpha_\lambda(\lambda)$ (fraction of incident radiation that is absorbed at wavelength $\lambda$) is $0.25u_\lambda(\lambda,T)c$.
-\end{thm}
-Proof: We first consider the flux of photons of number density $n_\epsilon(\epsilon)d\epsilon$ hitting a surface. The flux will be $\int c\cos\theta n_\epsilon(\epsilon)d\epsilon\frac{1}{2}\sin\theta d\theta=\frac{1}{4}n_\epsilon(\epsilon)c$.\\[5pt]
-Consider a body in equilibrium with radiation inside a cavity at temperature $T$. The energy hitting a unit area on the surface per unit time for an energy interval $d\epsilon$ is $\frac{1}{4}u_\epsilon(\epsilon) cd\epsilon$. The energy out must be equal to the energy in, by Kirchhoff's law, so $e_\lambda d\lambda=\frac{1}{4}u_\lambda cd\lambda \alpha_\lambda$, where $u_\epsilon(\epsilon)d\epsilon=u_\lambda(\lambda)d\lambda$. Since a blackbody is a perfect blackbody, $\alpha=1$ and so the blackbody radiation is equivalent to equilibrium radiation in a cavity. For a non-blackbody, the spectral radiant exitance is $\epsilon_\lambda$ (emissivity) multiplied by that of a blackbody. 
-\subsubsection*{Phonons}
-\begin{defi}[Phonons]
-Phonons are quantized lattice waves that describe the elementary excitations of vibrations of the lattice.
-\end{defi}
-\begin{eg}[Einstein Model]
-The Einstein model assumes all vibrational modes of the solid have the same frequency $\omega_E$, i.e. $g_E(\omega)=3N\delta(\omega-\omega_E)$ (each atom has three vibrational degrees of freedom with each of these normal modes being independent and do not interact with each other). Hence, $Z=\prod_{k=1}^{3N}Z_k\implies\log(Z)=\sum_{k=1}^{3N}\log(Z_k)$. Each mode can be modelled as a simple harmonic oscillator. Each single mode is $Z_k=\sum_{n=0}^\infty e^{-(n+0.5)\hbar\omega_E\beta}=\frac{e^{-0.5\hbar\omega_E\beta}}{1-e^{-\hbar\omega_E\beta}}$. The internal energy $U=-(\frac{\partial\log Z}{\partial\beta})$ is
-$$U=\frac{3N}{2}\hbar\omega_E+\frac{3N}{1-e^{-\hbar\omega_E\beta}}\hbar\omega_Ee^{-\hbar\omega_E\beta}=\frac{3N}{2}\hbar\omega_E+\frac{3N\hbar\omega_E}{e^{\hbar\omega_E\beta}-1}=3R\Theta_E(0.5+(e^{\Theta_E/T}-1)^{-1})$$
-where $\hbar\omega_E=k\Theta_E$ defines a temperature $\Theta_E$ which scales with the vibrational frequency in the Einstein model. The molar heat capacity will be
-$$C=3R\Theta_E\bigg(-\frac{1}{(e^{\Theta_E/T}-1)^2}\bigg)e^{\Theta_E/T}\bigg(-\frac{\Theta_E}{T^2}\bigg)=3R\frac{(\Theta_E/T)^2e^{\Theta_E/T}}{(e^{\Theta_E/T}-1)^2}$$
-As $T\rightarrow\infty$, $C\rightarrow 3R$, the Dulong-Petit result.
-\end{eg}
-\begin{eg}[Debye Model]
-This time we assume the lattice vibrations are waves with speed $v_s$, speed of sound in the solid, i.e. $\omega=v_sq$, where $q$ is the wavevector of the lattice vibration. The density of states of lattice vibrations in 3D as a function of $q$ is
-$$g(q)dq=\frac{4\pi q^2dq}{(2\pi/L)^3}3\implies g(\omega)d\omega=\frac{3V\omega^2d\omega}{2\pi^2v_s^3}$$
-such that $\int_0^{\omega_D}g(\omega)d\omega=3N$ where $\omega_D$ the cutoff frequency (Debye frequency) is imposed to have a finite number of modes. We then have $\omega_D^3V=6N\pi^2v_s^3$ and hence rewriting $g(\omega)d\omega=\frac{9N\omega^2d\omega}{\omega_D^3}$. We can thus define a Debye temperature $\Theta_D=\hbar\omega_D/k$. The internal energy is 
-$$U=\int_0^{\omega_D}g(\omega)\hbar\omega(0.5+(e^{\beta\hbar\omega}-1)^{-1})d\omega=\frac{9}{8}N\hbar\omega_D+\frac{9N\hbar}{\omega_D^3}\int_0^{\omega_D}\frac{\omega^3d\omega}{e^{\hbar\omega\beta}-1}$$
-The heat capacity will be $\frac{9R}{x_D^3}\int_0^{x_D}\frac{x^4e^xdx}{(e^x-1)^2}$ where $x_D=\hbar\beta\omega_D$. At high temperature $C\rightarrow\frac{9R}{x_D^3}\int_0^{x_D}\frac{x^4}{x^2}dx=3R$ as expected. At low temperatures, $C\rightarrow\frac{9R}{x_D^3}\int_0^\infty\frac{x^4e^xdx}{(e^x-1)^2}=\frac{12R\pi^4}{5x_D^3}$, hence proportional to $T^3$.
-\end{eg}
-
-
-
-
-
-
-
-
-
-
-
 \bibliographystyle{unsrt}
 \bibliography{reference.bib}
 \end{document}

@@ -131,15 +131,20 @@ Invert the expression:
 $$S(U,V,N)=\frac{3}{2}Nk_B\ln\bigg\{\bigg(\alpha\frac{V}{N}\bigg)^{2/3}\frac{U}{N}\bigg\}\implies U(S,V,N)=e^{2S/3Nk_B}\bigg(\frac{N}{\alpha V}\bigg)^{2/3}N$$
 But we have $dU=TdS-pdV+\mu dN$ and so
 $$p=-\bigg(\frac{\partial U}{\partial V}\bigg)_{S,N}=\frac{2U}{3V},\quad T=\bigg(\frac{\partial U}{\partial S}\bigg)_{V,N}=\frac{2}{3Nk_B}U$$
-which separately gives $p=\frac{2}{3}U/V$ and $U=\frac{3}{2}Nk_BT$. The lattonsistent er is cwith the equipartition of energy while the former $p=\frac{2}{3}\frac{3}{2}\frac{N}{V}k_BT\implies Nk_BT=pV$ is consistent with the ideal gas law.
+which separately gives 
+$$p=\frac{2}{3}U/V,\quad U=\frac{3}{2}Nk_BT$$
+The latter is consistent with the equipartition of energy while the former
+$$p=\frac{2}{3}\frac{3}{2}\frac{N}{V}k_BT\implies Nk_BT=pV$$
+is consistent with the ideal gas law.
 \end{ans}
+\newpage
 \begin{qns}[Analytic thermodynamics]
 Use a Maxwell relation and the chain rule to show that for any substance the rate of change of $T$ with $p$ in a reversible adiabatic compression is given by
 $$\bigg(\frac{\partial T}{\partial p}\bigg)_S=\frac{T}{C_p}\bigg(\frac{\partial V}{\partial T}\bigg)_p$$
 Find an equivalent expression for the adiabatic rate of change of $T$ with $V$ , and check that both results are valid for an ideal monatomic gas.
 \end{qns}
 \begin{ans}
-We have $dH=TdS+vdp$, which gives the Maxwell relation
+We have $dH=TdS+Vdp$, which gives the Maxwell relation
 $$\bigg(\frac{\partial T}{\partial p}\bigg)_S=\bigg(\frac{\partial V}{\partial S}\bigg)_p=\bigg(\frac{\partial V}{\partial T}\bigg)_p\bigg(\frac{\partial T}{\partial S}\bigg)_p$$
 But, $C_p=(\frac{\partial U}{\partial T})_p=T(\frac{\partial S}{\partial T})_p$, which gives our relation. Next, we want to find $(\frac{\partial T}{\partial V})_S$. We have $dU=TdS-pdV$, which gives the Maxwell relation
 $$\bigg(\frac{\partial T}{\partial V}\bigg)_S=-\bigg(\frac{\partial p}{\partial S}\bigg)_V=-\bigg(\frac{\partial p}{\partial T}\bigg)_V\bigg(\frac{\partial T}{\partial S}\bigg)_V=-\frac{T}{C_V}\bigg(\frac{\partial p}{\partial T}\bigg)_V$$
@@ -156,18 +161,37 @@ $$\bigg(\frac{\partial T}{\partial V}\bigg)_S=-(\gamma-1)\frac{T}{V}=-\frac{2T}{
 Write brief notes on thermodynamic equilibrium in closed and open systems.
 \end{qns}
 \begin{ans}
-Closed systems can only exchange energy with their surroundings. Energy is not conserved; if the system is in equilibrium with its surroundings, mean value of energy is related to the temperature of the system or the surroundings.\\[5pt]
-Open systems can exchange energy and matter with their surroundings; energy and particle number are not conserved; if the system is in equilibrium with its surroundings, mean values of energy and the particle number are related to the temperature and chemical potential of the system or of the surroundings.\\[5pt]
-Thermodynamic equilibrium state is defined as the one macroscopic state of a system which is automatically attained after a sufficiently long period of time such that the macroscopic properties of the system no longer change with time.\\[5pt]
-By Second Law of thermodyamics, we can show that the equilibrium state is the state at which $S$ has a global maximum. Since $S$ is a monotonically increasing function of $U$, then the condition for equilibrium is $(\Delta U)_{S,V,N_i}\geq0$. By first-order variational displacement of $E$:
-$$\delta U=\sum_{\alpha=1}^\mu[T^{(\alpha)}\delta S^{(\alpha)}-p^{(\alpha)}\delta V^{(\alpha)}+\sum_{i=1}^r\mu_i^{(\alpha)}\delta N_i^{(\alpha)}]$$
-From the condition of equilibrium, i.e. consider process that repartition individual quantities, keeping the corresponding total fixed. Then we have
-$$\sum_{\alpha=1}^\nu\delta S^{(\alpha)}=0,\quad\sum_{\alpha=1}^\nu\delta V^{(\alpha)}=0,\quad\sum_{\alpha=1}^\nu\delta N_i^{(\alpha)}=0,\text{ for }i=1,2,...,r$$
-For $\nu=2$, we can easily demonstrate 
-$$\delta S^{(1)}=-\delta S^{(2)},\quad\delta V^{(1)}=-\delta V^{(2)},\quad\delta N_j^{(1)}=-\delta N_j^{(2)}$$
-The first-order displacements require
-$$(T^{(1)}-T^{(2)})\delta S^{(1)}-(p^{(1)}-p^{(2)})\delta V^{(1)}+\sum_{i=1}^r(\mu_i^{(1)}-\mu_i^{(2)})\delta N_i^{(1)}\geq0$$
-The fluctuations are independent of each other. So the only acceptable solutions are $T^{(1)}=T^{(2)}$, $p^{(1)}=p^{(2)}$, $\mu_i^{(1)}=\mu_i^{(2)}$ for $i=1,2,...,r$. We can generalize for arbitrary $\mu$.
+The thermodynamic equilibrium state is defined as the one macroscopic state of a system which is automatically attained after a sufficiently long period of time such that the macroscopic properties of the system no longer change with time. The governing principle of thermodynamic equilibrium is that the entropy of the Universe tends to a maximum.\\[5pt]
+Closed systems does not exchange energy or particles with the environment. The entropy is maximized with respect to the internal constraints of the system. Consider a system of total energy $U$, total volume $V$ and total particle number $N$ with an imaginary wall that partitions the system into two regions of volumes $V_1$, $V_2$, energies $U_1$, $U_2$ and particle numbers $N_1$, $N_2$. Since the system is closed, we have
+$$V_1+V_2=V,\quad U_1+U_2=U,\quad N_1+N_2=N$$
+Maximize the total entropy $S=S_1+S_2$:
+\begin{align}
+    0&=dS_1+dS_2\nonumber\\&=\bigg(\frac{\partial S_1}{\partial U_1}\bigg)_{V_1,N_1}dU_1+\bigg(\frac{\partial S_2}{\partial U_2}\bigg)_{V_2,N_2}dU_2+\bigg(\frac{\partial S_1}{\partial V_1}\bigg)_{U_1,N_1}dV_1\nonumber\\&+\bigg(\frac{\partial S_2}{\partial V_2}\bigg)_{U_2,N_2}dV_2+\bigg(\frac{\partial S_1}{\partial N_1}\bigg)_{V_1,U_1}dN_1+\bigg(\frac{\partial S_2}{\partial N_2}\bigg)_{V_2,U_2}dN_1\nonumber\\&=\bigg(\frac{1}{T_1}-\frac{1}{T_2}\bigg)dU+\bigg(\frac{P_1}{T_1}-\frac{P_2}{T_2}\bigg)dV_1-\bigg(\frac{\mu_1}{T_1}-\frac{\mu_2}{T_2}\bigg)dN_1\nonumber
+\end{align}
+There are thus three types of equilibrium for a closed system:
+\begin{itemize}
+    \item thermal equilibrium: the temperatures of the two regions are the same. For constant volume and particle numbers, the system will evolve to this state by letting heat flow from the hotter region to the colder region.
+    \item mechanical equilibrium: the pressures of the two regions are the same. For same temperature and particle numbers, the system will evolve to this state by moving the partition such that the higher pressure region expands into the other.
+    \item chemical equilibrium: the chemical potential of the two regions are the same. For same temperature and volumes, the system will evolve to this state by allowing particles to flow down the chemical potential gradient.
+\end{itemize}
+We extend our arguments to an open system. Open systems allow heat and particle number exchange with the system and reservoir. The previous discussion on equilibrium conditions for a closed system can hold by treating the combined system and the reservoir as a closed system. Without loss of generality, let the labels 1 and 2 refer to the system and reservoir respectively. In another words, the system is in thermodynamic equilibrium, if it has the same temperature, particle number and volume as the reservoir. Note that the reservoir is significantly larger so its temperature, pressure and chemical potential are effectively constants.\\[5pt]
+However, in maximizing the entropy of the combined system, it is not convenient to explicitly consider the entropy of the reservoir. The maximum entropy condition gives:
+\begin{align}
+    0&=dS_{sys}+dS_{res}\nonumber\\&=dS_{sys}+\frac{1}{T_{res}}(dU_{res}+P_{res}dV_{res}-\mu_{res}dN_{res})\nonumber\\&=\frac{1}{T_{res}}(T_{res}dS_{sys}-dU_{sys}-P_{res}dV_{sys}+\mu_{res}dN_{sys})\nonumber\\&:=-\frac{dA_{sys}}{T_{res}}\nonumber
+\end{align}
+where we defined the availability of the system as
+$$A_{sys}:=U_{sys}-T_{res}S_{sys}+P_{res}V_{sys}-\mu_{res}N_{sys}$$
+and used the conservation of energy, volume and particle numbers:
+$$dU_{res}=-dU_{sys},\quad dV_{res}=-dV_{sys},\quad dN_{res}=-dN_{sys}$$
+Hence, the condition of maximum entropy for both the system and the reservoir is equivalent to minimizing the availability of the system. Note that we have
+$$A_{sys}=U_{sys}-T_{res}S_{sys}+P_{res}V_{sys}-\mu_{res}N_{sys}=(T_{sys}-T_{res})S_{sys}-(P_{sys}-P_{res})V_{sys}+(\mu_{sys}-\mu_{res})N_{sys}$$
+So, when the system is in complete thermodynamic equilibrium with the reservoir, the availability of the system is zero. Finally, for particular constraints, minimizing the availability is equivalent to minimizing a particular thermodynamic potential. Some examples are
+\begin{itemize}
+    \item Helmholtz free energy $F=U-TS$: for constant $T$ and $V$
+    \item Gibbs free energy $G=F-PV$: for constant $T$ and $P$
+    \item Enthalpy $H=U-PV$: for constant $S$ and $P$
+    \item Grand potential $\Phi=F-\mu N$: for constant $T$ and $\mu$
+\end{itemize}
 \end{ans}
 \newpage
 \begin{qns}[Bubble]
@@ -187,7 +211,14 @@ The pressure inside the bubble is higher than the outside.
 What is the minimum work required to extract 1 mole of pure O$_2$ from a large volume of air at the same temperature and pressure, if air is regarded as being composed of 1 volume of O$_2$ mixed with 4 volumes of $N_2$. 
 \end{qns}
 \begin{ans}
-
+Consider the reverse process where the pure gases are mixed. In this mixing, $\Delta W=\Delta Q=0$, so by the first law of thermodynamics, $\Delta U=0$.\\[5pt]
+Consider the forward process:
+$$0=\Delta U=T\Delta S+\Delta W$$
+where $\Delta S<0$ is the change in entropy from separating Oxygen, and $\Delta W=-T\Delta S>0$ is the reversible work done. By Dalton's law, the initial pressure and final pressure of oxygen are $p_0/5$ and $p_0$ respectively, where $p_0$ is the atmospheric pressure. The Sackur-Tetrode equation gives
+$$\Delta S=R\ln(1/p_0)-R\ln(1/(p_0/5))=-R\ln 5$$
+The work done is then
+$$\Delta W=-T\Delta S=T~R\ln 5=13.4~T$$
+amount of Joules.
 \end{ans}
 \newpage
 \begin{qns}[Fuel cell]
@@ -208,7 +239,7 @@ We now consider an ideal fuel cell operating at the same pressure and temperatur
 We have $G=H-TS$
 $$G_{H_2}^{(m)}=0-298(130.7)=-38.9~kJ/mol,\quad G_{O_2}^{(m)}=0-298(205.1)=-61.1~kJ/mol$$
 $$G_{H_2O}^{(m)}=-285.8\times10^3-298(69.9)=-306.6~kJ/mol$$
-The chemical potential is the Gibbs free energy per particle, i.e. $\mu=G/N=N_A\mu_0$, where $\mu_0$ is the chemical potential at 1 atm and 298 K. The equilibrium constant is
+The chemical potential is the Gibbs free energy per particle, i.e. $\mu=G/N=N_A\mu_0$, where $\mu_0$ is the chemical potential at 1 atm and 298 K. The equilibrium constant is defined to be
 $$k_BT\ln K_c(p,T)=-\sum_i\nu_i\mu_{0i}\implies K_c=\exp\bigg(-\frac{1}{RT}\bigg(2G_{H_2}^{(m)}+G_{O_2}^{(m)}-2G_{H_2O}^{(m)}\bigg)\bigg)=e^{-303.7}<<1$$
 Since $K_c$ is very small, the reaction is pushed to the right, i.e. water is much favorably formed.\\[5pt]
 The change in Gibbs free energy (from the formation of 1 mole of water) is the maximal reversible work that can be done by the system at the same pressure and temperature. 
