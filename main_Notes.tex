@@ -18,6 +18,7 @@
 \usepackage{float}
 \usepackage{esint}
 \usepackage{wrapfig}
+\usepackage{pgfplots}
 \usepackage{gensymb}
 \usepackage{lipsum}
 \usepackage{amssymb}
@@ -1022,7 +1023,7 @@ $$\Phi=U-\mu N-TS=-\frac{\partial}{\partial\beta}\log\mathcal{Z}-Tk_B\frac{\part
 $$d\Phi=dE-TdS-SdT-\mu dN-Nd\mu=-SdT-PdV-Nd\mu$$
 such that $N=-\frac{\partial\Phi}{\partial\mu}|_{T,V}$. So, the natural variables of $\Phi$ are $T$, $V$ and $\mu$, i.e. $\Phi=\Phi(T,V,\mu)$. There is only one extensive independent variable, namely $V$, i.e. $\Phi(T,\lambda V,\mu)=\lambda\Phi(T,V,\mu)$. But since 
 $$\frac{\partial\Phi}{\partial V}\bigg|_{T,\mu}=-P$$
-then $\Phi=-p(T,\mu)V$.
+then $\Phi=-P(T,\mu)V$.
 \end{enumerate}
 \end{remarks}
 \begin{cor}
@@ -1355,14 +1356,14 @@ $$n_B(E)=\frac{1}{e^{\beta(E-\mu)}-1},\quad n_F(E)=\frac{1}{e^{\beta(E-\mu)}+1}$
 \end{prop}
 \begin{proof}
 Using results from the grand canonical ensemble: the mean occupation number for bosons and fermions are respectively:
-$$n_B(E)=T\frac{\partial}{\partial\mu}\log \mathcal{Z}_B=-T\frac{\partial}{\partial\mu}\log(1-e^{(\mu-E)/T})=\frac{1}{e^{(E-\mu)/T}-1}$$
-$$n_F(E)=T\frac{\partial}{\partial\mu}\log\mathcal{Z}_F=T\frac{\partial}{\partial\mu}(1+e^{n(\mu-E)/T})=\frac{e^{(\mu-E)/T}}{1+e^{(\mu-E)/T}}=\frac{1}{e^{(E-\mu)/T}+1}$$
+$$n_B(E)=k_BT\frac{\partial}{\partial\mu}\log \mathcal{Z}_B=-k_BT\frac{\partial}{\partial\mu}\log(1-e^{(\mu-E)/k_BT})=\frac{1}{e^{(E-\mu)/k_BT}-1}$$
+$$n_F(E)=k_BT\frac{\partial}{\partial\mu}\log\mathcal{Z}_F=k_BT\frac{\partial}{\partial\mu}(1+e^{n(\mu-E)/k_BT})=\frac{e^{(\mu-E)/k_BT}}{1+e^{(\mu-E)/k_BT}}=\frac{1}{e^{(E-\mu)/k_BT}+1}$$
 \end{proof}
 \begin{cor}
 The quantum gas distributions reduce to the Maxwell-Boltzmann distribution.
 \end{cor}
 \begin{proof}
-$$n\approx e^{-(E-\mu)/T},\quad \beta(E-\mu)>>1$$
+$$n\approx e^{-(E-\mu)/k_BT},\quad \beta(E-\mu)>>1$$
 \end{proof}
 \begin{eg}
 The Maxwell-Boltzmann probability distribution is obtained by
@@ -1495,6 +1496,7 @@ $$\Phi(T)=\Phi(0)-\frac{Vk_B^2T^2}{12}\bigg(\frac{2m}{\hbar^2}\bigg)^{3/2}E_F^{1
 and hence the heat capacity at constant volume is
 $$C_V=T\bigg(\frac{\partial S}{\partial T}\bigg)_{V,\mu}=-T\bigg(\frac{\partial^2\Phi}{\partial T^2}\bigg)_{V,\mu}=T\frac{\partial}{\partial T}\frac{k_B^2T}{3}\frac{V}{2}\bigg(\frac{2m}{\hbar^2}\bigg)^{3/2}\sqrt{E_F}=\frac{\pi^2}{3}g(E_F)k_B^2T$$
 \item In solid metal, the contributions to $C$ are $O(T)$ from non-degenerate electrons and $O(T^2)$ from lattice vibrations. The electronic contribution to the heat capacity dominates at low temperatures. The Fermi temperature $T_F$ is very large for metals, typically 50,000 K.
+\item We have the density of states to be $g(E)\propto\sqrt{E}$ and so the number is $N(E)=\int g(E)dE\propto\frac{2}{3}E^{3/2}$, and so $g(E_F)=\frac{3N_{\text{tot}}}{2E_F}$.
 \end{enumerate}
 \end{remarks}
 \newpage
@@ -1543,7 +1545,7 @@ so $P$ is directly proportional to $T^{5/2}$ for $T\leq T_c$. Earlier, $PV=\frac
 \item At low temperatures and below $T_c$, set $\mu=0$, we have
 $$U=\frac{2Vk_BT}{\sqrt{\pi}\lambda^3}\int_0^\infty\frac{x^{3/2}dx}{e^x-1}\approx\frac{2V}{\lambda^3}k_BT\propto T^{5/2}$$
 and so the heat capacity is
-$$C_V=\frac{\partial E}{\partial T}|_V=\frac{5}{2}\frac{k_BV}{\sqrt{2}\lambda^3}\propto T^{3/2}$$
+$$C_V=\frac{\partial E}{\partial T}\bigg|_V=\frac{5}{2}\frac{k_BV}{\sqrt{2}\lambda^3}\propto T^{3/2}$$
 For large $T$, estimate $C_V$ using virial expansion (see later):
 $$E=\frac{3}{2}PV=\frac{3}{2}NT\bigg(1-O\bigg(\frac{N}{V}\frac{1}{T^{3/2}}\bigg)\bigg)\implies C_V=\frac{\partial E}{\partial T}\bigg|_V=\frac{3}{2}N\bigg(1+O\bigg(\frac{N}{V}\frac{1}{T^{3/2}}\bigg)\bigg)$$
 \begin{center}
@@ -1682,30 +1684,774 @@ $$\int_0^{T_D/T}\frac{x^3}{e^x-1}dx\approx\int_0^{T_D/T}x^2+...~dx=\frac{T_D^3}{
 where we invoked the definition of Debye temperature, i.e. $T_D^3=\hbar^3\omega_D^3=\hbar^3(3N)2\pi^2c_s^3/V$
 \end{proof}
 \newpage
-\section{Classical Interacting Systems}
+\section{Real Gases and Liquids}
+\subsection{Virial theorem}
+\begin{defi}[Virial]
+The classical virial $\mathcal{V}$ is defined as
+$$\mathcal{V}:=-\frac{1}{2}\sum_i\mathbf{r_i}\cdot\mathbf{f_i}$$
+where $\mathbf{r_i}$ and $\mathbf{f_i}$ are respectively, the position of, and the force acting on, the $i$th particle. From newton's second law, we can write as
+$$\mathcal{V}=-\frac{1}{2}\sum_im_i\frac{d}{dt}(\mathbf{r_i}\cdot\mathbf{v_i})+\sum_i\frac{1}{2}m_i\mathbf{v_i}^2$$
+\end{defi}
+\begin{eg}
+Consider a liquid consisting of $N$ particles in a container of volume $V$. The value of $\mathbf{r_i}\cdot\mathbf{v_i}$ can only fluctuate between finite limits and if we average it over a long period its time derivative must average to zero, which leads to
+$$\langle\mathcal{V}=\sum_i\frac{1}{2}m_i\langle v_i^2\rangle=\frac{3}{2}Nk_BT$$
+The mean virial is equal to the mean kinetic energy, which is Clausius' version of virial theorem.
+\end{eg}
+The virial may separate external and internal contributions. 
+\begin{thm}[Virial theorem]
+Assuming an internal interaction potential $\phi$ between two particles $i$ and $j$, that depends only on their separation $r_{ij}=|\mathbf{r_i}-\mathbf{r_j}|$, then the virial theorem is
+$$3pV=2\langle K\rangle-\bigg\langle\sum_{j>i}r_{ij}\frac{d\phi(r_{ij})}{dr_{ij}}\bigg\rangle$$
+where $K$ is the kinetic energy.
+\end{thm}
+\begin{proof}
+For the external virial, the force on an element of the wall is $pd\mathbf{A}$. The force on the particles acts inwards and $d\mathbf{A}$ is directed outwards, so we have
+$$\langle\mathcal{V}_{\text{ext}}\rangle=\bigg\langle-\frac{1}{2}\sum_i\mathbf{r_i}\cdot\mathbf{f_{\text{ext},i}}\bigg\rangle=\frac{1}{2}\int_Ap\mathbf{r}\cdot d\mathbf{A}=\frac{p}{2}\int_V\boldsymbol{\nabla}\cdot\mathbf{r}dV=\frac{3}{2}pV$$
+For the given interaction potential, the force on particle $i$ from the other $j\neq i$ particles is
+$$\mathbf{f_{\text{int},i}}=\sum_{j\neq i}-\frac{\partial\phi(r_{ij})}{\partial\mathbf{r_i}}$$
+and using the result:
+$$\mathbf{r_i}\cdot\frac{\partial\phi(r_{ij})}{\partial\mathbf{r_i}}=\mathbf{r_i}\cdot\frac{\partial r_{ij}}{\partial r_{ij}^2}\frac{\partial r_{ij}^2}{\partial\mathbf{r_i}}\frac{\partial\phi(r_{ij})}{\partial r_{ij}}=\mathbf{r_{ij}}\cdot\frac{1}{2r_{ij}}2(\mathbf{r_i}-\mathbf{r_j})\frac{\partial\phi(r_{ij})}{\partial r_{ij}}$$
+The total internal virial becomes
+$$\mathcal{V}_{\text{int}}=\frac{1}{2}\sum_i\sum_{j\neq i}\mathbf{r_i}\cdot\frac{(\mathbf{r_i}-\mathbf{r_j})}{r_{ij}}\frac{\partial\phi(r_{ij})}{\partial r_{ij}}=\frac{1}{4}\sum_i\sum_{j\neq i}r_{ij}\frac{\partial\phi(r_{ij})}{\partial r_{ij}}=\frac{1}{2}\sum_{j>i}r_{ij}\frac{\partial\phi(r_{ij})}{\partial r_{ij}}$$
+where we have noted that we can pair together the terms containing $r_{\alpha\beta}$ and $r_{\beta\alpha}$ and use
+$$\mathbf{r_\alpha}\cdot(\mathbf{r_\alpha}-\mathbf{r_\beta})+\mathbf{r_\beta}\cdot(-\mathbf{r_\alpha}+\mathbf{r_\beta})=r_{\alpha\beta}^2$$
+Upon averaging, we obtain the mean internal virial:
+$$\langle\mathcal{V}_{\text{int}}\rangle=\frac{1}{2}\bigg\langle\sum_{j>i}r_{ij}\frac{\partial\phi(r_{ij})}{\partial r_{ij}}\bigg\rangle$$
+The final result is
+$$\langle K\rangle=\langle V_{\text{ext}}\rangle+\langle V_{\text{int}}\rangle=\frac{3}{2}pV+\frac{1}{2}\bigg\langle\sum_{j>i}r_{ij}\frac{\partial\phi(r_{ij})}{\partial r_{ij}}\bigg\rangle$$
+\end{proof}
+\begin{remarks}
+Just from $\langle\mathcal{V}_{\text{ext}}\rangle=\frac{3}{2}pV$ alone, we may obtain the ideal gas law from the Clausius' version of Virial's theorem.
+\end{remarks}
+\begin{eg}
+Consider a particle moving in a potential $\phi(r)=A/r$, then $r\frac{d\phi}{dr}=-\phi$, and as there is no external virial and hence no pressure, we have
+$$\langle K\rangle=-\frac{1}{2}\langle V\rangle$$
+where $V$ is the potential energy.
+\end{eg}
+\subsection{Generic interacting gas/liquid}
+\begin{defi}[Configurational partition function (for interaction potential)]
+Consider a system of $N$ classical particles of momenta $\mathbf{p_i}$ and positions $\mathbf{r_i}$ where they interact with one another via a potential $\phi(r_{ij})$ which only depend on the separation of point-like particles, then
+$$Z_\phi:=\int\exp\bigg(-\sum_{j>i}\beta\phi(r_{ij})d^3r_1\dots d^3r_N$$
+where $\sum_{j>i}$ sums over all particle pairs. 
+\end{defi}
+\begin{remarks}
+The full Hamiltonian has the form
+$$H=\sum_i\frac{p_i^2}{2m}+\sum_{j>i}\phi(\mathbf{r_{ij}})$$
+The full partition function is
+$$Z=\sum e^{-\beta H(\mathbf{r},\mathbf{p})}=\frac{1}{N!}\int e^{-\beta H}d^3r_1\dots d^3r_N\frac{d^3p_1\dots d^3p_N}{(2\pi\hbar)^{3N}}=\frac{1}{N!}\bigg(\frac{mk_BT}{2\pi\hbar^2}\bigg)^{3N/2}Z_\phi$$
+\end{remarks}
+\begin{eg}[Lennard-Jones potential]
+One example of an interaction potential is the Lennard-Jones inter-atomic potential:
+$$\phi(r)=4\epsilon\bigg[\bigg(\frac{r_0}{r}\bigg)^{12}-\bigg(\frac{r_0}{r}\bigg)^6\bigg]$$
+This potential consists of a short ranged hard-core repulsion and a long ranged van der Waals attraction, which decays as $1/r^6$.
+\end{eg}
+\begin{defi}[Two-particle distribution function]
+The probability density of finding a particle at $\mathbf{r_1}$ and another at $\mathbf{r_2}$ is
+$$P_2(\mathbf{r_1},\mathbf{r_2})=\frac{N(N-1)}{Z_\phi}\int\exp\bigg(-\sum_{j>i}\beta\phi(r_{ij})\bigg)d^3r_3\dots d^3r_N$$
+\end{defi}
+\begin{defi}[Radial distribution function]
+The radial distribution function is
+$$g(r_{12})=\frac{V^2}{N^2}P_2(\mathbf{r_1},\mathbf{r_2})$$
+where $P_2$ depends only on radial separation $|\mathbf{r_1}-\mathbf{r_2}|$.
+\end{defi}
+\begin{eg}
+Typically, the radial distribution function is small at short distances because of the hard-core repulsion between the atoms. It rises to a peak at the distance of the first shell of neighbours. There is a smaller peak at the second shell but at large distances $g(r)$ goes to unity, which is the value it would have in the absence of interactions (so that $P_2(r)\rightarrow(N/V)^2$). We can understand roughly how $g(r)$ will change when $T$ and $V$ are altered. If the system is compressed we expect the peaks of $g(r)$ to move to smaller separations, and if $T$ is increased we expect the peaks to become less pronounced as the thermal motion smears them out.
+\end{eg}
+\begin{remarks}
+Radial distribution functions can be measured using X-ray or neutron diffraction techniques. They can also be calculated using Monte Carlo or Molecular Dynamics methods. Monte Carlo methods are statistical techniques for generating ensembles of configurations, $\{\mathbf{r_i}\}$, distributed according to a known probability distribution. In classical Molecular Dynamics methods the molecules are moved according to Newton's laws in what amounts to a `computaitonal expeirment'. An important modern development is the use of computational quantum mechanical techniques to calculate the interaction energy, which can readily be combined with the classical theory of liquids developed here.
+\end{remarks}
+\begin{prop}
+$$U=\frac{3}{2}Nk_BT+\frac{N^2}{2V}\int_0^\infty\phi(r)g(r)4\pi r^2dr$$
+\end{prop}
+\begin{proof}
+The internal energy is
+$$U=-\frac{\partial}{\partial\beta}\ln Z=\frac{3}{2}Nk_BT-\frac{\partial}{\partial\beta}\ln Z_\phi$$
+where
+$$-\frac{\partial}{\partial\beta}\ln Z_\phi=\frac{1}{Z_\phi}\int\sum_{j>i}\phi(r_{ij})e^{-\sum_{j>i}\beta\phi(r_{ij})}d^3r_1\dots d^3r_N=\frac{N(N-1)}{2Z_\phi}\int\phi(r_{12})e^{-\sum_{j>i}\beta\phi(r_{ij})}d^3r_1\dots d^3r_N$$
+since there are $N(N_1)/2$ terms in the sum. Substitute in the definitions, we obtain our desired result.
+\end{proof}
+\begin{remarks}
+Unfortunately, $T$, $V$ and $N$ are not the natural variables of $U$. So even if we knew $\phi(r)$ and had $g(r)$ as a function of $T$, $V$ and $N$, we still do not have enough information to do the complete thermodynamics of liquids.
+\end{remarks}
+\begin{cor}
+$$p=\frac{Nk_BT}{V}-\frac{N^2}{6V^2}\int_0^\infty r\frac{d\phi}{dr}g(r)4\pi r^2dr$$
+\end{cor}
+\begin{proof}
+Use Virial theorem and evaluate $\langle\sum_{j>i}r_{ij}\frac{d\phi(r_{ij})}{dr_{ij}}\rangle$:
+$$\bigg\langle\sum_{j>i}r_{ij}\frac{d\phi(r_{ij})}{dr_{ij}}\bigg\rangle=\frac{N(N-1)}{2Z_\phi}\int r_{12}\frac{d\phi(r_{12})}{dr_{12}}e^{-\sum_{j>i}\beta\phi(r_{ij})}d^3r_1\dots d^3r_N=\frac{N^2}{2V}\int r\frac{d\phi(r)}{dr}g(r)d^3r$$
+and use the equipartition theorem to get $\langle K\rangle=\frac{3}{2}Nk_BT$.
+\end{proof}
+\begin{remarks}
+The key quantities in the classical statistical mechanics of liquids are the inter-molecular potential $\phi(r)$ and the radial distribution function $g(r)$. The Lennard-Jones potentials works well for simple liquids, and would normally give a poor description of systems with strong ionic, covalent or metallic bonding. For ionic bonding, one should include the long-range Coulomb forces, for covalent materials one needs directional bonding forces, and in metals the interaction energy is not well described by a sum of pairwise terms. Also, if the molecules are far from spherical or have significant dipole moments the inter-molecular potentials will dpeend on the relative orientation of the molecules.
+\end{remarks}
+\begin{defi}[Virial expansion]
+We may expand the radial distribution function as a polynomial of density $n=N/V$. Plugging in the virial equation of state, we obtain the virial expansion:
+$$\frac{p}{k_BT}=n+B_2(T)n^2+B_3(T)n^3+\dots$$
+The $m$th Virial coefficient, $B_m(T)$ reflects the $m$-body correlations in the equation of state.
+\end{defi}
+\begin{remarks}
+Mayer developed a diagrammatic recipe which in principle allows each coefficient to be calculated. Note that the virial expansion only converges when the distance between molecules is much greater than their size, hence less useful at liquid densities. The virial expansion gives an excellent description of imperfect gases at low densities, when only pair interactions between particles are relevant. 
+\end{remarks}
+\begin{prop}[Second virial coefficient]
+$$B_2(T)=\int_0^\infty2\pi r^2(1-e^{-\phi/k_BT})dr$$
+\end{prop}
+\begin{proof}
+To calculate $B_2(T)$, we need an approximation to the radial distribution function which is accurate at low densities. The two-particle distribution function can be written as
+$$P_2(\mathbf{r_1},\mathbf{r_2})=N(N-1)e^{-\beta\phi(r_{12})}\frac{\int e^{-\beta\sum'_{j>i}\phi(r_{ij})}d^3r_3\dots d^3r_N}{\int e^{-\beta\sum_{j>i}\phi(r_{ij})}d^3r_1\dots d^3r_N}$$
+where the primed summation indicates that we have removed the $\phi(r_{12})$ term. At very low densities, the integrals over particles 3, 4, ..., $N$ in the numerator mostly involve configurations in which these particles are distant from each other and from particles 1 and 2, and therefore we can set all the $\phi(r_{ij})$ inside the integral to zero. In the denominator, particles 1 and 2 are also far apart for almost all configurations, hence again set all the $\phi(r_{ij})$ inside the integral to zero. Therefore
+$$P_2(\mathbf{r_1},\mathbf{r_2})\approx\frac{N(N-1)}{V^2}e^{-\beta\phi(r_{12})}\implies\lim_{N\rightarrow\infty}g_0=e^{-\beta\phi(r)}$$
+which is as expected: $\phi(r=0)=\infty$, $g(r=0)=0$ and $\phi(r=\infty)=0$, $g_0(r=\infty)=1$. Also, $g_0(r)$ takes its maximum value at the minimum in $\phi(r)$. We substitute $g_0(r)$ into the Virial expansion and integrate by parts:
+\begin{align}
+    \frac{p}{k_BT}&=n-\frac{n^2}{6k_BT}\int_0^\infty 4\pi r^3\frac{d\phi}{dr}e^{-\phi/k_BT}dr\nonumber\\&=n+\frac{n^2}{6}\bigg\{\bigg[4\pi r^3e^{-\phi/k_BT}\bigg]_0^\infty-\int_0^\infty 12\pi r^2e^{-\phi/k_BT}dr\bigg\}\nonumber\\&=n+\frac{n^2}{6}\bigg\{\int_0^\infty 12\pi r^2dr-\int_0^\infty 12\pi r^2e^{-\phi/k_BT}dr\bigg\}\nonumber\\&=n+n^2\bigg\{\int_0^\infty 2\pi r^2(1-e^{-\phi/k_BT})dr\bigg\}\nonumber
+\end{align}
+where we read off $B_2(T)$.
+\end{proof}
+\begin{eg}
+At high temperatures, $B_2(T)$ is dominated by hard core repulsion and is positive and orughly constant. At low temperatures, it is dominated by the van der Waals attraction, and is negative and roughly proportional to $1/T$. Experimental measurements agree with theory well except where quantum effects are important.
+\end{eg}
+\begin{defi}[Boyle temperature]
+Boyle temperature $T_B$ is the temperature at which $B_2(T=T_B)=0$. The contribution from the long-range particle attraction on average exactly compensates the short-range repulsion, leaving effectively `non-interacting' particles. At higher temperature the gas is harder to compress than an ideal gas, and at low temperature it is easier.
+\end{defi}
+\begin{prop}
+Under weak and slowly varying potential limit $\beta\phi(r)<<1$, the mean potential energy of a $N$-particle system is obtained by counting the interacting pairs:
+$$U_{\text{pair}}\approx\frac{N^2}{V}k_BTB_2(T)$$
+\end{prop}
+\begin{proof}
+From counting the interacting pairs, the mean potential energy is
+$$U_{\text{pair}}=\sum_{i>j}\phi(r_{ij})\approx\frac{N^2}{2V}\int\phi(r)d^3r=\frac{N^2}{2}\overline{\phi}$$
+where $\frac{1}{2}N^2$ is the number of distinct pairs in the system and the pair potential is an average over space, $\overline{\phi}$. In the limit of $\beta\phi(r)<<1$, we have $B_2\approx\frac{1}{2}\int\beta\phi(r)d^3r$, and hence $U_{\text{pair}}\approx\frac{N^2}{V}k_BTB_2(T)$.
+\end{proof}
+\newpage
+\subsection{van der Waals gas}
+\begin{prop}[Equation of state]
+$$p=\frac{Nk_BT}{V-Nb}-\frac{aN^2}{V^2}$$
+\end{prop}
+\begin{proof}
+Separate the inter-atomic potentials as a sum of a short-range repulsive part $\phi_r(r)$ and an long-range attractive part $\phi_a(r)$:
+$$\phi(r)=\phi_r(r)+\phi_a(r)$$
+Each particle will feel the long-range attractive potential from many others and we can write
+$$\sum_{j>i}\phi_a(r_{ij})=\frac{1}{2}\sum_{j\neq i}\sum_i\phi_a(r_{ij})\approx\frac{N(N-1)}{2V}\int\phi_a(r)d^3r\approx-\frac{aN^2}{V},\quad a:=-\frac{1}{2}\int\phi_a(r)d^3r$$
+The effect of the short range repulsive part is to exclude the particles from a volume around each of them, and so we can write
+$$\int e^{-\sum_{j>i}\beta\phi_r(r_{ij})}d^3r_1\dots d^3r_N\approx (V-Nb)^N$$
+The partition function is then
+$$Z=\frac{1}{N!}\bigg(\frac{m}{2\pi\hbar^2\beta}\bigg)^{3N/2}\int e^{-\sum_{j>i}\beta[\phi_r(r_{ij})+\phi_a(r-{ij})]}d^3r_1\dots d^3r_N\approx\frac{1}{N!}\bigg(\frac{m}{2\pi\hbar^2\beta}\bigg)^{3N/2}(V-Nb)^Ne^{\beta aN^2/V}$$
+The Helmholtz free energy is
+$$F=-k_BT\ln Z=-k_BT\ln\bigg[\frac{1}{N!}\bigg(\frac{m}{2\pi\hbar^2\beta}\bigg)^{3N/2}\bigg]-k_BTN\ln(V-Nb)-\frac{aN^2}{V}$$
+The pressure is then
+$$p=-\bigg(\frac{\partial F}{\partial V}\bigg)_T=\frac{Nk_BT}{V-Nb}-\frac{aN^2}{V^2}$$
+This is the desired van der Waals equation of state.
+\end{proof}
+\begin{cor}
+The second virial coefficient and Boyle temperature of a van der Waals gas respectively are
+$$B_2(T)=b-\frac{a}{k_BT},\quad T_B=\frac{a}{bk_B}$$
+\end{cor}
+\begin{proof}
+Approximate the equation of state to be:
+$$p\approx\frac{Nk_BT}{V}\bigg(1+\frac{Nb}{V}\bigg)-\frac{aN^2}{V^2}=\frac{Nk_BT}{V}+\frac{N^2}{V^2}(b-\beta a)$$
+Result follows immediately.
+\end{proof}
+\newpage
+\section{Phase transitions}
 \subsection{Mixing and Phase Separation}
-\subsection{Phase Transitions}
+\begin{defi}[Average interaction energy]
+We define a non-dimensional parameter $\chi$ to be a measure of the average interaction energy.
+$$k_BT\chi=(2\epsilon_{12}-\epsilon_{11}-\epsilon_{22})$$
+where $\epsilon_{ij}$ is the interaction energy between a particle of species i and another of species j.
+\end{defi}
+\begin{prop}
+The potential energy of mixing is
+$$U_{\text{mix}}=Nk_BT\chi c_1(1-c_1)$$
+and hence the corresponding free energy is
+$$F_{\text{mix}}=Nk_BT(c\ln c+(1-c)\ln(1-c)+\chi c(1-c))$$
+\end{prop}
+\begin{proof}
+We have shown that under a weak and slowly varying potential $\beta\phi(r)<<1$, the mean potential energy between any pair is
+$$U_{ij}\approx\frac{N_iN_j}{V}k_BTB_2(ij)$$
+where $B_2$ is the second virial coefficient. Limiting ourselves to pair interactions, we have:
+$$U_{11}\approx\frac{N_1^2}{V}k_BTB_2(11),\quad U_{12}\approx2\frac{N_1N_2}{V}k_BTB_2(12),\quad U_{22}\approx\frac{N_2^2}{V}k_BTB_2(22)$$
+The entropy of mixing is $S_{\text{mix}}=-k_BN\sum_ic_i\ln c_i$. For two components, we have $c_2=1-c_1$. Summing up the pair interactions, the total interaction energy
+$$U_{\text{int}}=U_{11}+U_{22}+U_{12}=N(\epsilon_{11}c_1^2+\epsilon_{22}(1-c_1)^2+2\epsilon_{12}c_1(1-c_1)$$
+where each energy factor is $\epsilon_{ij}=k_BTB_2(ij)/v_0$. Comparing the unmixed state, where we place all the particles of each species to one side, where they occupy a volume $V_i=v_0N_i$. Neglecting the energy of the interface between the separated species, we have the unmixed energy to be
+$$U_{\text{unmix}}=\frac{N_1^2}{V_1}k_BTB_2(11)+\frac{N_2^2}{V_2}k_BTB_2(22)=Nc_1(\epsilon_{11}c_1+\epsilon_{22}(1-c_1))$$
+The potential energy of mixing is the difference between the two: $U_{\text{mix}}=N(2\epsilon_{12}-\epsilon_{11}-\epsilon_{22})c_1(1-c_1)$. The free energy is $F_{\text{mix}}=U_{\text{mix}}-TS_{\text{mix}}$.
+\end{proof}
+\begin{remarks}
+Here, we take a `mean field' approximation. We take an average field, the concentration of particles in this case, rather than a spatially dependent concentration field.
+\end{remarks}
+\begin{eg}[Osmotic pressure]
+The osmotic pressure is the pressure exerted by molecules `1' in solution against a membrane which is impenetrable to them but allows the flow of solvent molecules `2'. The equation of state is
+$$p_1=-\frac{\partial F_{\text{mix}}}{\partial V}=-\frac{k_BT}{v_0}[\ln(1-c)+\chi c^2]\approx\frac{k_BT}{v_0}\bigg[c+\frac{1}{2}(1-2\chi)c^2\bigg]$$
+where we take $c<<1$. The first term is the ideal gas law for species `1' while the second term is the second virial correction, giving $B_2(T)=0.5(1-2\chi)$.
+\end{eg}
+\begin{remarks}
+We plot $F_{\text{mix}}$ as a function of $c_1$. At high temperature (or low $\chi$), the entropy of mixing stabilizes a fully mixed state - at any concentration (in red). Lowering the temperature (or increasing $\chi$) results in a maximum in $F_{\text{mix}}$ (in blue). When a two-well structure forms, $F$ can be lowered by separating into two phases, one with $c>0.5$ and the other with $c<0.5$. Within the central part of the $c$-range, $F''<0$ and so the mixture is unstable regarding infinitesimal fluctuations. Spinodal decomposition (phase separation occurs spontaneously) thus occur. Further out, at both extremes of the $c$-range, $F''>0$ and so the mixture is stable against small fluctuations. Phase separation still occurs but nucleation is required.
+\begin{center}
+  \begin{tikzpicture}
+    \draw [->] (0, 0) -- (3, 0) node [right] {$c_1$};
+    \draw [->] (0, -1) -- (0, 1) node [above] {$F_{\text{mix}}/Nk_BT$};
+    \draw (0, 0) node [left] {0};
+    \draw (1, 0) node [above] {$1$};
+    \draw [thick, domain=0.01:1, blue] plot [smooth] (\x, {\x*ln(\x)+(1-\x)*ln(1-\x)+3*\x*(1-\x)});
+    \draw [thick, domain=0.01:1, red] plot [smooth] (\x, {\x*ln(\x)+(1-\x)*ln(1-\x)+1*\x*(1-\x)});
+  \end{tikzpicture}
+\end{center}
+\end{remarks}
+\begin{prop}
+The free energy of mixing has one minimum at $c=0.5$ when $\chi$ is small or negative, and one maximum, two minima when $\chi>0$ is large.
+\end{prop}
+\begin{proof}
+Check numerically for the following:
+$$0=\frac{\partial F_{\text{mix}}}{\partial c}=\chi(1-2c)-\ln\frac{1-c}{c}$$
+which is difficult to solve analytically.
+\end{proof}
+\begin{defi}[Binodal line]
+The line of solutions for the minimum of mixing free energy $c^*(\chi)$ is called the binodal line.
+\end{defi}
+\begin{defi}[Spinodal line]
+The set of inflection points given by the solution of $\frac{\partial^2F_{\text{mix}}}{\partial c^2}=0$ is called the spinodal line, where
+$$\frac{\partial^2F_{\text{mix}}}{\partial c^2}=\frac{1}{(1-c)c}-2\chi$$
+It represents the boundary of stability.
+\end{defi}
+\begin{remarks}
+The plots of the binodal (red) and the spinodal (blue) lines, as $\chi(c)$ variation, are shown. This maps the regions of different behaviour. 
+\begin{center}
+  \begin{tikzpicture}
+    \draw [->] (0, 0) -- (2, 0) node [right] {$c_1$};
+    \draw [->] (0, 0) -- (0, 3) node [above] {$\chi$};
+    \draw (0, 0) node [left] {0};
+    \draw (0, 2) node [left] {2};
+    \draw (1, 0) node [above] {$1$};
+    \draw [thick, domain=0.2:0.8, blue] plot [smooth] (\x, {(1/(2*\x*(1-\x))});
+    \draw [thick, domain=0.15:0.45, red] plot [smooth] (\x, {ln((1-\x)/\x)*(1/(1-2*\x))});
+    \draw [thick, domain=0.55:0.85, red] plot [smooth] (\x, {ln((1-\x)/\x)*(1/(1-2*\x))});
+  \end{tikzpicture}
+\end{center}
+Below the binodal line (small $\chi$ and negative), at any concentration the mixture is stable: the $F_{\text{mix}}$ is convex at any value of $c$. For large $\chi$, different values of $c_1$ will give different signs for $F''(c_1)$, i.e. stability. Above the spinodal line, the values of $c$ and $\chi$ are such that the mixture is absolutely unstable ($F''<0$) and its components separate immediately. The region between both lines is the region of metastability ($F''>0$) where one of the phases (mixed or separated) may have a higher free energy than the other, but is prevented from reaching the ground state by an energy barrier. Here, nucleation is required for phase separation.
+\end{remarks}
+\begin{cor}
+The critical point, where the region of metastability shrinks to zero as its two boundaries coincide, is at $c=1/2$.
+\end{cor}
+\begin{proof}
+The minimum of the spinodal line $\chi_s=\frac{1}{2c(1-c)}$:
+$$\frac{\partial\chi_s}{\partial c}=\frac{2c-1}{2c^2(1-c)^2}=0\implies c=\frac{1}{2}\iff\chi=2$$
+In another words, the mixture has to separate at the lowest value of the effective repulsive interaction $\chi$.
+\end{proof}
+\begin{eg}[First-order phase transition]
+Consider a system at equilibrium at concentration $c_A$ and allow the concentration to fluctuate such that $c=c_A+\phi$ is reached. Assume $\phi$ is small, then
+$$\frac{F_{\text{mix}}(c)-F_{\text{mix}}(c_A)}{Nk_BT}=-\frac{1-2\chi c_A(1-c_A)}{2c_A(1-c_A)}\phi^2-\frac{1-2c_A}{6c_A^2(1-c_A)^2}\phi^3+\frac{1-3c_A+3c_A^2}{12c_A^3(1-c_A)^3}\phi^4+\dots$$
+where $F_{\text{mix}}/Nk_BT=c\ln c+(1-c)\ln(1-c)+\chi c(1-c)$. The term linear in $\phi$ has disappeared due to the equilibrium condition. For an arbitrary $c_A$, increasing $\chi$ gives a trajectory in the phase diagram that passes through the region of metastability. A new minimum develops after some $\chi$, corresponds to crossing the binodal line. The new free energy minimum now occurs at a finite $\phi\neq 0$. Here, $F=0$. There is still an energy barrier separating this new state of increased $c$ from the original $c_A$. The barrier persists even when the new `1'-rich state has a significant preference in free energy, preventing the actual separation. Only at a substantially higher $\chi$, the barrier finally disappears the state $\phi=0$ becomes absolutely unstable, and corresponds to crossing the spinodal line, leading to a first order phase transition.\\[5pt]
+At the critical point, $c_A=1/2$, we minimize the change in free energy to find $\phi^*$:
+$$\frac{F_{\text{mix}}(c)-F_{\text{mix}}(c_A)}{Nk_BT}=(2-\chi)\phi^2+\frac{4}{3}\phi^4+\dots\implies\phi^*=\sqrt{\frac{3}{8}(\chi-2)}$$
+\end{eg}
+\subsection{Ising Model}
+\begin{defi}[Ising Model]
+The Ising model is a simple model for a magnet. Consider a lattice in $d$ spatial dimensions with $N$ sites. On each site $i=1,\dots,N$, there is a discrete variable, called `spin' which takes values:
+$$S_i=+1=\uparrow,\quad S_i=-1=\downarrow$$
+The system of spins $\{S_i\}$ has energy
+$$E=-B\sum_iS_i-J\sum_{\langle i,j\rangle}S_iS_j$$
+where $\langle i,j\rangle$ is sum over nearest neighbour pairs (which depend on the dimensions $d$ and the lattice type) and $B$ is the external magnetic field. To minimize $E$, $B>0$ will lead to a preferential spin-up configuration while $B<0$ spin-down. If $J>0$, the spins preferentially align, i.e. ferromagnet. Conversely, if $J<0$, the spins prefer to anti-align, i.e. anti-ferromagnet.
+\end{defi}
+We are interested in the physics of the Ising model at a finite temperature $T$.
+\begin{remarks}
+A finite temperature $T$ encourages the spins to ignore both the interactions and magnetic field because maximizing entropy becomes more important than minimizing energy. Since there are many more random configurations than aligned configurations, the temperature will tend to mess up the nice ordered states that the interactions and magnetic field have so carefully prepared.
+\end{remarks}
+\begin{eg}
+The 1D Ising model shows a phase transition, but only at exact $T=0$. It costs very little energy to reverse the direction for a large block of spins on a line. For dimensions greater than one, the Ising model shows a real phase transition as $B\rightarrow 0$ at a temperature proportional to $J$, into a ferromagnetic phase with non-zero magnetization, while the high-temperature disordered paramagnetic phase has $M=0$. When $B\neq 0$, the equilibrium value of $M$ is finite and varies smoothly with temperature, and therefore no phase transition occurs.
+\end{eg}
+\begin{defi}[Mean field theory]
+Assume the interactions between any particular spins and the other spins can be represented by their average effect. This particular spin is $\sigma_i=\langle\sigma\rangle+\delta\sigma_i$ and assume the fluctuation is small.
+\end{defi}
+\begin{prop}
+Under mean field theory (MFT), the spontaneous magnetization is
+$$\langle\sigma\rangle=\tanh\frac{Jq\langle\sigma\rangle}{k_BT}$$
+where $q$ is the coordination number.
+\end{prop}
+\begin{proof}
+The Hamiltonian is
+$$H=-m_0B\sum_i^N\sigma_i-J\sum_{ij}(\langle\sigma\rangle+\delta\sigma_i)(\langle\sigma\rangle+\delta\sigma_j)=-m_0B\sum_i\sigma_i-J\sum_{ij}(\langle\sigma\rangle^2+\langle\sigma\rangle(\delta\sigma_i+\delta\sigma_j)+\delta\sigma_i~\delta\sigma_j)$$
+Usually, $m_0=1$. Drop the term quadratic in fluctuations, and assume that fluctuations are site-independent, then:
+$$H\approx-m_0B\sum_i\sigma_i-\frac{1}{2}zJ\sum_i(\langle\sigma\rangle^2+2\langle\sigma\rangle[\sigma_i-\langle\sigma\rangle])\approx\frac{1}{2}qJN\langle\sigma\rangle^2-(m_0B+zJ\langle\sigma\rangle)\sum_i\sigma_i$$
+where $z$, the coordination number, is the number of nearest neighbours and the $1/2$ prefactor avoids double-counting, since each bond participates in two spins. The single-particle partition function is
+$$Z_1=\sum_{\sigma=\pm1}\exp\bigg[-\frac{qJ\langle\sigma\rangle^2}{2k_BT}-\frac{m_0B\sigma+Jq\sigma\langle\sigma\rangle}{k_BT}\bigg]=2e^{-0.5\beta zJ\langle\sigma\rangle^2}\cosh\frac{m_0B+Jq\langle\sigma\rangle}{k_BT}$$
+The Helmholtz free energy per spin $F_1=-k_BT\ln Z_1$ will then give us the mean magnetic moment per spin $\langle\sigma\rangle$ (related via $m=m_0\langle\sigma\rangle$:
+$$F_1=-k_BT\ln\bigg[2\cosh\frac{m_0B+Jq\langle\sigma\rangle}{k_BT}\bigg]+\frac{1}{2}qJ\langle\sigma\rangle^2\implies m=-\bigg(\frac{\partial F_1}{\partial B}\bigg)_Tm_0=m_0\tanh\frac{m_0B+Jq\langle\sigma\rangle}{k_BT}$$
+The spontaneous magnetization is obtained by setting $B=0$.
+\end{proof}
+Graphic solution of the self-consistent mean-field equation $m=\tanh\beta Jqm$ for the Ising model, illustrating the qualitatively different behaviour for $T > T_c$ (blue), $T < T_c$ (red), and $T = T_c$ (black). We can see that only when $T<T_c$, we have two other non-zero solutions to $m=\tanh[\beta(B+Jqm)]$
+\begin{center}
+\begin{tikzpicture}
+      \draw[->] (-4,0) -- (4,0) node[right] {$\langle\sigma\rangle$};
+      \draw[->] (0,-2.5) -- (0,2.5) ;
+      \draw[domain=-3:3,smooth,variable=\x,black] plot ({\x},{tanh(\x)});
+      \draw[domain=-3:3,smooth,variable=\x,red] plot ({\x},{tanh(2*(\x))});
+      \draw[domain=-3:3,smooth,variable=\x,blue] plot ({\x},{tanh(0.5*(\x))});
+      \draw[domain=-2:2,smooth,variable=\x,black] plot ({\x},{\x});
+      \draw (0,0) node[below]{0};
+    \draw (1,0) node[above]{$+1$};
+    \draw (-1,0) node[above]{$-1$};
+\end{tikzpicture}
+\end{center}
+\begin{remarks}
+There’s a nice intuition behind this mean field result. It can be derived by assuming that each spin experiences an effective magnetic field given by $B_{\text{eff}} = m_0B +Jq\langle\sigma\rangle$, which includes an extra contribution from the spins around it. In this way, the tricky interactions in the Ising model have been replaced by an averaged effective field $B_{\text{eff}}$, which is the highlight of the mean field approximation.
+\end{remarks}
+\begin{remarks}[Validity of MFT]\leavevmode
+\begin{enumerate}
+    \item For $d=1$: MFT is completely wrong as there is supposed to be no phase transition.
+    \item For $d=2,3$: The basic structure of the phase diagram looks right, but the details near the $T_c$ are wrong.
+    \item For $d\geq4$: MFT gives the right answers.
+\end{enumerate}
+Similar stories for other systems:
+\begin{enumerate}
+    \item MFT fails completely for $d\leq d_l$, the lower critical dimension.
+    \item MFT always works for $d\geq d_u$, the upper critical dimension.
+    \item What about $d_l<d<d_u$? Often, those $d$'s are interesting.
+\end{enumerate}
+\end{remarks}
+\newpage
 \subsection{Landau Theory of Phase Transitions}
+\begin{defi}[Phase transition]
+Conventionally, a phase transition occurs when some quantity changes discontinuously.
+\end{defi}
+For the Ising model, this order parameter that changes discontinuously is $m$. Landau theory offers a simple yet effective way to understand phase transitions qualitatively, based on free energy and symmetry (A $\mathbb{Z}_2$ symmetry when $B=0$: $m(\mathbf{x})\rightarrow-m(\mathbf{x})$. If $B\neq 0$, the symmetry should be $B\rightarrow -B\implies m(\mathbf{x})\rightarrow-m(\mathbf{x})$). Taylor expand the free energy for the Ising model obtained from the mean field approximation:
+$$F_1\approx -k_BT\ln 2+\frac{qJ}{2k_BTm_0^2}(k_BT-qJ)m^2+\frac{(qJ)^4}{12(k_BT)^3m_0^4}m^4+\dots$$
+Rewriting this in a cleaner expression, and dropping the insignificant constant terms:
+$$f(m)\approx-Bm+\frac{1}{2}\bigg(\frac{1}{\beta}-Jq\bigg)m^2+\frac{1}{12}\frac{1}{\beta}m^4+\dots$$
+where we introduced the term $-Bm$ when there is an external field $B$. The equilibrium value of $m$ is $m_{min}$, as discussed earlier. Landau theory explains how does $m_{min}$ change as we vary the parameters.
+\begin{remarks}
+In Ehrenfest's classification scheme, phase transitions were labelled by the lowest derivative of the free energy which is discontinuous at the transition. In the modern classification, phase transitions are classified based on whether a latent heat is involved (only in first-order).
+\end{remarks}
+\subsubsection{$B=0$: a continuous phase transition}
+\begin{defi}[Second order phase transition]
+At a second order phase transition, the order parameter changes continuously.
+\end{defi}
+\begin{prop}
+$m$ turns off abruptly (but changes continuously from $\pm1$ to 0) as we increase $T$ beyond a critical temperature $T_c$. $m\neq 0$ and $m=0$ are respectively called ordered and disordered phases.
+\end{prop}
+\begin{proof}
+When $B=0$, the free energy is 
+$$f(m)\approx\frac{1}{2}(T-T_c)m^2+\frac{1}{12}Tm^4+\dots,\quad T_c=Jq$$
+The equilibrium magnetization occurs at the minimum of the free energy:
+$$0=\frac{\partial f(m)}{\partial m}=(T-T_c)m+\frac{1}{3}Tm^3+\dots$$
+When $T>T_c$, there is only one possible equilibrium magnetization, which is $m=0$. This is expected since temperature randomizes the spins. When $T<T_c$, we solve for
+$$(T_c-T)m=\frac{1}{3}m^3+\dots$$
+but we need to find the minimum so
+$$0<\frac{\partial^2f(m)}{\partial m^2}=T-T_c+Tm^2+\dots$$
+As we can see, $m=0$ is a maximum of the free energy.
+\end{proof}
+On the left is the graph for $f(m)$ where red and blue curves represent respectively $T<T_c$ and $T>T_c$. On the right is the graph for $m\neq 0$ when $T<T_c$. 
+\begin{center}
+\begin{tikzpicture}
+      \draw[->] (-2,0) -- (2,0) node[right] {$m$};
+      \draw[->] (0,0) -- (0,3) node[left] {$f(m)$};
+      \draw[domain=-1.15:1.15,smooth,variable=\x,blue] plot ({\x},{(\x)^2+(\x)^4});
+      \draw[domain=-1.5:1.5,smooth,variable=\x,red] plot ({\x},{-(\x)^2+(\x)^4});
+      \draw (0,0) node[below]{0};
+    \draw (1,0) node[above]{$+m_0$};
+    \draw (-1,0) node[above]{$-m_0$};
+\end{tikzpicture}
+\begin{tikzpicture}
+      \draw[->] (0,0) -- (3.05,0) node[right] {$T$};
+      \draw[->] (0,-1.5) -- (0,1.5) node[left] {$m$};
+
+    \draw [thick] (0, 1) -- (0.3, 1) .. controls (2, 1) and (2, 0) .. (2.2, 0) -- (3, 0);
+    \draw [thick] (0, -1) -- (0.3, -1) .. controls (2, -1) and (2, 0) .. (2.2, 0) -- (3, 0);
+    \draw (0,1) node[left]{$+m_0$};
+    \draw (0,-1) node[left]{$-m_0$};
+    \draw (2,-0.5) node[below]{$T_c$};
+  \end{tikzpicture}
+\end{center}
+\newpage
+\begin{remarks}\leavevmode
+\begin{enumerate}
+    \item The expression 
+$$m_0(T\sim T_c)=\pm\sqrt{3(T_c-T)/T}$$
+is only valid close to $T_c$ when $m$ is small, and higher order terms $O(m^4)$ can be ignored.
+    \item $f(m)$ is invariant under $\mathbb{Z}_2$ symmetry, i.e. $m\rightarrow -m$ leaves $f(m)$ invariant. This symmetry is inherited from the $S_i\rightarrow-S_i$ symmetry of the Ising model when $B=0$.
+    \item For $T<T_c$, the system chooses one of the two states $m=\pm m_0$, i.e. the $\mathbb{Z}_2$ symmetry is spontaneously broken. Spontaneous symmetry breaking occurs if the symmetry of a system is not respected by the ground state.
+\end{enumerate}
+\end{remarks}
+\begin{prop}
+The heat capacity is discontinuous at $T=T_c$.
+\end{prop}
+\begin{proof}
+The heat capacity (at constant $B=0$) is a response function, given by
+$$C=\frac{\partial\langle E\rangle}{\partial T}=\beta^2\frac{\partial^2}{\partial\beta^2}\ln Z,\quad\langle E\rangle=-\frac{\partial}{\partial\beta}\ln Z$$
+Bearing in mind the various $m_{\text{min}}$ (that minimizes the effective free energy) solutions obtained earlier, in the different regimes, we have 
+$$f(m_{\text{min}})=
+\left\{
+        \begin{array}{ll}
+      \frac{1}{2}(T-T_c)\times 0+\frac{1}{12}T\times 0\quad=0 & T>T_c \\
+      \frac{1}{2}(T-T_c)\frac{3(T_c-T)}{T}+\frac{1}{12}T\frac{9(T_c-T)^2}{T^2}=-\frac{3}{4}\frac{(T_c-T)^2}{T} & T<T_c
+      \end{array}
+    \right.$$
+Using $\ln Z\approx-\beta N f(m_{\text{min}})$ gives the heat capacity per particle to be
+$$c=\frac{C}{N}=\frac{\beta^2}{N}\frac{\partial^2}{\partial\beta^2}(-\beta N f(m_{\text{min}}))=
+\left\{
+        \begin{array}{ll}
+      0 & T\rightarrow T_c^+ \\
+      \frac{3}{2} & T\rightarrow T_c^-
+        \end{array}
+    \right.$$
+\end{proof}
+\begin{remarks}
+The essence of a phase transition is that some quantity is discontinuous. But, everything was determined by the partition function $Z$, a sum of smooth analytic functions. Yet, we obtained non-analytic behaviour characteristic of a phase transition. In reality, $Z$ is only necessary analytic if the sum is finite, which is not true when $N\rightarrow\infty$. Essentially, discontinuous phase transitions only occur in infinite systems.  Similarly, spontaneous symmetry breaking can only occur in infinite systems.
+\end{remarks}
+\subsubsection{$B\neq 0$: a discontinuous phase transition}
+\begin{defi}[First order phase transition]
+At a first order phase transition, the order parameter changes discontinuously.
+\end{defi}
+\begin{prop}
+For all temperatures $T$, the sign of $m$ is completely determined by the sign of $B$.
+\end{prop}
+\begin{proof}
+The free energy is
+$$f(m)\approx-Bm+\frac{1}{2}(T-T_c)m^2+\frac{1}{12}Tm^4+\dots$$
+Two minima exist for low temperatures - one being metastable and another is a true ground state. 
+$$0=\frac{\partial f(m)}{\partial m}=-B+(T-T_c)m+\frac{1}{3}Tm^3+\dots$$
+$$0<\frac{\partial^2f(m)}{\partial m^2}=(T-T_c)+Tm^2+\dots$$
+The metastable state disappears if the temperature increases above a certain value - the spinodal point. As we vary temperature $T$, the magnetization varies smoothly with asymptotic behaviour:
+$$\lim_{T\rightarrow\infty}m=\frac{B}{T},\quad\lim_{T\rightarrow0}m=\pm1$$
+\end{proof}
+\begin{center}
+\begin{tikzpicture}
+      \draw[->] (-2,0) -- (2,0) node[right] {$m$};
+      \draw[->] (0,0) -- (0,3) node[left] {$f(m)$};
+      \draw[domain=-1.01:1.15,smooth,variable=\x,blue] plot ({\x},{-0.25*\x+(\x)^2+(\x)^4});
+      \draw[domain=-1.3:1.5,smooth,variable=\x,red] plot ({\x},{-0.25*\x-(\x)^2+(\x)^4});
+      \draw (0,0) node[below]{0};
+    \draw (1,0) node[above]{$+m_0$};
+    \draw (-1,0) node[above]{$-m_0$};
+\end{tikzpicture}
+  \begin{tikzpicture}
+    \draw [->] (0, 0) -- (3.5, 0) node [right] {$T$};
+    \draw [->] (0, -1.5) -- (0, 1.5) node [above] {$m$};
+
+    \draw [thick] (0, 1) -- (1, 1) .. controls (2.2, 1) and (2.2, 0.1) .. (2.5, 0.1) -- (3, 0.1);
+     \draw [thick] (0, -1) -- (1, -1) .. controls (2.2, -1) and (2.2, -0.1) .. (2.5, -0.1) -- (3, -0.1);
+      \draw (0,1) node[left]{$+m_0$};
+    \draw (0,-1) node[left]{$-m_0$};
+  \end{tikzpicture}
+\end{center}
+\begin{prop}
+For $T<T_c$, the magnetization $m$ (the order parameter) jumps discontinuously from $-m_0$ to $+m_0$ as $B$ flips from negative to positive. This is characteristic of a first order phase transition.
+\end{prop}
+\begin{proof}
+Take the red curve from the previous diagram. The position of the true minima depends on the sign of $B$. If $B=0$, we obtain two minima, like earlier.
+\end{proof}
+\begin{remarks}
+Draw $B$ against $T$. This line of first order phase transitions occurs at $B=0$ along $T>0$ axis and ends at a second order phase transition at $T = T_c$. This is referred to as the critical point. For $T>T_c$, we no longer experience a sign change in $m$ if the sign of $B$ changes.
+\end{remarks}
+\subsubsection{Close to Critical Point}
+\begin{prop}
+The magnetic susceptibility (another type of response function, i.e. $\chi=\frac{\partial m}{\partial B}|_T$) of the Ising model have the following behaviour near a critical point.
+$$\chi\sim\frac{1}{|T-T_c|}$$
+\end{prop}
+\begin{proof}
+Close to the critical point $T=T_c$,
+$$f(m)\approx-Bm+\frac{1}{12}T_cm^4+\dots\implies \frac{\partial f}{\partial m}=0\implies m\sim B^{1/3},\quad B>0$$
+and when $B<0$, $m\sim-|B|^{1/3}$. For $T>T_c$,
+$$f(m)\approx-Bm+\frac{1}{2}(T-T_c)m^2+\dots\implies \frac{\partial f}{\partial m}=0\implies m\approx\frac{B}{T-T_c}\implies\chi=\frac{\partial m}{\partial B}\sim\frac{1}{T-T_c},\quad T\rightarrow T_c^+$$
+For $T<T_c$, we can write minimum of $f$ as $m=m_0+\delta m$ for small $B$, and so to leading order in $B/T$, 
+$$m\approx m_0+\frac{B}{2(T_c-T)}\implies\chi\sim\frac{1}{T_c-T},\quad T\rightarrow T_c^-$$
+\end{proof}
+\begin{remarks}
+Landau theory assumes that the free energy can be expanded about the transition point in a power series in the order parameter, but this assumption is actually invalid at the critical point because the free energy is singular at a continuous phase transition. Crucially, Landau theory ignores fluctuations in the order parameter.
+\end{remarks}
+\newpage
 \subsection{Critical Exponents and Universality}
-How about ising model, lattice gas, broken symmetry and range of correlations, mean field theory, variational treatment of mean field theory, renormalization group theory
+\begin{eg}[Critical Exponents]
+In our MFT approach, we have seen that various quantities scale as power laws, as we approach the critical point. We first approach the critical point along the temperature axis ($B=0$):
+$$m\sim(T_c-T)^\beta,\quad\beta=\frac{1}{2},\quad T<T_c$$
+$$c\sim c_\pm|T-T_c|^{-\alpha},\quad\alpha=0\text{ (discontinuity)}$$
+$$\chi\sim|T-T_c|^{-\gamma},\quad\gamma=1$$
+To obtain the final exponent, we vary $B$ at $T=T_c$:
+$$m\sim B^{1/\delta},\quad\delta=3$$
+$\alpha,\beta,\gamma,\delta$ are called critical exponents.
+\end{eg}
+Compare MFT results with the true values for the Ising model in $d=2$ and 3:
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+      & MFT & d=2 & d=3         \\
+      \hline
+$\alpha$ & 0   & 0   & 0.1101...   \\
+ \hline
+$\beta$  & 1/2 & 1/8 & 0.3264...   \\
+ \hline
+$\gamma$ & 1   & 7/4 & 1.2371...   \\
+ \hline
+$\delta$ & 3   & 15  & 4.7898...  \\
+\hline
+\end{tabular}
+\end{table}
+\begin{remarks}
+The critical exponents are only analytically worked out in $d=2$. $d=3$ is a numerical result, and no one has obtained an analytical solution for the 3D Ising model.
+\end{remarks}
+The liquid-gas transition shows many similarities to the Ising model. Again, a line of first-order phase transitions ending at a critical point. At fixed $p$, the volume per particle $v=V/N$ jumps discontinuously at a liquid-gas first-order phase transition. This suggests $v$ is an order parameter, analogous to $m$ in the ising model. using an equation of state (e.g. van der Waals equation in statistical physics) at the critical point:
+$$v_{\text{gas}}-v_{\text{liquid}}\sim(T_c-T)^\beta,\quad\beta=\frac{1}{2},\quad T<T_c$$
+$$v_{\text{gas}}-v_{\text{liquid}}\sim(p-p_c)^{1/\delta},\quad\delta=3,\quad p\rightarrow p_c^+$$
+Analogous to the susceptibility, the compressibility (another response function) is
+$$\kappa=-\frac{1}{v}\frac{\partial v}{\partial p}\bigg|_T\sim|T-T_c|^{-\gamma},\quad\gamma=1$$
+$$C_V\sim C_\pm|T-T_c|^{-\alpha},\quad\alpha=0$$
+The critical exponents ($\alpha=0,\beta=1/2,\gamma=1,\delta=3$) of liquid-gas transition are the same as the Ising model using MFT. None of these theoretical values, again, agree with experiment. But yet, the actual experimental measurements of the critical exponents agree with $d=3$ Ising.
+\begin{defi}[Universality]
+The critical point governs behaviour of many different physical systems. All memory of underlying microscopic physics is washed away. If two systems are governed by the same critical point, we say they live in the same universality class.
+\end{defi}
+\begin{remarks}[Ising model as a lattice gas]
+Consider the same $d$-dimensional lattice, but now with particles hopping between sites. Let the number of particles on site $i$ be $n_i$. By the hard core assumption, no more than one particle can be on each site. So $n_i=0$ and $n_i=1$ for an empty and filled site respectively. The energy would then be
+$$E=-4J\sum_{\langle i,j\rangle}n_in_j-\mu\sum_in_i$$
+For $J>0$, there is an attractive force between sites. $\mu$ is the chemical potential. This is equivalent to the Ising model if we identify $S_i=2n_i-1$.
+\end{remarks}
 
 
 \newpage
 \section{Fluctuations in Equilibrium}
 \subsection{Fluctuations}
+\begin{eg}
+At second-order phase transitions, fluctuations in some thermodynamic quantities diverge, giving rise to new phenomena. Even far from critical points, spatial fluctuation sin the density scatter particles. For instance, the scattering of conduction electrons in metals from density fluctuations of the positively-charged ions on the lattice.
+\end{eg}
+\begin{defi}[Variance in canonical ensemble]
+$$\langle\Delta x^2\rangle:=\langle x^2\rangle-\langle x\rangle^2=\frac{1}{Z}\sum_ix_i^2e^{-E_i/k_BT}-\bigg(\frac{1}{Z}\sum_i x_ie^{-E_i/k_BT}\bigg)^2$$
+\end{defi}
+\begin{prop}
+The variance of $x$ is related to its response function, assuming a linear dependence $E_i=-fx_i$.
+\end{prop}
+\begin{proof}
+If the linear dependence between the microstate energy and the variable, a generic trick applies
+$$\langle x\rangle=\frac{1}{Z}\sum_ix_ie^{fx_i\beta}=\frac{1}{\beta Z}\frac{\partial Z}{\partial f},\quad\langle x^2\rangle=\frac{1}{Z}\sum_ix_i^2e^{fx_i\beta}=\frac{1}{Z\beta^2}\frac{\partial^2Z}{\partial f^2}$$
+Take one more derivative of $\langle x\rangle$:
+$$k_BT\frac{\partial\langle x\rangle}{\partial f}=(k_BT)^2\bigg[-\frac{1}{Z^2}\bigg(\frac{\partial Z}{\partial f}\bigg)^2+\frac{1}{Z}\frac{\partial^2Z}{\partial f^2}\bigg]=-\langle x\rangle^2+\langle x^2\rangle=\langle\Delta x^2\rangle$$
+\end{proof}
+\begin{eg}
+Consider $E_i=-M_iB$, then the mean square fluctuation of the magnetization $M$ is
+$$\langle\Delta M^2\rangle=k_BT\bigg(\frac{\partial\langle M\rangle}{\partial B}\bigg)_T$$
+For a system of non-interacting spins, $\langle M\rangle=Nm_0\tanh\frac{m_0B}{k_BT}$, and so
+$$\langle\Delta M^2\rangle=\frac{Nm_0^2}{\cosh^2(m_0B/k_BT)}\implies\frac{\sqrt{\langle\Delta M^2\rangle}}{\langle M\rangle}\propto\frac{1}{\sqrt{N}}$$
+\end{eg}
+\begin{cor}
+The mean square fluctuation in the internal energy $U$ is proportional to the heat capacity.
+\end{cor}
+\begin{proof}
+$$U=\langle E\rangle=-\frac{1}{Z}\frac{\partial Z}{\partial\beta},\quad\langle E^2\rangle=\frac{1}{Z}\frac{\partial^2Z}{\partial\beta^2}$$
+and so
+$$\langle\Delta U^2\rangle=\langle E^2\rangle-\langle E\rangle^2=\frac{\partial}{\partial\beta}\bigg[\frac{1}{Z}\frac{\partial Z}{\partial\beta}\bigg]=k_BT^2\frac{\partial U}{\partial T}$$
+\end{proof}
 \subsection{Connection with Thermodynamics}
+\begin{prop}
+The magnitude of fluctuations in $x$ is related to the availability of the system via
+$$\langle\Delta x^2\rangle:=\langle(x-x_0)^2\rangle=\frac{k_BT_R}{(\partial^2A/\partial x^2)_{x=x_0}}$$
+\end{prop}
+\begin{proof}
+Consider a system that can exchange energy and particles with a large reserovir. We wish to claculate the probability distribution $P(x)$ for variable $x$ of the system, when the total internal energy of the system and reservoir is $U_{\text{tot}}$, it is easy to see that $P(x)\propto\Omega_{\text{tot}}(x,U_{\text{tot}})$, where $\Omega_{\text{tot}}(x,U_{\text{tot}})$ is the number of microstates of the system and reservoir in which the variable of the system is equal to $x$. The entropy of the system and reservoir is given by $S_{\text{tot}}(x,U_{\text{tot}})=k_B\ln\Omega_{\text{tot}}(x,U_{\text{tot}})$, but we may relate this with the availability via $dS_{\text{tot}}=-dA(x)/T_R$ where $T_R$ is the temperature of the reservoir. hence, $P(x)\propto e^{-A(x)/k_BT_R}$. Expand $A$ about the equilibrium value of $x$, $x_0$:
+$$A(x)=A(x_0)+(x-x_0)\frac{\partial A}{\partial x}\bigg|_{x=x_0}+\frac{1}{2}(x-x_0)^2\frac{\partial^2A}{\partial x^2}\bigg|_{x=x_0}+\dots$$
+but the first derivative is zero since it is a minimum, so the probability distribution within the Gaussian approximation is
+$$P9x)=\frac{1}{\sqrt{2\pi\langle\Delta x^2\rangle}}\exp\bigg[-\frac{\Delta x^2}{2\langle\Delta x^2\rangle}\bigg]$$
+where $\langle\Delta x^2\rangle$ follows.
+\end{proof}
+\begin{cor}
+$$\langle\Delta x^2\rangle=k_BT\frac{\partial x}{\partial f}\bigg|_{x=x_0}$$
+\end{cor}
+\begin{proof}
+The first derivative $\frac{\partial A}{\partial x}$ is equal to the thermodynamic force $f$ conjugate to the variable $x$. 
+\end{proof}
+\begin{eg}[Fluctuation-dissipation theorem]
+Consider the arbitrary conjugate pair of thermodynamic variables $(x,f)$ as a force and the corresponding displacement via the linear response relation $f=\alpha x$, then the mean squared fluctuation of a thermodynamic variable is $\langle\Delta x^2\rangle=k_BT/\alpha$. This is the first example of the fluctuation-dissipation theorem we will see.
+\end{eg}
+\begin{cor}
+The probability distribution for fluctuations in the internal energy $U$ of a system held at constant volume and particle number but thermally coupled to a reservoir, is a Gaussian.
+\end{cor}
+\begin{proof}
+At constant $V$ and $N$, the availability is the free energy:
+$$dA=dU-T_RdS:=dF\implies\bigg(\frac{\partial F}{\partial U}\bigg)_V=1-T_R\bigg(\frac{\partial S}{\partial U}\bigg)_V=1-\frac{T_R}{T}$$
+which must be zero in equilibrium, so $T=T_R$. Differentiating again, we obtain
+$$\bigg(\frac{\partial^2F}{\partial U^2}\bigg)_V=\frac{T_R}{T^2}\bigg(\frac{\partial T}{\partial U}\bigg)_V=\frac{1}{TC_V}$$
+where $T_R=T$. Using earlier results, we have
+$$\langle\Delta U^2\rangle=\frac{k_BT}{(\partial^2F/\partial U^2)_V}=k_BT^2C_V,\quad P(U)=\frac{1}{\sqrt{2\pi k_BT^2C_V}}\exp\bigg[-\frac{\Delta U^2}{2k_BT^2C_V}\bigg]$$
+\end{proof}
+\begin{eg}
+1 cm$^3$ of monatomic ideal gas contains $N=\frac{pV}{k_BT}\sim 2.5\times10^{19}$ atoms. Equipartition gives $U=\frac{3}{2}Nk_BT=0.15J$ and the heat capacity at constant volume is $C_V=\frac{3}{2}Nk_B=5.2\times10^{-4}$ J/K, so the root mean square fluctuation is
+$$\langle\Delta U^2\rangle^{1/2}\sim T\sqrt{k_BC_V}\sim 2.5\times10^{-11}J$$
+The fractional fluctuation is $\sqrt{\langle\Delta U^2\rangle}/U\sim 1.6\times10^{-10}$, which is unmeasurably small. 
+\end{eg}
+\newpage
 \subsection{Near Critical Points}
-
-how about fluctuation-dissipation theorem, response functions, absorption, friction and Langevin equation
-
+\begin{eg}[van der Waals gas]
+In $p$-$V$ coordinates, the critical isotherm has a single point where $\frac{dp}{dV}=0$. Applying the first law, $dU=T_RdS-pdV\implies dA=(p_R-p)dV$, and so differentiating gives
+$$\bigg(\frac{\partial A}{\partial V}\bigg)_T=p_R-p,\quad\bigg(\frac{\partial^2A}{\partial V^2}\bigg)_T=-\bigg(\frac{\partial p}{\partial V}\bigg)_T=\frac{1}{\kappa_TV}$$
+where $\kappa_T$ is the isothermal compressibility, i.e. the linear response coefficient for the conjugate pair of thermodynamic variables $(p,V)$. Hence, 
+$$\langle\Delta V^2\rangle=k_BTV\kappa_T,\quad P(V)=\frac{1}{\sqrt{2\pi k_BTV\kappa_T}}\exp\bigg(-\frac{\Delta V^2}{2k_BTV\kappa_T}\bigg)$$
+The fractional volume fluctuation is
+$$\frac{\sqrt{\langle\Delta V^2\rangle}}{V}=\sqrt{k_BT\kappa_T/V}$$
+$\kappa_T\propto dV/dP$ diverges at the liquid-vapour critical point, and hence the magnitude of the volume fluctuations. We observe this as a `critical opalescence' phenomena - volume of density fluctuations increases to the point they start scattering light. A similar example is seen in the demixing region of a phase-separating mixture, but in $(T,c)$.
+\end{eg}
+\begin{eg}[Ising model]
+The mean square fluctuation of magnetisation is
+$$\langle\Delta M^2\rangle=k_BT\frac{\partial M}{\partial B}$$
+Evaluated at $B\rightarrow 0$ and in equilibrium $M_0=0$ at $T>T_c$, the derivative is equal to the susceptibility $\chi$, the corresponding linear response coefficient of the $(M,B)$ pair. This susceptibility diverges at the critical point and so must the magnitude of fluctuation in magnetisation. This divergence occurs on both sides of the critical point.
+\end{eg}
 \newpage
 \section{Stochastic Physics}
 \subsection{Brownian Motion}
+\begin{defi}[Brownian motion]
+Brownian motion refers to the pereptual irregular motions exhibited by small grains or particles of colloid size immersed in a liquid.
+\end{defi}
+\begin{defi}[Langevin equation]
+The theory of the Brownian motion of a free particle is described by the Langevin equation:
+$$m\frac{d\mathbf{u}}{dt}=-\gamma\mathbf{u}+\xi(t)$$
+where $\mathbf{u}$ denotes the vector of particle velocity. The term $-\gamma\mathbf{u}$ represents the kinetic friction experienced by the particle, which is governed by fluid dynamics. The second contribution is fluctuating, which is the force provided by collisions with molecules of surrounding liquid. This stochastic force has `white noise' properties:
+$$\langle\xi(t)\rangle=0,\quad\langle\xi(t)^2\rangle\neq 0,\quad\langle\xi(t_1)\xi(t_2)\rangle=0\text{ if }t_1\neq t_2$$
+i.e. zero expectation and complete lack of correlation, i.e. $\langle\xi(t)\xi(t')\rangle=\Gamma\delta(t-t')$ where $\Gamma$ is a measure of intensity of the stochastic force.
+\end{defi}
+\begin{prop}
+$$\Gamma=2k_BT\gamma$$
+\end{prop}
+\begin{proof}
+The homogeneous dynamical equation $m\dot{u}=-\gamma u$ has the obvious solution $u=u_0e^{-\gamma t/m}$, which represents the decay of the initial condition $u(t=0)=u_0$. With the added stochastic force, the solution is
+$$u(t)=u_0e^{-\gamma t/m}+\int_0^te^{-\gamma(t-t')/m}\frac{\xi(t')}{m}dt'$$
+The instantaneous value of $u(t)$ cannot be predicted, but its mean square value is easy to determine:
+\begin{align}
+    \langle u^2\rangle&=\bigg\langle u_0^2e^{-2\gamma t/m}+2u_0e^{-\gamma t/m}\int_0^te^{-\gamma(t-t')/m}\frac{\xi(t')}{m}dt'+\int_0^t\int_0^te^{-\gamma(2t-t_1-t_2)/m}\frac{\xi(t_1)\xi(t_2)}{m^2}dt_1dt_2\bigg\rangle\nonumber\\&=u_0^2e^{-2\gamma t/m}+\frac{1}{m^2}\int_0^t\int_0^te^{-\gamma(2t-t_1-t_2)/m}\langle\xi(t_1)\xi(t_2)\rangle dt_1dt_2\nonumber\\&=u_0^2e^{-2\gamma t/m}+\frac{\Gamma}{m^2}e^{-2\gamma t/m}\int_0^te^{2\gamma t_1/m}dt_1\nonumber\\&=u_0^2e^{-2\gamma t/m}+\frac{\Gamma}{2m\gamma}(1-e^{-2\gamma t/m})\nonumber
+\end{align}
+The cross-term, linear in $\langle\xi\rangle$ is dropped out. In the long-time limit, the decaying exponential vanishes, i.e. the transient dies out. Invoking equipartition theorem,
+$$\langle0.5mu^2\rangle=\frac{\Gamma}{4\gamma}=\frac{1}{2}k_BT$$
+The desired result follows.
+\end{proof}
 \subsection{Diffusion of Free and Confined Particles}
-\subsection{Damped Harmonic Oscillator}
-\subsection{Diffusion in External Potentials}
+\begin{prop}
+For the simplest 1D example,
+$$\langle x^2\rangle=2Dt$$
+where $D$ is some constant, called the diffusion constant.
+\end{prop}
+\begin{proof}
+After a long time of observation, $t>>m/\gamma$, no memory of the initial particle velocity $u_0$ must remain and the current velocity must be distributed according to the Maxwell distribution. Inertial effects are irrelevant on long time scales of interest and the particle acceleration $\dot{u}$ must average out. The forces must balance out:
+$$0=-\gamma u+\xi(t)\implies\frac{dx}{dt}=\frac{1}{\gamma}\xi(t)\implies x(t)=\frac{1}{\gamma}\int_0^t\xi(t')dt'$$
+Hence, it follows that
+$$\langle x^2\rangle=\frac{1}{\gamma^2}\int_0^t\int_0^t\langle\xi(t_1)\xi(t_2)\rangle dt_1dt_2=\frac{\Gamma t}{\gamma^2}=2Dt,\quad D=\frac{k_BT}{\gamma}$$
+\end{proof}
+\begin{cor}
+$$\langle\mathbf{r}^2\rangle=6Dt$$
+for 3D diffusion.
+\end{cor}
+\begin{prop}
+For a confined potential of $V=\frac{1}{2}\alpha x^2$, we have instead
+$$\langle x^2\rangle=\frac{k_BT}{\alpha}$$
+\end{prop}
+\begin{proof}
+At time scales of observation which are much longer than the velocity relation time $\tau=m/\gamma$, inertial effects are again irrelevant and the acceleration averages to zero in the equation of motion for the average position. In this limit, the Lagevin equation takes the overdamped form:
+$$\gamma\mathbf{\dot{x}}=-\alpha\mathbf{x}+\xi(t)$$
+which has the same equation form for a free particle with the inertial term present. The stochastic solution for $x(t)$ is
+$$x(t)=x_0e^{-\alpha t/\gamma}+\int_0^te^{-\alpha(t-t')/\gamma}\frac{\xi(t')}{\gamma}dt'$$
+Again, its mean-squared value is
+\begin{align}
+    \langle x^2\rangle&=x_0^2e^{-2\alpha t/\gamma}+\frac{1}{\gamma^2}\int_0^t\int_0^te^{-\alpha(2t-t_1-t_2)/\gamma}\langle\xi(t_1)\xi(t_2)\rangle dt_1dt_2\nonumber\\&=x_0^2e^{-2\alpha t/\gamma}+\frac{\Gamma}{\gamma^2}e^{-2\alpha t/\gamma}\int_0^te^{2\alpha t_1/\gamma}dt_1\nonumber\\&=x_0^2e^{-2\alpha t/\gamma}+\frac{\Gamma}{2\alpha\gamma}(1-e^{-2\alpha t/\gamma})\nonumber
+\end{align}
+A new time scale $\tau_x=\alpha/\gamma$ has emerged, which determines how long does the memory of the initial condition $x_0$ persists in such a system. Without thermal noise $\xi(t)$, the particle released at $x=x_0$ would come to a rest at the point of its equilibrium $x=0$ in approximately this length of time. In the long time limit, at $t>>\tau_x$, we obtain
+$$\langle x^2\rangle=\frac{\Gamma}{2\alpha\gamma}=\frac{k_BT}{\alpha}$$
+\end{proof}
+\begin{eg}
+Dissipation leads to fluctuations in electric circuits. Nyquist's argument is as follow: the transmission line is a blackbody with spectrum
+$$E_\omega d\omega=k_BTld\omega/\pi c$$
+Terminate the transmission line with a characteristic impedance $R$. The termination resistor injects noise power $I^2Rd\omega=\frac{k_BT}{2\pi}\omega$. Model int erms of a voltage source injecting noise:
+$$I_\omega=\frac{V_\omega}{2R}\implies\frac{V_\omega^2}{4R^2}Rd\omega=k_BTdf $$
+This gives the Johnson noise $V_f^2=4Rk_BT$ injectedby the resistor $R$.
+\end{eg}
+\newpage
+\subsection{Working with probability distributions}
+\begin{prop}
+The probability distribution for a 1-D random walk is
+$$P(N_+,N)=2a\sqrt{\frac{1}{4\pi Dt}}\exp\bigg(-\frac{x^2}{4Dt}\bigg)$$
+for some $D$. This is the probability that after $N$ such steps the particle reaches a certain distance $x$ from the starting point. $N_+$ and $N_-$ are the steps to the right and left respectively, with $x=a(N_+-N_-)$, where $a$ is the length of an elementary step.
+\end{prop}
+\begin{proof}
+The probability of finding the configuration with $N$ trials out of which $N_+$ are `successful' is
+$$P(N_+,N)=\frac{N!}{N_+!(N-N_+)!}\frac{1}{2^N}=\sqrt{\frac{N}{2\pi N_+(N-N_+)}}e^{N\ln N-N_+\ln N_+-(N-N_+)\ln(N-N_+)-N\ln 2}$$
+where we used Stirling formula $N!\approx e^{-N}N^N\sqrt{2\pi N}$. Expand in terms of $\epsilon=x/aN=x\tau/at$, and keeping terms up to second order in the exponential, gives
+$$P(N_+,N)=\sqrt{\frac{2}{\pi N}}\sqrt{\frac{1}{1-(x/aN)^2}}\exp\bigg[-\frac{x^2}[2a^2N]\bigg]=2a\sqrt{\frac{1}{4\pi Dt}}\exp\bigg[-\frac{x^2}{4Dt}\bigg]$$
+where we used $D=a^2/2\tau$. 
+\end{proof}
+\begin{remarks}
+We can always write $P(N_+,N)=2aP(x,t)$ for some continuous probability density, such that $P(x,t)dx$ is the probability of finding the particle after time $t$ in the interval $[x,x+dx]$.
+\end{remarks}
+\begin{defi}[Transition probability]
+Assign a number $m$ to the current position the particle occupies after $N=1$ steps and denote the probability of this occurrence is $P(m,N+1)$.
+$$P(m,N+1)=w(m,m-1)P(m-1,N)+w(m,m+1)P(m+1,N)$$
+where $w(m,m+1)$ and $w(m,m-1)$ are transition probabilities. 
+\end{defi}
+\begin{prop}[Free Diffusion equation]
+$$\frac{\partial P(x,t)}{\partial t}\propto\frac{\partial^2P(x,t)}{\partial x^2}$$
+\end{prop}
+\begin{proof}
+For a free Brownian motion in 1D, we set all $w$'s to be $1/2$ and take infinitesimal limit:
+\begin{eqnarray}
+\frac{P(m,N+1)-P(m,N)}{\tau}&=&\frac{1}{\tau}w(m,m-1)P(m-1,N)+\frac{1}{\tau}w(m,m+1)P(m+1,N)\nonumber\\&&-\frac{1}{\tau}[w(m-1,m)+w(m+1,m)]P(m,N)\nonumber\\\frac{\partial P(m,t)}{\partial t}&=&\frac{1}{2\tau}[P(m-1,t)-2P(m,t)+P(m+1,t)]\nonumber\\&=&\frac{1}{2\tau}\frac{\partial^2P(m,t)}{\partial m^2}=\bigg(\frac{a^2}{2\tau}\bigg)\frac{\partial^2P(x,t)}{\partial x^2}\nonumber
+\end{eqnarray}
+where we replaced the index $m$ by a continuous variable $m=x/a$.
+\end{proof}
+\begin{remarks}
+Assume the transition probabilities are not equal, independently of where the particle is on the $x$-scale, we take
+$$w(m,m-1)=\frac{1}{2}-\epsilon,\quad w(m,m+1)=\frac{1}{2}+\epsilon$$
+Then the diffusion equation now becomes
+$$\frac{\partial P(m,t)}{\partial t}=\frac{1}{2\tau}\frac{\partial^2P(m,t)}{\partial m^2}+\frac{2\epsilon}{\tau}\frac{\partial P(m,t)}{\partial m}$$
+Often, it is casted in the form $\partial_tP(x,t)=D\partial_x^2P(x,t)+C\partial_xP(x,t)$. 
+\end{remarks}
+\begin{prop}[Fokker-Planck equation]
+The full, time-dependent, generalized diffusion equation under an external force $f=-dE/dx$, where $E(x)$ is the corresponding potential energy of the particle at point $x$, is
+$$\frac{\partial P(x,t)}{\partial t}=-\frac{\partial}{\partial x}\bigg[\frac{1}{\gamma}f(x)P(x,t)\bigg]+D\frac{\partial^2}{\partial x^2}P(x,t)$$
+\end{prop}
+\begin{proof}
+First, consider the steady state of this process:
+$$0=D\partial_x^2P(x)+C\partial_xP(x)\implies P_{\text{eq}}(x)=P_0e^{-Cx/D}$$
+where at very large $x$, both $P$ and $P'$ have to be zero. The equilibrium probability distribution must have the Boltzmann form, $P_{\text{eq}}\propto\exp[-E(x)/k_BT]$, with $E(x)$ the corresponding potential energy at point $x$. So, $C=\frac{1}{\gamma}\frac{dE(x)}{dx}$. Let $f=-dE/dx$ be the external force, then plug this back and differentiate with respect to $x$ to get the full equation:
+$$\partial_tP(x,t)=\partial_x\bigg(\frac{1}{\gamma}\frac{dE}{dx}+D\frac{\partial}{\partial x}\bigg)P(x,t)$$
+as desired.
+\end{proof}
+\begin{cor}
+We may cast the Fokker-Planck equation to a continuity equation form:
+$$\frac{\partial P(x,t)}{\partial t}=-\frac{\partial J(x,t)}{\partial x}$$
+\end{cor}
+\begin{proof}
+Comparing the continuity equation and the Fokker-Planck equation, we have
+$$J(x,t)=-D\frac{\partial P(x,t)}{\partial x}+\frac{1}{\gamma}f(x)P(x,t)=-De^{-\beta E(x)}\frac{\partial}{\partial x}\bigg[e^{\beta E(x)}P(x,t)\bigg]$$
+where $J(x,t)$ represents the diffusion current for the probability $P(x,t)$.
+\end{proof}
+\begin{eg}[Kramers' problem]
+Kramers' problem describes the escape of particles over potential barriers. Suppose the particles are initially caught in the metastable state at A, and we wish to find the rate at which the particles will escape from this state over the potential (of energy barrier $\Delta E$ before reaching a global minimum behind it at B), as a result of thermal motion. When steady current of particles is established in the long-time limit,
+$$J\int_A^Be^{\beta E(s)}ds=-D\bigg[e^{\beta E(x)}P(x)\bigg]_A^B$$
+Approximate the potential near the metastable equilibrium point A as $E(x)\approx E_A+\frac{1}{2}K_Ax^2$. The number of particles in the vicinity of A can be estimated by taking
+$$dN_A=P(x_A)e^{-\beta E_A}dx\implies N_A\approx P(x_A)\int_{-\infty}^\infty e^{-\beta K_Ax^2/2}dx=P(x_A)\sqrt{\frac{2\pi k_BT}{k_A}}$$
+Assuming the potential well $E_B(x)$ is deep enough, then the steady state current is
+$$J\approx\frac{DP(x_A)}{\int_A^Be^{\beta E(s)}ds}$$
+and the rate is $J/N_A=D\sqrt{\frac{K_A}{2\pi k_BT}}/\int_A^Be^{\beta E(s)}ds$. The principal contribution to the integral arises only from the very small region near the potential barrier C, with an approximate parabolic form near the maximum, i.e. $E_c\approx\Delta E-0.5K_c(x-x_0)^2$.
+$$\int_A^Be^{\beta E(s)}ds\approx e^{\Delta E/k_BT}\int_{-\infty}^\infty e^{-0.5\beta K_c(x-x_0)^2}dx=e^{\Delta E/k_BT}\sqrt{\frac{2\pi k_BT}{K_C}}$$
+Hence, the rate of particles transit over the barrier (equivalent to the rate of leaving the metastable state A) is
+$$\frac{J}{N_A}=De^{-\Delta E/k_BT}\frac{\sqrt{K_AK_C}}{2\pi k_BT}=\frac{\sqrt{K_AK_C}}{2\pi\gamma}e^{-\Delta E/k_BT}$$
+This expression gives hte probability, per unit time, that a particle originally in the potential hole A, will escape to a deeper well B by crossing the barrier at C. The prefactor fraction is determined by various microscopic features of the system. The exponential form represents thermal activation.
+\end{eg}
+\newpage
+\subsection{Fluctuation-Dissipation Theorem}
 
-\appendix
+
+
+
+
+
+
+
+
+\begin{prop}
+The fluctuating Langevin force indeed has a uniform power spectrum and that the intensity of the Langevin force is given by the damping constant.
+\end{prop}
+\begin{proof}
+We start from a damped harmonic oscillator (since the Langevin equation is the equation of motion of a damped simple harmonic oscillator with a stochastic applied force $f(t)$), which has a response function:
+$$\alpha_\omega=\frac{1}{-m\omega^2-i\gamma\omega+k}=\frac{m(\omega_0^2-\omega^2)+i\gamma\omega}{m^2(\omega^2-\omega_0^2)^2+\gamma^2\omega^2}$$
+Equipartition principle says the mean square displacement should be
+$$\frac{1}{2}k\langle x^2\rangle=\frac{1}{2}k_BT\implies\langle x^2\rangle=k_BT\frac{1}{k}=k_BT\text{Re}[\alpha_{\omega=0}]$$
+The fluctuation dissipation theorem gives us
+$$\langle\delta x_\omega^2\rangle=\frac{2k_BT}{\omega}\text{Im}[\alpha_\omega]$$
+where $\delta x=x-\overline{x}=x$ as $\overline{x}=0$ for our damped oscillator. We have
+$$x_\omega=f_\omega\alpha_\omega\implies\langle x^2_\omega\rangle=\langle|x_\omega|^2\rangle=\langle|\xi_\omega|^2\rangle|\alpha_\omega|^2=\frac{2k_BT}{\omega}\text{Im}[\alpha_\omega]\implies\langle|\xi_\omega|^2\rangle=\frac{2k_BT}{\omega}\frac{\text{Im}[\alpha_\omega]}{|\alpha_\omega|^2}=2k_BT\gamma$$
+i.e. constant.
+\end{proof}
 \newpage
 \bibliographystyle{unsrt}
 \bibliography{reference.bib}
