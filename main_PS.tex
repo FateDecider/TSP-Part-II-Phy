@@ -50,6 +50,16 @@
 \DeclareMathOperator{\Log}{Log}
 \DeclareMathOperator{\sech}{sech}
 \DeclareMathOperator{\Var}{Var}
+\newtheoremstyle{new2}% <name>
+{2pt}% <Space above>
+{2pt}% <Space below>
+{\color{black}}% Body font
+{}% <Indent amount>
+{\bfseries\color{black}}% Theorem head font
+{:}% <Punctuation after theorem head>
+{.5em}% <Space after theorem headi>
+{}% <Theorem head spec (can be left empty, meaning `normal')>
+\theoremstyle{new2}
 \newtheorem{ans}{Answer}[section]
 
 \definecolor{darkblue}{RGB}{	0, 0, 139}
@@ -72,6 +82,8 @@
 \begin{document}
 \maketitle
 \tableofcontents
+\subsection*{Acknowledgements:}
+Many thanks to my supervisor Bill Allison, and the lecturer Malte Grosche for their guidance. 
 \newpage
 \section{Problem Sheet 1}
 \subsection*{Thermodynamics}
@@ -101,17 +113,17 @@ where $p_0$ is a constant and $A$ is a function of $T$ only. Derive expressions 
 Can all equilibrium thermodynamic information about the gas be obtained from a knowledge of: (i) $F(T, V, N)$; (ii) the equation of state and $U(T, p, N)$?
 \end{qns}
 \begin{ans}
-Note that $dG=-SdT+Vdp$. $G$ is thus given in terms of its natural variables so it is possible to deduce all thermodynamic properties.
+Note that $dG=-SdT+Vdp_+\mu dN$. $G$ is thus given in terms of its natural variables so it is possible to deduce all thermodynamic properties.
 \begin{enumerate}[label=(\alph*)]
 \item To find the equation of state (function of $p$, $T$ and $V$), we have
 $$V=\bigg(\frac{\partial G}{\partial p}\bigg)_{T,N}=\frac{Nk_BT}{p}-NA$$
 \item The entropy is a conjugate variable with temperature
 $$S=-\bigg(\frac{\partial G}{\partial T}\bigg)_{p,N}=-Nk_B\ln\frac{p}{p_0}+Np\bigg(\frac{\partial A}{\partial T}\bigg)_{p,N}$$
-\item By definition, the enthalpy is
+\item The enthalpy $H(S,p,N)$ is obtained from the Gibbs free energy $G(T,p,N)$ via a Legendre transformation:
 $$H=G+TS=Nk_BT\ln\frac{p}{p_0}-NA(T)p+T\bigg\{-Nk_B\ln\frac{p}{p_0}+Np\bigg(\frac{\partial A}{\partial T}\bigg)_{p,N}\bigg\}=Np\bigg(\bigg(\frac{\partial A}{\partial T}\bigg)_{p,N}T-A\bigg)$$
-\item By definition, the internal energy is
+\item The internal energy $U(S,V,N)$ is obtained from the enthalpy $H(S,p,N)$ via a Legendre transformation:
 $$U=H-pV=Np\bigg(\bigg(\frac{\partial A}{\partial T}\bigg)_{p,N}T-A\bigg)-(Nk_BT-NpA)=TN\bigg[p\bigg(\frac{\partial A}{\partial T}\bigg)_{p,N}-k_B\bigg]$$
-\item By definition, the Helmholtz free energy is
+\item The Helmholtz free  energy $F(T,V,N)$ is obtained from the internal energy $U(S,V,N)$ via a Legendre transformation:
 $$F=U-TS=TN\bigg[p\bigg(\frac{\partial A}{\partial T}\bigg)_{p,N}-k_B\bigg]+TNk_B\ln\frac{p}{p_0}-NpT\bigg(\frac{\partial A}{\partial T}\bigg)_{p,N}=Nk_BT\bigg(\ln\frac{p}{p_0}-1\bigg)$$
 \end{enumerate}
 \begin{enumerate}[label=\roman*]
@@ -205,7 +217,7 @@ so $F$ is minimum for a system at constant $T$, $V$ and $N$. Take the entire sys
 $$0=dF=dF_l+dF_a+dF_{\text{surface}}=p_ldV_a-p_adV_a+\Gamma dA$$
 where we have $dT=0$, $dV_l=-dV_a$, $dN_i=0$ $\forall i$. For a spherical bubble, we have $dA=8\pi rdr$ and $dV_a=4\pi r^2dr$, and so
 $$0=(p_l-p_a)rdr+2\Gamma dr\implies p_a=p_l+\frac{2\Gamma}{r}$$
-The pressure inside the bubble is higher than the outside.
+The pressure inside the bubble is higher than the outside. The local pressure in the air inside the bubble is proportional to the local radius of curvature. If the bubble isn't spherical, there is a pressure gradient in the air inside the bubble, and this gradient will cause a flow of air inside the bubble which acts to restore the bubble to a spherical shape.
 \end{ans}
 \begin{qns}[Oxygen extraction]
 What is the minimum work required to extract 1 mole of pure O$_2$ from a large volume of air at the same temperature and pressure, if air is regarded as being composed of 1 volume of O$_2$ mixed with 4 volumes of $N_2$. 
@@ -241,8 +253,8 @@ We now consider an ideal fuel cell operating at the same pressure and temperatur
 \end{qns}
 \begin{ans}
 We have $G=H-TS$
-$$G_{H_2}^{(m)}=0-298(130.7)=-38.9~kJ/mol,\quad G_{O_2}^{(m)}=0-298(205.1)=-61.1~kJ/mol$$
-$$G_{H_2O}^{(m)}=-285.8\times10^3-298(69.9)=-306.6~kJ/mol$$
+$$G_{H_2}^{(m)}=0-298(130.7)=-38.9~\text{kJ/mol},\quad G_{O_2}^{(m)}=0-298(205.1)=-61.1~\text{kJ/mol}$$
+$$G_{H_2O}^{(m)}=-285.8\times10^3-298(69.9)=-306.6~\text{kJ/mol}$$
 The chemical potential is the Gibbs free energy per particle, i.e. $\mu=G/N=N_A\mu_0$, where $\mu_0$ is the chemical potential at 1 atm and 298 K. The equilibrium constant is defined to be
 $$k_BT\ln K_c(p,T)=-\sum_i\nu_i\mu_{0i}\implies K_c=\exp\bigg(-\frac{1}{RT}\bigg(2G_{H_2}^{(m)}+G_{O_2}^{(m)}-2G_{H_2O}^{(m)}\bigg)\bigg)=e^{-303.7}<<1$$
 Since $K_c$ is very small, the reaction is pushed to the right, i.e. water is much favorably formed.\\[5pt]
@@ -250,7 +262,7 @@ The change in Gibbs free energy (from the formation of 1 mole of water) is the m
 $$\Delta G^{(m)}=G^{(m)}_{H_2O}-(G_{H_2}^{(m)}+\frac{1}{2}G_{O_2}^{(m)})=-306.6\times10^3-(-61.1(0.5)-38.9)\times10^3=-237~\text{kJ/mol}$$
 The heat evolved from the reaction is
 $$Q^{(m)}=T\Delta S^{(m)}=T(S_{H_2O}^{(m)}-S_{H_2}^{(m)}-\frac{1}{2}S_{O_2}^{(m)})=298(69.9-(130.7+0.5(205.1)))=-48.7~\text{kJ/mol}$$
-If the reaction were allowed to proceed without extracting work. 
+If the reaction were allowed to proceed without extracting work, 
 $$Q_{\text{irrev}}^{(m)}=H_{H_2O}^{(m)}-(H_{H_2}^{(m)}+0.5H_{O_2}^{(m)})=-285.58~\text{kJ/mol}$$
 The efficiency of the ideal fuel cell is
 $$\eta=\frac{\Delta G^{(m)}}{Q_{\text{irrev}}^{(m)}}=\frac{-237}{-285.58}=0.83$$
@@ -324,6 +336,7 @@ The pressure, as a function of energy density is
 $$P=\frac{1}{3}\frac{U}{V}$$
 Since the pressure is a third of its energy density and that the chemical potential is zero, these are characteristics of a radiation gas, and hence the physical system corresponds to blackbody radiation.
 \end{ans}
+\newpage
 \begin{qns}[Vacancies]
 A crystalline solid contains $N$ identical atoms on $N$ lattice sites, and $N$ interstitial sites to which atoms may be transferred at the energy cost $\varepsilon_c$. If $n$ atoms are on interstitial sites, show that the configurational entropy is $2k_B\ln(N!/n!(N −n)!)$.\\[5pt]
 Assuming $n/N$ is small, and that vacancies are very rare, show by minimising the total free energy that the equilibrium proportion of atoms on interstitial sites $n/N$ is
@@ -433,7 +446,7 @@ $$n_{\text{ads}}=\frac{p}{k_BT}\bigg(\frac{2\pi\hbar^2}{mk_BT}\bigg)^{1/2}\exp\b
 We use the grand canonical ensemble. The 3D gas of He atoms in the vapour acts as a particle reservoir, setting the chemical potential for the He atoms on the surface. We treat the He gas as a classical gas, i.e. $(\varepsilon_k-\mu)/k_BT>>1$, so the grand partition function of a microstate is
 $$\mathcal{Z}_k=1+e^{-\beta(\varepsilon_k-\mu)}$$
 The grand potential for a microstate with energy $\varepsilon_k=\frac{p^2}{2m}-\Delta$ is
-$$\Phi(\varepsilon_k)=-k_BT\log\mathcal{Z}_k\approx-k_BTe^{-\mu/k_BT}e^{\Delta/k_BT}e^{-p^2/2mk_BT}$$
+$$\Phi(\varepsilon_k)=-k_BT\log\mathcal{Z}_k\approx-k_BTe^{\mu/k_BT}e^{\Delta/k_BT}e^{-p^2/2mk_BT}$$
 To obtain the full grand potential of the gas $\Phi=\sum_k\Phi(\varepsilon_k)$, we convert the discrete sum to an integral over the corresponding phase space.
 $$\Phi=\int_{\mathbb{R}^4}\Phi(\varepsilon_k)\frac{d^2xd^2p}{(2\pi\hbar)^2}=-k_BT\frac{A}{(2\pi\hbar)^2}e^{(\mu+\Delta)/k_BT}\int_0^\infty e^{-p^2/2mk_BT}pdp=-k_B^2T^2\frac{Am}{(2\pi\hbar^2)}e^{(\mu+\Delta)/k_BT}$$
 The density of adsorbed atoms is
@@ -455,7 +468,7 @@ The state is either
     \item doubly occupied: energy contribution of $2\epsilon+U$
 \end{itemize}
 Given that the state is in contact with a reservoir of equilibrium chemical potential $\mu$, this is a grand canonical ensemble. The grand canonical partition function is
-$$\mathcal{Z}=\sum_ie^{-\beta(\epsilon_i-n_i\mu)}=1+2e^{-\beta(\epsilon-\mu)}+e^{-\beta(2\epsilon+U-2\mu)}$$
+$$\mathcal{Z}=\sum_ie^{-\beta(\epsilon_i-N_i\mu)}=1+2e^{-\beta(\epsilon-\mu)}+e^{-\beta(2\epsilon+U-2\mu)}$$
 The average occupancy in a grand canonical ensemble is
 $$\langle N\rangle=\frac{1}{\mathcal{Z}}\sum_nN_ne^{-\beta(E_n-\mu N_n)}=\frac{1}{\beta\mathcal{Z}}\frac{\partial\mathcal{Z}}{\partial\mu}=\frac{2(e^{-\beta(\epsilon-\mu)}+e^{-\beta(2\epsilon+U-2\mu)})}{1+2e^{-\beta(\epsilon-\mu)}+e^{-\beta(2\epsilon+U-2\mu)}}$$
 To sketch this, one can take limiting cases (L'Hopital rule will be helpful) of the full analytic expression:
@@ -493,7 +506,7 @@ Find the proportion of He that is ionised at $10^4$ K (i) at atmospheric pressur
 \end{qns}
 \begin{ans}
 The equilibrium constant for the reaction is
-$$K_N=\frac{N_{\text{He}}}{N_{\text{He}}+N_{e^-}}$$
+$$K_N=\frac{N_{\text{He}}}{N_{\text{He}}N_{e^-}}$$
 By the law of mass action, we can relate $K_N$ to the partition functions of the individual single-particle species:
 $$K_N(T)=\prod_i(Z_1^i)^{\nu_i}$$
 where $Z_1^i$ is the single-particle partition function for species $i$. This follows from the chemical potential of a classical ideal gas being $\mu_i=k_BT(\ln N_i-\ln Z_1^i)$. The single-particle partition function of He is the product of that of an ideal gas with no internal structure, and that due to ionization, i.e.
@@ -504,7 +517,7 @@ But $\lambda=\sqrt{2\pi\hbar^2/mk_BT}$ is a function of temperature $T$ and mass
 $$\frac{N_{\text{He}^+}}{N_{\text{He}}}=\frac{1}{K_NN_{\text{e}^-}}=\frac{4V}{N_{\text{e}^-}}\bigg(\frac{2\pi\hbar^2}{m_ek_BT}\bigg)^{-3/2}e^{-e\phi\beta}$$
 By ideal gas law, $V=Nk_BT/p$ where $N=N_{\text{He}}+2N_{\text{e}^-}$ and $N_{\text{He}^+}=N_{\text{e}^-}$. So, in terms of pressure, we have
 \begin{eqnarray}
-\frac{N_{\text{He}^+}}{N_{\text{He}}}&=&\bigg(\frac{N_{\text{He}}}{N_{\text{He}^+}}+2\bigg)\frac{4k_BT}{p}\bigg(\frac{m_ek_BT}{2\pi\hbar^2}\bigg)^{3/2}e^{-e\phi\beta}\nonumber\\&=&\bigg(\frac{N_{\text{He}}}{N_{\text{He}^+}}+2\bigg)\frac{4(1.38\times10^{-23})(10^4)}{p}\bigg(\frac{(9.11\times10^{-31})(1.38\times10^{-23})(10^4)}{2\pi(6.626\times10^{-34}/2\pi)^2}\bigg)^{3/2}e^{-(1.6\times10^{-19}(24.6)/(1.38\times10^{-23}~\times 10^4)}\nonumber\bigg(\frac{N_{\text{He}^+}}{N_{\text{He}}}\bigg)^2\nonumber\\&=&\bigg(1+2\frac{N_{\text{He}^+}}{N_{\text{He}}}\bigg)\frac{5.47\times10^{-4}}{p}\nonumber
+&&\frac{N_{\text{He}^+}}{N_{\text{He}}}\nonumber\\&=&\bigg(\frac{N_{\text{He}}}{N_{\text{He}^+}}+2\bigg)\frac{4k_BT}{p}\bigg(\frac{m_ek_BT}{2\pi\hbar^2}\bigg)^{3/2}e^{-e\phi\beta}\nonumber\\&=&\bigg(\frac{N_{\text{He}}}{N_{\text{He}^+}}+2\bigg)\frac{4(1.38\times10^{-23})(10^4)}{p}\bigg(\frac{(9.11\times10^{-31})(1.38\times10^{-23})(10^4)}{2\pi(6.626\times10^{-34}/2\pi)^2}\bigg)^{3/2}e^{-\frac{1.6\times10^{-19}(24.6)}{(1.38\times10^{-23}~\times 10^4)}}\nonumber\bigg(\frac{N_{\text{He}^+}}{N_{\text{He}}}\bigg)^2\nonumber\\&=&\bigg(1+2\frac{N_{\text{He}^+}}{N_{\text{He}}}\bigg)\frac{5.47\times10^{-4}}{p}\nonumber
 \end{eqnarray}
 which gives a quadratic equation with coefficients being a sole function of pressure:
 $$\frac{N_{\text{He}^+}}{N_{\text{He}}}=\frac{5.47\times10^{-4}}{p}\pm\sqrt{\bigg(\frac{5.47\times10^{-4}}{p}\bigg)^2+\frac{5.47\times10^{-4}}{p}}$$
@@ -528,8 +541,8 @@ $$S=-\bigg(\frac{\partial F}{\partial T}\bigg)_N=Nk_B\log\frac{Z_1}{N}+Nk_B+Nk_B
 Since, $Z_1\propto T^{9/2}a^{-3}$, we have $\log Z_1\propto\frac{9}{2}\log T-3\log a$. The sketch will be a $\log T$ dependence and $S$ is not defined physically when $S<0$. In the following, $a_1>a_2$.
 \begin{center}
 \begin{tikzpicture}
-      \draw[->] (0,0) -- (6,0) node[right] {$T$};
-      \draw[->] (0,0) -- (0,4) node[left] {$S$};
+      \draw[->] (0,0) -- (5,0) node[right] {$T$};
+      \draw[->] (0,0) -- (0,3) node[left] {$S$};
       \draw[domain=1:5,smooth,variable=\x,blue] plot ({\x},{ln(\x)});
       \draw[domain=0.6:5,smooth,variable=\x,red] plot ({\x},{ln(\x)+0.5});
       \draw (0,0) node[below]{0};
@@ -539,12 +552,12 @@ Since, $Z_1\propto T^{9/2}a^{-3}$, we have $\log Z_1\propto\frac{9}{2}\log T-3\l
 \end{center}
 In an adiabatic process, $dQ=0$ so the change in entropy is zero for a reversible process. From our result, this hence mean $Z_1$ is a constant, and so
 $$T=T_0\bigg(\frac{a}{a_0}\bigg)^{2/3}$$
-So to lower the temperature (cooling), we have to lower $a$ (the potential magnitude). Since the number of atoms in the trap is variable, we use the grand canonical ensemble. The grand canonical partition function is
+So to lower the temperature (cooling), we have to lower $a$ (the potential magnitude) isothermally, followed by an isentropic cooling (which increases $a$ and lowers temperature). Since the number of atoms in the trap is variable, we use the grand canonical ensemble. The grand canonical partition function is
 $$\mathcal{Z}=\sum_{N=0}^\infty\frac{Z_1^N}{N!}e^{\beta\mu N}=\exp(e^{\beta\mu}Z_1)$$
 where $Z_1=\frac{8\pi k_B^3T^3}{a^3\pi^3\lambda^3}$ and we used the definition of the exponential series. The average occupancy is then
 $$N=\frac{1}{\beta}\frac{\partial}{\partial\mu}\log\mathcal{Z}=\frac{1}{\beta}\beta e^{\beta\mu}Z_1\implies \mu=\frac{1}{\beta}\bigg(\log N-\log\frac{8\pi k_B^3T^3}{a^3\pi^3\lambda^3}\bigg)$$
 $\mu$ will determine whether the gas is in the quantum or classical regime. $\mu<<0$ and $\mu\geq0$ for the classical and quantum mechanical regime respective. Set $\log$ argument to 1 to attain the quantum regime, hence
-$$N=\frac{8\pi k_B^3T^3}{a^3\pi^3\lambda^3}$$
+$$N\geq\frac{8\pi k_B^3T^3}{a^3\pi^3\lambda^3}$$
 \end{ans}
 \begin{qns}[Degenerate or non-degenerate]
 The temperature at the centre of the sun is $T = 1.6\times 10^7$ K, and plasma at the centre of the sun consists of hydrogen at a density of $\rho_H = 6\times10^4$ kg m$^{−3}$ and helium at a density of $\rho_{He} = 1\times10^5$ kg m$^{−3}$.
@@ -561,10 +574,10 @@ The temperature at the centre of the sun is $T = 1.6\times 10^7$ K, and plasma a
 $$\lambda=\sqrt{\frac{2\pi\hbar^2}{mk_BT}}=\sqrt{\frac{2\pi(6.626\times10^{-34}/(2\pi))^2}{m(1.38\times10^{-23})(1.6\times10^7)}}=\frac{1.78\times10^{-26}}{\sqrt{m}}$$
 Since the masses for electrons, protons and He nuclei are respectively $9.11\times10^{-31}$ kg, $1.67\times10^{-27}$ kg and $4(1.67)\times10^{-27}$ kg, the respective de Broglie wavelengths are $1.86\times10^{-11}$ m, $4.35\times10^{-13}$ m and $2.17\times10^{-13}$ m.
 \item Electrons, protons and He nuclei are fermions, and thus they experience degeneracy pressure at high density, i.e. $n=\frac{N}{V}>>\frac{1}{\lambda^3}$, but $n=\frac{N}{V}=\frac{\rho}{m}$. The number densities are
-$$n_p=\frac{\rho_H}{m_p}=\frac{6\times10^4}{1.67\times10^{-27}}=3.59\times10^{31}m^{-3},\quad n_{\text{He}}=\frac{\rho_{\text{He}}}{m_{\text{He}}}=\frac{1\times10^5}{4(1.67\times10^{-27})}=1.497\times10^{31}m^{-3}$$
-$$n_e=n_p+2n_{\text{He}}=6.58\times10^{31}m^{-3}$$
+$$n_p=\frac{\rho_H}{m_p}=\frac{6\times10^4}{1.67\times10^{-27}}=3.59\times10^{31}\text{m}^{-3},\quad n_{\text{He}}=\frac{\rho_{\text{He}}}{m_{\text{He}}}=\frac{1\times10^5}{4(1.67\times10^{-27})}=1.497\times10^{31}\text{m}^{-3}$$
+$$n_e=n_p+2n_{\text{He}}=6.58\times10^{31}\text{m}^{-3}$$
 where each ionized Hydrogen atom and Helium atom contributes one and two electrons respectively. The inverse cubed of thermal de Broglie wavelengths are respectively
-$$\frac{1}{\lambda^3_p}=1.215\times10^{37}m^{-3}>>n_p,\quad\frac{1}{\lambda^3_{\text{He}}}=\frac{8}{\lambda^3_p}=9.72\times10^{37}m^{-3},\quad\frac{1}{\lambda_e^3}=1.55\times10^{32}m^{-3}$$
+$$\frac{1}{\lambda^3_p}=1.215\times10^{37}\text{m}^{-3}>>n_p,\quad\frac{1}{\lambda^3_{\text{He}}}=\frac{8}{\lambda^3_p}=9.72\times10^{37}\text{m}^{-3},\quad\frac{1}{\lambda_e^3}=1.55\times10^{32}\text{m}^{-3}$$
 $1/\lambda^3$ is comparable to $n$ for electrons, hence the electron gas is weakly degenerate, but are much greater for protons and He nuclei, hence they are classical gases.
 \item The ideal gas of classical protons and alpha particle will dominate, so we use the ideal gas law:
 $$p=n_{\text{tot}}k_BT=(11.7\times10^{31})(1.38\times10^{-23})(1.6\times10^7)=2.6\times10^{16}Nm^{-2}$$
@@ -581,11 +594,11 @@ At temperatures below 0.4 K, a dilute solution of $^3$He in liquid $^4$He behave
 He-3 have half-integer spins and are fermions. The heat capacity show a similar behaviour to metals at low temperature, i.e. linear temperature dependence. The Fermi energy is
 $$E_F=\frac{\hbar^2(3\pi^2N/V)^{2/3}}{2m^*}$$
 where $m^*$ is the effective mass of the fermionic quasiparticles $m^*=2.4m_{\text{He-3}}=1.2024\times10^{26}$ kg. Since this He mixture is 5 percent He-3 and 95 percent He-4, the average atomic mass is 
-$$(0.05\times 3+0.95\times 4)=3.95\text{amu}=6.60\times10^{-27}\text{kg/atom}$$
+$$(0.05\times 3+0.95\times 4)=3.95~\text{amu}=6.60\times10^{-27}\text{kg/atom}$$
 But, $\rho=140$ kg m$^{-3}$, so the number density is 
-$$n=\frac{\rho}{m}=2.12\times10^{28}m^{-3}\implies n_{\text{He}-3}=0.05 n=1.06\times10^{27}m^{-3}$$
+$$n=\frac{\rho}{m}=2.12\times10^{28}\text{m}^{-3}\implies n_{\text{He}-3}=0.05 n=1.06\times10^{27}\text{m}^{-3}$$
 The Fermi temperature is then
-$$T_F=\frac{E_F}{k_B}=\frac{(6.626\times10^{-34}/2\pi)^2}{2(1.2024\times10^{-26})(1.38\times10^{-23})}(3\pi^2)^{2/3}(1.06\times10^{27})^{2/3}=0.33K$$
+$$T_F=\frac{E_F}{k_B}=\frac{(6.626\times10^{-34}/2\pi)^2}{2(1.2024\times10^{-26})(1.38\times10^{-23})}(3\pi^2)^{2/3}(1.06\times10^{27})^{2/3}=0.33\text{K}$$
 Assume the density of states $g(E)$ is independent of the temperature $T$. For small $T$, the slope of $n_F$ at $E=\mu$ is $O(1/T)$ large. Between temperatures 0 and $T$, the number of particles that can move is $O(g(E_F)k_BT)$. Since $g(E)$ is approximately constant around $E_F$, $\mu$ does not need to change much to keep $N$ fixed. The increase in total energy between temperatures 0 and $T$ is $O(T^2g(E_F)k_B^2)$ and hence the heat capacity is
 $$C=O(Tg(E_F)k_B^2)$$
 Take $c_V=\gamma T$, LHS is
@@ -593,7 +606,7 @@ $$c_V=\frac{C}{N}\approx\frac{g(E_F)k_B^2T}{N}$$
 where the density of states at the Fermi energy is
 $$N(E)=\int g(E)dE\propto\int E^{1/2}dE\propto\frac{2}{3}E^{3/2}\implies g(E_F)=\frac{3N}{2E_F}$$
 The coefficient of specific heat per atom is
-$$\gamma=\frac{C}{NT}=\frac{3N}{2E_F}\frac{k_B^2T}{NT}=\frac{3k_B^2}{2E_F}=6.21\times10^{-23}JK^{-2}$$
+$$\gamma=\frac{C}{NT}=\frac{3N}{2E_F}\frac{k_B^2T}{NT}=\frac{3k_B^2}{2E_F}=6.21\times10^{-23}\text{JK}^{-2}$$
 \end{ans}
 \begin{qns}[Spin waves]
 Spin waves in many ferromagnets show a gap at low energy, due to coupling of the orbital moments to the crystalline lattice. The resulting dispersion relation curves are typically as shown below.
@@ -611,9 +624,9 @@ Spin waves in many ferromagnets show a gap at low energy, due to coupling of the
 By first carrying out an approximate calculation sufficient to show the qualitative temperature dependence of the internal energy $U$ (or otherwise), sketch the expected temperature dependence of the specific heat at low temperatures, assuming that the dispersion relation is isotropic.
 \end{qns}
 \begin{ans}
-Given the quadratic dispersion relation, we can attempt to treat the spin waves like phonons, which is a type of Bose gas where $N$ is not conserved. We may then set $\mu=0$. The internal eenergy for a generic bosonic gas is
+Given the quadratic dispersion relation, we can attempt to treat the spin waves like phonons, which is a type of Bose gas where $N$ is not conserved. We may then set $\mu=0$. The internal energy for a generic bosonic gas is
 $$U=\int_{E_0}^\infty\frac{Eg(E)dE}{e^{\beta(E-\mu)}-1}$$
-where $E_0$ is the ground stat energy. We have $g(k)=\frac{g_sV4\pi k^2dk}{(2\pi\hbar)^3}$, $E_0=0$, $E=\Delta+\alpha k^2$. Hence,
+where $E_0$ is the ground state energy. We have $g(k)=\frac{g_sV4\pi k^2dk}{(2\pi\hbar)^3}$, $E_0=0$, $E=\Delta+\alpha k^2$. Hence,
 $$U=\frac{g_sV}{(2\pi\hbar)^3}\int_0^\infty\frac{(\Delta+\alpha k^2)4\pi k^2dk}{e^{\beta\Delta}e^{\beta\alpha k^2}-1}=\frac{g_sV}{2\pi^2\hbar^3}\int_0^\infty\frac{(\Delta+\alpha k^2)k^2dk}{e^{\beta(\Delta+\alpha k^2)}-1}$$
 Integral has no analytic solution, but we may approximate it in the low temperature limit, $\beta\Delta >>1$. 
 \begin{align}
@@ -623,6 +636,7 @@ where the Gaussian integral identity is
 $$\int_0^\infty x^{2n}e^{-x^2}dx=\frac{\sqrt{\pi}}{2}\frac{(2n-1)!!}{2^n},\quad 3!!=3$$
 The linear dependence never dominates. The internal energy shows a power law dependence at high temperatures and exponential dependence at low temperatures.
 \end{ans}
+\newpage
 \begin{qns}[Noise in transmission lines]
 A long air-filled coaxial transmission line, of length L and small diameter, is short circuited at each end. Show that, at room temperature and at a cyclic frequency $\nu =$ 109Hz ($\nu = \omega/2\pi$), the mean energy of black body radiation between the conductors in a small frequency range $d\omega$ will be approximately
 $$k_BT\frac{L}{\pi c}d\omega$$
@@ -640,7 +654,7 @@ $$\beta\hbar\omega=\frac{h\nu}{k_BT}=\frac{(6.626\times10^{-34})(10^9)}{(1.38\ti
 The internal energy is
 $$U=\frac{\hbar L}{\pi c}\int\frac{\omega}{\beta\hbar\omega}d\omega\implies dU=\frac{Lk_BT}{\pi c}d\omega$$
 Having an outer and inner diameter would mean that the cylinder is now three-dimensional. The density of states in 3D is
-$$g(E)dE=\frac{g_sV}{(2\pi\hbar)^3}d^3p=\frac{g_sVp^2dp}{(2\pi\hbar)^3}=\frac{V}{(2\pi\hbar)^3c^3}\hbar^2\omega\hbar d\omega=\frac{2V\omega^2d\omega}{(2\pi c)^3}$$
+$$g(E)dE=\frac{g_sV}{(2\pi\hbar)^3}d^3p=2\pi\frac{g_sVp^2dp}{(2\pi\hbar)^3}=\frac{2\pi Vg_s}{(2\pi\hbar)^3c^3}\hbar^2\omega^2\hbar d\omega=\frac{2V\omega^2d\omega}{4\pi^2 c^3}$$
 where $dp=dE/c$ and $g_s=2$. The internal energy is again approximately
 $$U\propto\frac{2\hbar V}{(2\pi c)^3}\int\frac{\omega^3}{\beta\hbar\omega}d\omega\implies dU=2\frac{\omega^2k_BT}{(2\pi c)^3}d\omega\propto k_BT\frac{V}{(\pi c)^3}\omega^2d\omega$$
 \end{ans}
@@ -655,7 +669,7 @@ $$dG=\sum_i\mu_idN_i=0$$
 But the $dN_i$'s are related by matter conservation, so $dN_i/\nu_i$ is a constant. We then have 
 $$\sum_i\nu_i\mu_i=0$$
 where $\nu_i$'s are the ratios, with $\nu>0$ for reactants and $\nu<0$ for products.\\[5pt]
-Chemical potential is a useful concept in understanding phases of matter. At high temperatures, the phase with highest $s$ have the smallest $\mu$, so more stable since $(\frac{\partial\mu}{\partial T})_p=-\frac{S}{N}=s$. At high pressures, the phase with smallest $v$ have the smallest $\mu$, so more stable since $(\frac{\partial\mu}{\partial p})_T=\frac{V}{N}=v$. The Clausius–Clapeyron relation is a way of characterizing a discontinuous phase transition (involving a latent heat, with no change in temperature) between two phases of matter of a single constituent. The gradient of the phase boundary on the $P$-$T$ plane is
+Chemical potential is a useful concept in understanding phases of matter. At high temperatures, the phase with highest $s$ have the smallest $\mu$, so more stable since $(\frac{\partial\mu}{\partial T})_p=-\frac{S}{N}=-s$. At high pressures, the phase with smallest $v$ have the smallest $\mu$, so more stable since $(\frac{\partial\mu}{\partial p})_T=\frac{V}{N}=v$. The Clausius–Clapeyron relation is a way of characterizing a discontinuous phase transition (involving a latent heat, with no change in temperature) between two phases of matter of a single constituent. The gradient of the phase boundary on the $P$-$T$ plane is
 $$\frac{dP}{dT}=\frac{L}{T(V_2-V_1)}$$ 
 Suppose $N_1$ particles of phase 1 are in equilibrium with $N_2$ particles of phase 2. The total Gibbs free energy is $G_{tot}=N_1\mu_1+N_2\mu_2$. In phase equilibrium, $dG_{tot}=0\implies\mu_1=\mu_2$. At a given temperature and pressure, each coexisting phase has the same chemical potential. We can thus characterize the line of coexistence of two phases to be $\mu_1(P,T)=\mu_2(P,T)$. Along this phase boundary, we have $\mu_1(P+dP,T+dT)=\mu_2(P+dP,T+dT)\implies d\mu_1=d\mu_2\implies -s_1dT+v_1dP=-s_2dT+v_2dP$, where $s$ and $v$ are entropy and volume per particle respectively. We then have 
 $$\frac{dP}{dT}=\frac{(S_2-S_1)}{(V_2-V_1)}=\frac{L}{T(V_2-V_1)}$$
@@ -689,14 +703,14 @@ $\mu=(\frac{\partial E}{\partial N})_{S,V}$ is the energy cost of adding an extr
 \end{itemize}
 In this case, their wavepackets will start interfering with each other and we are in the quantum regime. Equivalently, the quantum regime occurs when the occupancy of each of the energy levels becomes small and therefore the discreteness becomes relevant, i.e. reciprocal $k$-space condition. The average occupation of an accessible energy level is
 $$\langle n\rangle=\frac{N}{4\pi k_{\text{max}}^3/3}\frac{(2\pi)^3}{V}$$
-The crossover occur when $\langle n\rangle\sim 1$. $1/\lambda^3$ is sometimes called the quantum concentration $n_Q$. In a Fermi gas, as the temperature is increased, the chemical potential (originally positive) shifts to lower values, and ultimately becomes negative. On the other hand, in a Bose gas: At low temperatures, $\mu\approx 0$ and it becomes more negative as temperature increases. $\mu\geq0$ cannot be true, otherwise the occupation number at $E=\mu$ would become infinite, contradicting our assumption on fixed total $N$. Note that a Bose gas will form a Bose-Einstein condensation at very low temperatures. This is a condensate in momentum/energy space where a macroscopic number of particles occupy the ground state.
+The crossover occur when $\langle n\rangle\sim 1$. $1/\lambda^3$ is sometimes called the quantum concentration $n_Q$. In a Fermi gas, as the temperature is increased, the chemical potential (originally positive) shifts to lower values, and ultimately becomes negative. On the other hand, in a Bose gas: At low temperatures, $\mu\approx 0$ and it becomes more negative as temperature increases. $\mu\geq0$ cannot be true, otherwise the occupation number at $E=\mu$ would become infinite, contradicting our assumption of fixed total $N$. Note that a Bose gas will form a Bose-Einstein condensation at very low temperatures. This is a condensate in momentum/energy space where a macroscopic number of particles occupy the ground state.
 \end{ans}
 
 \newpage
 \section{Problem Sheet 4}
 \subsection*{Interacting systems, stochastic physics}
 \begin{qns}[Virial coefficient and radial distribution function]
-Virial coefficient and radial distribution function An inter-molecular potential takes the form
+An inter-molecular potential takes the form
 \begin{equation*}
   \phi(r) = \begin{cases}
         \infty\quad r<a        \\
@@ -713,12 +727,15 @@ Within the virial expansion the radial distribution function is expanded in powe
 \end{qns}
 \begin{ans}\leavevmode
 \begin{enumerate}[label=(\alph*)]
-\item 
-
-\item 
-
-\item 
-
+\item The radial distribution function's expansion is $g(r)=g_0(r)+\sum_{i=1}^\infty g_i(r)n^i$, where $g_0(r)=e^{-\beta\phi(r)}$ is density independent. For $r<a$, $g_0(r)=0$; $r>2a$, $g_0(r)=1$; $a<r<2a$, $g_0(r)=e^{\beta\epsilon}$. When $k_BT>>\epsilon\iff\beta\epsilon<<1\implies e^{\beta\epsilon}\sim1$. When $k_BT<<\epsilon\iff\beta\epsilon>>1\implies e^{\beta\epsilon}$ large finite value.
+\item We have
+\begin{align}
+    B_2(T)&=\int_0^\infty 2\pi r^2(1-e^{-\phi/k_BT})dr\nonumber\\&=\int_0^a2\pi r^2dr+\int_a^{2a}2\pi r^2(1-e^{\epsilon/k_BT})dr\nonumber\\&=\frac{2}{3}\pi a^3+\frac{2\pi}{3}(1-e^{\epsilon/k_BT})[(2a)^3-a^3]\nonumber\\&=\frac{16\pi}{3}a^3-\frac{14\pi}{3}a^3e^{\beta\epsilon}\nonumber
+\end{align}
+The Boyle temperature is
+$$B_2(T=T_B)=0\implies\frac{16\pi}{3}a^3=\frac{14\pi}{3}a^3e^{\epsilon/k_BT_B}\implies T_B=\frac{\epsilon}{k_B\ln(8/7)}$$
+\item We can rewrite it as
+$$\frac{B_2(T^*)}{v_0^*}=8-7e^{1/T^*}\implies T^*=\frac{k_BT}{\epsilon},\quad v_0^*=\frac{2\pi}{3}a^3$$
 \end{enumerate}
 \end{ans}
 \newpage
@@ -733,8 +750,17 @@ where $a$, $b$, $c$ and $T_c$ are positive constants. This system shows a first 
 \end{qns}
 \begin{ans}\leavevmode
 \begin{enumerate}[label=(\alph*)]
-\item 
-\item 
+\item The equilibrium $Q$ (that minimizes $F$) is
+$$0=\frac{\partial F}{\partial Q}=2a(T-T_c)Q-3bQ^2+4cQ^3=Q[2a(T-T_c)-3bQ+4cQ^2]\implies Q=0,~Q^*=\frac{3b\pm\sqrt{9b^2-32ac(T-T_c)}}{8c}$$
+But, we need to have $F(Q=Q^*)=F(Q=0)=0$, which gives
+$$0=a(T-T_c)(Q^*)^2-b(Q^*)^3+c(Q^*)^4,\quad 0=2a(T-T_c)-3b(Q^*)+4c(Q^*)^2$$
+which gives $Q^*=b/2c$ and hence
+$$0=2a(T^*-T_c)-\frac{3b^2}{2c}+4c\frac{b^2}{4c^2}=2a(T^*-T_c)-\frac{b^2}{2c}\implies T^*=T_c+\frac{b^2}{4ac}$$
+This is the temperature where the first order transition occurs.
+\item The latent heat is $L=T^*\Delta S$ where the entropy is obtained from the free energy:
+$$S=-\bigg(\frac{\partial F}{\partial T}\bigg)_{V,N}=-\bigg(\frac{\partial F}{\partial T}\bigg)_Q-\frac{\partial F}{\partial Q}\frac{\partial Q}{\partial T}=-\bigg(\frac{\partial F}{\partial T}\bigg)_Q=-aQ^2$$
+where $\frac{\partial F}{\partial Q}=0$ in equilibrium. The disordered phase $Q=0$ gives $S=0$ while the ordered phase $Q=Q^*$ gives $S=-a(Q^*)^2=-a\frac{b^2}{4c^2}$. The latent heat is
+$$L=T^*\Delta S=\bigg(T_c+\frac{b^2}{4ac}\bigg)\bigg(-\frac{ab^2}{4c}-0\bigg)=-\bigg(T_c+\frac{b^2}{4ac}\bigg)\frac{ab^2}{4c^2}$$
 \end{enumerate}
 \end{ans}
 \newpage
@@ -750,10 +776,19 @@ where $P$ is the polarisation of the crystal and $\varepsilon$ is the elastic st
 \end{qns}
 \begin{ans}\leavevmode
 \begin{enumerate}[label=(\roman*)]
-\item 
-
-\item 
-
+\item The equilibrium $P$ occurs at
+$$0=\frac{\partial F}{\partial P}=2\alpha(T-T_c)P+4bP^3+6cP^5=2P[\alpha(T-T_c)+2bP^2+3cP^4]$$
+where $P=0$ or $3c(P^*)^4+2b(P^*)^2+\alpha(T^*-T_c)=0$. At the first order transition, $F(P=P^*)=F(P=0)=0$, giving an additional equation $0=\alpha(T^*-T_c)+b(P^*)^2+c(P^*)^4$. Solving gives
+$$0=-b(P^*)^2-2c(P^*)^4\implies P^*=\sqrt{\frac{-b}{2c}}$$
+But $b<0\implies P^*\in\mathbb{R}$ in order to have first-order phase transition. This occurs at the temperature
+$$0=3c(P^*)^4+2b(P^*)^2+\alpha(T^*-T_c)=3c\frac{b^2}{4c^2}-2b\frac{b}{2c}+\alpha(T^*-T_c)\implies T^*=T_c+\frac{b^2}{4\alpha c^2}$$
+This is a first-order phase transition since there is a discontinuous jump from $P=0$ to $P=P^*$ at $T\leq T^*$.
+\item Find equilibrium $(P,\varepsilon)$ by minimizing $F$ with respect to $P$ and $\varepsilon$ separately:
+$$0=\frac{\partial F}{\partial P}=2\alpha(T-T_c)P+4bP^3+6cP^5+2D\varepsilon P+E\varepsilon^2$$
+$$0=\frac{\partial F}{\partial\varepsilon}=DP^2+2E\varepsilon\implies\varepsilon=-\frac{DP^2}{2E}$$
+These give
+$$0=2\alpha(T-T_c)+\bigg(4b-\frac{D^2}{E}\bigg)P^2+6cP^4+\frac{D^2P^3}{4E}$$
+All coefficients except $4b-\frac{D^2}{E}$ are always positive if $T>T_c$, so $4b-\frac{D^2}{E}<0\implies\frac{D^2}{4E}>b$ for a first-order phase transition.
 \end{enumerate}
 \end{ans}
 \newpage
@@ -762,13 +797,33 @@ Show that the fluctuations in particle number, $N$, at constant temperature, $T$
 $$\langle\Delta N^2\rangle=k_BT\bigg(\frac{\partial N}{\partial\mu}\bigg)_{T,V}$$
 \end{qns}
 \begin{ans}
-
+Since the particle number varies, we can use the grand partition function. The grand canonical partition function is $\mathcal{Z}=\sum_ie^{-(E_i-\mu N_i)/k_BT}$. By definition, the expectations are
+$$\langle N\rangle=\frac{\sum_iN_ie^{-(E_i-\mu N_i)/k_BT}}{\sum_ie^{-(E_i-\mu N_i)/k_BT}}=\frac{k_BT}{\mathcal{Z}}\bigg(\frac{\partial\mathcal{Z}}{\partial\mu}\bigg)_{T,V}$$
+$$\langle N^2\rangle=\frac{\sum_iN_i^2e^{-(E_i-\mu N_i)/k_BT}}{\sum_ie^{-(E_i-\mu N_i)/k_BT}}=\frac{(k_BT)^2}{\mathcal{Z}}\bigg(\frac{\partial^2\mathcal{Z}}{\partial\mu^2}\bigg)_{T,V}$$
+We have
+$$\bigg(\frac{\partial\langle N\rangle}{\partial\mu}\bigg)_{T,V}=-\frac{k_BT}{\mathcal{Z}^2}\bigg(\frac{\partial\mathcal{Z}}{\partial\mu}\bigg)_{T,V}\bigg(\frac{\partial\mathcal{Z}}{\partial\mu}\bigg)_{T,V}+\frac{k_BT}{\mathcal{Z}}\bigg(\frac{\partial^2\mathcal{Z}}{\partial\mu^2}\bigg)_{T,V}=-\frac{\langle N\rangle^2}{k_BT}+\frac{\langle N^2\rangle}{k_BT}$$
+By definition, the fluctuation is $\langle\Delta N^2\rangle:=\langle N^2\rangle-\langle N\rangle^2$, i.e. variance. Hence, the result follows.
 \end{ans}
 \begin{qns}[Energy fluctuations]
 For a system of $N$ free electrons the statistical weight, $\Omega(U)$, is proportional to $\exp[(NU/\epsilon_0)^{1/2}]$, where $\epsilon_0$ is about $10^{−19}$ J. Calculate the heat capacity, $C$, of the system at room temperature. Show that the probability distribution of the energy of the system is approximately Gaussian and find the root mean square fractional energy fluctuation, $\sqrt{\langle\Delta U^2\rangle/\langle U\rangle^2}$, for a system with $N = 10^{23}$ at room temperature. 
 \end{qns}
 \begin{ans}
-
+The heat capacity is defined as $\frac{\partial\langle U\rangle}{\partial T}$. We have $\Omega(U)\propto\exp(\sqrt{NU/\epsilon_0})$, so the entropy is
+$$S=k_B\log\Omega(U)=k_B\sqrt{\frac{NU}{\epsilon_0}}\implies\frac{1}{T}=\bigg(\frac{\partial S}{\partial U}\bigg)_{V,N}=\frac{k_B}{2}\sqrt{\frac{N}{\varepsilon_0}}U^{-1/2}\implies T=\frac{2}{k_B}\sqrt{\frac{U\epsilon_0}{N}}\implies\langle U\rangle=\bigg(\frac{k_BT}{2}\bigg)^2\frac{N}{\epsilon_0}$$
+The heat capacity is
+$$C=\frac{\partial\langle U\rangle}{\partial T}=2\bigg(\frac{k_B}{2}\bigg)^2\frac{N}{\epsilon_0}T=\frac{k_B^2TN}{2\epsilon_0}$$
+The heat capacity per particle at room temperature is $c=\frac{C}{N}=\frac{(1.38\times10^{-23})^2(273+30)}{2(10^{-19})}=2.9\times10^{-25}$J/K. The Boltzmann distribution is
+$$P(U)=\frac{\Omega(U)}{Z}e^{-U/k_BT}\implies\ln P(U)=-\frac{U}{k_BT}+\ln\frac{\Omega(U)}{Z}$$
+but $\ln P(U)=\ln P|_{\langle U\rangle}+\frac{\Delta U^2}{2}\frac{\partial^2}{\partial U^2}\ln P|_{\langle U\rangle}+\dots$, where the maximum of $P(U)$ occurs at $\langle U\rangle$, i.e. 
+$$0=\frac{\partial\ln P}{\partial U}\bigg|_{\langle U\rangle}=-\frac{1}{k_BT}+\frac{\partial\ln\Omega}{\partial U}\bigg|_{\langle U\rangle}$$
+where we have
+$$\frac{1}{k_BT}=\frac{\partial\log\Omega(U)}{\partial U}=\frac{\partial}{\partial U}\sqrt{\frac{NU}{\epsilon_0}}=\frac{1}{2}\sqrt{\frac{N}{U\epsilon_0}}\implies U=\frac{k_B^2T^2N}{4\epsilon_0}$$
+This is $\langle U\rangle$, which is the value $U$ takes at the maximum of $P(U)$.
+$$\frac{\partial^2\ln P}{\partial U^2}\bigg|_{\langle U\rangle}=\frac{\partial^2\ln\Omega}{\partial U^2}\bigg|_{\langle U\rangle}+0=\frac{\partial^2}{\partial U^2}\sqrt{\frac{N}{\epsilon_0}}U^{1/2}\bigg|_{\langle U\rangle}=-\frac{1}{4}\sqrt{\frac{N}{\epsilon_0}}\frac{1}{\langle U\rangle^{3/2}}$$
+But, fluctuation-dissipation theorem gives
+$$\langle\Delta U^2\rangle=-\frac{1}{(\partial^2\ln P/\partial U^2)|_{\langle U\rangle}}=4\sqrt{\frac{\epsilon_0}{N}}\langle U\rangle^{3/2}=\frac{k_B^3T^3}{2}\sqrt{\frac{\epsilon_0}{N}}\bigg(\frac{N}{\epsilon_0}\bigg)^{3/2}=\frac{k_B^3T^3N}{2\epsilon_0}$$
+The root mean square of the fractional energy fluctuation is
+$$\sqrt{\frac{\langle\Delta U^2\rangle}{\langle U\rangle^2}}=\sqrt{\frac{k_B^3T^3N}{2\epsilon_0}\frac{16\epsilon_0}{k_B^4T^4N^2}}=\sqrt{\frac{8\epsilon_0}{k_BTN}}=\sqrt{\frac{8(10^{-19})}{(1.38\times10^{-23})(303)(10^{23})}}=4.4\times10^{-11}$$
 \end{ans}
 \newpage
 \begin{qns}[Critical fluctuations]
@@ -776,8 +831,23 @@ Find the mean square fluctuation of magnetisation, $\langle\Delta M^2\rangle$, a
 $$F=a(T-T_c)M^2+bM^4$$
 \end{qns}
 \begin{ans}
-
+Find the equilibrium magnetization:
+$$0=\frac{\partial F}{\partial M}=2a(T-T_c)M+4bM^3=M[2a(T-T_c)+4bM^2]\implies M=0,~M^*=\pm\sqrt{\frac{a}{2b}(T_c-T)}$$
+$M^*$ is only physical if $T_c>T$, otherwise $M^*\notin\mathbb{R}$. The fluctuation-dissipation theorem gives
+$$\langle(\Delta M)^2\rangle=\frac{k_BT}{(\partial^2F/\partial M^2)}\bigg|_{M=M_{\text{eq}}}$$
+We need to minimize $F$:
+$$\frac{\partial^2F}{\partial M^2}=2a(T-T_c)+12bM^2$$
+When $M=0$, $\frac{\partial^2F}{\partial M^2}=2a(T-T_c)$ which is minimized only if $T>T_c$. When $M=M^*=\pm\sqrt{\frac{a}{2b}(T_c-T)}$,
+$$\frac{\partial^2F}{\partial M^2}=2a(T-T_c)+12b\frac{a}{2b}(T_c-T)=2a(T-T_c)-6a(T-T_c)=-4a(T-T_c)$$
+which is minimized only if $T<T_c$. It follows that
+\begin{equation*}
+  \langle(\Delta M)^2\rangle = \begin{cases}
+        \frac{k_BT}{2a(T-T_c)}=\frac{k_B}{2a}\bigg(1-\frac{T_c}{T}\bigg)^{-1}\quad T>T_c        \\
+        \frac{k_BT}{-4a(T-T_c)}=-\frac{k_B}{4a}\bigg(1-\frac{T_c}{T}\bigg)^{-1}\quad T<T_c        \end{cases}
+ \end{equation*}
+ which show an asymptote from both sides at $T=T_c$.
 \end{ans}
+\newpage
 \begin{qns}[Anharmonic oscillator]
 A system is governed by the anharmonic Hamiltonian $H(x) = ax^2 +bx^4$. This is evaluated by considering a harmonic Hamiltonian $H_\alpha=\alpha x^2$ with adjustable $\alpha$, which generates a probability distribution $\rho_\alpha(x)=Z_\alpha^{-1}\exp(-\alpha x^2\beta)$. The auxiliary Hamiltonian $\tilde{H}=H_\alpha+\langle H-H_\alpha\rangle_\alpha$, where the average $\langle\dots\rangle_\alpha$ is evaluated with respect to the probability distribution $\rho_\alpha(x)$, has the same average as $H$ itself: $\langle H\rangle_\alpha=\langle\tilde{H}\rangle_\alpha$.\\[5pt]
 Explain why $\tilde{F}$ is an upper bound for $F$
@@ -785,7 +855,22 @@ $$F\leq\tilde{F}=F_\alpha+\langle H-H_\alpha\rangle_\alpha$$
 and use this to show that $\tilde{F}$ most closely approximates $F$ for $\alpha=a+6b\langle x^2\rangle_\alpha$. Calculate and sketch the temperature dependence of $\alpha$ and $\langle x^2\rangle_\alpha$ for $a > 0$.
 \end{qns}
 \begin{ans}
-
+In equilibrium, the system adjusts $\rho(x)$ such that $F$ is minimized. Essentially, a variational principle problem. The free energy is $\tilde{F}=-k_BT\ln\tilde{Z}$ for some $\tilde{Z}$, where we define 
+$$\tilde{Z}=\int_{-\infty}^\infty e^{-\beta H_\alpha}e^{-\beta\langle H-H_\alpha\rangle_\alpha}dx=Z_\alpha e^{-\beta\langle H-H_\alpha\rangle_\alpha}dx$$
+where $\tilde{H}=H_\alpha+\langle H-H_\alpha\rangle_\alpha$. Hence,
+$$\tilde{F}=k_BT\beta\langle H-H_\alpha\rangle_\alpha-k_BT\ln Z_\alpha=\langle H-H_\alpha\rangle_\alpha+F_\alpha$$
+The true $\rho=\frac{1}{Z}e^{-\beta H}$ for $H=ax^2+bx^4$ minimizes $F$. $\rho_\alpha$ may not minimize $F$.
+$$F\leq\langle F\rangle_\alpha=\langle H-TS\rangle_\alpha=\langle H_\alpha-TS\rangle_\alpha+\langle H-H_\alpha\rangle_\alpha=F_\alpha+\langle H-H_\alpha\rangle_\alpha=\tilde{F}$$
+For our problem, we have
+$$\tilde{F}(\alpha)=-\frac{1}{\beta}\ln Z_\alpha+(a-\alpha)\langle x^2\rangle_\alpha+b\langle x^4\rangle_\alpha=-\frac{1}{\beta}\ln\sqrt{\frac{\pi}{\alpha\beta}}+\frac{a-\alpha}{2\alpha\beta}+\frac{3b}{4\alpha^2\beta^2}$$
+where
+$$\langle x^2\rangle_\alpha=\int_{-\infty}^\infty\frac{1}{Z_\alpha}x^2e^{-\alpha\beta x^2}dx=\frac{1}{2\alpha\beta},\quad Z_\alpha=\int_{-\infty}^\infty e^{-\alpha\beta x^2}dx=\sqrt{\frac{\pi}{\alpha\beta}}$$
+$$\langle x^4\rangle_\alpha=\int_{-\infty}^\infty\frac{1}{Z_\alpha}x^4e^{-\alpha\beta x^2}dx=\frac{3}{4\alpha^2\beta^2}$$
+Extremize $\tilde{F}$:
+$$0=\frac{\partial\tilde{F}}{\partial\alpha}=-\frac{1}{2\beta\alpha}-\frac{a}{2\alpha^2\beta}-\frac{3b}{2\alpha^3\beta^2}\implies\alpha^2=a_\alpha+6b\alpha\langle x^2\rangle_\alpha\implies\alpha=\frac{1}{2}\bigg(a\pm\sqrt{a^2+\frac{12b}{\beta}}\bigg)$$
+where we reject $\alpha=0$ solution. The limit of high temperature is $\lim_{T\rightarrow\infty}\alpha=\sqrt{3b/\beta}$. Finally,
+$$\langle x^2\rangle_\alpha=\frac{k_BT}{a+\sqrt{a^2+12b/\beta}}$$
+At low $T$, $\alpha$ starts as $a$, rises like $\sqrt{T}$ at $T\rightarrow\infty$, i.e. the system spends more time at large $x$, where the potential rises off more steeply. Conversely, $\langle x^2\rangle_\alpha$ starts off at low T linearly (expected from equipartition) and increases sublinearly with increasing $T$, i.e. $\lim_{T\rightarrow\infty}\langle x^2\rangle_\alpha\propto\sqrt{k_BT}$. The response of the system becomes stiffer.
 \end{ans}
 \newpage
 \begin{qns}[Brownian motion]
@@ -794,7 +879,17 @@ $$D=\frac{k_BT}{6\pi\eta R}$$
 In 1928 Pospisil observed the Brownian motion of soot particles of radius $0.4\times10^{-7}$ m immersed in a water-glycerine solution of viscosity $2.78\times10^{-3}$ kg m$^{−1}$ s$^{−1}$, at a temperature of 292 K. The observed value of $\langle x^2\rangle$ was $3.3\times10^{-12}$ m$^2$ in a 10-second interval. Use these data to determine a value of the Boltzmann constant, $k_B$, and compare it with the modern value.
 \end{qns}
 \begin{ans}
-
+The Langevin equation is
+$$m\frac{d\mathbf{u}}{dt}=-\gamma\mathbf{u}+\xi(t)$$
+where $-\gamma\mathbf{u}$ is the kinetic friction, $\xi(t)$ is the stochastic force with `white noise' properties $\langle\xi(t)\xi(t')\rangle=\Gamma\delta(t-t')$. After a long observation time $t>>m/\gamma$, no memory of the initial particle velocity must remain. Inertial effects are irrelevant and $\dot{u}$ must average out.
+$$\frac{dx}{dt}=\frac{1}{\gamma}\xi(t)\implies x(t)=\frac{1}{\gamma}\int_0^t\xi(t')dt'$$
+Take
+$$\langle x^2\rangle=\frac{1}{\gamma^2}\int_0^t\int_0^t\langle\xi(t_1)\xi(t_2)\rangle dt_1~dt_2=\frac{\Gamma t}{\gamma^2}=2Dt$$
+where $D=k_BT/\gamma$ and $\Gamma=2k_BT\gamma$. The Stokes' drag coefficient experienced by a sphere in Stokes' flow is $\gamma=6\pi\eta R\implies D=\frac{k_BT}{6\pi\eta R}$. In 2D (effectively a plane), 
+$$\langle\mathbf{r}^2\rangle=4Dt\implies 3.3\times10^{-12}=4D(10)\implies D=3.3\times10^{-13}\text{m}^2$$
+The obtained Boltzmann constant is
+$$k_B=\frac{D6\pi\eta R}{T}=\frac{6\pi\eta RD}{T}=\frac{6\pi(2.78\times10^{-3})(0.4\times10^{-7})(5.5\times10^{-14})}{292}=3.95\times10^{-25}$$
+which is smaller than the literature $k_B$ value. The crude approximation is incorrect.
 \end{ans}
 \newpage
 \begin{qns}[Johnson noise]
@@ -810,9 +905,24 @@ Show that the power dissipated in the resistor equals the power supplied by the 
 In a parallel $R$−$C$ circuit, the voltage noise spectrum across the known capacitor $C$ is measured at an unknown temperature $T$ for an unknown, temperature-dependent resistor $R(T)$. Outline how the measured voltage noise spectrum can be used to extract both temperature and resistance.
 \end{qns}
 \begin{ans}
-
+The corresponding Green's function satisfies
+$$\bigg(\frac{1}{C}+R\frac{d}{dt}\bigg)G(t-t')=\delta(t-t')$$
+Take Fourier transform:
+$$\bigg(\frac{1}{C}-i\omega R\bigg)G(\omega)=1\implies G(\omega)=\frac{C+i\omega\tau C}{1+\omega^2\tau^2}$$
+where $\tau=RC$. By fluctuation-dissipation theorem,
+$$\langle|q(\omega)|^2\rangle=\frac{2k_BT}{\omega}\text{Im}[G(\omega)]=\frac{2k_BT\tau C}{1+\omega^2\tau^2}$$
+Since $q(\omega)=G(\omega)V(\omega)$ in the frequency domain,
+$$\langle|V(\omega)|^2\rangle=\frac{\langle|q(\omega)|^2\rangle}{|G(\omega)|^2}=\frac{2k_BT\tau C}{1+\omega^2\tau^2}\frac{1+\omega^2\tau^2}{C^2}=2k_BTR$$
+since $\tau=RC$. Given that positive and negative frequencies contribute equally, the Johnson noise is twice of the fluctuation. The total Johnson noise is $4k_BTR$. For the capacitor,
+$$V_C(\omega)=\frac{1/i\omega C}{R+(1/i\omega C)}V(\omega)=\frac{1}{1+i\omega\tau}V(\omega)\implies\langle|V_C(\omega)|^2\rangle=\frac{\langle|V(\omega)|^2\rangle}{1+\omega^2\tau^2}=\frac{2k_BTR}{1+\omega^2\tau^2}$$
+We have
+$$\langle V_C^2\rangle=\int_{-\infty}^\infty\frac{2k_BTR}{1+\omega^2\tau^2}\frac{d\omega}{2\pi}=\frac{k_BT}{\pi C}\int_{-\infty}^\infty\frac{\tau d\omega}{1+\omega^2\tau^2}=\frac{k_BT}{\pi C}\bigg[\frac{\pi}{2}-\bigg(-\frac{\pi}{2}\bigg)\bigg]=k_BT/C$$
+This gives $\frac{1}{2}C\langle V_C^2\rangle=\frac{1}{2}k_BT$, i.e. one quadratic degree of freedom, consistent with equipartition theorem. For the resistor,
+$$I=-i\omega q(\omega)\implies\langle|I|^2\rangle=\omega^2\frac{2k_BT\tau C}{1+\omega^2\tau^2}$$
+The power dissipated is $\langle|I|^2\rangle R=2k_BT\frac{\omega^2\tau^2}{1+\omega^2\tau^2}$. For the noise source, the power supplied is
+$$\text{Re}[\langle V(\omega)(-i\omega q(\omega))\rangle]=\text{Re}[\langle-i\omega G(\omega)|V(\omega)|^2\rangle]=2k_BTR\text{Re}\bigg[-i\omega\frac{C+i\omega\tau C}{1+\omega^2\tau^2}\bigg]=2k_BTR\frac{\omega^2\tau C}{1+\omega^2\tau^2}=\frac{2k_BT\omega^2\tau^2}{1+\omega^2\tau^2}$$
+which is equal to the power dissipated in the resistor, consistent with energy conservation. From the previous result, $\frac{1}{2}C\langle|V_C(\omega)|^2\rangle=\frac{1}{2}k_BT$ and we can measure the temperature $T$. Repeat previous procedure, write down differential equation and work in frequency space to obtain the response function. Use $q(\omega)=G(\omega)V(\omega)\implies\langle|q(\omega)|^2\rangle=\frac{2k_BT}{\omega}\text{Im}[G(\omega)]$. Solve for $\langle|V(\omega)|^2\rangle$ in terms of $R$.
 \end{ans}
-\newpage
 \begin{qns}[Ratchet and pawl]
 The famous ratchet and pawl machine, originally suggested by Smoluchowski in 1912 to be able to extract useful work from a thermal reservoir (against the Laws of Thermodynamics) is shown below. The pawl preventing the backward rotation of the wheel allows the energy transferred to the flaps from the thermal motion of surrounding gas to be rectified, i.e. only channelled in one direction.
 \begin{figure}[H]
@@ -824,7 +934,7 @@ $$\frac{\varepsilon+L\theta}{T_1}=\frac{\varepsilon}{T_2}$$
 where $T_1$ and $T_2$ are the temperatures of the gas and the vanes, and of the ratchet wheel, respectively. As a result, prove that the Carnot condition for a reversible cycle holds, $Q_1/Q_2=T_1/T_2$, where $Q_1$ is the energy taken from the vanes and $Q_2$ the energy delivered to the wheel. 
 \end{qns}
 \begin{ans}
-
+Either the ratchet rotates forward (lifts pawl, do work against external torque, energy cost of $\varepsilon+L\theta$, or the ratchet rotates backward with energy cost of $\varepsilon$. System couple with reservoir, so we have a Boltzmann distribution. The probability of rotating forward and backward respectively are $\frac{1}{Z}e^{-(\varepsilon+L\theta)/k_BT_1}$ and $\frac{1}{Z}e^{-\varepsilon/k_BT_2}$. This is reversible if the probabilities are equal, $\frac{\varepsilon+L\theta}{T_1}=\frac{\varepsilon}{T_2}\implies\frac{Q_1}{T_1}=\frac{Q_2}{T_2}$.
 \end{ans}
 \newpage
 \begin{qns}[Diffusion]
@@ -832,6 +942,14 @@ Consider free Brownian particles diffusing along the axis $x\geq0$, so that ther
 If the diffusion constant is $D$, estimate how long on average it would take for all the particles to escape from the system.
 \end{qns}
 \begin{ans}
-
+The free diffusion equation subjected to the boundary conditions:
+$$\frac{\partial P(x,t)}{\partial t}=D\frac{\partial^2P(x,t)}{\partial x^2},\quad P(x=L)=0,~\frac{dP}{dx}(x=0)=0$$
+Using separation of variables $P(x,t)=X(x)T(t)$,
+$$\dot{T}=-\lambda T,\quad X''=-\frac{\lambda}{D}X$$
+giving $T(t)=e^{-\lambda t}$ and $X(x)=A\sin\sqrt{\frac{\lambda}{D}}x+B\cos\sqrt{\frac{\lambda}{D}}x$, where $\lambda/D>0$. The boundary conditions result in
+$$X'(0)=0\implies A=0\quad X(L)=0\implies B\cos\sqrt{\frac{\lambda}{D}}L=0\implies\sqrt{\frac{\lambda}{D}}L=\pi(n+0.5),~n\in\mathbb{Z}^+$$
+The full probability is
+$$P(x,t)=\sum_{n=0}^\infty B_ne^{-\pi^2D(n+0.5)^2t/L^2}\cos(n+0.5)\frac{\pi x}{L}$$
+The longest surviving mode is $n=0$: $B_0e^{-\pi^2Dt/4L^2}\cos(\pi x/2L)$ with time constant $\tau_0=\frac{4L^2}{\pi^2D}$. This is the relevant time scale for all particles to escape.
 \end{ans}
 \end{document}

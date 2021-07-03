@@ -78,7 +78,7 @@
 \setlength{\parindent}{0cm}
 \begin{document}
 \maketitle
-\tableofcontents
+{\small\tableofcontents}
 %\newpage
 %The following are useful reference books:
 %\begin{itemize}
@@ -150,7 +150,7 @@ If two systems are separately in thermal equilibrium with a third, then they mus
 Temperature, a state function, describes the tendency of a system to exchange energy with other system. An empirical state function whose existence is implied from the zeroth law.
 \end{defi}
 \begin{cor}
-All systems in thermal contact have the same temperature when in thermal equilibrium and no energy is exchanged between them. Otherwise, energy is transferred from the hotter system to the colder system.
+All systems in thermal contact have the same temperature when in thermal equilibrium and no net exchange in energy between them. Otherwise, energy is transferred from the hotter system to the colder system.
 \end{cor}
 \begin{defi}[Energy]
 Energy of the system is the sum of two contributions:
@@ -174,7 +174,9 @@ Both heat and work are not state functions and depend on the nature of the proce
 \end{cor}
 \begin{law}[First Law of Thermodynamics]
 Energy, i.e. internal energy $U$, is conserved and is transferred between systems as either heat $Q$ or work $W$
-$$dU=\delta Q+\delta W$$
+\begin{equation}
+dU=\delta Q+\delta W\label{firstlaw}
+\end{equation}
 where $dU$ is an exact differential but $\delta Q$ and $\delta W$ are inexact differentials. They are conventionally positive if energy flows into the system.
 \end{law}
 \begin{defi}[Reversible Process]
@@ -227,15 +229,17 @@ For ideal gas, $PV=nRT$, we have expansivity $\beta_P=\frac{1}{V}(\frac{\partial
 \end{eg}
 \begin{prop}
 For an ideal gas, the heat capacities satisfy the relation
-$$C_P-C_V=nR$$
+\begin{equation}
+C_P-C_V=nR\label{heatcapacities}
+\end{equation}
 \end{prop}
 \begin{eg}[Paramagnetic salt in an applied magnetic field]
 The work required to change the magnetic moment of a substance from $\mathbf{m}$ to $\mathbf{m}+d\mathbf{m}$ in an applied external field $\mathbf{H}$ conventionally regards only the work needed to change the state of the substance, returning any external sources of field back to zero. A paramagnetic substance with magnetic moment $\mathbf{m}(\mathbf{H})$ at some large distance from a permanent magnet will experience an attractive force
-$$(\mathbf{m}\boldsymbol{\nabla})\mathbf{H}$$
+$$(\mathbf{m}\cdot\boldsymbol{\nabla})\mathbf{H}$$
 Letting the substance approach the magnet until it experiences a field $\mathbf{H_1}$, we can extract work, so that the work done on the substance is
-$$W'=-\mu_0\int_0^{H_1}\mathbf{m}(\mathbf{H})d\mathbf{H}$$
+$$W'=-\mu_0\int_0^{H_1}\mathbf{m}(\mathbf{H})\cdot d\mathbf{H}$$
 However, the magnet is still near the substance, so in order to calculate the work required to change the state of the substance alone, we need to pull the magnet away to the previous separation, while keeping the magnetic moment $\mathbf{m_1}$ constant, i.e.
-$$W_1=\mu_0\int_0^{H_1}\mathbf{m_1}dH=\mu_0m_1H_1$$
+$$W_1=\mu_0\int_0^{H_1}\mathbf{m_1}\cdot d\mathbf{H}=\mu_0m_1H_1$$
 This gives a net work $W=\mu_0\int\mathbf{H} d\mathbf{m}$.\\[5pt]
 The difference between the two expressions is the change in the potential energy of the dipole moment in an applied field, $-\mu_0d(mH)$, which is conventionally not counted as part of the internal energy. 
 \end{eg}
@@ -243,7 +247,9 @@ The difference between the two expressions is the change in the potential energy
 \subsection{van der Waals Gases}
 \begin{defi}[van der Waals Gas]
 The equation of state for a van der Waals gas is
-$$\bigg(P-\frac{a}{V_m^2}\bigg)(V_m-b)=RT$$
+\begin{equation}
+\bigg(P-\frac{a}{V_m^2}\bigg)(V_m-b)=RT\label{vdW}
+\end{equation}
 where $V_m$ is the molar volume, $a$ parametrizes the strength of the inter-molecular interactions while $b$ is the volume excluded owing to the finite size of the molecules.
 \end{defi}
 \begin{Note}[Derive equation of state]
@@ -251,14 +257,17 @@ Assuming $n$ moles of gas in volume $V$, the number of nearest neighbours is pro
 We can estimate $b$ by simple hard sphere model. Each molecule excludes a spherical volume $\frac{4}{3}\pi(2r)^3$ and for one mole, $b=\frac{1}{2}N_A\frac{4}{3}\pi(2r)^3=\frac{16}{3}N_A\pi r^3$. The factor 0.5 arises because the key situation is when a collision occurs - so one considers how much space is `off limits' for a pair of atoms.
 \end{Note}
 \begin{Note}[van der Waals' Isotherms]
-Starting at the low density side (i.e. high volume $v$ per particle), we find behaviour approaching that of an ideal gas. As the density increases, the inter-molecular attraction term $N^2a/V^2$ causes the isotherm to fall below the ideal gas pressure, until we start to approach the density of closest packing, at which point the hard core repulsion term $N b$ causes the pressure to skyrocket. On some isotherms there is a very odd region where $\partial p/\partial V$ is positive, a situation which is mechanically unstable.\\[5pt]
+Refer to Fig.~\ref{vanderwaals}. Starting at the low density side (i.e. high volume $v$ per particle), we find behaviour approaching that of an ideal gas. As the density increases, the inter-molecular attraction term $N^2a/V^2$ causes the isotherm to fall below the ideal gas pressure, until we start to approach the density of closest packing, at which point the hard core repulsion term $N b$ causes the pressure to skyrocket. On some isotherms there is a very odd region where $\partial p/\partial V$ is positive, a situation which is mechanically unstable.\\[5pt]
 The isotherms can be obtained via the cubic equation
 $$PV^3-(Pb+RT)V^2+aV-ab=0$$
 At high $T$, $PV_m=RT$ is a good approximation. C is a point of inflection, denoting the critical temperature, and the point is on the critical isotherm. For $T<T_c$, the isotherms exhibit a S-shape curve with a minimum and a maximum. There is a region in which the isothermal compressibility $\kappa_T=-\frac{1}{V}(\frac{\partial V}{\partial p})_T$ is negative, i.e. compressing the gas increases the volume.\\[5pt]
 The dashed curve with maximum at critical point, represents phase equilibrium between vapor and liquid. The region bounded by the curve is a 2-phase, for small $V$ on the left outside the region is a liquid and for large $V$ on the right, it is a vapor.
 \end{Note}
 \begin{prop}[Critical Point]
-At the critical point, $\frac{P_cV_c}{RT_c}=\frac{3}{8}$.
+The critical point parameters satisfy
+\begin{equation}
+\frac{P_cV_c}{RT_c}=\frac{3}{8}\label{crit}
+\end{equation}
 \end{prop}
 \begin{proof}
 Since $P=\frac{RT}{V-b}-\frac{a}{V^2}$ and at the critical point, we require both
@@ -272,7 +281,9 @@ A heat reservoir is a thermodynamic system with a heat capacity so large that th
 \end{defi}
 \begin{defi}[Ideal Heat Engine]
 A heat engine is a cyclic process in a system that absorbs heat $Q_{\text{in}}$, rejects heat $Q_{\text{out}}$, and a positive amount of work $|W|$ is done by the engine. The heat transferred to the system in one cycle is $Q=-W$ since $\Delta U=0$. The efficiency of the heat engine is 
-$$\eta=\frac{|W|}{Q_{\text{in}}}=1-\frac{|Q_{\text{out}}|}{|Q_{\text{in}}|},\quad0\leq\eta\leq 1$$
+\begin{equation}
+\eta=\frac{|W|}{Q_{\text{in}}}=1-\frac{|Q_{\text{out}}|}{|Q_{\text{in}}|},\quad0\leq\eta\leq 1\label{efficiency}
+\end{equation}
 \end{defi}
 \begin{defi}[Refrigerator]
 A refrigerator is a heat engine that is run backwards so that you put work in and cause a heat flow from a cold reservoir to a hot reservoir. Another name is a heat pump.
@@ -292,14 +303,14 @@ There is no process whose only effect is to accept heat from a single heat reser
 The Kelvin and Clausius statements of the Second Law of Thermodynamics are equivalent.
 \end{thm}
 \begin{proof}
-We first show that if Clausius statement is not true, then it implies that Kelvin statement is not true. Suppose there exists a Clausius-violating device (accepts $|Q_2|$ heat from cold reservoir and dump the exact same amount to the hotter reservoir), that acts together with a heat engine (accepts heat $|Q_1|-|Q_2|$ from a single heat reservoir at temperature $T_1$ and converting it entirely into work $|W|=|Q_1|-|Q_2|$). This combined system violates Kelvin's statement since the heat accepted from the hotter reservoir is completely converted to work.\\[5pt]
-Conversely, suppose there exists a Kelvin-violating device (converting heat $|Q_1'|$ entirely into work $|W|$), that acts together with a refrigerator, accepts heat $|Q_2|$ from a colder reservoir at temperature $T_2$ and transfer heat $|Q_1|$ to a hotter reservoir at temperature $T_1$. The combined system violates Clausius' statement since it takes heat $|Q_2|$ from a colder reservoir and dumps heat $|Q_2|=|Q_1|-|Q_1'|>0$ onto a hotter reservoir.
-\end{proof}
+We first show that if Clausius statement is not true, then it implies that Kelvin statement is not true. Suppose there exists a Clausius-violating device (accepts $|Q_2|$ heat from cold reservoir and dump the exact same amount to the hotter reservoir), that acts together with a heat engine (accepts heat $|Q_1|-|Q_2|$ from a single heat reservoir at temperature $T_1$ and converting it entirely into work $|W|=|Q_1|-|Q_2|$). This combined system violates Kelvin's statement since the heat accepted from the hotter reservoir is completely converted to work.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.8]{secondlaw2.PNG}
+    \includegraphics[scale=0.6]{secondlaw2.PNG}
     \caption{(Top) First part of proof. (Bottom) Second part of proof. \cite{blundell2010concepts}}
 \end{figure}
+Conversely, suppose there exists a Kelvin-violating device (converting heat $|Q_1'|$ entirely into work $|W|$), that acts together with a refrigerator, accepts heat $|Q_2|$ from a colder reservoir at temperature $T_2$ and transfer heat $|Q_1|$ to a hotter reservoir at temperature $T_1$. The combined system violates Clausius' statement since it takes heat $|Q_2|$ from a colder reservoir and dumps heat $|Q_2|=|Q_1|-|Q_1'|>0$ onto a hotter reservoir.
+\end{proof}
 \begin{defi}[Carnot Engine]
 Carnot engine is an idealized system that is cyclic and reversible with all of its heat exchanges taking place at a hotter reservoir at temperature $T_1$ and a colder reservoir at temperature $T_2$.
 \end{defi}
@@ -341,7 +352,10 @@ Carnot Cycle consists of 4 processes:
 \end{center}
 \end{defi}
 \begin{thm}
-The energy efficiency of Carnot engine with ideal gas as a working substance is $$\eta=1-\frac{T_2}{T_1}$$
+The energy efficiency of Carnot engine with ideal gas as a working substance is
+\begin{equation}
+    \eta=1-\frac{T_2}{T_1}\label{efficiencyCarnot}
+    \end{equation}
 \end{thm}
 \begin{proof}
 Since A to B is an isothermal expansion, C to D is an isothermal compression, then we have
@@ -374,7 +388,9 @@ Carnot's theorem means that the ratio of the heat transfers into and out of the 
 \end{defi}
 \begin{thm}[Clausius Inequality]
 For a general cycle, reversible or not, the following relation is true
-$$\oint\frac{dQ}{T}\leq 0$$
+\begin{equation}
+\oint\frac{dQ}{T}\leq 0\label{Clausius}
+\end{equation}
 \end{thm}
 \begin{proof}
 Suppose heat $\delta Q_i$ at each point of a general cycle is supplied via a Carnot engine, which is connected between a common (all Carnot engines on this cycle) reservoir at temperature $T$ and the reservoir at temperature $T_i$. Each Carnot engine produces work $\delta W_i$ and for a Carnot engine, we know from Carnot's theorem that $\frac{\delta Q_i}{T_i}=\frac{\delta Q_i+\delta W_i}{T}$. The total work extracted from the cycle is $\Delta W=\sum_{i\in\text{cycle}}\delta Q_i$. And from Kelvin's statement (we cannot extract work from this assembly), the total work produced per cycle is:
@@ -385,16 +401,14 @@ where $T>0$. Changing the sum to a closed loop path integral, we obtain the Clau
 For reversible cycle, $\oint\frac{dQ}{T}=0$.
 \end{cor}
 \begin{defi}[Entropy]
-Entropy, denoted as $S$, is $$dS=\frac{\delta q_{rev}}{T}$$ where $\delta q_{rev}$ is an infinitesimal amount of heat absorbed in a reversible process. 
+The infinitesimal change in entropy, denoted as $S$, is $dS=\frac{\delta q_{\text{rev}}}{T}\label{entropy}$, where $\delta q_{\text{rev}}$ is an infinitesimal amount of heat absorbed in a reversible process. 
 \end{defi}
 \begin{thm}[Second Law of Thermodynamics]
-An equivalent statement of the Second Law of Thermodynamics states that for a thermally isolated system,
-$$dS\geq0$$
-In particular, $dS=0$ for a reversible process and $dS>0$ for an irreversible process.
+An equivalent statement of the Second Law of Thermodynamics states that for a thermally isolated system, $dS\geq0$. In particular, $dS=0$ for a reversible process and $dS>0$ for an irreversible process.
 \end{thm}
 \begin{proof}
 Consider a loop which contains an irreversible section A to B and a reversible section B to A. By Clausius' inequality, we have
-$$dS=\frac{\delta q_{rev}}{T}\geq\frac{\delta q}{T}$$
+$$dS=\frac{\delta q_{\text{rev}}}{T}\geq\frac{\delta q}{T}$$
 For a thermally isolated system, we have $\delta q=0$. So, $dS\geq0$ in general.
 \end{proof}
 \begin{defi}[Entropy Change of Surroundings and System]
@@ -408,8 +422,7 @@ This is true for both reversible and irreversible process.
 A system is said to be in equilibrium if $dS_{\text{univ}}=0$.
 \end{defi}
 \begin{defi}[Spontaneity]
-A spontaneous process occurs when the resultant change in entropy of the Universe is positive, i.e. $dS_{\text{univ}}>0$. Note that
-$$\Delta S_{\text{univ}}=\Delta S_{\text{surr}}+\Delta S_{\text{sys}}$$
+A spontaneous process occurs when the resultant change in entropy of the Universe is positive, i.e. $dS_{\text{univ}}>0$. Note that $\Delta S_{\text{univ}}=\Delta S_{\text{surr}}+\Delta S_{\text{sys}}$.
 \end{defi}
 \begin{Note}[Reversible Expansion Versus Irreversible Expansion]
 In general, expansion occurs when $p_{\text{internal}}>p_{\text{external}}$. Whenever there is a constant external pressure imposed on the system of gas, the expansion is said to be irreversible. It is also known as Joule expansion. It is spontaneous and system will tend towards mechanical equilibrium where $p_{\text{internal}}=p_{\text{external}}$.\\[5pt]
@@ -417,12 +430,16 @@ In contrast, for a reversible expansion, the external pressure is infinitesimall
 \end{Note}
 \begin{defi}[Entropy]
 We can also define the entropy of a system, $S=S(E)$, to be 
-$$S(E)=\log(\Omega(E))$$
+\begin{equation}
+S(E)=k_B\log(\Omega(E))\label{entropy}
+\end{equation}
 where $\Omega(E)$ is the number of states with energy $E$.
 \end{defi}
 \begin{defi}[Thermodynamic Temperature]
 The thermodynamic temperature $T$ of a system with entropy function $S(E)$ is
-$$\frac{1}{T}:=\frac{dS(E)}{dE}$$
+\begin{equation}
+\frac{1}{T}:=\frac{dS(E)}{dE}\label{temp}
+\end{equation}
 \end{defi}
 \begin{Note}[Maximal entropy at equilibrium]
 Consider an isolated system, partitioned into systems 1 and 2 which are in thermal contact with each other. The subsystems have energies $E_1$ and $E_2$ respectively. The total energy is $E=E_1+E_2$, which is conserved even after the isolated systems come into contact. The number of available states is
@@ -431,10 +448,8 @@ so thermal contact allows $E_1$ to take on any value that state 1 allows, i.e. $
 $$\frac{dS}{dE_1}=\frac{dS_1}{dE_1}+\frac{dS_2}{dE_2}\frac{dE_2}{dE_1}=0$$
 with $E_2=E-E_1$, so $\frac{dS_1}{dE_1}-\frac{dS_2}{dE_2}=\frac{1}{T_1}-\frac{1}{T_2}=0$ at equilibrium energy $E_1$. Thus, $T_1=T_2$. The condition for the maximum of $S$ is
 $$\frac{d^2S}{dE_1^2}=\frac{d^2}{dE_1^2}(S_1(E_1)+S_2(E-E_1))=\frac{d}{dE_1}\bigg(\frac{1}{T_1}-\frac{1}{T_2}\bigg)=-\frac{1}{T_1^2}\frac{dT_1}{dE_1}-\frac{1}{T_2^2}\frac{dT_2}{dE_2}$$
-where $E_2=E-E_1$. At equilibrium, $T_2=T_1$, so
-$$\frac{d^2S}{dE_1^2}=-\frac{1}{T_1^2}\bigg(\frac{dT_1}{dE_1}+\frac{dT_2}{dE_2}\bigg)$$
-For maximum $S$, we require
-$$\frac{dT_1}{dE_1}+\frac{dT_2}{dE_2}>0$$
+where $E_2=E-E_1$. At equilibrium, $T_2=T_1$, so for maximum $S$
+$$0>\frac{d^2S}{dE_1^2}=-\frac{1}{T_1^2}\bigg(\frac{dT_1}{dE_1}+\frac{dT_2}{dE_2}\bigg)$$
 This will work if $\frac{dT}{dE}>0$ for every system, i.e. energy increases with temperature. In another words, the slope of $S(E)$ decreases with energy $E$. 
 \end{Note}
 \subsection{Chemical Potential}
@@ -448,17 +463,19 @@ Gradient in chemical potential influences particle exchange.
 We have $dU=TdS-pdV+\mu dN\implies dS=\frac{dU}{T}+\frac{pdV}{T}-\frac{\mu dN}{T}$. Writing $dS=(\frac{\partial S}{\partial U})_{N,V}dU+(\frac{\partial S}{\partial V})_{N,U}dV+(\frac{\partial S}{\partial N})_{U,V}dN$ and by comparison, we get $(\frac{\partial S}{\partial N})_{U,V}=-\mu/T$. Consider two systems which are able to exchange particles with each other, but remain isolated from their surroundings. If system 1 loses $dN$ particles, system 2 must gain $dN$ particles and so $dS=(\frac{\mu_1}{T_1}-\frac{\mu_2}{T_2})dN\geq0$. Assuming $T_1=T_2$, we find $dN>0$ when $\mu_1>\mu_2$.
 \end{proof}
 \begin{Note}[Internal Energy as Extensive Function]
-Since internal energy is extensive, i.e. depends linearly on the size of the system, then $U(\lambda S, \lambda X)$, where $X$ are all other possible extensive variables (could be generalized). Then, $U(\lambda S,\lambda X)=\lambda U(S,X)$. Thus, $U(S,X)$ is a first-order homogeneous function of $S$ and $X$.
+Since internal energy is extensive, i.e. depends linearly on the size of the system, then by writing $U(\lambda S, \lambda X)$, where $X$ are all other possible extensive variables (could be generalized), we have $U(\lambda S,\lambda X)=\lambda U(S,X)$. Thus, $U(S,X)$ is a first-order homogeneous function of $S$ and $X$.
 \end{Note}
 \begin{thm}[Gibbs-Duhem Equation]
 The Gibbs-Duhem equation, in the energy representation, is
-$$0=SdT+\sum_{i=1}^rx_idF_i+\sum_{i=1}^rN_id\mu_i$$
+\begin{equation}
+0=SdT+\sum_{i=1}^rx_idF_i+\sum_{i=1}^sN_id\mu_i\label{GibbsDuhem}
+\end{equation}
 where only $r+s$ variables are independent. It states that adjacent equilibrium states cannot differ only in one of these independent variables.
 \end{thm}
 \begin{proof}
 We invoke Euler's theorem for first-order homogeneous functions which are $f(\{u_i\})=\lambda f(\{x_i\})$ where $u_i=\lambda x_i$ $\forall i\in[1,n]$. Then, $(\frac{\partial f(\{u_i\})}{\partial \lambda})_{x_i}=f(\{x_i\})$ but $df(\{u_i\})=\sum_{s=1}^n(\frac{\partial f}{\partial u_s})_{u_k}du_s$ and so
 $$\bigg(\frac{\partial f}{\partial\lambda}\bigg)_{x_i}=\sum_{i=1}^n\bigg(\frac{\partial f}{\partial u_i}\bigg)_{u_i}\bigg(\frac{\partial u_i}{\partial\lambda}\bigg)_{x_i}=\sum_{i=1}^n\bigg(\frac{\partial f}{\partial u_i}\bigg)_{u_j}x_i$$
-This implies $f(\{x_i\})=\sum_{i=1}^n(\frac{\partial f}{\partial u_i})_{u_j}x_i$ is true for all $\lambda$. Take $\lambda=1$, then $f(\{x_i\})=\sum_{i=1}^n(\frac{\partial f}{\partial x_i})_{x_j}x_i$. Since $U(S,X)$ is first-order homogeneous, by Euler's theorem, we have $U=TS+Fx+\mu N\implies dU=TdS+SdT+\sum_{i=1}^r(x_idF_i+F_idx_i)+\sum_{i=1}^r(\mu_idN_i+N_id\mu_i)$ but $dU=TdS+\sum_{i=1}^rF_idx_i+\sum_{i=1}^r\mu_idN_i$ and so we recover the desired equation.
+This implies $f(\{x_i\})=\sum_{i=1}^n(\frac{\partial f}{\partial u_i})_{u_j}x_i$ is true for all $\lambda$. Take $\lambda=1$, then $f(\{x_i\})=\sum_{i=1}^n(\frac{\partial f}{\partial x_i})_{x_j}x_i$. Since $U(S,X)$ is first-order homogeneous, by Euler's theorem, we have $U=TS+Fx+\mu N\implies dU=TdS+SdT+\sum_{i=1}^r(x_idF_i+F_idx_i)+\sum_{i=1}^s(\mu_idN_i+N_id\mu_i)$ but $dU=TdS+\sum_{i=1}^rF_idx_i+\sum_{i=1}^s\mu_idN_i$ and so we recover the desired equation.
 \end{proof}
 \begin{cor}
 $$U=TS-PV+\mu N$$
@@ -472,15 +489,15 @@ For a reversible chemical reaction, we must have $\sum_i\nu_i\mu_i=0$.
 \begin{proof}
 By Gibbs-Duhem equation, we have $d\mu_i=-s_idT+v_idp$. The change in chemical potential is thus zero at constant $T$ and $P$. The variation of $G$ about the equilibrium ratio of chemical components satisfies
 $$dG=\sum_i\mu_idN_i=0$$
-But the $dN_i$'s are related by matter conservation, so $dN_i/\nu_i$ is a constant. We then have 
-$$\sum_i\nu_i\mu_i=0$$
-where $\nu_i$'s are the ratios, with $\nu>0$ for reactants and $\nu<0$ for products. 
+But the $dN_i$'s are related by matter conservation, so $dN_i/\nu_i$ is a constant. We then have $\sum_i\nu_i\mu_i=0$, where $\nu_i$'s are the ratios, with $\nu>0$ for reactants and $\nu<0$ for products. 
 \end{proof}
 \begin{defi}[Equilibrium constant for concentration]
-$$K_c(T):=\prod_ic_i^{\nu_i}$$
+$K_c(T):=\prod_ic_i^{\nu_i}$
 \end{defi}
 \begin{prop}
-$$\ln K_c(T)=-\frac{1}{k_BT}\sum_i\nu_i\mu_{0,i}(T,P)$$
+\begin{equation}
+\ln K_c(T)=-\frac{1}{k_BT}\sum_i\nu_i\mu_{0,i}(T,P)\label{eqmconst}
+\end{equation}
 \end{prop}
 \begin{proof}
 Combining $\sum_i\nu_i\mu_i=0$ and $\mu_i(P_i,T)=\mu_{0,i}(P,T)+k_BT\ln c_i$, we have
@@ -496,7 +513,7 @@ Maximizing the total entropy of system and reservoir $R$ with respect to the sta
 \begin{proof}
 From the principle of maximum entropy, we have
 $$0\leq dS_{\text{tot}}=dS+dS_R=dS+dS_R=dS+\frac{dU_R+P_RdV_R-\mu_RdN_R}{T_R}$$
-Maximize $S_{\text{tot}}$ is thus equivalent to maximizing the quantity
+By conservation of energy, volume and particle number, $dU=-dU_R$, $dV=-dV_R$ and $dN=-dN_R$. Maximize $S_{\text{tot}}$ is thus equivalent to maximizing the quantity
 $$\int(T_RdS-dU-P_RdV+\mu_RdN)=\int(d(T_RS)-dU-d(P_RV)+d(\mu_RN))=T_RS-U-P_RV+\mu_RN$$
 We denote this quantity to be the availability $-A$. The reason for the minus sign is apparent later.
 \end{proof}
@@ -512,7 +529,7 @@ The total work extracted is
 \begin{align}
 -dW&=dU+dU_R\nonumber\\&=d(A+T_RS-P_RV+\mu_RN)+T_RdS_R-P_RdV_R+\mu_RdN_R\nonumber\\&=dA+T_RdS+T_RdS_R-P_RdV+P_RdV+\mu_RdN-\mu_RdN\nonumber\\&=dA+T_Rd(S+S_R)\nonumber
 \end{align}
-But since $d(S+S_R)\geq0$, we have $-dW\geq dA$. The maximum work is attained when $S+S_R$ stays constant.
+But since $d(S+S_R)\geq0$, we have $-dW\leq dA$. The maximum work is attained when $S+S_R$ stays constant.
 \end{proof}
 \begin{cor}
 The availability of a system in equilibrium with a reservoir is always zero.
@@ -548,12 +565,12 @@ Thermodynamic potentials are generated by Legendre transforms. The variables whi
 \end{remarks}
 \begin{eg}
 Since internal energy is the sum of $\delta q$ and $\delta W$, then by the first law of thermodynamics,
-$$dU=TdS-pdV$$
+$$dU=TdS-PdV$$
 where $S$ and $V$ are natural variables of $U$, i.e. $U=U(S,V)=TS-PV$. We correspondingly define three more thermodynamic potentials: enthalpy $H$, Gibbs function $G$ and Helmholtz function $F$:
 $$H=U+PV\implies dH=dU+d(PV)=TdS-PdV+PdV+VdP=TdS+VdP$$
 $$G=H-TS\implies dG=dH-d(TS)=TdS+VdP-TdS-SdT=-SdT+VdP$$
 $$F=U-TS\implies dF=dU-d(TS)=TdS-PdV-TdS-SdT=-SdT-PdV$$
-The natural variables are thus $H(S,p)$, $F(T,V)$, $G(P,T)$. Note that here we take $N$ to be fixed. Otherwise, we have $F(T,V,N)$, $G(P,T,N)$, $H(S,P,N)$ and $U(S,V,N)$. Physically, they mean:
+The natural variables are thus $H(S,P)$, $F(T,V)$, $G(P,T)$. Note that here we take $N$ to be fixed. Otherwise, we have $F(T,V,N)$, $G(P,T,N)$, $H(S,P,N)$ and $U(S,V,N)$. Physically, they mean:
 \begin{itemize}
     \item Internal Energy $U$: energy needed to create a system. To attain equilibrium at constant $V$, $S$ and $N$, we minimize $U$, i.e. $dA=dU$.
     \item Enthalpy $H$: energy needed to create a system plus the work needed to make room for it. To attain equilibrium at constant $P$, $S$ and $N$, we minimize $H$, i.e. $dA=dU+PdV=d(U+PV)=dH$.
@@ -572,7 +589,9 @@ The thermodynamic potentials can indeed be inter-converted from Legendre Transfo
 Since $T=(\frac{\partial U}{\partial S})_V$ and $P=-(\frac{\partial U}{\partial V})_S$, then $(T,S)$ and $(P,-V)$ are conjugate variables pair. To construct $F$ from $U$, we subtract the quantity $S$ times the variable conjugate to $S$, which is $T$, i.e. $F=U-TS$. Similarly, to construct $H$ from $U$, we subtract the quantity $V$ with its conjugate, which is $-P$, i.e. $H=U-(-PV)$. Lastly, to construct $G$ from $U$, we first convert it to $F$ and then deduct $-PV$. 
 \end{proof}
 \begin{thm}[Maxwell's Relations]
-$$\bigg(\frac{\partial T}{\partial V}\bigg)_S=-\bigg(\frac{\partial p}{\partial S}\bigg)_V,\quad\bigg(\frac{\partial T}{\partial p}\bigg)_S=-\bigg(\frac{\partial V}{\partial S}\bigg)_p,\quad\bigg(\frac{\partial p}{\partial T}\bigg)_V=-\bigg(\frac{\partial S}{\partial V}\bigg)_T,\quad\bigg(\frac{\partial V}{\partial T}\bigg)_p=-\bigg(\frac{\partial S}{\partial p}\bigg)_T$$
+\begin{equation}
+\bigg(\frac{\partial T}{\partial V}\bigg)_S=-\bigg(\frac{\partial p}{\partial S}\bigg)_V,\quad\bigg(\frac{\partial T}{\partial p}\bigg)_S=-\bigg(\frac{\partial V}{\partial S}\bigg)_p,\quad\bigg(\frac{\partial p}{\partial T}\bigg)_V=-\bigg(\frac{\partial S}{\partial V}\bigg)_T,\quad\bigg(\frac{\partial V}{\partial T}\bigg)_p=-\bigg(\frac{\partial S}{\partial p}\bigg)_T\label{Maxwell}
+\end{equation}
 \end{thm}
 \begin{proof}
 For all four, we use Clairaut's theorem (symmetry of second partial derivatives). The first, second, third and fourth were obtained from $U$, $H$, $F$ and $G$ respectively.\\[5pt]
@@ -585,7 +604,9 @@ In general, there are more than 4 Maxwell's relations. Given a particular thermo
 $dU$ gives the heat transfer $\delta q$ to a system at constant $V$ while $dH$ gives the heat transfer $\delta q$ to a system at constant $p$, i.e. energetics of a chemical reaction.
 \end{eg}
 \begin{thm}[Gibbs-Helmholtz Equations]
-$$U=-T^2\bigg(\frac{\partial}{\partial T}\frac{F}{T}\bigg)_V,\quad H=-T^2\bigg(\frac{\partial}{\partial T}\frac{G}{T}\bigg)_P$$
+\begin{equation}
+U=-T^2\bigg(\frac{\partial}{\partial T}\frac{F}{T}\bigg)_V,\quad H=-T^2\bigg(\frac{\partial}{\partial T}\frac{G}{T}\bigg)_P\label{GibbsHelmholtz}
+\end{equation}
 \end{thm}
 \begin{proof}
 Using the expressions $S=-(\frac{\partial F}{\partial T})_V$ and $S=-(\frac{\partial G}{\partial T})_p$, we get
@@ -620,7 +641,7 @@ A phase of a thermodynamic system and the states of matter have uniform physical
 \begin{enumerate}
     \item At a given temperature and pressure, the stable phase will be the one with lower Gibbs free energy.
     \item The condition for phase equilibrium: the chemical potential $\mu$ of both phases are equal.
-    \item Recall Gibbs-Duhem relation $d\mu=-sdT+vdP$ where $s$ and $v$ are the entropy and volume per particle respectively. At high temperatures, the phase with highest $s$ have the smallest $\mu$, so more stable since $(\frac{\partial\mu}{\partial T})_p=-\frac{S}{N}=s$. At high pressures, the phase with smallest $v$ have the smallest $\mu$, so more stable since $(\frac{\partial\mu}{\partial p})_T=\frac{V}{N}=v$. 
+    \item Recall Gibbs-Duhem relation $d\mu=-sdT+vdP$ where $s$ and $v$ are the entropy and volume per particle respectively. At high temperatures, the phase with highest $s$ have the smallest $\mu$, so more stable since $(\frac{\partial\mu}{\partial T})_p=-\frac{S}{N}=-s$. At high pressures, the phase with smallest $v$ have the smallest $\mu$, so more stable since $(\frac{\partial\mu}{\partial p})_T=\frac{V}{N}=v$. 
 \end{enumerate}
 \end{remarks}
 \begin{thm}[Clausius-Clapeyron relation]
@@ -628,7 +649,7 @@ The Clausius–Clapeyron relation is a way of characterizing a discontinuous pha
 $$\frac{dP}{dT}=\frac{L}{T(V_2-V_1)}$$
 \end{thm}
 \begin{proof}
-Suppose $N_1$ particles of phase 1 are in equilibrium with $N_2$ particles of phase 2. The total Gibbs free energy is $G_{tot}=N_1\mu_1+N_2\mu_2$. In phase equilibrium, $dG_{tot}=0\implies\mu_1=\mu_2$. At a given temperature and pressure, each coexisting phase has the same chemical potential. We can thus characterize the line of coexistence of two phases to be $\mu_1(P,T)=\mu_2(P,T)$. Along this phase boundary, we have $\mu_1(P+dP,T+dT)=\mu_2(P+dP,T+dT)\implies d\mu_1=d\mu_2\implies -s_1dT+v_1dP=-s_2dT+v_2dP$, where $s$ and $v$ are entropy and volume per particle respectively. We then have 
+Suppose $N_1$ particles of phase 1 are in equilibrium with $N_2$ particles of phase 2. The total Gibbs free energy is $G_{\text{tot}}=N_1\mu_1+N_2\mu_2$. In phase equilibrium, $dG_{\text{tot}}=0\implies\mu_1=\mu_2$. At a given temperature and pressure, each coexisting phase has the same chemical potential. We can thus characterize the line of coexistence of two phases to be $\mu_1(P,T)=\mu_2(P,T)$. Along this phase boundary, we have $\mu_1(P+dP,T+dT)=\mu_2(P+dP,T+dT)\implies d\mu_1=d\mu_2\implies -s_1dT+v_1dP=-s_2dT+v_2dP$, where $s$ and $v$ are entropy and volume per particle respectively. We then have 
 $$\frac{dP}{dT}=\frac{(S_2-S_1)}{(V_2-V_1)}=\frac{L}{T(V_2-V_1)}$$
 where $L=T(S_2-S_1)$ is the latent heat evolved from the phase transition.
 \end{proof}
@@ -707,7 +728,7 @@ From first law,
 $$dS=\frac{dU}{T}+\frac{pdV}{T}\implies S=C_V\log T+Nk_B\log V$$
 unique up to some constant. But, $T$ and $V$ are the same for the entire mixture, so we express it in terms of partial pressures (intensive variables), to get
 $$S=C_p\log T-Nk_B\log p$$
-Starting with a collection of vessels all at the same pressure $p$ and containing numbers of particles $N_i$ of gas component $i$, we could achieve the mixing process by first, an isothermal expansion of each component $i$ to the desired final pressure $p_i$, followed by joining together all the containers, then isothermally compressing again to the same pressure $p$ to partial pressure $p_i$, its entropy changes by $\Delta S_i=-N_ik_B\log(p_i/p)$. The difference is entropy is
+Starting with a collection of vessels all at the same pressure $p$ and containing numbers of particles $N_i$ of gas component $i$, we could achieve the mixing process by first, an isothermal expansion of each component $i$ to the desired final pressure $p_i$, followed by joining together all the containers, then isothermally compressing again to the same pressure $p$ from partial pressure $p_i$, its entropy changes by $\Delta S_i=-N_ik_B\log(p_i/p)$. The difference is entropy is
 $$\Delta S=-k_B\sum_iN_i\log(p_i/p)=-Nk_B\sum_ic_i\log c_i$$
 where $c_i=N_i/N=p_i/p$ is the concentration of the $i$th component.
 \end{proof}
@@ -718,16 +739,9 @@ The chemical potential of the $i$th component, which is present with concentrati
 At constant $T$, we have
 $$\bigg(\frac{\partial G}{\partial p}\bigg)_T=\bigg(\frac{\partial\mu N}{\partial p}\bigg)_T=\frac{k_BTN}{p}\implies\mu (T,p)=\mu(T,p_0)+k_BT\log\frac{p}{p_0}$$
 The Gibbs free energy of the mixture is $G=\sum_iG_i$. Using $(\partial G_i/\partial p_i)_{T,N_i}=V$, we have
-$$G_i(p_i,T)=G_i(p,T)+\int_p^{p_i}Vdp=G_i(p,T)+N_ik_BT\log c_i$$
+$$G_i(p_i,T)=G_{0,i}(p,T)+\int_p^{p_i}Vdp=G_{0,i}(p,T)+N_ik_BT\log c_i$$
 Since $G_i=\mu_iN_i$, we have $\mu_i(p_i,T)=\mu_{0,i}(p,T)+k_BT\log c_i$. 
 \end{proof}
-\begin{eg}
-For a chemical equilibrium, we start with ensuring the Gibbs free energy is a minimum. At constant $T$ and $p$, $d\mu_i=0$ from Gibbs-Duhem equation. A variation of $G$ about the equilibrium ratio of chemical components thus satisfy
-$$0=dG=\sum_i\mu_idN_i=\sum_i\nu_i\mu_i$$
-where the $dN_i$;s are related by matter conservation. Now, with the equation for $\mu_i$, we have
-$$0=\sum_i\nu_i\mu_{0,i}+k_BT\sum_i\nu_i\log c_i=\sum_i\nu_i\mu_{0,i}+k_BT\log\prod_i c_i^{\nu_i}$$
-We can define the equilibrium constant for concentration to be $K_c(T)=\prod_i c_i^{\nu_i}$.
-\end{eg}
 \newpage
 \section{Recap of Statistical Mechanics}
 \subsection{Definitions}
@@ -756,10 +770,12 @@ Suppose we want to maximize a function of $\Omega$ variables, say $f(p_1,...,p_\
 \begin{proof}
 At the point of maximum of $f$, $df=\sum_{i=1}^\Omega\frac{\partial f}{\partial p_i}dp_i=0$. But the increments $\{dp_i\}$ are not independent because they are only allowed to change subject to the constraint. So $g$ cannot change, i.e. $dg=0$. Then, we have say
 $$dp_1=-\sum_{i=2}^\Omega\frac{\partial g}{\partial p_i}\bigg(\frac{\partial g}{\partial p_1}\bigg)^{-1}dp_i$$
-Substitute this back to $df=0$, we then have $\{dp_2,...,dp_\Omega\}$ to be now all independent. So, $\frac{\partial f}{\partial p_\alpha}-\lambda\frac{\partial g}{\partial p_\alpha}=0$ for $\alpha=2,...,\Omega$. This includes $\alpha=1$, following the definition of $\lambda$. SO we now have $\Omega+1$ variables and $\Omega+1$ equations (including the constraint). Essentially, we want to maximize $f-\lambda g$ with respect to $\{p_1,...,p_\Omega,\lambda\}$ and with no constraints. We can extend this to the case of several constraints.
+Substitute this back to $df=0$, we then have $\{dp_2,...,dp_\Omega\}$ to be now all independent. So, $\frac{\partial f}{\partial p_\alpha}-\lambda\frac{\partial g}{\partial p_\alpha}=0$ for $\alpha=2,...,\Omega$. This includes $\alpha=1$, following the definition of $\lambda$. So we now have $\Omega+1$ variables and $\Omega+1$ equations (including the constraint). Essentially, we want to maximize $f-\lambda g$ with respect to $\{p_1,...,p_\Omega,\lambda\}$ and with no constraints. We can extend this to the case of several constraints.
 \end{proof}
 \begin{thm}[Stirling's Formula]
-$$\log(N!)=N\log(N)-N+O(\log N)$$
+\begin{equation}
+\log(N!)=N\log(N)-N+O(\log N)\label{Stirling}
+\end{equation}
 \end{thm}
 \newpage
 \subsection{Microcanonical ensemble}
@@ -768,34 +784,31 @@ A microcanonical ensemble is a statistical ensemble where the total energy of th
 \end{defi}
 \begin{remarks}\leavevmode
 \begin{enumerate}
-\item The energy levels of a quantum Hamiltonian of a $N$-particle system are discrete. For large $N\sim10^{23}$, we can treat them as a continuum. $\Omega(E)$ counts the number of states with energy between $E$ and $E+\delta E$, where $\delta E$ is small compared to the accurayc of our measuring apparatus, but large compared to the gap between levels.The gap between levels is far less than the measurement uncertainty $\delta E$. Suppose energy is confined in a narrow band, the number of states in band with energy less than $E$ is $\Omega(E)=g(E)\delta E$. 
+\item The energy levels of a quantum Hamiltonian of a $N$-particle system are discrete. For large $N\sim10^{23}$, we can treat them as a continuum. $\Omega(E)$ counts the number of states with energy between $E$ and $E+\delta E$, where $\delta E$ is small compared to the accuracy of our measuring apparatus, but large compared to the gap between levels. Suppose energy is confined in a narrow band, the number of states in band with energy less than $E$ is $\Omega(E)=g(E)\delta E$. 
 \item We describe the system in terms of a probability distribution over the quantum states, i.e. mixed states. $p(n)$ is not related to the quantum indeterminacy, but due to our ignorance.
 \end{enumerate}
 \end{remarks}
-\begin{defi}[Boltzmann Entropy]
-We define the entropy of a system, $S=S(E)$, to be 
-$$S(E)=\log(\Omega(E))$$
-where $\Omega(E)$ is the number of states with energy $E$.
-\end{defi}
 \begin{remarks}
-With $\Omega(E)=g(E)\delta E$, the entropy is
-$$S(E)=\log(\Omega(E))=\log(g(E)\delta E)=\log(g(E))+\log(\delta E)$$
+With $\Omega(E)=g(E)\delta E$, the entropy (Eqn.~\ref{entropy}) is
+$$S(E)/k_B=\log(\Omega(E))=\log(g(E)\delta E)=\log(g(E))+\log(\delta E)$$
 where $\log(g(E))$ depends on $N$, but $\log\delta E$ is independent of $N$. The effect of $\delta E$ is negligible.
 \item By the equal a priori probability postulate, every accessible microstate of an isolated system in thermodynamic equilibrium is equally probable, i.e.
 $$p_\alpha^{m.c.}(E,V,N)=\frac{1}{\Omega(E,V,N)}$$
 \end{remarks}
 \begin{prop}[Additivity of Entropy]
 Entropy is additive, i.e.
-Two systems with $\Omega_1$ and $\Omega_2$ states combined to form a system with $\Omega_1\Omega_2$ states and total entropy $$S=\log(\Omega_1\Omega_2)=\log(\Omega_1)+\log(\Omega_2)=S_1+S_2$$
+Two systems with $\Omega_1$ and $\Omega_2$ states combined to form a system with $\Omega_1\Omega_2$ states and total entropy
+$$S=k_B\log(\Omega_1\Omega_2)=k_B\log(\Omega_1)+k_B\log(\Omega_2)=S_1+S_2$$
 \end{prop}
 \begin{eg}[Two-State Systems]
 Consider $N$ identical, weakly interacting, localized particles, each with non-degenerate energy levels, $\varepsilon_n=(-1)^n\varepsilon$ where $n=1,2$. Each possible microstate is specified by $\alpha=(n_1,n_2,...,n_N)$ where $n_i=1,2$ gives energy level occupied by the $i$-particle; $N_i$ particles occupies $\varepsilon_i$, i.e. $N=N_1+N_2$ and $E=N_1\varepsilon_1+N_2\varepsilon_2=(N_2-N_1)\varepsilon$. By Stirling's approximation, the entropy is
-$$S(E,N)=-\frac{Nk}{2}\bigg(1-\frac{E}{N\varepsilon}\bigg)\log\bigg(\frac{1}{2}\bigg(1-\frac{E}{N\varepsilon}\bigg)\bigg)-\frac{Nk}{2}\bigg(1+\frac{E}{N\varepsilon}\bigg)\log\bigg(\frac{1}{2}\bigg(1+\frac{E}{N\varepsilon}\bigg)\bigg)$$
-where $\Omega(E,N;N_2)=\frac{N!}{N_2!(N-N_2)!}$ with $N_{1,2}=\frac{N}{2}(1\mp\frac{E}{N\varepsilon})$. 
+$$S(E,N)=-\frac{Nk_B}{2}\bigg(1-\frac{E}{N\varepsilon}\bigg)\log\bigg(\frac{1}{2}\bigg(1-\frac{E}{N\varepsilon}\bigg)\bigg)-\frac{Nk_B}{2}\bigg(1+\frac{E}{N\varepsilon}\bigg)\log\bigg(\frac{1}{2}\bigg(1+\frac{E}{N\varepsilon}\bigg)\bigg)$$
+where $\Omega(E,N;N_2)=\frac{N!}{N_2!(N-N_2)!}$ with $N_{1,2}=\frac{N}{2}(1\mp\frac{E}{N\varepsilon})$. The entropy vanishes when $E-\pm\varepsilon$ because there is only one possible state with each of these energies. The entropy is maximal when $E=0$ where we
+have $S = N k_B\log2$.
 \end{eg}
 \begin{eg}[Harmonic Oscillators]
 Consider $N$ identical, weakly interacting, localized harmonic oscillators, each with non-degenerate set of energy levels $\varepsilon_n=n\hbar\omega$ where $n\in\mathbb{Z}^+\cup\{0\}$. Each possible microstate is specified by $\alpha=(n_1,...,n_N)$ where $n_i$ is the energy level occupied by the $i$-oscillator with energy value $E_i=n_i\hbar\omega$ and $N_n$ is the number of oscillators occupy energy level $\varepsilon_n$. Our constraints are thus $N=\sum_{n=1}^\infty N_n$ and $E=\sum_{i=1}^NE_i=\sum_{i=1}^Nn_i\hbar\omega$. By Stirling's approximation,
-$$S(E,N)=-\frac{Ek}{\hbar\omega}\log\bigg(\frac{E/\hbar\omega}{N+E/\hbar\omega}\bigg)-Nk\log\bigg(\frac{N}{N+E/\hbar\omega}\bigg)$$
+$$S(E,N)=-\frac{Ek_B}{\hbar\omega}\log\bigg(\frac{E/\hbar\omega}{N+E/\hbar\omega}\bigg)-Nk_B\log\bigg(\frac{N}{N+E/\hbar\omega}\bigg)$$
 where $\Omega(E,N;M)=\frac{(N-1+M)!}{(N-1)!M!}$ such that $M=\sum_{i=1}^Nn_i=\frac{E}{\hbar\omega}$.
 \end{eg}
 \newpage
@@ -803,7 +816,9 @@ where $\Omega(E,N;M)=\frac{(N-1+M)!}{(N-1)!M!}$ such that $M=\sum_{i=1}^Nn_i=\fr
 Consider a small system in thermal contact with a reservoir. The fluctuations in the energy of the system will be an appreciable fraction of the mean energy. The states of the system cannot simply be labelled as `accessible' or `inaccessible', we have to think about the probabilities that the system will be in each of its possible states.
 \begin{prop}
 The Gibbs Entropy is
-$$S=-k_B\sum_np(n)\log p(n)$$
+\begin{equation}
+S=-k_B\sum_np(n)\log p(n)\label{Gibbs}
+\end{equation}
 where $p(n)$ is the probability for the system to attain a state $n$.
 \end{prop}
 \begin{proof}
@@ -813,9 +828,6 @@ where we used Stirling's approximation. Thus, the entropy for a single copy of t
 \end{proof}
 \begin{remarks}\leavevmode
 \begin{enumerate}
-    \item The quantum analog of the Gibbs entropy is
-    $$S=-\Tr\hat{\rho}\log\hat{\rho}$$
-    again, see II Principles of Quantum Mechanics.
     \item The Gibbs entropy reverts to the Boltzmann entropy if $p(n)=1/\Omega(E)$, which is applicable for large systems in equilibrium, i.e. For a large system, the probability distribution is very sharply peaked in energy.
     \item Gibbs entropy is the most fundamental entropy in equilibrium statistical mechanics, that is applicable to both large and small systems.
 \end{enumerate}
@@ -828,7 +840,6 @@ Maximizing the Gibbs entropy $S_G$ subject to the constraint $\sum_\alpha p_\alp
 $$dS_G-\lambda\sum_\alpha dp_\alpha-\bigg(\sum_\alpha p_\alpha-1\bigg)d\lambda=0$$
 where $\lambda$ is a Lagrange multiplier. Since $S_G=-\sum_\alpha p_\alpha\log(p_\alpha)$, we have $dS_G=-\sum_\alpha(\log p_\alpha+1)dp_\alpha$ and we have $-\sum_\alpha(\log p_\alpha+1+\lambda)dp_\alpha-(\sum_\alpha p_\alpha-1)d\lambda=0$, then $p_\alpha=e^{-(1+\lambda)}$ and $e^{-(1+\lambda)}=\frac{1}{\Omega}$ and so $S_G=\log\Omega$ and $p_\alpha=\frac{1}{\Omega}$.
 \end{proof}
-\newpage
 \subsection{Canonical ensemble}
 \begin{defi}[Canonical Ensemble]
 Consider a closed system $Q$ that can exchange energy, but not particles, with a large heat reservoir $Q'$, at an equilibrium temperature $T$.
@@ -836,39 +847,37 @@ Consider a closed system $Q$ that can exchange energy, but not particles, with a
 What is the probability for finding the system $Q$ in a particular microstate of energy $E$? This is particularly important if the system $Q$ is small on microscopic scale. We regard the total system $Q+Q'$ as microcanonical, i.e. with fixed energy $E_0$ and uncertainty $\delta E$.
 \begin{prop}
 All states of a canonical ensemble, with the same energy $E$, have the same probability distribution as a microcanonical probability distribution. The probability for the system to have energy $E_r$ is
-$$p_r=\frac{e^{-E_r/T}}{\sum_{r'}e^{-E_r'/T}}$$
+\begin{equation}
+p_r=\frac{e^{-E_r/k_BT}}{\sum_{r'}e^{-E_r'/k_BT}}\label{canonical}
+\end{equation}
 \end{prop}
 \begin{proof}
 Let total energy of system $Q$ and reservoir $Q'$ be $E_0$. At constant entropy $S$, energy conservation will mean $dE=-PdV$. If $Q$ has energy $E$, then $Q'$ has energy $E_0-E$. All states of the total system are equally likely, by principle of equal a priori probability. The number of states with given energy splitting $E$ and $E_0-E$ is
 $$g'(E_0-E)\delta E=e^{S'(E_0-E)}$$
 where $S'$ is the entropy of heat bath $Q'$ at energy $E_0-E$, $g'$ is the density of states of the heat bath. Now, since $Q'$ is a reservoir which has a large supply of energy, then $E<<E_0$, and so expand
-$$S'(E_0-E)=S'(E_0)-\frac{dS'}{dE}\bigg|_{E=E_0}E$$
+$$S'(E_0-E)\approx S'(E_0)-\frac{dS'}{dE}\bigg|_{E=E_0}E$$
 where $\frac{\partial S'}{\partial E}(E=E_0)=\frac{1}{k_BT}$ from earlier. The number of states is $e^{S'(E_0)-(E/k_BT)}$ which is directly proportional with $e^{-E/k_BT}$, i.e. the probability of a given microstate for system $Q$ is proportional to $e^{-E/k_BT}$. This is the canonical probability distribution.
 \end{proof}
 \begin{defi}[Partition Function]
 We define the quantity $Z=\sum_re^{-E_r/k_BT}$ to be the partition function.
 \end{defi}
-\begin{remarks}
-The canonical ensemble is really a special choice of the density matrix
-$$\hat{\rho}=e^{-\hat{H}/k_BT}/Z$$
-See II Principle of Quantum Mechanics.
-\end{remarks}
 \begin{prop}[Multiplicative of Partition Function]
 The partition function is multiplicative.
 \end{prop}
 \begin{proof}
-Consider two systems, the combined partition function is
-$$Z=\sum_{n,m}e^{-E_m^{(1)}/k_BT}e^{- E_n^{(2)}/k_BT}=\sum_me^{-E_m^{(1)}/k_BT}e^{-E_n^{(2)}/k_BT}=Z_1Z_2$$
+Consider two systems, the combined partition function is $Z=\sum_{n,m}e^{-E_m^{(1)}/k_BT}e^{- E_n^{(2)}/k_BT}=\sum_me^{-E_m^{(1)}/k_BT}e^{-E_n^{(2)}/k_BT}=Z_1Z_2$. 
 \end{proof}
 \begin{defi}[Inverse Temperature]
 We define $\beta$ to be the inverse temperature, i.e. $\beta=\frac{1}{k_BT}$.
 \end{defi}
 \begin{cor}
 The average energy and energy fluctuations of of a canonical ensemble are respectively
-$$\langle E\rangle=-\frac{\partial}{\partial\beta}\log Z,\quad\langle (E-\langle E\rangle)^2\rangle=-\frac{\partial}{\partial\beta}\langle E\rangle$$
+\begin{equation}
+\langle E\rangle=-\frac{\partial}{\partial\beta}\log Z,\quad\langle (E-\langle E\rangle)^2\rangle=-\frac{\partial}{\partial\beta}\langle E\rangle\label{canonical2}
+\end{equation}
 \end{cor}
 \begin{proof}
-By definition of expectation,
+By definition of expectation
 $$\langle E\rangle=\sum_np_nE_n=\frac{1}{Z}\sum_nE_ne^{-\beta E_n}=-\frac{\partial}{\partial\beta}\log Z$$
 where $\frac{\partial}{\partial\beta}Z=-E_n$. Similarly, we compute the variance by
 $$\frac{\partial^2}{\partial\beta^2}\log Z=-\frac{1}{Z^2}\bigg(\frac{\partial Z}{\partial\beta}\bigg)^2+\frac{1}{Z}\frac{\partial^2Z}{\partial\beta^2}$$
@@ -884,120 +893,82 @@ From previous result, we get our desired form for $C_V$.
 \end{proof}
 \begin{remarks}\leavevmode
 \begin{enumerate}
-\item This is related to the fluctuation-dissipation theorem. Dissipation is quantified by $C_V$ while fluctuation is given by $\Delta E$.
-\item We have $\Delta E/E\sim1/\sqrt{N}$. In the thermodynamic limit, i.e. $N\rightarrow\infty$, $E$ peaks sharply at $\langle E\rangle$.
+\item This is related to the fluctuation-dissipation theorem. Dissipation is quantified by $C_V$ while fluctuation is given by $\sigma_E=\sqrt{\langle E^2\rangle-\langle E\rangle^2}$.
+\item We have $\sigma_E/E\sim1/\sqrt{N}$. In the thermodynamic limit, i.e. $N\rightarrow\infty$, $E$ peaks sharply at $\langle E\rangle$.
 \end{enumerate}
 \end{remarks}
 \begin{thm}
 Suppose we have one other constraint, i.e. maximize entropy subject to a fixed value of mean energy, $\sum_\alpha p_\alpha E_\alpha=U$, then we obtain the partition function for a canonical ensemble.
 \end{thm}
 \begin{proof}
-Maximizing the Gibbs entropy $S_G$ subjected to both constraints is equivalent to maximizing $S_G-\lambda\bigg(\sum_\alpha p_\alpha -1\bigg)-\beta\bigg(\sum_\alpha p_\alpha E_\alpha -U\bigg)$.
+Maximizing the Gibbs entropy $S_G$ subjected to both constraints is equivalent to maximizing $S_G-\lambda(\sum_\alpha p_\alpha -1)-\beta(\sum_\alpha p_\alpha E_\alpha -U)$.
 $$ dS_G-\lambda\sum_\alpha dp_\alpha-\bigg(\sum_\alpha p_\alpha-1\bigg)d\lambda-\beta\sum_\alpha E_\alpha dp_\alpha-\bigg(\sum_\alpha p_\alpha E_\alpha -U\bigg)d\beta=0$$
 where $\lambda,\beta$ are Lagrange multipliers. Using the form for $S_G$, we get
 $$-\sum_\alpha(\log p_\alpha+1+\lambda+\beta E_\alpha)dp_\alpha-\bigg(\sum_\alpha p_\alpha-1\bigg)d\lambda-\bigg(\sum_\alpha p_\alpha E_\alpha -U\bigg)d\beta=0$$
 We then have $p_\alpha =e^{-1-\lambda-\beta E_\alpha}$. The normalization constant is obtained from $\sum_\alpha p_\alpha-1=0$ and hence $Z(\beta)=\sum_\alpha e^{-\beta E_\alpha}$ which is the partition function. The desired probability distribution is $p_\alpha=\frac{1}{Z(\beta)}e^{-\beta E_\alpha}$. 
 \end{proof}
-\begin{prop}
-The entropy in the canonical ensemble is
-$$S=k_B\frac{\partial}{\partial T}(T\log Z)$$
-\end{prop}
-\begin{proof}
-$$S=-k_B\sum_np(n)\log(p(n))=-\frac{k_B}{Z}\sum_ne^{-\beta E_n}\log\frac{e^{-\beta E_n}}{Z}=k_B\frac{\beta}{Z}\sum_nE_ne^{-\beta E_n}+k_B\log Z=k_B\frac{\partial}{\partial T}(T\log Z)$$
-Alternatively, $\sum_\alpha p_\alpha E_\alpha=\frac{1}{Z(\beta)}\sum_\alpha E_\alpha e^{-\beta E_\alpha}=-\frac{\partial\log Z}{\partial\beta}=U$. The Gibbs entropy is then rewritten as $S_G=\beta U+\log(Z)$.
-\end{proof}
 \begin{cor}
-The free energy of a canonical ensemble in terms of the partition function is 
-$$F=-k_BT\log Z$$
+The entropy and free energy of a canonical ensemble are respectively
+\begin{equation}
+S=k_B\frac{\partial}{\partial T}(T\log Z),\quad F=-k_BT\log Z\label{canonical3}
+\end{equation}
 \end{cor}
 \begin{proof}
-$$F=U-TS=k_BT^2\frac{\partial}{\partial T}\log Z-k_BT\frac{\partial}{\partial T}(T\log Z)=-k_BT\log Z$$
+The Gibbs entropy is
+$$S=-k_B\sum_np(n)\log(p(n))=-\frac{k_B}{Z}\sum_ne^{-\beta E_n}\log\frac{e^{-\beta E_n}}{Z}=k_B\frac{\beta}{Z}\sum_nE_ne^{-\beta E_n}+k_B\log Z=k_B\frac{\partial}{\partial T}(T\log Z)$$
+Alternatively, $\sum_\alpha p_\alpha E_\alpha=\frac{1}{Z(\beta)}\sum_\alpha E_\alpha e^{-\beta E_\alpha}=-\frac{\partial\log Z}{\partial\beta}=U$. The Gibbs entropy is then rewritten as $S=\beta U+\log(Z)$. Finally, $F=U-TS=k_BT^2\frac{\partial}{\partial T}\log Z-k_BT\frac{\partial}{\partial T}(T\log Z)=-k_BT\log Z$.
 \end{proof}
-
-
 \begin{eg}[Two-States System]
 Consider $N$ identical, weakly interacting, localized particles, each with non-degenerate energy levels, $\varepsilon_n=(-1)^n\varepsilon$ where $n=1,2$. Each possible microstate is specified by $\alpha=(n_1,n_2,...,n_N)$ where $n_i=1,2$ gives energy level occupied by the $i$-particle; $E_\alpha=\sum_{i=1}^NE_i(n_i)$, where $E_i(n_i)=(-1)^{n_i}\varepsilon$. The free energy is
-$$F(T,N)=-k_BT\log Z=-Nk_BT\log\cosh(\varepsilon/kT) -Nk_BT\log(2)$$
-where $Z(T,N)=\sum_\alpha e^{-\beta E_\alpha}=\prod_{i=1}^N\sum_{n_i=1}^2e^{(-1)^{n_i+1}\beta\varepsilon}=2^N(\cosh(\varepsilon/kT))^N$. The internal energy will be
-$$U=-\frac{dZ}{d\beta}=-\frac{d}{d\beta}\log(2^N(\cosh(\beta\varepsilon))^N)=-N\frac{1}{2\cosh(\beta\varepsilon)}\frac{d}{d\beta}2\cosh(\beta\varepsilon)=-N\varepsilon\tanh(\beta\varepsilon)$$
+$$F(T,N)=-k_BT\log Z=-Nk_BT\log\cosh(\varepsilon/k_BT) -Nk_BT\log(2)$$
+where $Z(T,N)=\sum_\alpha e^{-\beta E_\alpha}=\prod_{i=1}^N\sum_{n_i=1}^2e^{(-1)^{n_i+1}\beta\varepsilon}=2^N(\cosh(\varepsilon/k_BT))^N$. The internal energy will be
+$$U=-\frac{\partial \ln Z}{\partial\beta}=-\frac{d}{d\beta}\log(2^N(\cosh(\beta\varepsilon))^N)=-N\frac{1}{2\cosh(\beta\varepsilon)}\frac{d}{d\beta}2\cosh(\beta\varepsilon)=-N\varepsilon\tanh(\beta\varepsilon)$$
 The heat capacity will be
-$$C=\frac{dU}{dT}=-N\varepsilon(-k_B\beta^2)\frac{d}{d\beta}\tanh(\beta\varepsilon)=N\varepsilon^2\beta^2k\sech^2(\beta\varepsilon)$$
+$$C=\frac{dU}{dT}=-N\varepsilon(-k_B\beta^2)\frac{d}{d\beta}\tanh(\beta\varepsilon)=N\varepsilon^2\beta^2k_B\sech^2(\beta\varepsilon)$$
 For an array of $N$ localized spin 0.5 paramagnetic atoms, $\varepsilon=\mu_BB$ and so we can write
-$$C=Nk_B(\theta/T)^2\frac{e^{\theta/T}}{e^{\theta/T}+1)^2}$$
+$$C=Nk_B(\theta/T)^2\frac{e^{\theta/T}}{(e^{\theta/T}+1)^2}$$
 where $\theta=2\mu_BB/k_B$. $dC/dT=0\implies C_{max}$ occurs at $\theta/T=2.4$ and so $T=\frac{5}{6}\frac{\mu_BB}{k_B}$. In fact, $\lim_{T\rightarrow\infty}C=Nk_B(\theta/T)^2$ and $\lim_{T\rightarrow0}C=Nk_B(\theta/T)^2e^{-\theta/T}$.
 \end{eg}
 \begin{eg}[Harmonic Oscillator]
 Consider $N$ identical, weakly interacting, localized harmonic oscillators, each with non-degenerate set of energy levels $\varepsilon_n=n\hbar\omega$ where $n\in\mathbb{Z}^+\cup\{0\}$. Each possible microstate is specified by $\alpha=(n_1,...,n_N)$ where $n_i$ is the energy level occupied by the $i$-oscillator with energy value $\varepsilon_i=n_i\hbar\omega$. Note $E_\alpha=\sum_{i=1}^NE_i(n_i)$ where $E_i(n_i)=\varepsilon_i=n_i\hbar\omega$. The free energy is
-$$F(T,N)=-k_BT\log Z= NkT\log(1-e^{-\hbar\omega/kT})$$
+$$F(T,N)=-k_BT\log Z= Nk_BT\log(1-e^{-\hbar\omega/k_BT})$$
 where $Z(T,N)=\prod_{i=1}^N\sum_{n_i=0}^\infty e^{-\beta\hbar\omega n_i}=(\frac{1}{1-e^{-\beta\hbar\omega}})^N$. 
 \end{eg}
 \newpage
 \subsection{Grand canonical ensemble}
-In reality, many systems have a variable particle number. For instance:
-\begin{itemize}
-    \item system in contact through a permeable membrane;
-    \item system where chemical reaction can occur;
-    \item a subsystem of a gas, i.e. particles can enter and leave;
-    \item electromagnetic radiation, where photon number depends on energy.
-\end{itemize}
-\begin{defi}[Extensive quantities]
-Extensive quantities scale with particle number $N$ and simultaneously on $V$.
-\end{defi}
-\begin{eg}
- $U$, $S$ and $F=U-TS$ are extensive, i.e. $U=Nf_U(\frac{S}{N},\frac{V}{N})$ and $F=Nf_F(T,\frac{V}{N})$ for some function $f_U$ and $f_F$.
-\end{eg}
+In reality, many systems have a variable particle number.
 \begin{defi}[Chemical Potential]
-We define the chemical potential $\mu$ to be
-$$\mu:=\frac{\partial U}{\partial N}\bigg|_{S,V}$$
-where $N$ is a further independent variable of the system, i.e. $dE=TdS-pdV+\mu dN$.
+We define the chemical potential $\mu$ to be $\mu:=\frac{\partial U}{\partial N}|_{S,V}$, where $N$ is a further independent variable of the system, i.e. $dU=TdS-pdV+\mu dN$.
 \end{defi}
 \begin{eg}
-Quantities such as $T$, $p$ and $\mu$ are intensive since
-$$\frac{1}{T}=\frac{\partial S}{\partial U},\quad p=T\frac{\partial S}{\partial V},\quad\mu=T\frac{\partial S}{\partial N}$$
-are all ratio of two extensive quantities.
+Quantities such as $T=(\partial S/\partial U)^{-1}$, $p=T\frac{\partial S}{\partial V}$ and $\mu=T\frac{\partial S}{\partial N}$ are intensive since they are all ratio of two extensive quantities.
 \end{eg}
 \begin{defi}[Grand Canonical Ensemble]
 Consider a closed system $Q$ that can exchange energy and particles with a large heat and particle reservoir $Q'$ at an equilibrium temperature $T$ and chemical potential $\mu$. Note that all exchange is between $Q$ and $Q'$ and not the environment.
 \end{defi}
-\begin{defi}[Grand Partition Function]
-$$\mathcal{Z}=\sum_re^{-\beta(E_r-\mu N_r)}$$
+\begin{defi}[Grand Partition Function] The grand partition function is $\mathcal{Z}=\sum_re^{-\beta(E_r-\mu N_r)}$.
 \end{defi}
 \begin{prop}
 The probability distribution for a grand canonical ensemble is
-$$p_r=\frac{e^{-\beta(E_r-\mu N_r)}}{\mathcal{Z}}$$
+\begin{equation}
+p_r=\frac{e^{-\beta(E_r-\mu N_r)}}{\mathcal{Z}}\label{grandcanonical}
+\end{equation}
 \end{prop}
 \begin{proof}
-We use a similar argument. Let the total energy and particle number be $E_0$ and $N_0$, the system energy and particle number be $E<<E_0$ and $N<<N_0$, i.e. dominated by reservoir. Use $dS=\frac{dE}{T}-\frac{\mu dN}{T}$. The entropy of the bath is 
-$$S'(E_0-E,N_0-N)=S'(E_0,N_0)-\frac{E}{T}+\frac{\mu N}{T}$$
-The probability of a system being in a microstate with energy $E_r$, particle number $N_r$ is
-$$p_r=\frac{1}{\mathcal{Z}}e^{-\beta E_r+\beta\mu N_r}$$
-with $r$ being a state label. The normalization constant is the grand partition function.
-\end{proof}
-\begin{remarks}
-For macroscopic system, the sum is sharply peaked around certain $E$ and $N$ where there are $e^{S(U,N)}$ number of states, such that $\frac{\partial S}{\partial U}|_N=\frac{1}{T}$ and $\frac{\partial S}{\partial N}|_U=\frac{-\mu}{T}$. 
-\end{remarks}
-\begin{prop}
-The entropy in the grand canonical ensemble is
-$$S=k_B\frac{\partial}{\partial T}(T\log\mathcal{Z})$$
-\end{prop}
-\begin{proof}
-\begin{align}
-S&=-k_B\sum_np(n)\log(p(n))\nonumber\\&=-\frac{k_B}{\mathcal{Z}}\sum_ne^{-\beta (E_n-\mu N_n)}\log\frac{e^{-\beta (E_n-\mu N_n)}}{\mathcal{Z}}\nonumber\\&=k_B\frac{\beta}{\mathcal{Z}}\sum_n(E_n-\mu N_n)e^{-\beta (E_n-\mu N_n)}+k_B\log\mathcal{Z}\nonumber\\&=k_B\frac{\partial}{\partial T}(T\log \mathcal{Z})\nonumber
-\end{align}
+We use a similar argument. Let the total energy and particle number be $E_0>>E$ and $N_0>>N$, i.e. dominated by reservoir. Use $dS=\frac{dE}{T}-\frac{\mu dN}{T}$. The entropy of the bath is $S'(E_0-E,N_0-N)=S'(E_0,N_0)-\frac{E}{T}+\frac{\mu N}{T}$. The probability of a system being in a microstate with energy $E_r$, particle number $N_r$ is $p_r=\frac{1}{\mathcal{Z}}e^{-\beta E_r+\beta\mu N_r}$, with $r$ being a state label.
 \end{proof}
 \begin{cor}
-$$\langle N\rangle=\frac{1}{\beta}\frac{\partial}{\partial\mu}\log\mathcal{Z},\quad\langle (N-\langle N\rangle)^2\rangle=\frac{1}{\beta}\frac{\partial\langle N\rangle}{\partial\mu},\quad\langle E\rangle-\mu\langle N\rangle=-\frac{\partial}{\partial\beta}\log\mathcal{Z}$$
+\begin{equation}
+\langle N\rangle=\frac{1}{\beta}\frac{\partial}{\partial\mu}\log\mathcal{Z},\quad\langle (N-\langle N\rangle)^2\rangle=\frac{1}{\beta}\frac{\partial\langle N\rangle}{\partial\mu},\quad\langle E\rangle-\mu\langle N\rangle=-\frac{\partial}{\partial\beta}\log\mathcal{Z}\label{grandcanonical2}
+\end{equation}
 \end{cor}
 \begin{proof}
-By definition of expectation,
-$$\langle N\rangle=\sum_np_nN_n=\frac{1}{\mathcal{Z}}\sum_nN_ne^{-\beta (E_n-\mu N_n)}=\frac{1}{\beta}\frac{\partial}{\partial\mu}\log\mathcal{Z}$$
-where $\frac{\partial}{\partial\mu}\mathcal{Z}=\beta N_n$. Similarly, we compute the variance by
-$$\frac{\partial^2}{\partial\mu^2}\log \mathcal{Z}=-\frac{1}{\mathcal{Z}^2}\bigg(\frac{\partial\mathcal{Z}}{\partial\mu}\bigg)^2+\frac{1}{\mathcal{Z}}\frac{\partial^2\mathcal{Z}}{\partial\mu^2}$$
-but $\frac{\partial^2\mathcal{Z}}{\partial\mu^2}=\beta^2\sum_nN_n^2e^{-\beta (E_n-\mu N_n)}$ and $\frac{\partial \mathcal{Z}}{\partial\beta}=\sum_n\beta N_ne^{-\beta (E_n-\mu N_n)}$ and so $\frac{\partial^2\log \mathcal{Z}}{\partial\beta^2}=\langle N^2\rangle-\langle N\rangle^2=\langle (N-\langle N\rangle)^2\rangle$. Finally,
-$$\langle E\rangle-\mu\langle N\rangle=\sum_np_n(E_n-\mu N_n)=\frac{1}{\mathcal{Z}}\sum_n(E_n-\mu N_n)e^{-\beta(E_n-\mu N_n)}=-\frac{\partial}{\partial\beta}\log\mathcal{Z}$$ 
+Similar to the canonical ensemble, $\langle N\rangle=\sum_np_nN_n=\frac{1}{\mathcal{Z}}\sum_nN_ne^{-\beta (E_n-\mu N_n)}=\frac{1}{\beta}\frac{\partial}{\partial\mu}\log\mathcal{Z}$, where $\frac{\partial}{\partial\mu}\mathcal{Z}=\beta N_n$. Moreover, we have
+$\frac{\partial^2}{\partial\mu^2}\log \mathcal{Z}=-\frac{1}{\mathcal{Z}^2}(\frac{\partial\mathcal{Z}}{\partial\mu})^2+\frac{1}{\mathcal{Z}}\frac{\partial^2\mathcal{Z}}{\partial\mu^2}$, but $\frac{\partial^2\mathcal{Z}}{\partial\mu^2}=\beta^2\sum_nN_n^2e^{-\beta (E_n-\mu N_n)}$ and $\frac{\partial \mathcal{Z}}{\partial\mu}=\sum_n\beta N_ne^{-\beta (E_n-\mu N_n)}$ and so $\frac{\partial^2\log \mathcal{Z}}{\partial\mu^2}=\langle N^2\rangle-\langle N\rangle^2=\langle (N-\langle N\rangle)^2\rangle$. Finally, 
+$\langle E\rangle-\mu\langle N\rangle=\sum_np_n(E_n-\mu N_n)=\frac{1}{\mathcal{Z}}\sum_n(E_n-\mu N_n)e^{-\beta(E_n-\mu N_n)}=-\frac{\partial}{\partial\beta}\log\mathcal{Z}$. 
 \end{proof}
 \begin{remarks}
-We have $\Delta N/N\sim1/\sqrt{N}$. In the thermodynamic limit, i.e. $N\rightarrow\infty$, $N$ peaks sharply at $\langle N\rangle$.
+Again, in the thermodynamic limit, $N$ peaks sharply at $\langle N\rangle$.
 \end{remarks}
 \begin{thm}
 Suppose we have two other constraints, i.e. maximize entropy subject to a fixed value of mean energy, $\sum_\alpha p_\alpha E_\alpha=U$ and a fixed value of mean particle number, $\sum_\alpha p_\alpha N_\alpha=\langle N\rangle$, then we obtain the grand canonical distribution.
@@ -1005,25 +976,30 @@ Suppose we have two other constraints, i.e. maximize entropy subject to a fixed 
 \begin{proof}
 We need to maximize $S_G-\lambda(\sum_\alpha p_\alpha-1)-\beta(\sum_\alpha p_\alpha E_\alpha-U)+\beta\mu(\sum_\alpha p_\alpha N_\alpha-\langle N\rangle)$. We then find $\log p_\alpha+1+\lambda+\beta E_\alpha-\beta\mu N_\alpha=0$ and so $p_\alpha=\frac{1}{\mathcal{Z}(\beta,\mu)}e^{-\beta(E_\alpha-\mu N_\alpha)}$ where $\mathcal{Z}(\beta,\mu)=\sum_\alpha e^{-\beta(E_\alpha-\mu N_\alpha)}$ is the grand canonical partition function.
 \end{proof}
-
 \begin{defi}[Grand Potential]
 We define the grand potential $\Phi$ to be the quantity
-$$\Phi:=U-TS-\mu N=F-\mu N$$
+\begin{equation}
+\Phi:=U-TS-\mu N=F-\mu N\label{grandpotential}
+\end{equation}
 \end{defi}
 \begin{cor}
-$$\Phi=-k_BT\log\mathcal{Z}$$
+The entropy and grand potential of the grand canonical ensemble is 
+\begin{equation}
+S=k_B\frac{\partial}{\partial T}(T\log\mathcal{Z}),\quad\Phi=-k_BT\log\mathcal{Z}\label{grandcanonical2}
+\end{equation}
 \end{cor}
 \begin{proof}
-$$\Phi=U-\mu N-TS=-\frac{\partial}{\partial\beta}\log\mathcal{Z}-Tk_B\frac{\partial}{\partial T}(T\log\mathcal{Z})=k_BT^2\frac{\partial}{\partial T}\log\mathcal{Z}-k_BT\frac{\partial}{\partial T}(T\log\mathcal{Z})=-k_BT\log\mathcal{Z}$$
+The Gibbs entropy $S=-k_B\sum_np(n)\log(p(n))$ and the grand potential are respectively 
+$$-\frac{k_B}{\mathcal{Z}}\sum_ne^{-\beta (E_n-\mu N_n)}\log\frac{e^{-\beta (E_n-\mu N_n)}}{\mathcal{Z}}=k_B\frac{\beta}{\mathcal{Z}}\sum_n(E_n-\mu N_n)e^{-\beta (E_n-\mu N_n)}+k_B\log\mathcal{Z}$$
+$$\Phi=U-\mu N-TS=-\frac{\partial}{\partial\beta}\log\mathcal{Z}-Tk_B\frac{\partial}{\partial T}(T\log\mathcal{Z})=k_BT^2\frac{\partial}{\partial T}\log\mathcal{Z}-k_BT\frac{\partial}{\partial T}(T\log\mathcal{Z})$$
+which simplify to our results.
 \end{proof}
 \begin{remarks}\leavevmode
 \begin{enumerate}
 \item The sum in the grand canonical partition function still converge for large $N$ since $\mu<0$. Implicitly, particles were conserved when passing from the bath to the system. If not, for example, for photons, we imagine photons coming from the bath. But $S'$ does not depend on their number, so $\mu=0$. 
 \item The differential of the grand potential is
-$$d\Phi=dE-TdS-SdT-\mu dN-Nd\mu=-SdT-PdV-Nd\mu$$
-such that $N=-\frac{\partial\Phi}{\partial\mu}|_{T,V}$. So, the natural variables of $\Phi$ are $T$, $V$ and $\mu$, i.e. $\Phi=\Phi(T,V,\mu)$. There is only one extensive independent variable, namely $V$, i.e. $\Phi(T,\lambda V,\mu)=\lambda\Phi(T,V,\mu)$. But since 
-$$\frac{\partial\Phi}{\partial V}\bigg|_{T,\mu}=-P$$
-then $\Phi=-P(T,\mu)V$.
+$$d\Phi=dU-TdS-SdT-\mu dN-Nd\mu=-SdT-PdV-Nd\mu$$
+such that $N=-\frac{\partial\Phi}{\partial\mu}|_{T,V}$. So, the natural variables of $\Phi$ are $T$, $V$ and $\mu$, i.e. $\Phi=\Phi(T,V,\mu)$. There is only one extensive independent variable, namely $V$, i.e. $\Phi(T,\lambda V,\mu)=\lambda\Phi(T,V,\mu)$. But since $\frac{\partial\Phi}{\partial V}|_{T,\mu}=-P$, then $\Phi=-P(T,\mu)V$.
 \end{enumerate}
 \end{remarks}
 \begin{cor}
@@ -1040,7 +1016,7 @@ where $Z(T,N)=\sum_\alpha e^{-\beta E_{N_S,\alpha}}=\prod_{i=1}^{N_S}\sum_{n_i=1
 \begin{eg}[Harmonic Oscillators]
 Consider identical, weakly interacting, localized harmonic oscillators, each with non-degenerate set of energy levels $\epsilon_n=n\hbar\omega$ where $n\in\mathbb{Z}^+\cup\{0\}$. Each possible microstate is specified by $\alpha_{N_S}=(n_1,...,n_N)$ where $n_i$ is the energy level occupied by the $i$-oscillator with energy value $\epsilon_i=n_i\hbar\omega$. Note $E_{N_S,\alpha}=\sum_{i=1}^{N_S}E_i(n_i)$ where $E_i(n_i)=\epsilon_i=n_i\hbar\omega$. The grand potential is
 $$\Phi(T,\mu)=-k_BT\log\mathcal{Z}(T,\mu)=-k_BT\log\bigg(\frac{1-e^{-\beta\hbar\omega}}{1-e^{\beta\mu}-e^{-\beta\hbar\omega}}\bigg)$$
-where $\frac{e^{\beta\mu}}{1-e^{-\beta\hbar\omega}}<1$. We have $Z(T,N_S)=\prod_{i=1}^N\sum_{n_i=0}^\infty e^{-\beta\hbar\omega n_i}=(\frac{1}{1-e^{-\beta\hbar\omega}})^N$. We then have $\mathcal{Z}(T,\mu)=\sum_{N_S=0}^\infty (e^{\beta\mu})^{N_S}Z(T,N_S)=\frac{1-e^{-\beta\hbar\omega}}{1-e^{\beta\mu}-e^{-\beta\hbar\omega}}$.
+where $\frac{e^{\beta\mu}}{1-e^{-\beta\hbar\omega}}<1$. We have $Z(T,N_S)=\prod_{i=1}^{N_S}\sum_{n_i=0}^\infty e^{-\beta\hbar\omega n_i}=(\frac{1}{1-e^{-\beta\hbar\omega}})^{N_S}$. We then have $\mathcal{Z}(T,\mu)=\sum_{N_S=0}^\infty (e^{\beta\mu})^{N_S}Z(T,N_S)=\frac{1-e^{-\beta\hbar\omega}}{1-e^{\beta\mu}-e^{-\beta\hbar\omega}}$.
 \end{eg}
 \begin{cor}
 Suppose we have numerous species of particles, the grand potential is the sum of that of the individual species.
@@ -1062,13 +1038,10 @@ An example of an external potential is gravity. The gravitational field does not
 \end{align}
 The chemical potential of the gas for fixed particle number $N$ is
 $$N=-\bigg(\frac{\partial\Phi}{\partial\mu}\bigg)_{T,V}\implies\mu=k_BT\bigg[\ln\bigg(\frac{N(h)\lambda^3}{\sigma V}\bigg)-\ln Z_{\text{int}}-\ln Z_{\text{ext}}(h)\bigg]$$
-where $E_{\text{ext}}=mgh\implies-k_BT\ln Z_{\text{ext}}(h)=mgh$. Now, consider the variation of particle number with height in an ideal classical gas in a gravitational field. In equilibrium, the temperature must be independent of height. In equilibrium $\mu$ must also be independent of height, and we see 
-$$N(h)=N(0)e^{-mgh/k_BT}$$
+where $E_{\text{ext}}=mgh\implies-k_BT\ln Z_{\text{ext}}(h)=mgh$. Now, consider the variation of particle number with height in an ideal classical gas in a gravitational field. In equilibrium, the temperature must be independent of height. In equilibrium $\mu$ must also be independent of height, and we have an exponential decay profile, i.e. $N(h)=N(0)e^{-mgh/k_BT}$.
 \end{eg}
 \begin{prop}[Law of mass action]
-Let the equilibrium constant be $K_N(T)=\prod_iN_i^{\nu_i}$, then
-$$K_N(T)=\prod_i(Z_1^i)^{\nu_i}$$
-where $Z_1$ is the single-particle partition function for species $i$.
+The equilibrium constant is $K_N(T)=\prod_iN_i^{\nu_i}=\prod_i(Z_1^i)^{\nu_i}$, where $Z_1$ is the single-particle partition function for species $i$.
 \end{prop}
 \begin{proof}
 The chemical potential for each species is $\mu_i=k_BT(\ln N_i-\ln Z_1^i)$. where $Z_1^i$ is the single-particle partition function for a single molecule of species $i$, confined to a volume $V$, which includes all degrees of freedom. By the condition of chemical equilibrium, $\sum_i\nu_i\mu_i=0$, we have $K_N(T)=\prod_iN_i^{\nu_i}=\prod_i(Z_1^i)^{\nu_i}$.
@@ -1078,11 +1051,10 @@ Suppose a vapour is in thermal equilibrium with a surface, and that a molecule o
 $$F=-k_BT\ln Z_N=-N\varepsilon-k_BT(N\ln z_s+N_s\ln N_s-(N_s-N)\ln(N_s-N)-N\ln N)$$
 The chemical potential is
 $$\mu_s=\frac{\partial F}{\partial N}=-\varepsilon-k_BT\bigg(\ln z_s+\ln\frac{N_s-N}{N}\bigg)=-\varepsilon+k_BT\ln\frac{\theta}{(1-\theta)z_s}$$
-where $\theta=N/N_s$ is the fraction of the surface sites occupied by molecules. Equivalently, we use the grand partition function is
-$$\mathcal{Z}=\sum_ie^{-\beta(E_i-\mu_sN_i)}Z_{\text{int}}^{(i)}=1+z_se^{\beta(\varepsilon+\mu_s)}$$
-where each site (the surface sites are independent) has two states: $i=0$ empty and $i=1$ full. The corresponding grand potential is $\Phi=-k_BT\ln\mathcal{Z}$ and the average occupation of the site is
+where $\theta=N/N_s$ is the fraction of the surface sites occupied by molecules. Equivalently, we use the grand partition function is $\mathcal{Z}=\sum_ie^{-\beta(E_i-\mu_sN_i)}Z_{\text{int}}^{(i)}=1+z_se^{\beta(\varepsilon+\mu_s)}$, where each site (the surface sites are independent) has two states: $i=0$ empty and $i=1$ full. The corresponding grand potential is $\Phi=-k_BT\ln\mathcal{Z}$ and the average occupation of the site is
 $$\theta=\frac{N}{N_s}=-\bigg(\frac{\partial\Phi}{\partial\mu_s}\bigg)_{T,V}=\frac{z_se^{\beta(\varepsilon+\mu_s)}}{1+z_se^{\beta(\varepsilon+\mu_s)}}\implies\mu_s=-\varepsilon+k_BT\ln\frac{\theta}{(1-\theta)z_s}$$
-But the chemical potential of an ideal gas (later) is $\mu=k_BT\ln\frac{p\lambda^3}{k_BT}$ and so the Langmuir adsorption isotherm is characterized by $p=\frac{\theta}{1-\theta}\frac{k_BT}{z_s\lambda^3}e^{-\beta\varepsilon}$.
+But the chemical potential of an ideal gas (later) is $\mu=k_BT\ln\frac{p\lambda^3}{k_BT}$ and so the Langmuir adsorption isotherm is characterized by
+$$p=\frac{\theta}{1-\theta}\frac{k_BT}{z_s\lambda^3}e^{-\beta\varepsilon}$$
 \end{eg}
 \newpage
 \section{Classical Statistical Mechanics}
@@ -1117,7 +1089,9 @@ In dealing with a closed system, whose energy is confined to a narrow region bet
 \end{remarks}
 \begin{defi}[Entropy]
 The definitions for Boltzmann and Gibbs entropy respectively are:
-$$S=-k_B\log\frac{d\Gamma(U)}{dU}dU,\quad S=-k_B\int\rho\log\rho d\Gamma$$
+\begin{equation}
+S=-k_B\log\frac{d\Gamma(U)}{dU}dU,\quad S=-k_B\int\rho\log\rho d\Gamma\label{entropyphase}
+\end{equation}
 \end{defi}
 \begin{remarks}
 Further, if we consider a `subsystem' plus a `reservoir' as a large closed system, the Boltzmann distribution is 
@@ -1129,12 +1103,14 @@ where $Z_{\text{cl}}$ is the classical partition function. The phase space argum
 For the following, we work in the canonical ensemble approach. We aim to reformulate the idea of the partition function in classical mechanics. 
 \begin{prop}
 Consider an ideal non-interacting gas of $N$ particles in volume $V$. The gas can be described with phase space coordinates $(\mathbf{q},\mathbf{p})\in\mathbb{R}^N$ such that each particle has position $\mathbf{x}^{(n)}$ and momentum $\mathbf{p}^{(n)}$ where $n=1,2,..,N$. For a single classical particle, the partition function may be defined as the integration over phase space $\mathbb{R}^{6N}$. 
-$$Z_1=\frac{1}{h^3}\int e^{-\beta H(p,q)}d^3pd^3q$$
+\begin{equation}
+Z_1=\frac{1}{h^3}\int e^{-\beta H(p,q)}d^3pd^3q\label{sp}
+\end{equation}
 \end{prop}
 \begin{proof}
-In one-dimension, the single particle Hamiltonian is $\hat{H}=\frac{\hat{p}^2}{2m}+V(\hat{q})$. The partition function in the canonical ensemble is
+In one-dimension, the single particle Hamiltonian is $\hat{H}=\frac{\hat{p}^2}{2m}+V(\hat{q})$. The single particle partition function in the canonical ensemble is
 \begin{align}
-    Z_1&=\sum_ne^{-\beta E_n}\nonumber\\&=\sum_n\langle n|e^{-\beta\hat{H}}|n\rangle\nonumber\\&=\sum_n\langle n|\int|q\rangle\langle q|e^{-\beta\hat{H}}dq\int|q'\rangle\langle q'|dq'|n\rangle\nonumber\\&=\int\langle q|e^{-\beta\hat{H}}|q'\rangle\sum_n\langle q'|n\rangle\langle n|q\rangle dqdq'\nonumber\\&=\int\langle q|e^{-\beta\hat{H}}|q'\rangle dq~dq'\delta(q'-q)\nonumber\\&=\int\langle q|e^{-\beta\hat{H}}|q\rangle dq\nonumber
+    Z_1&=\sum_ne^{-\beta E_n}\nonumber\\&=\sum_n\langle n|e^{-\beta\hat{H}}|n\rangle\nonumber\\&=\sum_n\langle n|\int|q\rangle\langle q|e^{-\beta\hat{H}}dq\int|q'\rangle\langle q'|dq'|n\rangle\nonumber\\&=\int\langle q|e^{-\beta\hat{H}}|q'\rangle\sum_n\langle q'|n\rangle\langle n|q\rangle dqdq'\nonumber\\&=\int\langle q|e^{-\beta\hat{H}}|q'\rangle\delta(q'-q)~ dq~dq'\nonumber\\&=\int\langle q|e^{-\beta\hat{H}}|q\rangle dq\nonumber
 \end{align}
 In another words, we replaced the sum over the energy eigenstates with an integral over any complete basis eigenstates. We can write $Z_1$ in a basis-independent fashion.
 $$Z_1=\Tr[e^{-\beta\hat{H}}]=\Tr[e^{-\beta \hat{p}^2/2m}e^{-\beta V(\hat{q})}+O(\hbar)]$$
@@ -1146,7 +1122,9 @@ where $\langle q|p\rangle=\frac{1}{\sqrt{2\pi\hbar}}e^{ipq/\hbar}$. Generalize t
 \end{proof}
 \begin{prop}
 For an ideal gas (non-interacting) with no internal structure (no rotational or vibrational degree of freedom), then the single particle partition function is
-$$Z_1(V,T)=V\bigg(\frac{mk_BT}{2\pi\hbar^2}\bigg)^{3/2}$$
+\begin{equation}
+Z_1(V,T)=V\bigg(\frac{mk_BT}{2\pi\hbar^2}\bigg)^{3/2}\label{spnonInteracting}
+\end{equation}
 \end{prop}
 \begin{proof}
 \begin{align}
@@ -1165,7 +1143,9 @@ Each squared, separable degree of freedom in the Hamiltonian has a mean energy o
 Consider a Hamiltonian with a separable term that is quadratic in one of the generalized coordinates or momenta, i.e. $H=Aq^2+\Delta H(Q)$ where $Q$ represents all of the other $6N-1$ coordinates of the phase space. We can show that the probability distribution of a separable coordinate is independent of all of the other coordinates.
 $$\rho(q)dq=\frac{e^{-\beta Aq^2}dq\int e^{-\beta\Delta H}dQ}{\int e^{-\beta Aq^2}dq\int e^{-\beta\Delta H}dQ}=\frac{e^{-\beta Aq^2}dq}{\int e^{-\beta Aq^2}dq}=\frac{e^{-\beta Aq^2}dq}{\sqrt{\pi k_BT/A}}$$
 The internal energy is then $U=\langle Aq^2\rangle+\langle\Delta H(Q)\rangle$, with
-$$\langle Aq^2\rangle=\frac{\int Aq^2e^{-\beta Aq^2}dq}{\int e^{-\beta Aq^2}dq}=\frac{\sqrt{\pi}/2\beta^{3/2}}{\sqrt{\pi}/\beta^{1/2}}=\frac{1}{2}k_BT$$
+\begin{equation}
+\langle Aq^2\rangle=\frac{\int Aq^2e^{-\beta Aq^2}dq}{\int e^{-\beta Aq^2}dq}=\frac{\sqrt{\pi}/2\beta^{3/2}}{\sqrt{\pi}/\beta^{1/2}}=\frac{1}{2}k_BT\label{equipartition}
+\end{equation}
 \end{proof}
 \begin{remarks}
 The equipartition theorem only holds in the classical limit.
@@ -1178,7 +1158,7 @@ $$\rho(v_{x,i})dv=\sqrt{\frac{m}{2\pi k_BT}}e^{-\beta0.5 mv_{x,i}^2}dv$$
 The normalized 3-velocity distribution will be the cube of this. Since this is isotropic, the distribution of speeds $v=|\mathbf{v}|$ is
 $$\rho(v)=\bigg(\frac{m}{2\pi k_BT}\bigg)^{3/2}4\pi v^2e^{-mv^2/2k_BT}$$
 The mean kinetic energy of atom is
-$$\langle v_x^2\rangle=\sqrt{\frac{m}{2\pi T}}\int_{-\infty}^\infty v_x^2e^{-mv_x^2/2k_BT}dv_x=\frac{k_BT}{m}$$
+$$\langle v_x^2\rangle=\sqrt{\frac{m}{2\pi k_BT}}\int_{-\infty}^\infty v_x^2e^{-mv_x^2/2k_BT}dv_x=\frac{k_BT}{m}$$
 Hence, for each particle, the mean for $\frac{1}{2}m|\mathbf{v}|^2$ is $\frac{3}{2}k_BT$. This is independent of the interaction potential $U$. There is $\frac{1}{2}k_BT$ thermal energy per degree of freedom.
 \end{eg}
 \begin{remarks}
@@ -1189,16 +1169,20 @@ $$C_V=\frac{dE}{dT}\bigg|_V=\frac{3}{2}Nk_B$$
 \subsection{Gas of Diatomic Molecules}
 \begin{remarks}[Gibbs paradox]
 It may be tempting to directly generalize the single particle partition function $z_1$ to the $N$-particle case via $Z=z_1^N$. However, it turns out that the entropy is sensitive to the indistinguishability of the particles. Gibbs considered the following paradox: consider two partitioned regions of the same type of gas. Removing the partition allows gas to mix but since they are of the same type, there should be no increase in entropy due to mixing. A correction factor of $1/N!$ is necessary (number of ways to permutate the particle). Hence, for an ideal gas, the partition function is
-$$Z_{\text{ideal}}(N,V,T)=\frac{1}{N!}Z_1^N=\frac{V^N}{\lambda^{3N}}\frac{1}{N!}$$
+\begin{equation}
+Z_{\text{ideal}}(N,V,T)=\frac{1}{N!}Z_1^N=\frac{V^N}{\lambda^{3N}}\frac{1}{N!}\label{Gibbsparadox}
+\end{equation}
 \end{remarks}
 \begin{prop}
 With $Z_{\text{ideal}}$ for a classical gas, one can work out the following macroscopic quantities (using the canonical ensemble):
-$$P=\frac{Nk_BT}{V},\quad E=\frac{3}{2}Nk_BT,\quad S=Nk_B\bigg[\log\frac{V}{\lambda^3N}+\frac{5}{2}\bigg],\quad F=Nk_BT(-\log(V/\lambda^3)+\log N-1)$$
+\begin{equation}
+P=\frac{Nk_BT}{V},\quad U=\frac{3}{2}Nk_BT,\quad S=Nk_B\bigg[\log\frac{V}{\lambda^3N}+\frac{5}{2}\bigg],\quad F=Nk_BT(-\log(V/\lambda^3)+\log N-1)\label{ideal2}
+\end{equation}
 \end{prop}
 \begin{proof}
 $$P=-\frac{\partial F}{\partial V}=\frac{\partial}{\partial V}k_BT\log Z_{\text{ideal}}=\frac{Nk_BT}{V}\text{ equation of state}$$
-$$E=-\frac{\partial}{\partial\beta}\log Z_{\text{ideal}}=\frac{3}{2}Nk_BT\text{ equipartition theorem}$$
-$$S=\frac{\partial}{\partial T}T\log Z_{\text{ideal}}=Nk_B\bigg[\log\frac{V}{N\lambda^3}+\frac{5}{2}\bigg]\text{ Sackur-Terode equation}$$
+$$U=-\frac{\partial}{\partial\beta}\log Z_{\text{ideal}}=\frac{3}{2}Nk_BT\text{ equipartition theorem}$$
+$$S=k_B\frac{\partial}{\partial T}T\log Z_{\text{ideal}}=Nk_B\bigg[\log\frac{V}{N\lambda^3}+\frac{5}{2}\bigg]\text{ Sackur-Terode equation}$$
 $$F=-k_BT\log\mathcal{Z}_{\text{ideal}}=-Nk_BT\log\frac{V}{\lambda^3}+Nk_BT\log N-Nk_BT$$
 \end{proof}
 \begin{remarks}
@@ -1206,19 +1190,22 @@ If indistinguishability is not accounted for, we would have incorrectly $S=Nk_B(
 \end{remarks}
 \begin{prop}
 We may also recover the above results using the grand canonical ensemble. In addition, the chemical potential is
-$$\mu=Tk_B\log\frac{\lambda^3N}{V}$$
+\begin{equation}
+\mu=Tk_B\log\frac{\lambda^3N}{V}\label{ideal3}
+\end{equation}
 \end{prop}
 \begin{proof}
 Obtain the grand canonical partition function from the canonical partition function:
-$$\mathcal{Z}_{\text{ideal}}(\mu,V,T)=\sum_{N=0}^\infty e^{\beta\mu N}Z_{\text{ideal}}(N,V,T)=\exp\bigg(\frac{e^{\beta\mu }V}{\lambda^3}\bigg)$$
-The particle number is then
+$$\mathcal{Z}_{\text{ideal}}(\mu,V,T)=\sum_{N=0}^\infty e^{\beta\mu N}Z_{\text{ideal}}(N,V,T)=\sum_{N=0}^\infty 
+\frac{e^{\beta\mu N}}{N!}\bigg(\frac{V}{\lambda^3}\bigg)^N=\exp\bigg(\frac{e^{\beta\mu }V}{\lambda^3}\bigg)$$
+where we used the exponential series expansion. The particle number is then
 $$N=\frac{1}{\beta}\frac{\partial}{\partial\mu}\log\mathcal{Z}_{\text{ideal}}=\frac{e^{\beta\mu }V}{\lambda^3}$$
-This then gives the desired expression of $\mu$. The equation of state is obtained via
+This then gives the desired expression of $\mu$. We may reobtain the remaining expressions in Eqn.~\ref{ideal2} using the grand canonical ensemble. The equation of state is obtained via
 $$PV=k_BT\log\mathcal{Z}_{\text{ideal}}=k_BT\frac{e^{\beta\mu}V}{\lambda^3}=k_BTN$$
 Similar for the rest via $S=k_B\frac{\partial}{\partial T}(T\log\mathcal{Z}_{\text{ideal}})$.
 \end{proof}
 \begin{remarks}
-$\mu=(\frac{\partial E}{\partial N})_{S,V}$ is the energy cost of adding an extra particle at a fixed entropy and volume. However, adding a particle increases the number of ways to share the energy, and so increases entropy. But the entropy is fixed, so $\mu<0$ for the classical ideal gas. $\mu>0$ might occur in a suitably strong repulsive gas.
+$\mu=(\frac{\partial U}{\partial N})_{S,V}$ is the energy cost of adding an extra particle at a fixed entropy and volume. However, adding a particle increases the number of ways to share the energy, and so increases entropy. But the entropy is fixed, so $\mu<0$ for the classical ideal gas. $\mu>0$ might occur in a suitably strong repulsive gas.
 \end{remarks}
 \begin{prop}
 For diatomic molecules, we account for additional independent degrees of freedom, namely two degrees of freedom for rotation, two for vibration, and thus the heat capacity will be in total $\frac{7}{2}N$.
@@ -1228,7 +1215,7 @@ Model the diatomic molecule to rotate rigidly about the two axes perpendicular t
 $$\mathcal{L}_{\text{rot}}=\frac{1}{2}I(\dot{\theta}^2+\sin^2\theta\dot{\phi}^2)\implies \mathcal{H}_{\text{rot}}=\dot{\theta}p_\theta+\dot{\phi}p_\phi-\mathcal{L}_{\text{rot}}=\frac{p_\theta^2}{2I}+\frac{p_\phi^2}{2I\sin^2\theta}$$
 where $p_\theta=I\dot{\theta}$ and $p_\phi=I\sin^2\theta\dot{\phi}$. The single particle partition function $Z_1$ acquire multiplicative factor
 \begin{align}
-\int e^{-p_\theta^2/2Ik_BT}e^{-p_\phi^2/2Ik_BT\sin^2\theta}\frac{d\theta d\phi dp_\theta dp_\phi}{(2\pi\hbar)^2}&=\frac{1}{(2\pi\hbar)^2}\int\sqrt{2\pi Ik_BT}\sqrt{2\pi Ik_BT}\sin^2\theta d\theta d\phi\nonumber\\&=\frac{2\pi Ik_BT}{(2\pi\hbar)^2}\frac{\int\sin\theta d\theta d\phi}{4\pi}\nonumber\\&=\frac{2Ik_BT}{\hbar^2}\nonumber
+\int e^{-p_\theta^2/2Ik_BT}e^{-p_\phi^2/2Ik_BT\sin^2\theta}\frac{d\theta d\phi dp_\theta dp_\phi}{(2\pi\hbar)^2}&=\frac{1}{(2\pi\hbar)^2}\int\sqrt{2\pi Ik_BT}\sqrt{2\pi Ik_BT\sin^2\theta} d\theta d\phi\nonumber\\&=\frac{2\pi Ik_BT}{(2\pi\hbar)^2}\frac{\int_0^{2\pi}\int^\pi_0\sin\theta d\theta d\phi}{4\pi}\nonumber\\&=\frac{2Ik_BT}{\hbar^2}\nonumber
 \end{align}
 The free energy acquires an additive term $-NTk_B\log\frac{2Ik_BT}{\hbar^2}$. For vibrations, the Hamiltonian is $\mathcal{H}_{\text{vib}}=\frac{p^2}{2\mu}+\frac{1}{2}\mu\omega^2q^2$. The partition function $z$ acquires a further multiplicative factor
 $$\int e^{-p^2/2\mu k_B T}e^{-\mu\omega^2q^2/2k_BT}\frac{dqdp}{2\pi\hbar}=\frac{1}{2\pi\hbar}\sqrt{2\pi k_B\mu T}\sqrt{\frac{2\pi k_B T}{\mu\omega^2}}=\frac{k_BT}{\hbar\omega}$$
@@ -1241,7 +1228,7 @@ where $f(T)=-\frac{3}{2}k_BT\log\frac{mk_BT}{2\pi\hbar^2}-k_BT\log\frac{k_BT}{\h
 Due to quantum mechanics, the vibrational and rotational modes will freeze out as the temperature is lowered.
 \begin{center}
   \begin{tikzpicture}[yscale=0.7]
-    \draw [->] (0, 0) -- (5, 0) node [right] {$T$};
+    \draw [->] (0, 0) -- (5, 0) node [right] {$T/k_B$};
     \draw [->] (0, 0) -- (0, 5) node [above] {$C_V/Nk_B$};
 
     \draw [dashed] (1.75, 0) node [below] {$\hbar^2/2I$} -- +(0, 5);
@@ -1292,19 +1279,23 @@ The crossover occur when $\langle n\rangle\sim 1$. $1/\lambda^3$ is sometimes ca
 \section{Quantum Statistical Mechanics}
 \subsection{Density of states}
 The density of states appear a lot in this chapter when computing sums over states. Consider an ideal gas trapped in a box of volume $V=L^3$.
-\subsubsection{Open Boundary Conditions}
+\subsubsection*{Open Boundary Conditions}
 If we assert the wavefunction must vanish at the walls of the box, then it must be standing waves. The eigenstates and eigenvalues are
 $$\psi=\sqrt{\frac{8}{V}}\sin(k_xx)\sin(k_yy)\sin(k_zz),\quad E_{\mathbf{k}}=\frac{\hbar^2}{2m}(k_x^2+k_y^2+k_z^2)$$
 In order to satisfy the boundary conditions, we need $\psi(x_i=0)=\psi(x_i=L_i)=0$, $k_i=\frac{n\pi}{L_i}$. The allowed values of the $\mathbf{k}$-vector form a lattice in $\mathbf{k}$-space, with volume per point $\Delta k_x\Delta k_y\Delta k_z=\frac{\pi^3}{V}$. The density of allowed $\mathbf{k}$-vectors will be the inverse of this, multiplied by the spin degeneracy factor $g_s$.
-\subsubsection{Periodic Boundary conditions}
-Now, since $\psi(x_i+L_i)=\psi(x_i)$, the eigenstates must be travelling waves $\psi=\frac{1}{\sqrt{V}}e^{i\mathbf{k}\cdot\mathbf{r}}$. The allowed values of the wavevector $\mathbf{k}$ again form a lattice, but now the spacing between lattice points is $2\pi/L_i$, giving a larger volume per lattice point $(2\pi)^3/V$ and a smaller density $g_sV/(2\pi)^3$. Since we count $\mathbf{k}$ from all eight octants of the 3D wavevector space, whereas for the open boundary conditions, states with wavevector $(\pm k_x,\pm k_y,\pm k_z)$ are actually the same, and so we have to limit our sums to one octant.
-\subsubsection{Integral conversion}
+\subsubsection*{Periodic Boundary conditions}
+Now, since $\psi(x_i+L_i)=\psi(x_i)$, the eigenstates must be travelling waves $\psi=\frac{1}{\sqrt{V}}e^{i\mathbf{k}\cdot\mathbf{r}}$. The allowed values of the wavevector $\mathbf{k}$ again form a lattice, but now the spacing between lattice points is $2\pi/L_i$, giving a larger volume per lattice point $(2\pi)^3/V$ and a smaller density $g_sV/(2\pi)^3$. For the open boundary conditions, we counted $\mathbf{k}$ from all eight octants of the 3D wavevector space, but states with wavevector $(\pm k_x,\pm k_y,\pm k_z)$ are actually the same, and so we have to limit our sums to one octant.
+\subsubsection*{Integral conversion}
 For any macroscopic size box $(\lambda<<L)$, there are many states with $E_n\leq k_BT$ all of which contributes to the sum. Hence, we may approximate the discrete sum to an integral:
-$$\sum_n\rightarrow\int d^3n=\frac{V}{(2\pi)^3}\int d^3k=\frac{4\pi V}{(2\pi)^3}\int_0^\infty k^2dk$$
+$$\sum_n\rightarrow\int d^3n=\frac{g_sV}{(2\pi)^3}\int d^3k=\frac{4\pi Vg_s}{(2\pi)^3}\int_0^\infty k^2dk$$
 It is thus easier to change variables to $dE=\frac{\hbar^2k}{m}dk$, so the density of states is
-$$\int d^3n=\int g(E)dE,\quad g(E)=\frac{V}{4\pi^2}\bigg(\frac{2m}{\hbar^2}\bigg)^{3/2}E^{1/2}$$
-where $g(E)dE$ counts the number of states with energy between $E$ and $E+dE$. On the other hand, for massless particles, the density of states is
-$$g(E)=\frac{VE^2}{2\pi^2\hbar^3c^3}$$
+\begin{equation}
+\int d^3n=\int g(E)dE,\quad g(E)=\frac{g_sV}{4\pi^2}\bigg(\frac{2m}{\hbar^2}\bigg)^{3/2}E^{1/2}\label{DoS1}
+\end{equation}
+where $g(E)dE$ counts the number of states with energy between $E$ and $E+dE$. On the other hand, for massless particles, the energy and momentum are related via $E=\hbar kc$, so the density of states is
+\begin{equation}
+g(E)=\frac{g_sVE^2}{2\pi^2\hbar^3c^3}\label{DoS2}
+\end{equation}
 \begin{remarks}
 This conversion is necessary in order to compute the grand potential later. Recall that the full grand potential is summed over all energy states, i.e. $\Phi=\sum_k\Phi_k$. For a continuous non-relativistic gas in 3D, we can cast the discrete sum into an integral over available phase space.
 $$\Phi=\sum_k\Phi_k=\int\Phi(E)\frac{d^3xd^3p}{(2\pi\hbar)^3}=\frac{V}{(2\pi\hbar)^3}\int^\infty_0 e^{-\beta(E-\mu)}4\pi p^2dp=\frac{V}{4\pi^2}\bigg(\frac{2m}{\hbar^2}\bigg)^{3/2}\int_0^\infty\sqrt{E}e^{-\beta(E-\mu)}dE$$
@@ -1319,7 +1310,9 @@ where we substituted $x^2=\varepsilon/k_BT$ and the integral is equal to $\sqrt{
 \newpage
 \subsection{Bosons and Fermions}
 If particles are non-interacting and $\lambda\sim(V/N)^{1/3}$ at sufficiently low temperature, then we need to consider quantum statistics. Consider $N$ identical particles, which may be interacting with each other. Due to spin-statistics theorem, the quantum wavefunctions must obey the symmetry property (depending on the quantum statistics)
-$$\Psi(\mathbf{x^1},...,\mathbf{x^i},...,\mathbf{x^j},...,\mathbf{x^N})=\pm\Psi(\mathbf{x^1},...,\mathbf{x^j},...,\mathbf{x^i},...,\mathbf{x^N})$$
+\begin{equation}
+\Psi(\mathbf{x^1},...,\mathbf{x^i},...,\mathbf{x^j},...,\mathbf{x^N})=\pm\Psi(\mathbf{x^1},...,\mathbf{x^j},...,\mathbf{x^i},...,\mathbf{x^N})\label{spinstatistics}
+\end{equation}
 Bosonic (integer spins) wavefunctions are even under exchange, whereas fermionic (half-integer spins) wavefunctions are odd under exchange. We can construct the basis of $N$-particle states $\Psi$ from independent 1-particle states $\{\psi^1, \psi^2,...\}$.  We do this by specifying the occupation numbers of $N$-particle states, constrained by the total number of particles $N$ being fixed, i.e. $\sum_\alpha n^\alpha=N$. The occupancy for bosons and fermions satisfy respectively $n^\alpha\in\mathbb{Z}^+\cup\{0\}$ and $n^\alpha\in\{0,1\}$. The latter is due to Pauli exclusion principle:
 \begin{eg}[Pauli exclusion principle]
 Consider the two-particle state constructed using $\psi^\alpha$ and $\psi^\beta$:
@@ -1334,11 +1327,15 @@ $$\frac{1}{2}(1+1\pm\delta_{s_1,s_2}(e^{-i\mathbf{k_1}\cdot(\mathbf{r_1}-\mathbf
 which is called the pair-correlation function.
 \end{eg}
 Using the canonical ensemble framework, the partition function is
-$$Z=\sum_{\{n_r\}}e^{-\beta n_rE_r}$$
-where $n_r$ is the number of particles in the state $|r\rangle$, with $\sum_rn_r=N$ being the total number of particles. Imposing quantum statistics on this sum is tricky, so it is much easier if we use a chemical potential $\mu$ and allow the total number of particles $N$ to fluctuate, i.e. grand canonical ensemble framework. Treat each one-particle energy level to be in contact with a heat and particle reservoir of temperature $T$ and chemical potential $\mu$. There is no need to constrain total $E$ and $N$. Essentially, instead of treating the particles as independent thermodynamic systems, we treat the energy levels as independent thermodynamic systems, which contain particles and energy.
+$$Z=\sum_{\{n_r\}}e^{-\beta n_rE_r},\quad\sum_rn_r=N$$
+where $n_r$ is the number of particles in the state $|r\rangle$, with $N$ being the total number of particles. Imposing quantum statistics on this sum is tricky. Much easier if we consider energy levels as independent thermodynamic systems, and impose quantum statics on the occupancy of each state. \\[5pt]
+Each energy level is contact with a heat and particle reservoir of temperature $T$ and chemical potential $\mu$, i.e. grand canonical ensemble. There is no constraint on total $E$ and $N$. The average occupancy $\langle N\rangle$ of the grand canonical ensemble is sharply peaked, and can be adjusted by the chemical potential $\mu$. 
+
 \begin{prop}
 The macroscopic grand partition functions for bosons and fermions respectively are:
-$$\mathcal{Z}_B=\frac{1}{1-e^{n\beta(\mu-E)}},\quad\mathcal{Z}_F=1+e^{n(\mu-E)\beta}$$
+\begin{equation}
+\mathcal{Z}_B=\frac{1}{1-e^{n\beta(\mu-E)}},\quad\mathcal{Z}_F=1+e^{n(\mu-E)\beta}\label{bosonsfermions}
+\end{equation}
 \end{prop}
 \begin{proof}
 For bosons, consider state $|r\rangle$ which may be populated by an arbitrary number of particles:
@@ -1352,7 +1349,9 @@ We are summing over the number of particles in a given state, rather than summin
 \end{remarks}
 \begin{prop}
 The Bose-Einstein distribution and Fermi-Dirac distribution are respectively
-$$n_B(E)=\frac{1}{e^{\beta(E-\mu)}-1},\quad n_F(E)=\frac{1}{e^{\beta(E-\mu)}+1}$$
+\begin{equation}
+n_B(E)=\frac{1}{e^{\beta(E-\mu)}-1},\quad n_F(E)=\frac{1}{e^{\beta(E-\mu)}+1}\label{bosonsfermions2}
+\end{equation}
 \end{prop}
 \begin{proof}
 Using results from the grand canonical ensemble: the mean occupation number for bosons and fermions are respectively:
@@ -1363,7 +1362,7 @@ $$n_F(E)=k_BT\frac{\partial}{\partial\mu}\log\mathcal{Z}_F=k_BT\frac{\partial}{\
 The quantum gas distributions reduce to the Maxwell-Boltzmann distribution.
 \end{cor}
 \begin{proof}
-$$n\approx e^{-(E-\mu)/k_BT},\quad \beta(E-\mu)>>1$$
+$n\approx e^{-(E-\mu)/k_BT}$ where $\beta(E-\mu)>>1$.
 \end{proof}
 \begin{eg}
 The Maxwell-Boltzmann probability distribution is obtained by
@@ -1378,67 +1377,69 @@ As we will see later:
 \end{enumerate}
 \end{remarks}
 \begin{prop}
-Suppose we have a quasi-continuous density of 1-particle energy levels $g(E)$. The total particle number and total energy are respectively
-$$N=\int_{E_{0}}^\infty\frac{g(E)dE}{e^{\beta(E-\mu)}\mp 1},\quad E=\int_{E_{0}}^\infty\frac{E g(E)dE}{e^{\beta(E-\mu)}\mp 1}$$
+Suppose we have a quasi-continuous density of 1-particle energy levels $g(E)$. The total particle number and total energy (denoted $E$ or $U$) are respectively
+\begin{equation}
+N=\int_{E_{0}}^\infty\frac{g(E)dE}{e^{\beta(E-\mu)}\mp 1},\quad E=\int_{E_{0}}^\infty\frac{E g(E)dE}{e^{\beta(E-\mu)}\mp 1}\label{bosonsfermions3}
+\end{equation}
 The negative branch is for bosons and positive branch is for fermions. 
 \end{prop}
 \begin{remarks}
-In general, the two integrals have no closed form, but we can simplify it under certain regimes (as we will see later). For a gas of non-relativistic particles, $E=\frac{p^2}{2m}$, the density of states $g(E)$ is given to be
-$$g(E)dE=g_s\frac{V}{(2\pi\hbar)^3}d^3p=\frac{g_sV4\pi p^2dp}{(2\pi\hbar)^3}=\frac{g_sV}{4\pi^2}\bigg(\frac{2m}{\hbar^2}\bigg)^{3/2}E^{1/2}dE:=K'E^{1/2}dE$$
-where $g_s$ is the degeneracy of the particles.
+In general, the two integrals have no closed form, but we can simplify it under certain regimes (as we will see later). 
 \end{remarks} 
 \begin{prop}
 $PV=\frac{2}{3}E$ is true for bosons and fermions.
 \end{prop}
 \begin{proof}
-$\Phi$ is extensive and a function of $T$, $\mu$ and $V$, i.e. $\Phi=Vf(T,\mu)$. Recall $P=-\frac{\partial\Phi}{\partial V}|_{T,\mu}=-f(T,\mu)$ and for boson/fermion gases, the grand potential $\Phi$ is
-$$\Phi=-T\log\mathcal{Z}=-T\int g(E)\log(1\pm\xi e^{-E/T})dE=-TK'\int E^{1/2}\log(1\pm\xi e^{-E/T})dE$$
-where $\xi=e^{\mu/T}$ is defined as the fugacity. Perform an integration by parts:
-$$PV=-\Phi=T\log\mathcal{Z}=-TK'\int E^{1/2}\log(1\pm\xi e^{-\beta E})dE=K'\frac{2}{3}\int\frac{E^{3/2}dE}{\xi^{-1}e^{\beta E}\pm1}=\frac{2}{3}E$$
+Define $\xi:=e^{\mu/k_BT}$ to be the fugacity, the grand potential $\Phi$ for bosons/fermions is
+$$\Phi=-k_BT\log\mathcal{Z}=-k_BT\int g(E)\log(1\pm\xi e^{-E/k_BT})dE=-k_BTK'\int E^{1/2}\log(1\pm\xi e^{-E/k_BT})dE$$
+$\Phi$ is extensive and a function of $T$, $\mu$ and $V$, i.e. $\Phi=Vf(T,\mu)$, and recall $P=-\frac{\partial\Phi}{\partial V}|_{T,\mu}=-f(T,\mu)$. 
+$$PV=-\Phi=k_BT\log\mathcal{Z}=k_BTK'\int E^{1/2}\log(1\pm\xi e^{-\beta E})dE=K'\frac{2}{3}\int\frac{E^{3/2}dE}{\xi^{-1}e^{\beta E}\pm1}=\frac{2}{3}E$$
+where $K':=\frac{g_sV}{4\pi^2}(\frac{2m}{\hbar^2})^{3/2}$ and we performed an integration by parts.
 \end{proof}
 \begin{defi}[Gamma function]
 The Gamma function is defined to be
-$$\Gamma(s)=\int_0^\infty t^{s-1}e^{-t}dt$$
+\begin{equation}
+\Gamma(s)=\int_0^\infty t^{s-1}e^{-t}dt\label{Gamma}
+\end{equation}
 with the familiar results:
 $$\Gamma(n)=(n-1)!,\quad n\in\mathbb{Z}^+,\quad\Gamma(1/2)=\sqrt{\pi},\quad\Gamma(3/2)=\frac{\sqrt{\pi}}{2},\quad\Gamma(5/2)=\frac{3\sqrt{\pi}}{4}$$
 \end{defi}
 \begin{prop}
 Let $x=\beta E$ and recall the thermal wavelength to be $\lambda=\sqrt{2\pi\hbar^2\beta/m}$. Then, $\frac{N}{V}$ and $\frac{P}{T}$ of fermions/bosons can be elegantly written as
-$$\frac{N}{V}=\frac{g_s}{\lambda^3}f_{3/2}^{F/B}(\xi),\quad\frac{P}{T}=\frac{g_s}{\lambda^3}f_{5/2}^{F/B}(\xi)$$
-where
-$$f_\nu^F(\xi):=\frac{1}{\Gamma(\nu)}\int_0^\infty\frac{x^{\nu-1}}{\xi^{-1}e^x+1}dx,\quad f_\nu^B(\xi):=\frac{1}{\Gamma(\nu)}\int_0^\infty\frac{x^{\nu-1}}{\xi^{-1}e^x-1}dx$$
+\begin{equation}
+\frac{N}{V}=\frac{g_s}{\lambda^3}f_{3/2}^{F/B}(\xi),~\frac{P}{k_BT}=\frac{g_s}{\lambda^3}f_{5/2}^{F/B}(\xi),~\text{where }~f_\nu^F(\xi):=\frac{1}{\Gamma(\nu)}\int_0^\infty\frac{x^{\nu-1}}{\xi^{-1}e^x+1}dx,~f_\nu^B(\xi):=\frac{1}{\Gamma(\nu)}\int_0^\infty\frac{x^{\nu-1}}{\xi^{-1}e^x-1}dx\label{bosonsfermions4}
+\end{equation}
 where $\Gamma(\nu)$ is the Gamma function.
 \end{prop}
 \begin{proof}
 use the definition of $f_{3/2}^{F/B}(\xi)$, $f_{5/2}^{F/B}(\xi)$ and $\Gamma(3/2)=\sqrt{\pi}/2$, $\Gamma(5/2)=3\sqrt{\pi}/4$:
-$$\frac{N}{V}=\int_0^\infty\frac{g(E)dE}{\xi^{-1}e^{\beta E}\mp 1}dE=\frac{g_s}{4\pi^2}\bigg(\frac{2m}{\hbar^2}\bigg)^{3/2}\int_0^\infty\frac{E^{1/2}dE}{\xi^{-1}e^{\beta E}\mp 1}=\frac{g_s}{4\pi^2}\bigg(\frac{2m}{\hbar^2\beta}\bigg)^{3/2}\int_0^\infty\frac{x^{1/2}dx}{\xi^{-1}e^x\mp 1}=\frac{g_s}{\lambda^3}f_{3/2}^{F/B}(\xi)$$
-$$\frac{E}{V}=\int_0^\infty\frac{Eg(E)dE}{\xi^{-1}e^{\beta E}\mp 1}dE=\frac{g_s}{4\pi^2}\bigg(\frac{2m}{\hbar^2}\bigg)^{3/2}\int_0^\infty\frac{E^{3/2}dE}{\xi^{-1}e^{\beta E}\mp 1}=\frac{g_s}{4\pi^2}\bigg(\frac{2m}{\hbar^2\beta}\bigg)^{3/2}\frac{1}{\beta}\int_0^\infty\frac{x^{3/2}dx}{\xi^{-1}e^x\mp 1}=\frac{g_s}{\lambda^3}\frac{3}{2\beta}f_{5/2}^{F/B}(\xi)$$
-But $PV=\frac{2}{3}E$ for quantum gases, so $\frac{P}{T}=\frac{g_s}{\lambda^3}\frac{2}{3}\frac{3}{2}f_{5/2}^{F/B}(\xi)$.
+$$\frac{N}{V}=\int_0^\infty\frac{g(E)dE}{\xi^{-1}e^{\beta E}\mp 1}=\frac{g_s}{4\pi^2}\bigg(\frac{2m}{\hbar^2}\bigg)^{3/2}\int_0^\infty\frac{E^{1/2}dE}{\xi^{-1}e^{\beta E}\mp 1}=\frac{g_s}{4\pi^2}\bigg(\frac{2m}{\hbar^2\beta}\bigg)^{3/2}\int_0^\infty\frac{x^{1/2}dx}{\xi^{-1}e^x\mp 1}=\frac{g_s}{\lambda^3}f_{3/2}^{F/B}(\xi)$$
+$$\frac{E}{V}=\int_0^\infty\frac{Eg(E)dE}{\xi^{-1}e^{\beta E}\mp 1}=\frac{g_s}{4\pi^2}\bigg(\frac{2m}{\hbar^2}\bigg)^{3/2}\int_0^\infty\frac{E^{3/2}dE}{\xi^{-1}e^{\beta E}\mp 1}=\frac{g_s}{4\pi^2}\bigg(\frac{2m}{\hbar^2\beta}\bigg)^{3/2}\frac{1}{\beta}\int_0^\infty\frac{x^{3/2}dx}{\xi^{-1}e^x\mp 1}=\frac{g_s}{\lambda^3}\frac{3}{2\beta}f_{5/2}^{F/B}(\xi)$$
+But $PV=\frac{2}{3}E$ for quantum gases, so $\frac{P}{k_BT}=\frac{g_s}{\lambda^3}\frac{2}{3}\frac{3}{2}f_{5/2}^{F/B}(\xi)$.
 \end{proof}
 \begin{remarks}
 When $\xi=1$, we obtain the Riemann Zeta function
 $$f_\nu^B(\xi=1)=\zeta(\nu)=\frac{1}{\Gamma(\nu)}\int_0^\infty\frac{x^{\nu-1}}{e^x-1}dx$$
 In general, it is tricky to obtain analytical solutions, hence we shall only consider limiting cases.
 \end{remarks}
-\newpage
 \subsection{Ideal Fermi Gas}
 \begin{prop}
 Fermionic particles repel in a low density fermionic gas.
 \end{prop}
 \begin{proof}
 For low density, expand the Fermi-Dirac function for small $\xi$:
-$$\frac{1}{\xi^{-1}e^x+1}=\xi e^{-x}(1-\xi e^{-x}+...)\implies f_\nu^F(\xi)=\frac{1}{\Gamma(\nu)}\int_0^\infty x^{\nu-1}(\xi e^{-x}-\xi^2e^{-2x}+...)d\xi=\xi-\frac{\xi^2}{2^\nu}+...$$
-This gives
-$$\frac{N}{V}=\frac{g_s}{\lambda^3}\bigg(\xi-\frac{\xi^2}{2^{3/2}}+\dots\bigg),\quad\frac{P}{T}=\frac{g_s}{\lambda^3}\bigg(\xi-\frac{\xi^2}{2^{5/2}}+\dots\bigg)$$
-For dilute gas (low density) $\frac{N}{V}<<\frac{1}{\lambda^3}$, so $\xi<<1$. The leading result is $\frac{P}{T}=\frac{N}{V}$ as expected. The next leading term is obtained by eliminating $\xi$:
-$$P=\frac{NT}{V}\bigg(1+\frac{1}{2^{5/2}}\frac{\lambda^3}{g_s}\frac{N}{V}\bigg)=\frac{NT}{V}\bigg(1+\frac{\pi^{3/2}\hbar^3}{2m^{3/2}T^{3/2}g_s}\frac{N}{V}\bigg)$$
-The second Virial coefficient $B(T)$ (we will see later) is directly proportional to $T^{-3/2}$. This is small for large $T$, so $B(T)>0$, so pressure increase, i.e. fermions repel.
+$$\frac{1}{\xi^{-1}e^x+1}=\xi e^{-x}(1-\xi e^{-x}+...)\implies f_\nu^F(\xi)=\frac{1}{\Gamma(\nu)}\int_0^\infty x^{\nu-1}(\xi e^{-x}-\xi^2e^{-2x}+...)dx=\xi-\frac{\xi^2}{2^\nu}+...$$
+where we recall the definition of the Gamma function (Eqn.~\ref{Gamma}). Eqn.~\ref{bosonsfermions4} give
+$$\frac{N}{V}=\frac{g_s}{\lambda^3}\bigg(\xi-\frac{\xi^2}{2^{3/2}}+\dots\bigg),\quad\frac{P}{k_BT}=\frac{g_s}{\lambda^3}\bigg(\xi-\frac{\xi^2}{2^{5/2}}+\dots\bigg)$$
+For dilute gas (low density) $\frac{N}{V}<<\frac{1}{\lambda^3}$, so $\xi<<1$. The leading result is $\frac{P}{k_BT}=\frac{N}{V}$ as expected. The next leading term is obtained by eliminating $\xi$:
+$$P=\frac{Nk_BT}{V}\bigg(1+\frac{1}{2^{5/2}}\frac{\lambda^3}{g_s}\frac{N}{V}\bigg)=\frac{Nk_BT}{V}\bigg(1+\frac{\pi^{3/2}\hbar^3}{2m^{3/2}T^{3/2}g_s}\frac{N}{V}\bigg)$$
+The second Virial coefficient $B_2(T)$ (we will see later) is directly proportional to $T^{-3/2}$. This is small for large $T$, so $B(T)>0$, so pressure increase, i.e. fermions repel.
 \end{proof}
 \begin{prop}
 Chemical potential is negative for a dilute fermionic gas.
 \end{prop}
 \begin{proof}
-$\xi=e^{\mu/T}\approx\frac{\lambda^3N}{g_sV}<<1$ for dilute gas, hence $\mu\approx T\log\frac{\lambda^3N}{g_sV}<0$ and $n_F(\xi)$ is small for $\xi\geq0$. As $T$ decreases, $\lambda$ increases, so $\mu$ increases and becomes positive. 
+From earlier, $\xi=e^{\mu/k_BT}\approx\frac{\lambda^3N}{g_sV}<<1$ for dilute gas, hence $\mu\approx k_BT\log\frac{\lambda^3N}{g_sV}<0$ and $n_F(\xi)$ is small for $\xi\geq0$. As $T$ decreases, $\lambda$ increases, so $\mu$ increases and becomes positive. 
 \end{proof}
 \begin{remarks}
 To keep $N$ fixed, we have to adjust $\mu$ as the temperature changes. As the temperature is increased, the chemical potential (originally positive) shifts to lower values, and ultimately becomes negative.
@@ -1451,7 +1452,7 @@ For electronic gas, the degeneracy is $g_s=2$ since electrons have spin-$1/2$. A
 The energy states of the free particles are not localized in position space, but localized in momentum space. Successive fermions sit in states with ever-increasing momentum. Fermions fill out a ball in momentum space with the momentum of the final fermion called the Fermi momentum $k_F=\sqrt{2mE_F}/\hbar$. All states with wavevector $k\leq k_F$ are filled and are said to form the Fermi sphere.
 \end{Note}
 \begin{prop}
-At $T=0$, electronic gas is degenerate and exhibit degeneracy pressure.
+At $T=0$, $k_F=\sqrt{3\pi^2n}$, and the electronic gas is degenerate and exhibits degeneracy pressure. The total energy per particle will be $3E_F/5$.
 \end{prop}
 \begin{proof}
 For a fixed total particle number $N$ and $g_s=2$, the Fermi momentum satisfy
@@ -1474,42 +1475,43 @@ The density of states $g(E)$ is independent of temperature $T$. For small $T$, t
   \begin{tikzpicture}
     \draw [->] (0, 0) -- (5, 0) node [right] {$E$};
     \draw [->] (0, 0) -- (0, 3) node [above] {$n_F(E)$};
+    \draw (0, 2) node [left] {$1$};
 
-    \draw [thick](0, 2) -- (2, 2) -- (2, 0) node [below] {$E_f$} -- (4.9, 0);
+    \draw [thick](0, 2) -- (2, 2) -- (2, 0) node [below] {$E_F$} -- (4.9, 0);
   \end{tikzpicture}
   \begin{tikzpicture}
     \draw [->] (0, 0) -- (5, 0) node [right] {$E$};
     \draw [->] (0, 0) -- (0, 3) node [above] {$n_F(E)$};
+    \draw (0, 2) node [left] {$1$};
 
     \draw [thick] (0, 2) -- (1.8, 2) .. controls (2, 2) and (2, 0) .. (2.2, 0) -- (4.9, 0);
 
-    \node [below] at (2, 0) {$E_f$};
+    \node [below] at (2, 0) {$E_F$};
     \draw [decoration={markings, mark=at position 0 with {\arrowreversed{latex'}}, mark=at position 1 with {\arrow{latex'}}}, postaction={decorate}] (1.8, 2.2) -- (2.2, 2.2) node [pos=0.5, above] {$k_BT$};
   \end{tikzpicture}
 \end{center}
 \begin{remarks}\leavevmode
 \begin{enumerate}
-\item A more rigorous proof to the above is via the Sommerfield expansion. 
-$$\int_0^\infty\frac{g(E)dE}{e^{\beta(E-\mu)}+1}\approx\int_0^{E_F}g(E)dE+\frac{\pi^2}{6}k_B^2T^2g'(E_F)+\frac{7\pi^4}{360}k_B^4T^4g^{(3)}(E_F)+\dots$$
-To get the grand potential $\Phi$ to second order in $k_BT$, we substitute $g(E)=E^{3/2}$ to obtain
+\item A more rigorous proof to the above is via the Sommerfield expansion, i.e. a low temperature expansion of $f_\nu^F(\xi)$ in $1/\log \xi=1/\beta\mu$:
+$$f_\nu^F(\xi)=\frac{(\log \xi)^\nu}{\Gamma(\nu+1)}\bigg(1+\frac{\pi^2}{6}\frac{\nu(\nu-1)}{(\log \xi)^2}+\dots\bigg)\implies\int_0^\infty\frac{F(E)dE}{e^{\beta(E-\mu)}+1}\approx\int_0^{E_F}F(E)dE+\frac{\pi^2}{6}k_B^2T^2F'(E_F)+\dots$$
+Substitute $F(E)=E^{3/2}$ to obtain the grand potential:
 $$\Phi(T)=\Phi(0)-\frac{Vk_B^2T^2}{12}\bigg(\frac{2m}{\hbar^2}\bigg)^{3/2}E_F^{1/2}$$
 and hence the heat capacity at constant volume is
 $$C_V=T\bigg(\frac{\partial S}{\partial T}\bigg)_{V,\mu}=-T\bigg(\frac{\partial^2\Phi}{\partial T^2}\bigg)_{V,\mu}=T\frac{\partial}{\partial T}\frac{k_B^2T}{3}\frac{V}{2}\bigg(\frac{2m}{\hbar^2}\bigg)^{3/2}\sqrt{E_F}=\frac{\pi^2}{3}g(E_F)k_B^2T$$
-\item In solid metal, the contributions to $C$ are $O(T)$ from non-degenerate electrons and $O(T^2)$ from lattice vibrations. The electronic contribution to the heat capacity dominates at low temperatures. The Fermi temperature $T_F$ is very large for metals, typically 50,000 K.
+\item In solid metal, the contributions to $C$ are $O(T)$ from non-degenerate electrons and $O(T^3)$ from lattice vibrations. The electronic contribution to the heat capacity dominates at low temperatures. The Fermi temperature $T_F$ is very large for metals, typically 50,000 K.
 \item We have the density of states to be $g(E)\propto\sqrt{E}$ and so the number is $N(E)=\int g(E)dE\propto\frac{2}{3}E^{3/2}$, and so $g(E_F)=\frac{3N_{\text{tot}}}{2E_F}$.
 \end{enumerate}
 \end{remarks}
-\newpage
 \subsection{Ideal Bose Gas}
 \begin{prop}
 Bosonic particles attract in a low density bosonic gas.
 \end{prop}
 \begin{proof}
 Set $g_s=1$. For low density, expand Bose-Einstein function for small $\xi$:
-$$\frac{N}{V}=\frac{1}{\lambda^3}f_{3/2}^B(\xi)=\frac{1}{\lambda^3}\bigg(\xi+\frac{\xi^2}{2^{3/2}}+...\bigg),\quad \frac{P}{T}=\frac{1}{\lambda^3}f_{5/2}^B(\xi)=\frac{1}{\lambda^3}\bigg(\xi+\frac{\xi^2}{2^{5/2}}+...\bigg)$$
+$$\frac{N}{V}=\frac{1}{\lambda^3}f_{3/2}^B(\xi)=\frac{1}{\lambda^3}\bigg(\xi+\frac{\xi^2}{2^{3/2}}+...\bigg),\quad \frac{P}{k_BT}=\frac{1}{\lambda^3}f_{5/2}^B(\xi)=\frac{1}{\lambda^3}\bigg(\xi+\frac{\xi^2}{2^{5/2}}+...\bigg)$$
 At low density, $\xi<<1$. Eliminating $\xi$ gives
-$$P=\frac{NT}{V}\bigg(1-\frac{\lambda^3}{2^{5/2}}\frac{N}{V}+...\bigg)$$
-The second Virial coefficient (as we will see later) $B(T)=O(T^{-3/2})$ and is negative, i.e. Bosons are attractive.
+$$P=\frac{Nk_BT}{V}\bigg(1-\frac{\lambda^3}{2^{5/2}}\frac{N}{V}+...\bigg)$$
+The second Virial coefficient (as we will see later) $B_2(T)=O(T^{-3/2})$ and is negative, i.e. Bosons are attractive.
 \end{proof}
 \begin{defi}[Bose-Einstein Condensation]
 Bose-Einstein condensation is a condensate in momentum/energy space where a macroscopic number of particles occupy the ground state.
@@ -1519,7 +1521,7 @@ At a critical temperature $T_c$, we will obtain Bose-Einstein condensation.
 \end{prop}
 \begin{proof}
 Recall $\frac{N}{V}=\frac{1}{\lambda^3}f_{3/2}^B(\xi)$. As $T$ decreases, $\frac{1}{\lambda^3}$ decreases, so $\xi$ must increase to keep $\frac{N}{V}$ fixed. After $\xi$ reaches to 1, this equation breaks down (see $f_\nu^B$ integral). The critical temperature $T_c$ is given by
-$$\frac{N}{V}=\frac{1}{[\lambda(T=T_c)]^3}f_{3/2}^B(1)=\bigg(\frac{mk_BT_c}{2\pi\hbar^2}\bigg)^{3/2}\zeta(1.5)\implies T_c=\frac{2\pi\hbar^2}{k_Bm}\bigg(\frac{1}{\xi(1.5)}\frac{N}{V}\bigg)^{2/3}$$
+$$\frac{N}{V}=\frac{1}{[\lambda(T=T_c)]^3}f_{3/2}^B(1)=\bigg(\frac{mk_BT_c}{2\pi\hbar^2}\bigg)^{3/2}\zeta(1.5)\implies T_c=\frac{2\pi\hbar^2}{k_Bm}\bigg(\frac{1}{\zeta(1.5)}\frac{N}{V}\bigg)^{2/3}$$
 where $\zeta(1.5)=2.612$. $T_c$ is called the Bose-Einstein Condensation temperature, related to the number density $\frac{N}{V}$. Naively, we see that as we reduce $T$ below $T_c$, the number of particles $N$ should decrease. This is erroneous since in approximating the finite sum $\sum_k\rightarrow\frac{V(2m)^{3/2}}{4\pi^2\hbar^2}\int E^{1/2}dE$, $E=0$ does not contribute to the integral. The `missing' states have $E=0$ which does not contribute to the integral. Using the Bose-Einstein distribution, the ground state occupancy is predicted to be
 $$n_B(E=0)=\frac{1}{\xi^{-1}-1}$$
 which diverges at $\xi=0$. As $T\rightarrow T_c$ from above, one crudely approximate by setting $\xi\approx1-(1/N)$ so $n_B=O(N)$, i.e. the ground state have macroscopic occupation. 
@@ -1533,21 +1535,19 @@ This gives us the fraction of particles in the ground state. At $T=0$, all parti
 \begin{center}
   \begin{tikzpicture}
     \draw [->] (0, 0) -- (3, 0) node [right] {$T$};
-    \draw [->] (0, 0) -- (0, 2) node [above] {$N_0/N$};
+    \draw [->] (0, 0) -- (0, 1.5) node [above] {$N_0/N$};
     \draw (0, 1) node [left] {1};
     \draw (1, 0) node [below] {$T_c$};
     \draw [thick, domain=0:1] plot [smooth] (\x, {1-\x^(3/2)});
   \end{tikzpicture}
 \end{center}
-\item The pressure is given by
-$$\frac{P}{T}=\frac{g_s}{\lambda^3}f_{5/2}^B(\xi)=\frac{g_s}{\lambda^3}\zeta(5/2)$$
-so $P$ is directly proportional to $T^{5/2}$ for $T\leq T_c$. Earlier, $PV=\frac{2}{3}E$, so $E$ is directly proportional to $VT^{5/2}$. This is true for $T< T_c$ and $\xi\approx 1$. 
+\item The pressure is directly proportional to $T^{5/2}$ for $T\leq T_c$.
+$$\frac{P}{k_BT}=\frac{g_s}{\lambda^3}f_{5/2}^B(\xi=1)=\frac{g_s}{\lambda^3}\zeta(5/2)$$
+i.e. Riemann-Zeta function. Earlier, $PV=\frac{2}{3}E$, so $E$ is directly proportional to $VT^{5/2}$. This is true for $T< T_c$ and $\xi\approx 1$. 
 \item At low temperatures and below $T_c$, set $\mu=0$, we have
-$$U=\frac{2Vk_BT}{\sqrt{\pi}\lambda^3}\int_0^\infty\frac{x^{3/2}dx}{e^x-1}\approx\frac{2V}{\lambda^3}k_BT\propto T^{5/2}$$
-and so the heat capacity is
-$$C_V=\frac{\partial E}{\partial T}\bigg|_V=\frac{5}{2}\frac{k_BV}{\sqrt{2}\lambda^3}\propto T^{3/2}$$
-For large $T$, estimate $C_V$ using virial expansion (see later):
-$$E=\frac{3}{2}PV=\frac{3}{2}NT\bigg(1-O\bigg(\frac{N}{V}\frac{1}{T^{3/2}}\bigg)\bigg)\implies C_V=\frac{\partial E}{\partial T}\bigg|_V=\frac{3}{2}N\bigg(1+O\bigg(\frac{N}{V}\frac{1}{T^{3/2}}\bigg)\bigg)$$
+$$U=\frac{2Vk_BT}{\sqrt{\pi}\lambda^3}\int_0^\infty\frac{x^{3/2}dx}{e^x-1}\approx\frac{2V}{\lambda^3}k_BT\propto T^{5/2}\implies C_V=\frac{\partial U}{\partial T}\bigg|_V=\frac{5}{2}\frac{k_BV}{\sqrt{2}\lambda^3}\propto T^{3/2}$$
+For large $T$, estimate $C_V$ using virial expansion (from earlier expansion):
+$$U=\frac{3}{2}PV=\frac{3}{2}NT\bigg(1-O\bigg(\frac{N}{V}\frac{1}{T^{3/2}}\bigg)\bigg)\implies C_V=\frac{\partial U}{\partial T}\bigg|_V=\frac{3}{2}N\bigg(1+O\bigg(\frac{N}{V}\frac{1}{T^{3/2}}\bigg)\bigg)$$
 \begin{center}
   \begin{tikzpicture}
     \draw [->] (0, 0) -- (6, 0) node [right] {$T$};
@@ -1565,6 +1565,9 @@ $$E=\frac{3}{2}PV=\frac{3}{2}NT\bigg(1-O\bigg(\frac{N}{V}\frac{1}{T^{3/2}}\bigg)
 \end{enumerate}
 \item $C_V$ is continuous but have a discontinuous derivative at $T=T_c$. We call this a phase transition, and that $T_c$ depends on $\frac{N}{V}$.
 \end{remarks}
+\begin{eg}[Experimental signature]
+Above $T_c$, the ideal Bose gas show a Maxwellian momentum distribution. Below $T_c$, a sharp peak appears, centred on $k=0$ (the lowest energy eigenstate) which is macroscopically occupied.
+\end{eg}
 \begin{eg}
 $^4$He undergoes transition from normal liquid to a superfluid (related to Bose Einstein condensation, but interactions are really quite strong). Using the density of normal liquid at pressure 1 atm, we predict the Bose Einstein transition temperature $T_c=3.13$ K. Experimentally, we see a discontinuity in $C_V$ at $T=2.19$ K. The experimental measurements show a `$\lambda$' transition at $T_c$. This is because in our calculations, interactions are not accounted for. Better examples of BEC are dilute gases of heavy atoms in harmonic traps, like Rubidium-87 which have a $T_c\sim 10^{-7}$ K with a macroscopic occupation of $N\sim10^4$ to $10^7$, i.e. density of $2.5\times10^{12}$ atoms per cubic centimetres. 
 \end{eg}
@@ -1575,7 +1578,6 @@ The exact description of interacting particles is very difficult. Commonly, we c
 The elementary excitations of a ferromagnetic systems, in which the size of the moments is fixed, are `spin waves'. The simplest dispersion relation is $E_k\propto k^2$. The result will be $C\propto T^{3/2}$, which agrees with experimental measurements.
 \end{eg}
 Below, we consider two other examples: photons and phonons.
-\newpage
 \subsection{Blackbody radiation}
 \begin{defi}[Blackbody radiation]
 Blackbody radiation can be thought of as an ideal gas of photons, with integer angular momentum and obey Bose statistics. To come into equilibrium, they have to interact with a reservoir, which is taken to be the walls of the blackbody cavity.
@@ -1584,72 +1586,68 @@ Blackbody radiation can be thought of as an ideal gas of photons, with integer a
 The chemical potential of blackbody radiation is zero.
 \end{prop}
 \begin{proof}
-Thermal equilibrium is reached by absorption and emission of photons by the walls, so we cannot take $N$, the number of photons in the gas, to be constant. $\mu$ is obtained by minimizing the Helmholtz free energy, with respect to the variations in the average number of photons, i.e.
-$$\bigg(\frac{\partial F}{\partial N}\bigg)_{T,V}=0$$
-But this is actually $\mu$ by definition of free energy. In this case, the grand potential and the free energy is the same.
+Thermal equilibrium is reached by absorption and emission of photons by the walls, so we cannot take $N$, the number of photons in the gas, to be constant. $\mu$ is obtained by minimizing the Helmholtz free energy, with respect to the variations in the average number of photons, i.e. $(\frac{\partial F}{\partial N})_{T,V}=0$. But this is actually $\mu$ by definition of free energy. In this case, the grand potential and the free energy is the same.
 \end{proof}
 \begin{prop}
-The Planck distribution $E(\omega)$ is given by
-$$E=\int_0^\infty E(\omega)d\omega,\quad E(\omega)=\frac{V\hbar}{\pi^2c^3}\frac{\omega^3}{e^{\beta\hbar\omega}-1}$$
+The Planck distribution $U(\omega)$ is given by
+\begin{equation}
+U=\int_0^\infty E(\omega)d\omega,\quad U(\omega)=\frac{V\hbar}{\pi^2c^3}\frac{\omega^3}{e^{\beta\hbar\omega}-1}\label{Planck}
+\end{equation}
 \end{prop}
 \begin{proof}
-Consider electromagnetic radiation filling a volume $V=L^3$ at temperature $T$. The radiation modes are $\mathbf{A}e^{i(\mathbf{k}\cdot\mathbf{x}-\omega t)}$ with $\omega=c|\mathbf{k}|$. Again, enforce periodic boundary conditions are $k_x=\frac{2\pi n_x}{L}$, etc. There are two transverse polarization states which are the two directions transverse to the direction of propagation, so the degeneracy $g_s=2$. Hence, the density of modes in $\mathbf{k}$-space is $2\frac{V}{(2\pi)^3}$. The number of modes between $k$ and $k+dk$ is 
+Consider electromagnetic radiation filling a volume $V=L^3$ at temperature $T$. The radiation modes are $\mathbf{A}e^{i(\mathbf{k}\cdot\mathbf{x}-\omega t)}$ with $\omega=c|\mathbf{k}|$. Again, enforce periodic boundary conditions are $k_x=\frac{2\pi n_x}{L}$, etc. There are two transverse polarization states, so the degeneracy $g_s=2$. Hence, the density of modes in $\mathbf{k}$-space is $2\frac{V}{(2\pi)^3}$. The number of modes between $k$ and $k+dk$ is 
 $$g(k)dk=2\frac{V}{(2\pi)^3}4\pi k^2dk=\frac{Vk^2}{\pi^2}dk$$
-Correspondingly, the number of modes between $\omega$ and $\omega+d\omega$ is 
-$$g(\omega)d\omega=\frac{V\omega^2}{\pi^2c^3}d\omega$$
-where we used $\omega=ck$, i.e. relativistic. We start by summing photons with a definite frequency $\omega$. A state with $N$ such photons has energy $E=N\hbar\omega$.
-$$Z_\omega=\sum_{N=0}^\infty e^{-\beta N\hbar\omega}=\frac{1}{1-e^{-\beta\hbar\omega}}$$
-Sum over all possible frequencies:
-$$\ln Z=\int_0^\infty g(\omega)\ln Z_\omega d\omega=-\frac{V}{\pi^2c^3}\int_0^\infty\omega^2\ln(1-e^{-\beta\hbar\omega})d\omega$$
+Correspondingly, the number of modes between $\omega$ and $\omega+d\omega$ is $g(\omega)d\omega=\frac{V\omega^2}{\pi^2c^3}d\omega$, where we used the relativistic dispersion relation $\omega=ck$. We start by summing photons with a definite frequency $\omega$. A state with $N$ such photons has energy $E=N\hbar\omega$.
+$$Z_\omega=\sum_{N=0}^\infty e^{-\beta N\hbar\omega}=\frac{1}{1-e^{-\beta\hbar\omega}}\implies\ln Z=\int_0^\infty g(\omega)\ln Z_\omega d\omega=-\frac{V}{\pi^2c^3}\int_0^\infty\omega^2\ln(1-e^{-\beta\hbar\omega})d\omega$$
 Using the result from the canonical ensemble, the energy is
-$$E=-\frac{\partial}{\partial\beta}\log Z=\frac{V\hbar}{\pi^2c^3}\int_0^\infty\frac{\omega^3d\omega}{e^{\beta\hbar\omega}-1}$$
-Result follows by $E=\int_0^\infty E(\omega)d\omega$.
+$$U=-\frac{\partial}{\partial\beta}\log Z=\frac{V\hbar}{\pi^2c^3}\int_0^\infty\frac{\omega^3d\omega}{e^{\beta\hbar\omega}-1}$$
+Result follows by $U=\int_0^\infty E(\omega)d\omega$.
 \end{proof}
 \begin{cor}[Wien's displacement law]
 The Planck distribution peaks at a frequency $\omega_{\text{max}}=\xi T/\hbar$ where $\xi$ satisfies $3-\xi=3e^{-\xi}$.
 \end{cor}
 \begin{proof}
-Find maximum for the Planck distribution $E(\omega)$.
+Find maximum for the Planck distribution $U(\omega)$.
 \end{proof}
 \begin{prop}[Stefan-Boltzmann Law]
 The energy flux is given by $\sigma T^4$.
 \end{prop}
 \begin{proof}
 Substitute $x=\beta\hbar\omega$ in the $E$ integral:
-$$E=\frac{V}{\pi^2c^3}\frac{T^4}{\hbar^3}\int_0^\infty\frac{x^3dx}{e^x-1}=\frac{VT^4}{\pi^2c^3\hbar^3}\frac{\pi^4}{15}$$
+$$U=\frac{V}{\pi^2c^3}\frac{T^4}{\hbar^3}\int_0^\infty\frac{x^3dx}{e^x-1}=\frac{VT^4}{\pi^2c^3\hbar^3}\frac{\pi^4}{15}$$
 The energy flux is the rate of transfer of energy and can be shown to be $\frac{E}{V}\frac{c}{4}$. The flux of photons is obtained from
 $$\frac{1}{4\pi}\int_0^{2\pi}\int_0^{\pi/2}c\cos\theta (\sin\theta d\theta) d\phi=\frac{c}{4}$$
 where we consider photons travelling perpendicularly away from the object. The result follows.
 \end{proof}
 \begin{prop}
 The equation of state of the photon gas is
-$$P=\frac{1}{3}\frac{E}{V}$$
+\begin{equation}
+P=\frac{1}{3}\frac{U}{V}\label{photonpressure}
+\end{equation}
 \end{prop}
 \begin{proof}
-The free energy of a canonical ensemble is
-\begin{align}
-F&=-T\log Z\nonumber\\&=\frac{VT}{\pi^2c^3}\int_0^\infty\omega^2\log(1-e^{-\beta\hbar\omega})d\omega\nonumber\\&=-\frac{V\hbar}{3\pi^2c^3}\int_0^\infty\frac{\omega^3e^{-\beta\hbar\omega}}{1-e^{-\beta\hbar\omega}}d\omega\nonumber\\&=-\frac{V\hbar}{3\pi^2c^3\beta^4\hbar^4}\int_0^\infty\frac{x^3}{e^x-1}dx\nonumber\\&=-\frac{V\pi^2T^4}{45\hbar^3c^3}\nonumber
-\end{align}
-The pressure is then
-$$P=-\bigg(\frac{\partial F}{\partial V}\bigg)_T=\frac{E}{3V}$$
+The free energy of a canonical ensemble $F=-k_BT\log Z$ is
+$$F=\frac{k_BVT}{\pi^2c^3}\int_0^\infty\omega^2\log(1-e^{-\beta\hbar\omega})d\omega=\frac{V\hbar}{3\pi^2c^3}\int_0^\infty\frac{\omega^3e^{-\beta\hbar\omega}}{1-e^{-\beta\hbar\omega}}d\omega=-\frac{V\hbar}{3\pi^2c^3\beta^4\hbar^4}\int_0^\infty\frac{x^3}{e^x-1}dx=-\frac{V\pi^2T^4}{45\hbar^3c^3}$$
+where we integrated by parts. The pressure is then
+$$P=-\bigg(\frac{\partial F}{\partial V}\bigg)_T=\frac{U}{3V}$$
 or sometimes written as $4\sigma T^4/3c$. This is the radiation pressure. 
 \end{proof}
 \begin{remarks}\leavevmode
 \begin{enumerate}
-\item Alternatively, the equation of state can be worked out using the following argument: We have $k=\frac{\pi^2}{15\hbar^3c^3}$. Write $E=kVT^4$. At constant $V$,
-$$dE=4kVT^3dT=TdS=TVf'(T)dT$$
-where $S=Vf(T)$ is extensive. We must have $f'(T)=4kT^2$ and so $f(T)=\frac{4}{3}kT^3$ since $S(T=0)=0$ by Third Law. The entropy of blackbody radiation is $S=\frac{4}{3}kVT^3$. Now express $E$ in terms of $S$ and $V$. We have $E=kV(\frac{4}{3}kV)^{-4/3}S^{4/3}$ which is directly proportional to $V^{-1/3}$. The pressure is 
-$$P=-\frac{\partial E}{\partial V}\bigg|_S\implies PV=\frac{1}{3}E$$
+\item Alternatively, the equation of state can be worked out using the following argument: We have $k=\frac{\pi^2}{15\hbar^3c^3}$. Write $U=kVT^4$. At constant $V$,
+$$dU=4kVT^3dT=TdS=TVf'(T)dT$$
+where $S=Vf(T)$ is extensive. We must have $f'(T)=4kT^2$ and so $f(T)=\frac{4}{3}kT^3$ since $S(T=0)=0$ by Third Law. The entropy of blackbody radiation is $S=\frac{4}{3}kVT^3$. Now express $U$ in terms of $S$ and $V$. We have $U=kV(\frac{4}{3}kV)^{-4/3}S^{4/3}$ which is directly proportional to $V^{-1/3}$. The pressure is 
+$$P=-\frac{\partial U}{\partial V}\bigg|_S\implies PV=\frac{1}{3}U$$
 Hence, in an adiabatic change (slowly enlarge box with radiation inside), $PV^{4/3}$ is a constant and $TV^{1/3}$ is another constant. Hence, radiation cools as box expands.
 \item We can also work out
-$$S=-\bigg(\frac{\partial F}{\partial T}\bigg)_V=\frac{16V\sigma}{3c}T^3,\quad C_V=\bigg(\frac{\partial E}{\partial T}\bigg)_V=\frac{16V\sigma}{c}T^3$$
+$$S=-\bigg(\frac{\partial F}{\partial T}\bigg)_V=\frac{16V\sigma}{3c}T^3,\quad C_V=\bigg(\frac{\partial U}{\partial T}\bigg)_V=\frac{16V\sigma}{c}T^3$$
 \item In the classical limit $\hbar\omega<<T$, we have
-$$\frac{1}{e^{\beta\hbar\omega}-1}\approx\frac{1}{\beta\hbar\omega}\implies E(\omega)\approx\frac{V\omega^2T}{\pi^2c^3}$$
+$$\frac{1}{e^{\beta\hbar\omega}-1}\approx\frac{1}{\beta\hbar\omega}\implies U(\omega)\approx\frac{V\omega^2T}{\pi^2c^3}$$
 which is the Rayleigh-Jeans law for the classical distribution of radiation. This leads to the Ultraviolet catastrophe since $\int_0^\infty E(\omega)d\omega$ diverges.
 \item Alternatively, we may compute the total number and energy of photon gas respectively to be:
 $$N=\frac{V}{\pi^2c^3}\int_0^\infty\frac{\omega^2d\omega}{e^{\hbar\omega/T}-1}=\frac{VT^3}{\pi^2\hbar^3c^3}\int_0^\infty\frac{x^2dx}{e^x-1}=\frac{2\zeta(3)T^3}{\pi^2\hbar^3c^3}V$$
-$$E=\frac{V\hbar}{\pi^2c^3}\int_0^\infty\frac{\omega^3d\omega}{e^{\hbar\omega/T}-1}=\frac{VT^4}{\pi^2\hbar^3c^3}\int_0^\infty\frac{x^3dx}{e^x-1}=\frac{\pi^2T^4}{15\hbar^3c^3}V$$
-where $\zeta(\nu)=\int_0^\infty\frac{x^{\nu-1}}{e^x-1}dx$, is the Riemann zeta function such that $\zeta(3)\approx 0.244$ and $\zeta(4)=\frac{\pi^4}{15}$.
+$$U=\frac{V\hbar}{\pi^2c^3}\int_0^\infty\frac{\omega^3d\omega}{e^{\hbar\omega/T}-1}=\frac{VT^4}{\pi^2\hbar^3c^3}\int_0^\infty\frac{x^3dx}{e^x-1}=\frac{\pi^2T^4}{15\hbar^3c^3}V$$
+where $\zeta(\nu)=\int_0^\infty\frac{x^{\nu-1}}{e^x-1}dx$, is the Riemann Zeta function such that $\zeta(3)\approx 0.244$ and $\zeta(4)=\frac{\pi^4}{15}$.
 \end{enumerate}
 \end{remarks}
 \subsection{Vibrational Energy of Solids}
@@ -1660,11 +1658,10 @@ Consider an atomic crystal with $N$ atoms such that the vibrational modes are $\
 $$g(\omega)d\omega=\frac{3V\omega^2d\omega}{2\pi^2v_s^2}$$
 Each mode of frequency $\omega$ can be excited to any $n$-phonon state of energy $n\hbar\omega$. 
 \begin{prop}
-There is an upper frequency limit, known as the Debye frequency, with $\omega_D=(\frac{6\pi^2N}{V})^{1/3}c_s$.
+There is an upper frequency limit, the Debye frequency, with $\omega_D=(\frac{6\pi^2N}{V})^{1/3}c_s$.
 \end{prop}
 \begin{proof}
-Sound waves cannot propagate through the solid if the wavelength of sound is smaller than the atomic spacing, so we have have $\lambda=\frac{2\pi c_s}{\omega}<L$, where $L$ is the length of the crystal. Since there is three directions of motion for each of the $N$ atoms, then 
-$$3N=\int_0^{\omega_D}g(\omega)d\omega=\frac{V\omega_D^3}{2\pi^2c_s^3}$$
+Sound waves cannot propagate through the solid if the wavelength of sound is smaller than the atomic spacing, so we have have $\lambda=\frac{2\pi c_s}{\omega}<L$, where $L$ is the length of the crystal. Since there is three directions of motion for each of the $N$ atoms, then fix  $3N=\int_0^{\omega_D}g(\omega)d\omega=\frac{V\omega_D^3}{2\pi^2c_s^3}$.
 \end{proof}
 \begin{defi}[Debye temperature]
 The Debye temperature is the temperature at which the highest frequency phonon starts to become excited, i.e. $T_D=\hbar\omega_D$.
@@ -1676,9 +1673,9 @@ The vibrational heat capacity scales with $T^3$ for low temperatures and is a co
 Since the number of phonons is not conserved, we perform a similar procedure as that of photons.
 $$\log Z_{\text{phonon}}=\int_0^{\omega_D}g(\omega)\log Z_\omega d\omega,\quad Z_\omega=\frac{1}{1-e^{-\beta\hbar\omega}}$$
 The energy is then
-$$E=\int_0^{\omega_D}\frac{\hbar\omega g(\omega)}{e^{\beta\hbar\omega}-1}d\omega=\frac{3V\hbar}{2\pi^2c_s^3}\int_0^{\omega_D}\frac{\omega^3d\omega}{e^{\beta\hbar\omega}-1}=\frac{3Vk_BT^4}{2\pi^2\hbar^3c_s^3}\int_0^{T_D/T}\frac{x^3}{e^x-1}dx$$
+$$U=\int_0^{\omega_D}\frac{\hbar\omega g(\omega)}{e^{\beta\hbar\omega}-1}d\omega=\frac{3V\hbar}{2\pi^2c_s^3}\int_0^{\omega_D}\frac{\omega^3d\omega}{e^{\beta\hbar\omega}-1}=\frac{3Vk_BT^4}{2\pi^2\hbar^3c_s^3}\int_0^{T_D/T}\frac{x^3}{e^x-1}dx$$
 where we substituted $x=\beta\hbar\omega$. This however has no analytical solution. For low temperatures, $T<<T_D$, the upper integration limit approaches infinity. Like before, the integral is thus $\frac{\pi^4}{15}$. The heat capacity is then
-$$C_V=\bigg(\frac{\partial E}{\partial T}\bigg)_V=\frac{2\pi^2VT^3}{5\hbar^3c_s^3}=\frac{12\pi^4Nk_B}{5T_D^3}T^3$$
+$$C_V=\bigg(\frac{\partial U}{\partial T}\bigg)_V=\frac{2\pi^2VT^3}{5\hbar^3c_s^3}=\frac{12\pi^4Nk_B}{5T_D^3}T^3$$
 For high temperatures, $T>>T_D$, we Taylor expand the integrand,
 $$\int_0^{T_D/T}\frac{x^3}{e^x-1}dx\approx\int_0^{T_D/T}x^2+...~dx=\frac{T_D^3}{3T^3}+...\implies C_V=\frac{Vk_BT_D^3}{2\pi^2\hbar^3c_s^3}=3Nk_B$$
 where we invoked the definition of Debye temperature, i.e. $T_D^3=\hbar^3\omega_D^3=\hbar^3(3N)2\pi^2c_s^3/V$
@@ -1689,23 +1686,27 @@ where we invoked the definition of Debye temperature, i.e. $T_D^3=\hbar^3\omega_
 \begin{defi}[Virial]
 The classical virial $\mathcal{V}$ is defined as
 $$\mathcal{V}:=-\frac{1}{2}\sum_i\mathbf{r_i}\cdot\mathbf{f_i}$$
-where $\mathbf{r_i}$ and $\mathbf{f_i}$ are respectively, the position of, and the force acting on, the $i$th particle. From newton's second law, we can write as
-$$\mathcal{V}=-\frac{1}{2}\sum_im_i\frac{d}{dt}(\mathbf{r_i}\cdot\mathbf{v_i})+\sum_i\frac{1}{2}m_i\mathbf{v_i}^2$$
+where $\mathbf{r_i}$ and $\mathbf{f_i}$ are respectively, the position of, and the force acting on, the $i$th particle. From Newton's second law, we can write as
+\begin{equation}
+\mathcal{V}=-\frac{1}{2}\sum_im_i\frac{d}{dt}(\mathbf{r_i}\cdot\mathbf{v_i})+\sum_i\frac{1}{2}m_i\mathbf{v_i}^2\label{virial}
+\end{equation}
 \end{defi}
 \begin{eg}
 Consider a liquid consisting of $N$ particles in a container of volume $V$. The value of $\mathbf{r_i}\cdot\mathbf{v_i}$ can only fluctuate between finite limits and if we average it over a long period its time derivative must average to zero, which leads to
-$$\langle\mathcal{V}=\sum_i\frac{1}{2}m_i\langle v_i^2\rangle=\frac{3}{2}Nk_BT$$
+$$\langle\mathcal{V}\rangle=\sum_i\frac{1}{2}m_i\langle v_i^2\rangle=\frac{3}{2}Nk_BT$$
 The mean virial is equal to the mean kinetic energy, which is Clausius' version of virial theorem.
 \end{eg}
 The virial may separate external and internal contributions. 
 \begin{thm}[Virial theorem]
 Assuming an internal interaction potential $\phi$ between two particles $i$ and $j$, that depends only on their separation $r_{ij}=|\mathbf{r_i}-\mathbf{r_j}|$, then the virial theorem is
-$$3pV=2\langle K\rangle-\bigg\langle\sum_{j>i}r_{ij}\frac{d\phi(r_{ij})}{dr_{ij}}\bigg\rangle$$
+\begin{equation}
+3PV=2\langle K\rangle-\bigg\langle\sum_{j>i}r_{ij}\frac{d\phi(r_{ij})}{dr_{ij}}\bigg\rangle\label{virialtheorem}
+\end{equation}
 where $K$ is the kinetic energy.
 \end{thm}
 \begin{proof}
-For the external virial, the force on an element of the wall is $pd\mathbf{A}$. The force on the particles acts inwards and $d\mathbf{A}$ is directed outwards, so we have
-$$\langle\mathcal{V}_{\text{ext}}\rangle=\bigg\langle-\frac{1}{2}\sum_i\mathbf{r_i}\cdot\mathbf{f_{\text{ext},i}}\bigg\rangle=\frac{1}{2}\int_Ap\mathbf{r}\cdot d\mathbf{A}=\frac{p}{2}\int_V\boldsymbol{\nabla}\cdot\mathbf{r}dV=\frac{3}{2}pV$$
+For the external virial, the force on an element of the wall is $Pd\mathbf{A}$. The force on the particles acts inwards and $d\mathbf{A}$ is directed outwards, so we have
+$$\langle\mathcal{V}_{\text{ext}}\rangle=\bigg\langle-\frac{1}{2}\sum_i\mathbf{r_i}\cdot\mathbf{f_{\text{ext},i}}\bigg\rangle=\frac{1}{2}\int_AP\mathbf{r}\cdot d\mathbf{A}=\frac{P}{2}\int_V\boldsymbol{\nabla}\cdot\mathbf{r}dV=\frac{3}{2}PV$$
 For the given interaction potential, the force on particle $i$ from the other $j\neq i$ particles is
 $$\mathbf{f_{\text{int},i}}=\sum_{j\neq i}-\frac{\partial\phi(r_{ij})}{\partial\mathbf{r_i}}$$
 and using the result:
@@ -1717,7 +1718,7 @@ $$\mathbf{r_\alpha}\cdot(\mathbf{r_\alpha}-\mathbf{r_\beta})+\mathbf{r_\beta}\cd
 Upon averaging, we obtain the mean internal virial:
 $$\langle\mathcal{V}_{\text{int}}\rangle=\frac{1}{2}\bigg\langle\sum_{j>i}r_{ij}\frac{\partial\phi(r_{ij})}{\partial r_{ij}}\bigg\rangle$$
 The final result is
-$$\langle K\rangle=\langle V_{\text{ext}}\rangle+\langle V_{\text{int}}\rangle=\frac{3}{2}pV+\frac{1}{2}\bigg\langle\sum_{j>i}r_{ij}\frac{\partial\phi(r_{ij})}{\partial r_{ij}}\bigg\rangle$$
+$$\langle K\rangle=\langle V_{\text{ext}}\rangle+\langle V_{\text{int}}\rangle=\frac{3}{2}PV+\frac{1}{2}\bigg\langle\sum_{j>i}r_{ij}\frac{\partial\phi(r_{ij})}{\partial r_{ij}}\bigg\rangle$$
 \end{proof}
 \begin{remarks}
 Just from $\langle\mathcal{V}_{\text{ext}}\rangle=\frac{3}{2}pV$ alone, we may obtain the ideal gas law from the Clausius' version of Virial's theorem.
@@ -1730,7 +1731,9 @@ where $V$ is the potential energy.
 \subsection{Generic interacting gas/liquid}
 \begin{defi}[Configurational partition function (for interaction potential)]
 Consider a system of $N$ classical particles of momenta $\mathbf{p_i}$ and positions $\mathbf{r_i}$ where they interact with one another via a potential $\phi(r_{ij})$ which only depend on the separation of point-like particles, then
-$$Z_\phi:=\int\exp\bigg(-\sum_{j>i}\beta\phi(r_{ij})d^3r_1\dots d^3r_N$$
+\begin{equation}
+Z_\phi:=\int\exp\bigg(-\sum_{j>i}\beta\phi(r_{ij})\bigg)d^3r_1\dots d^3r_N\label{configpartition}
+\end{equation}
 where $\sum_{j>i}$ sums over all particle pairs. 
 \end{defi}
 \begin{remarks}
@@ -1746,11 +1749,15 @@ This potential consists of a short ranged hard-core repulsion and a long ranged 
 \end{eg}
 \begin{defi}[Two-particle distribution function]
 The probability density of finding a particle at $\mathbf{r_1}$ and another at $\mathbf{r_2}$ is
-$$P_2(\mathbf{r_1},\mathbf{r_2})=\frac{N(N-1)}{Z_\phi}\int\exp\bigg(-\sum_{j>i}\beta\phi(r_{ij})\bigg)d^3r_3\dots d^3r_N$$
+\begin{equation}
+P_2(\mathbf{r_1},\mathbf{r_2})=\frac{N(N-1)}{Z_\phi}\int\exp\bigg(-\sum_{j>i}\beta\phi(r_{ij})\bigg)d^3r_3\dots d^3r_N\label{distr}
+\end{equation}
 \end{defi}
 \begin{defi}[Radial distribution function]
 The radial distribution function is
-$$g(r_{12})=\frac{V^2}{N^2}P_2(\mathbf{r_1},\mathbf{r_2})$$
+\begin{equation}
+g(r_{12})=\frac{V^2}{N^2}P_2(\mathbf{r_1},\mathbf{r_2})\label{distr2}
+\end{equation}
 where $P_2$ depends only on radial separation $|\mathbf{r_1}-\mathbf{r_2}|$.
 \end{defi}
 \begin{eg}
@@ -1760,20 +1767,24 @@ Typically, the radial distribution function is small at short distances because 
 Radial distribution functions can be measured using X-ray or neutron diffraction techniques. They can also be calculated using Monte Carlo or Molecular Dynamics methods. Monte Carlo methods are statistical techniques for generating ensembles of configurations, $\{\mathbf{r_i}\}$, distributed according to a known probability distribution. In classical Molecular Dynamics methods the molecules are moved according to Newton's laws in what amounts to a `computaitonal expeirment'. An important modern development is the use of computational quantum mechanical techniques to calculate the interaction energy, which can readily be combined with the classical theory of liquids developed here.
 \end{remarks}
 \begin{prop}
-$$U=\frac{3}{2}Nk_BT+\frac{N^2}{2V}\int_0^\infty\phi(r)g(r)4\pi r^2dr$$
+\begin{equation}
+U=\frac{3}{2}Nk_BT+\frac{N^2}{2V}\int_0^\infty\phi(r)g(r)4\pi r^2dr\label{result1}
+\end{equation}
 \end{prop}
 \begin{proof}
 The internal energy is
 $$U=-\frac{\partial}{\partial\beta}\ln Z=\frac{3}{2}Nk_BT-\frac{\partial}{\partial\beta}\ln Z_\phi$$
 where
 $$-\frac{\partial}{\partial\beta}\ln Z_\phi=\frac{1}{Z_\phi}\int\sum_{j>i}\phi(r_{ij})e^{-\sum_{j>i}\beta\phi(r_{ij})}d^3r_1\dots d^3r_N=\frac{N(N-1)}{2Z_\phi}\int\phi(r_{12})e^{-\sum_{j>i}\beta\phi(r_{ij})}d^3r_1\dots d^3r_N$$
-since there are $N(N_1)/2$ terms in the sum. Substitute in the definitions, we obtain our desired result.
+since there are $N(N-1)/2$ terms in the sum. Substitute in the definitions, we obtain our desired result.
 \end{proof}
 \begin{remarks}
 Unfortunately, $T$, $V$ and $N$ are not the natural variables of $U$. So even if we knew $\phi(r)$ and had $g(r)$ as a function of $T$, $V$ and $N$, we still do not have enough information to do the complete thermodynamics of liquids.
 \end{remarks}
 \begin{cor}
-$$p=\frac{Nk_BT}{V}-\frac{N^2}{6V^2}\int_0^\infty r\frac{d\phi}{dr}g(r)4\pi r^2dr$$
+\begin{equation}
+    P=\frac{Nk_BT}{V}-\frac{N^2}{6V^2}\int_0^\infty r\frac{d\phi}{dr}g(r)4\pi r^2dr\label{result2}
+    \end{equation}
 \end{cor}
 \begin{proof}
 Use Virial theorem and evaluate $\langle\sum_{j>i}r_{ij}\frac{d\phi(r_{ij})}{dr_{ij}}\rangle$:
@@ -1785,28 +1796,32 @@ The key quantities in the classical statistical mechanics of liquids are the int
 \end{remarks}
 \begin{defi}[Virial expansion]
 We may expand the radial distribution function as a polynomial of density $n=N/V$. Plugging in the virial equation of state, we obtain the virial expansion:
-$$\frac{p}{k_BT}=n+B_2(T)n^2+B_3(T)n^3+\dots$$
+\begin{equation}
+\frac{P}{k_BT}=n+B_2(T)n^2+B_3(T)n^3+\dots\label{virialexpansion}
+\end{equation}
 The $m$th Virial coefficient, $B_m(T)$ reflects the $m$-body correlations in the equation of state.
 \end{defi}
 \begin{remarks}
 Mayer developed a diagrammatic recipe which in principle allows each coefficient to be calculated. Note that the virial expansion only converges when the distance between molecules is much greater than their size, hence less useful at liquid densities. The virial expansion gives an excellent description of imperfect gases at low densities, when only pair interactions between particles are relevant. 
 \end{remarks}
 \begin{prop}[Second virial coefficient]
-$$B_2(T)=\int_0^\infty2\pi r^2(1-e^{-\phi/k_BT})dr$$
+\begin{equation}
+B_2(T)=\int_0^\infty2\pi r^2(1-e^{-\phi/k_BT})dr\label{secondcoeff}
+\end{equation}
 \end{prop}
 \begin{proof}
 To calculate $B_2(T)$, we need an approximation to the radial distribution function which is accurate at low densities. The two-particle distribution function can be written as
 $$P_2(\mathbf{r_1},\mathbf{r_2})=N(N-1)e^{-\beta\phi(r_{12})}\frac{\int e^{-\beta\sum'_{j>i}\phi(r_{ij})}d^3r_3\dots d^3r_N}{\int e^{-\beta\sum_{j>i}\phi(r_{ij})}d^3r_1\dots d^3r_N}$$
 where the primed summation indicates that we have removed the $\phi(r_{12})$ term. At very low densities, the integrals over particles 3, 4, ..., $N$ in the numerator mostly involve configurations in which these particles are distant from each other and from particles 1 and 2, and therefore we can set all the $\phi(r_{ij})$ inside the integral to zero. In the denominator, particles 1 and 2 are also far apart for almost all configurations, hence again set all the $\phi(r_{ij})$ inside the integral to zero. Therefore
 $$P_2(\mathbf{r_1},\mathbf{r_2})\approx\frac{N(N-1)}{V^2}e^{-\beta\phi(r_{12})}\implies\lim_{N\rightarrow\infty}g_0=e^{-\beta\phi(r)}$$
-which is as expected: $\phi(r=0)=\infty$, $g(r=0)=0$ and $\phi(r=\infty)=0$, $g_0(r=\infty)=1$. Also, $g_0(r)$ takes its maximum value at the minimum in $\phi(r)$. We substitute $g_0(r)$ into the Virial expansion and integrate by parts:
+which is as expected: $\phi(r=0)=\infty$, $g(r=0)=0$ and $\phi(r=\infty)=0$, $g_0(r=\infty)=1$. Also, $g_0(r)$ takes its maximum value at the minimum in $\phi(r)$. We substitute $g_0(r)$ into Eqn.~\ref{result2} and integrate by parts:
 \begin{align}
-    \frac{p}{k_BT}&=n-\frac{n^2}{6k_BT}\int_0^\infty 4\pi r^3\frac{d\phi}{dr}e^{-\phi/k_BT}dr\nonumber\\&=n+\frac{n^2}{6}\bigg\{\bigg[4\pi r^3e^{-\phi/k_BT}\bigg]_0^\infty-\int_0^\infty 12\pi r^2e^{-\phi/k_BT}dr\bigg\}\nonumber\\&=n+\frac{n^2}{6}\bigg\{\int_0^\infty 12\pi r^2dr-\int_0^\infty 12\pi r^2e^{-\phi/k_BT}dr\bigg\}\nonumber\\&=n+n^2\bigg\{\int_0^\infty 2\pi r^2(1-e^{-\phi/k_BT})dr\bigg\}\nonumber
+    \frac{P}{k_BT}&=n-\frac{n^2}{6k_BT}\int_0^\infty 4\pi r^3\frac{d\phi}{dr}e^{-\phi/k_BT}dr\nonumber\\&=n+\frac{n^2}{6}\bigg\{\bigg[4\pi r^3e^{-\phi/k_BT}\bigg]_0^\infty-\int_0^\infty 12\pi r^2e^{-\phi/k_BT}dr\bigg\}\nonumber\\&=n+\frac{n^2}{6}\bigg\{\int_0^\infty 12\pi r^2dr-\int_0^\infty 12\pi r^2e^{-\phi/k_BT}dr\bigg\}\nonumber\\&=n+n^2\bigg\{\int_0^\infty 2\pi r^2(1-e^{-\phi/k_BT})dr\bigg\}\nonumber
 \end{align}
-where we read off $B_2(T)$.
+where we read off $B_2(T)$, from the Virial expansion form.
 \end{proof}
 \begin{eg}
-At high temperatures, $B_2(T)$ is dominated by hard core repulsion and is positive and orughly constant. At low temperatures, it is dominated by the van der Waals attraction, and is negative and roughly proportional to $1/T$. Experimental measurements agree with theory well except where quantum effects are important.
+At high temperatures, $B_2(T)$ is dominated by hard core repulsion and is positive and roughly constant. At low temperatures, it is dominated by the van der Waals attraction, and is negative and roughly proportional to $1/T$. Experimental measurements agree with theory well except where quantum effects are important.
 \end{eg}
 \begin{defi}[Boyle temperature]
 Boyle temperature $T_B$ is the temperature at which $B_2(T=T_B)=0$. The contribution from the long-range particle attraction on average exactly compensates the short-range repulsion, leaving effectively `non-interacting' particles. At higher temperature the gas is harder to compress than an ideal gas, and at low temperature it is easier.
@@ -1823,7 +1838,7 @@ where $\frac{1}{2}N^2$ is the number of distinct pairs in the system and the pai
 \newpage
 \subsection{van der Waals gas}
 \begin{prop}[Equation of state]
-$$p=\frac{Nk_BT}{V-Nb}-\frac{aN^2}{V^2}$$
+$$P=\frac{Nk_BT}{V-Nb}-\frac{aN^2}{V^2}$$
 \end{prop}
 \begin{proof}
 Separate the inter-atomic potentials as a sum of a short-range repulsive part $\phi_r(r)$ and an long-range attractive part $\phi_a(r)$:
@@ -1833,11 +1848,11 @@ $$\sum_{j>i}\phi_a(r_{ij})=\frac{1}{2}\sum_{j\neq i}\sum_i\phi_a(r_{ij})\approx\
 The effect of the short range repulsive part is to exclude the particles from a volume around each of them, and so we can write
 $$\int e^{-\sum_{j>i}\beta\phi_r(r_{ij})}d^3r_1\dots d^3r_N\approx (V-Nb)^N$$
 The partition function is then
-$$Z=\frac{1}{N!}\bigg(\frac{m}{2\pi\hbar^2\beta}\bigg)^{3N/2}\int e^{-\sum_{j>i}\beta[\phi_r(r_{ij})+\phi_a(r-{ij})]}d^3r_1\dots d^3r_N\approx\frac{1}{N!}\bigg(\frac{m}{2\pi\hbar^2\beta}\bigg)^{3N/2}(V-Nb)^Ne^{\beta aN^2/V}$$
+$$Z=\frac{1}{N!}\bigg(\frac{m}{2\pi\hbar^2\beta}\bigg)^{3N/2}\int e^{-\sum_{j>i}\beta[\phi_r(r_{ij})+\phi_a(r_{ij})]}d^3r_1\dots d^3r_N\approx\frac{1}{N!}\bigg(\frac{m}{2\pi\hbar^2\beta}\bigg)^{3N/2}(V-Nb)^Ne^{\beta aN^2/V}$$
 The Helmholtz free energy is
 $$F=-k_BT\ln Z=-k_BT\ln\bigg[\frac{1}{N!}\bigg(\frac{m}{2\pi\hbar^2\beta}\bigg)^{3N/2}\bigg]-k_BTN\ln(V-Nb)-\frac{aN^2}{V}$$
 The pressure is then
-$$p=-\bigg(\frac{\partial F}{\partial V}\bigg)_T=\frac{Nk_BT}{V-Nb}-\frac{aN^2}{V^2}$$
+$$P=-\bigg(\frac{\partial F}{\partial V}\bigg)_T=\frac{Nk_BT}{V-Nb}-\frac{aN^2}{V^2}$$
 This is the desired van der Waals equation of state.
 \end{proof}
 \begin{cor}
@@ -1846,7 +1861,7 @@ $$B_2(T)=b-\frac{a}{k_BT},\quad T_B=\frac{a}{bk_B}$$
 \end{cor}
 \begin{proof}
 Approximate the equation of state to be:
-$$p\approx\frac{Nk_BT}{V}\bigg(1+\frac{Nb}{V}\bigg)-\frac{aN^2}{V^2}=\frac{Nk_BT}{V}+\frac{N^2}{V^2}(b-\beta a)$$
+$$P\approx\frac{Nk_BT}{V}\bigg(1+\frac{Nb}{V}\bigg)-\frac{aN^2}{V^2}=\frac{Nk_BT}{V}+\frac{N^2k_BT}{V^2}(b-\beta a)$$
 Result follows immediately.
 \end{proof}
 \newpage
@@ -1945,9 +1960,9 @@ $$\frac{F_{\text{mix}}(c)-F_{\text{mix}}(c_A)}{Nk_BT}=(2-\chi)\phi^2+\frac{4}{3}
 \subsection{Ising Model}
 \begin{defi}[Ising Model]
 The Ising model is a simple model for a magnet. Consider a lattice in $d$ spatial dimensions with $N$ sites. On each site $i=1,\dots,N$, there is a discrete variable, called `spin' which takes values:
-$$S_i=+1=\uparrow,\quad S_i=-1=\downarrow$$
-The system of spins $\{S_i\}$ has energy
-$$E=-B\sum_iS_i-J\sum_{\langle i,j\rangle}S_iS_j$$
+$$\sigma_i=+1=\uparrow,\quad \sigma_i=-1=\downarrow$$
+The system of spins $\{\sigma_i\}$ has energy
+$$E=-B\sum_i\sigma_i-J\sum_{\langle i,j\rangle}\sigma_i\sigma_j$$
 where $\langle i,j\rangle$ is sum over nearest neighbour pairs (which depend on the dimensions $d$ and the lattice type) and $B$ is the external magnetic field. To minimize $E$, $B>0$ will lead to a preferential spin-up configuration while $B<0$ spin-down. If $J>0$, the spins preferentially align, i.e. ferromagnet. Conversely, if $J<0$, the spins prefer to anti-align, i.e. anti-ferromagnet.
 \end{defi}
 We are interested in the physics of the Ising model at a finite temperature $T$.
@@ -1963,20 +1978,20 @@ Assume the interactions between any particular spins and the other spins can be 
 \begin{prop}
 Under mean field theory (MFT), the spontaneous magnetization is
 $$\langle\sigma\rangle=\tanh\frac{Jq\langle\sigma\rangle}{k_BT}$$
-where $q$ is the coordination number.
+where $z$ is the coordination number.
 \end{prop}
 \begin{proof}
 The Hamiltonian is
 $$H=-m_0B\sum_i^N\sigma_i-J\sum_{ij}(\langle\sigma\rangle+\delta\sigma_i)(\langle\sigma\rangle+\delta\sigma_j)=-m_0B\sum_i\sigma_i-J\sum_{ij}(\langle\sigma\rangle^2+\langle\sigma\rangle(\delta\sigma_i+\delta\sigma_j)+\delta\sigma_i~\delta\sigma_j)$$
 Usually, $m_0=1$. Drop the term quadratic in fluctuations, and assume that fluctuations are site-independent, then:
-$$H\approx-m_0B\sum_i\sigma_i-\frac{1}{2}zJ\sum_i(\langle\sigma\rangle^2+2\langle\sigma\rangle[\sigma_i-\langle\sigma\rangle])\approx\frac{1}{2}qJN\langle\sigma\rangle^2-(m_0B+zJ\langle\sigma\rangle)\sum_i\sigma_i$$
+$$H\approx-m_0B\sum_i\sigma_i-\frac{1}{2}zJ\sum_i(\langle\sigma\rangle^2+2\langle\sigma\rangle[\sigma_i-\langle\sigma\rangle])\approx\frac{1}{2}zJN\langle\sigma\rangle^2-(m_0B+zJ\langle\sigma\rangle)\sum_i\sigma_i$$
 where $z$, the coordination number, is the number of nearest neighbours and the $1/2$ prefactor avoids double-counting, since each bond participates in two spins. The single-particle partition function is
-$$Z_1=\sum_{\sigma=\pm1}\exp\bigg[-\frac{qJ\langle\sigma\rangle^2}{2k_BT}-\frac{m_0B\sigma+Jq\sigma\langle\sigma\rangle}{k_BT}\bigg]=2e^{-0.5\beta zJ\langle\sigma\rangle^2}\cosh\frac{m_0B+Jq\langle\sigma\rangle}{k_BT}$$
+$$Z_1=\sum_{\sigma=\pm1}\exp\bigg[-\frac{zJ\langle\sigma\rangle^2}{2k_BT}-\frac{m_0B\sigma+Jz\sigma\langle\sigma\rangle}{k_BT}\bigg]=2e^{-0.5\beta zJ\langle\sigma\rangle^2}\cosh\frac{m_0B+Jz\langle\sigma\rangle}{k_BT}$$
 The Helmholtz free energy per spin $F_1=-k_BT\ln Z_1$ will then give us the mean magnetic moment per spin $\langle\sigma\rangle$ (related via $m=m_0\langle\sigma\rangle$:
-$$F_1=-k_BT\ln\bigg[2\cosh\frac{m_0B+Jq\langle\sigma\rangle}{k_BT}\bigg]+\frac{1}{2}qJ\langle\sigma\rangle^2\implies m=-\bigg(\frac{\partial F_1}{\partial B}\bigg)_Tm_0=m_0\tanh\frac{m_0B+Jq\langle\sigma\rangle}{k_BT}$$
+$$F_1=-k_BT\ln\bigg[2\cosh\frac{m_0B+Jz\langle\sigma\rangle}{k_BT}\bigg]+\frac{1}{2}zJ\langle\sigma\rangle^2\implies m=-\bigg(\frac{\partial F_1}{\partial B}\bigg)_Tm_0=m_0\tanh\frac{m_0B+Jz\langle\sigma\rangle}{k_BT}$$
 The spontaneous magnetization is obtained by setting $B=0$.
 \end{proof}
-Graphic solution of the self-consistent mean-field equation $m=\tanh\beta Jqm$ for the Ising model, illustrating the qualitatively different behaviour for $T > T_c$ (blue), $T < T_c$ (red), and $T = T_c$ (black). We can see that only when $T<T_c$, we have two other non-zero solutions to $m=\tanh[\beta(B+Jqm)]$
+Graphic solution of the self-consistent mean-field equation $m=\tanh\beta zJm$ for the Ising model, illustrating the qualitatively different behaviour for $T > T_c$ (blue), $T < T_c$ (red), and $T = T_c$ (black). We can see that only when $T<T_c$, we have two other non-zero solutions to $m=\tanh[\beta(B+Jzm)]$
 \begin{center}
 \begin{tikzpicture}
       \draw[->] (-4,0) -- (4,0) node[right] {$\langle\sigma\rangle$};
@@ -1991,7 +2006,7 @@ Graphic solution of the self-consistent mean-field equation $m=\tanh\beta Jqm$ f
 \end{tikzpicture}
 \end{center}
 \begin{remarks}
-There’s a nice intuition behind this mean field result. It can be derived by assuming that each spin experiences an effective magnetic field given by $B_{\text{eff}} = m_0B +Jq\langle\sigma\rangle$, which includes an extra contribution from the spins around it. In this way, the tricky interactions in the Ising model have been replaced by an averaged effective field $B_{\text{eff}}$, which is the highlight of the mean field approximation.
+There’s a nice intuition behind this mean field result. It can be derived by assuming that each spin experiences an effective magnetic field given by $B_{\text{eff}} = m_0B +Jz\langle\sigma\rangle$, which includes an extra contribution from the spins around it. In this way, the tricky interactions in the Ising model have been replaced by an averaged effective field $B_{\text{eff}}$, which is the highlight of the mean field approximation.
 \end{remarks}
 \begin{remarks}[Validity of MFT]\leavevmode
 \begin{enumerate}
@@ -2011,24 +2026,24 @@ Similar stories for other systems:
 \begin{defi}[Phase transition]
 Conventionally, a phase transition occurs when some quantity changes discontinuously.
 \end{defi}
-For the Ising model, this order parameter that changes discontinuously is $m$. Landau theory offers a simple yet effective way to understand phase transitions qualitatively, based on free energy and symmetry (A $\mathbb{Z}_2$ symmetry when $B=0$: $m(\mathbf{x})\rightarrow-m(\mathbf{x})$. If $B\neq 0$, the symmetry should be $B\rightarrow -B\implies m(\mathbf{x})\rightarrow-m(\mathbf{x})$). Taylor expand the free energy for the Ising model obtained from the mean field approximation:
-$$F_1\approx -k_BT\ln 2+\frac{qJ}{2k_BTm_0^2}(k_BT-qJ)m^2+\frac{(qJ)^4}{12(k_BT)^3m_0^4}m^4+\dots$$
+For the Ising model, this order parameter that changes discontinuously is $m$. Landau theory offers a simple yet effective way to understand phase transitions qualitatively, based on free energy and symmetry (A $\mathbb{Z}_2$ symmetry when $B=0$ only: $m(\mathbf{x})\rightarrow-m(\mathbf{x})$). Taylor expand the free energy for the Ising model obtained from the mean field approximation:
+$$F_1\approx -k_BT\ln 2+\frac{zJ}{2k_BTm_0^2}(k_BT-zJ)m^2+\frac{(zJ)^4}{12(k_BT)^3m_0^4}m^4+\dots$$
 Rewriting this in a cleaner expression, and dropping the insignificant constant terms:
-$$f(m)\approx-Bm+\frac{1}{2}\bigg(\frac{1}{\beta}-Jq\bigg)m^2+\frac{1}{12}\frac{1}{\beta}m^4+\dots$$
+$$f(m)\approx-Bm+\frac{1}{2}\bigg(\frac{1}{\beta}-Jz\bigg)m^2+\frac{1}{12}\frac{1}{\beta}m^4+\dots$$
 where we introduced the term $-Bm$ when there is an external field $B$. The equilibrium value of $m$ is $m_{min}$, as discussed earlier. Landau theory explains how does $m_{min}$ change as we vary the parameters.
 \begin{remarks}
 In Ehrenfest's classification scheme, phase transitions were labelled by the lowest derivative of the free energy which is discontinuous at the transition. In the modern classification, phase transitions are classified based on whether a latent heat is involved (only in first-order).
 \end{remarks}
-\subsubsection{$B=0$: a continuous phase transition}
+\subsubsection*{$B=0$: a continuous phase transition}
 \begin{defi}[Second order phase transition]
 At a second order phase transition, the order parameter changes continuously.
 \end{defi}
 \begin{prop}
-$m$ turns off abruptly (but changes continuously from $\pm1$ to 0) as we increase $T$ beyond a critical temperature $T_c$. $m\neq 0$ and $m=0$ are respectively called ordered and disordered phases.
+$m$ changes continuously from $\pm1$ to 0 as we increase $T$ beyond a critical temperature $T_c$. $m=\pm1$ and $m=0$ are respectively called ordered and disordered phases.
 \end{prop}
 \begin{proof}
 When $B=0$, the free energy is 
-$$f(m)\approx\frac{1}{2}(T-T_c)m^2+\frac{1}{12}Tm^4+\dots,\quad T_c=Jq$$
+$$f(m)\approx\frac{1}{2}(T-T_c)m^2+\frac{1}{12}Tm^4+\dots,\quad T_c=Jz$$
 The equilibrium magnetization occurs at the minimum of the free energy:
 $$0=\frac{\partial f(m)}{\partial m}=(T-T_c)m+\frac{1}{3}Tm^3+\dots$$
 When $T>T_c$, there is only one possible equilibrium magnetization, which is $m=0$. This is expected since temperature randomizes the spins. When $T<T_c$, we solve for
@@ -2065,7 +2080,7 @@ On the left is the graph for $f(m)$ where red and blue curves represent respecti
     \item The expression 
 $$m_0(T\sim T_c)=\pm\sqrt{3(T_c-T)/T}$$
 is only valid close to $T_c$ when $m$ is small, and higher order terms $O(m^4)$ can be ignored.
-    \item $f(m)$ is invariant under $\mathbb{Z}_2$ symmetry, i.e. $m\rightarrow -m$ leaves $f(m)$ invariant. This symmetry is inherited from the $S_i\rightarrow-S_i$ symmetry of the Ising model when $B=0$.
+    \item $f(m)$ is invariant under $\mathbb{Z}_2$ symmetry, i.e. $m\rightarrow -m$ leaves $f(m)$ invariant. This symmetry is inherited from the $\sigma_i\rightarrow-\sigma_i$ symmetry of the Ising model when $B=0$.
     \item For $T<T_c$, the system chooses one of the two states $m=\pm m_0$, i.e. the $\mathbb{Z}_2$ symmetry is spontaneously broken. Spontaneous symmetry breaking occurs if the symmetry of a system is not respected by the ground state.
 \end{enumerate}
 \end{remarks}
@@ -2080,7 +2095,7 @@ $$f(m_{\text{min}})=
 \left\{
         \begin{array}{ll}
       \frac{1}{2}(T-T_c)\times 0+\frac{1}{12}T\times 0\quad=0 & T>T_c \\
-      \frac{1}{2}(T-T_c)\frac{3(T_c-T)}{T}+\frac{1}{12}T\frac{9(T_c-T)^2}{T^2}=-\frac{3}{4}\frac{(T_c-T)^2}{T} & T<T_c
+      \frac{1}{2}(T-T_c)\frac{3(T_c-T)}{T}+\frac{1}{12}T\frac{9(T_c-T)^2}{T^2}=-\frac{3}{4}\frac{(T_c-T)^2}{T} & T<T_c,~T\sim T_c
       \end{array}
     \right.$$
 Using $\ln Z\approx-\beta N f(m_{\text{min}})$ gives the heat capacity per particle to be
@@ -2095,7 +2110,7 @@ $$c=\frac{C}{N}=\frac{\beta^2}{N}\frac{\partial^2}{\partial\beta^2}(-\beta N f(m
 \begin{remarks}
 The essence of a phase transition is that some quantity is discontinuous. But, everything was determined by the partition function $Z$, a sum of smooth analytic functions. Yet, we obtained non-analytic behaviour characteristic of a phase transition. In reality, $Z$ is only necessary analytic if the sum is finite, which is not true when $N\rightarrow\infty$. Essentially, discontinuous phase transitions only occur in infinite systems.  Similarly, spontaneous symmetry breaking can only occur in infinite systems.
 \end{remarks}
-\subsubsection{$B\neq 0$: a discontinuous phase transition}
+\subsubsection*{$B\neq 0$: a discontinuous phase transition}
 \begin{defi}[First order phase transition]
 At a first order phase transition, the order parameter changes discontinuously.
 \end{defi}
@@ -2140,7 +2155,7 @@ Take the red curve from the previous diagram. The position of the true minima de
 \begin{remarks}
 Draw $B$ against $T$. This line of first order phase transitions occurs at $B=0$ along $T>0$ axis and ends at a second order phase transition at $T = T_c$. This is referred to as the critical point. For $T>T_c$, we no longer experience a sign change in $m$ if the sign of $B$ changes.
 \end{remarks}
-\subsubsection{Close to Critical Point}
+\subsubsection*{Close to Critical Point}
 \begin{prop}
 The magnetic susceptibility (another type of response function, i.e. $\chi=\frac{\partial m}{\partial B}|_T$) of the Ising model have the following behaviour near a critical point.
 $$\chi\sim\frac{1}{|T-T_c|}$$
@@ -2187,7 +2202,7 @@ $\delta$ & 3   & 15  & 4.7898...  \\
 \begin{remarks}
 The critical exponents are only analytically worked out in $d=2$. $d=3$ is a numerical result, and no one has obtained an analytical solution for the 3D Ising model.
 \end{remarks}
-The liquid-gas transition shows many similarities to the Ising model. Again, a line of first-order phase transitions ending at a critical point. At fixed $p$, the volume per particle $v=V/N$ jumps discontinuously at a liquid-gas first-order phase transition. This suggests $v$ is an order parameter, analogous to $m$ in the ising model. using an equation of state (e.g. van der Waals equation in statistical physics) at the critical point:
+The liquid-gas transition shows many similarities to the Ising model. Again, a line of first-order phase transitions ending at a critical point. At fixed $p$, the volume per particle $v=V/N$ jumps discontinuously at a liquid-gas first-order phase transition. This suggests $v$ is an order parameter, analogous to $m$ in the Ising model. Using an equation of state (e.g. van der Waals equation in statistical physics) at the critical point:
 $$v_{\text{gas}}-v_{\text{liquid}}\sim(T_c-T)^\beta,\quad\beta=\frac{1}{2},\quad T<T_c$$
 $$v_{\text{gas}}-v_{\text{liquid}}\sim(p-p_c)^{1/\delta},\quad\delta=3,\quad p\rightarrow p_c^+$$
 Analogous to the susceptibility, the compressibility (another response function) is
@@ -2208,10 +2223,12 @@ For $J>0$, there is an attractive force between sites. $\mu$ is the chemical pot
 \section{Fluctuations in Equilibrium}
 \subsection{Fluctuations}
 \begin{eg}
-At second-order phase transitions, fluctuations in some thermodynamic quantities diverge, giving rise to new phenomena. Even far from critical points, spatial fluctuation sin the density scatter particles. For instance, the scattering of conduction electrons in metals from density fluctuations of the positively-charged ions on the lattice.
+At second-order phase transitions, fluctuations in some thermodynamic quantities diverge, giving rise to new phenomena. Even far from critical points, spatial fluctuations in the density scatter particles. For instance, the scattering of conduction electrons in metals from density fluctuations of the positively-charged ions on the lattice.
 \end{eg}
 \begin{defi}[Variance in canonical ensemble]
-$$\langle\Delta x^2\rangle:=\langle x^2\rangle-\langle x\rangle^2=\frac{1}{Z}\sum_ix_i^2e^{-E_i/k_BT}-\bigg(\frac{1}{Z}\sum_i x_ie^{-E_i/k_BT}\bigg)^2$$
+\begin{equation}
+\sigma_x^2:=\langle x^2\rangle-\langle x\rangle^2=\frac{1}{Z}\sum_ix_i^2e^{-E_i/k_BT}-\bigg(\frac{1}{Z}\sum_i x_ie^{-E_i/k_BT}\bigg)^2\label{variance}
+\end{equation}
 \end{defi}
 \begin{prop}
 The variance of $x$ is related to its response function, assuming a linear dependence $E_i=-fx_i$.
@@ -2220,36 +2237,33 @@ The variance of $x$ is related to its response function, assuming a linear depen
 If the linear dependence between the microstate energy and the variable, a generic trick applies
 $$\langle x\rangle=\frac{1}{Z}\sum_ix_ie^{fx_i\beta}=\frac{1}{\beta Z}\frac{\partial Z}{\partial f},\quad\langle x^2\rangle=\frac{1}{Z}\sum_ix_i^2e^{fx_i\beta}=\frac{1}{Z\beta^2}\frac{\partial^2Z}{\partial f^2}$$
 Take one more derivative of $\langle x\rangle$:
-$$k_BT\frac{\partial\langle x\rangle}{\partial f}=(k_BT)^2\bigg[-\frac{1}{Z^2}\bigg(\frac{\partial Z}{\partial f}\bigg)^2+\frac{1}{Z}\frac{\partial^2Z}{\partial f^2}\bigg]=-\langle x\rangle^2+\langle x^2\rangle=\langle\Delta x^2\rangle$$
+$$k_BT\frac{\partial\langle x\rangle}{\partial f}=(k_BT)^2\bigg[-\frac{1}{Z^2}\bigg(\frac{\partial Z}{\partial f}\bigg)^2+\frac{1}{Z}\frac{\partial^2Z}{\partial f^2}\bigg]=-\langle x\rangle^2+\langle x^2\rangle=\sigma_x^2$$
 \end{proof}
 \begin{eg}
 Consider $E_i=-M_iB$, then the mean square fluctuation of the magnetization $M$ is
-$$\langle\Delta M^2\rangle=k_BT\bigg(\frac{\partial\langle M\rangle}{\partial B}\bigg)_T$$
-For a system of non-interacting spins, $\langle M\rangle=Nm_0\tanh\frac{m_0B}{k_BT}$, and so
-$$\langle\Delta M^2\rangle=\frac{Nm_0^2}{\cosh^2(m_0B/k_BT)}\implies\frac{\sqrt{\langle\Delta M^2\rangle}}{\langle M\rangle}\propto\frac{1}{\sqrt{N}}$$
+$$\sigma_M^2=k_BT\bigg(\frac{\partial\langle M\rangle}{\partial B}\bigg)_T=\frac{Nm_0^2}{\cosh^2(m_0B/k_BT)}\implies\frac{\sqrt{\sigma_M^2}}{\langle M\rangle}\propto\frac{1}{\sqrt{N}}$$
+where for a system of non-interacting spins, $\langle M\rangle=Nm_0\tanh\frac{m_0B}{k_BT}$.
 \end{eg}
 \begin{cor}
 The mean square fluctuation in the internal energy $U$ is proportional to the heat capacity.
 \end{cor}
 \begin{proof}
-$$U=\langle E\rangle=-\frac{1}{Z}\frac{\partial Z}{\partial\beta},\quad\langle E^2\rangle=\frac{1}{Z}\frac{\partial^2Z}{\partial\beta^2}$$
-and so
-$$\langle\Delta U^2\rangle=\langle E^2\rangle-\langle E\rangle^2=\frac{\partial}{\partial\beta}\bigg[\frac{1}{Z}\frac{\partial Z}{\partial\beta}\bigg]=k_BT^2\frac{\partial U}{\partial T}$$
+We have $U=\langle E\rangle=-\frac{1}{Z}\frac{\partial Z}{\partial\beta}$ and $\langle E^2\rangle=\frac{1}{Z}\frac{\partial^2Z}{\partial\beta^2}\implies\sigma_U^2=\langle E^2\rangle-\langle E\rangle^2=\frac{\partial}{\partial\beta}[\frac{1}{Z}\frac{\partial Z}{\partial\beta}]=k_BT^2\frac{\partial U}{\partial T}$.
 \end{proof}
 \subsection{Connection with Thermodynamics}
 \begin{prop}
 The magnitude of fluctuations in $x$ is related to the availability of the system via
-$$\langle\Delta x^2\rangle:=\langle(x-x_0)^2\rangle=\frac{k_BT_R}{(\partial^2A/\partial x^2)_{x=x_0}}$$
+\begin{equation}
+\sigma_x^2:=\langle(x-x_0)^2\rangle=\frac{k_BT_R}{(\partial^2A/\partial x^2)_{x=x_0}}\label{fluctuation}
+\end{equation}
 \end{prop}
 \begin{proof}
-Consider a system that can exchange energy and particles with a large reserovir. We wish to claculate the probability distribution $P(x)$ for variable $x$ of the system, when the total internal energy of the system and reservoir is $U_{\text{tot}}$, it is easy to see that $P(x)\propto\Omega_{\text{tot}}(x,U_{\text{tot}})$, where $\Omega_{\text{tot}}(x,U_{\text{tot}})$ is the number of microstates of the system and reservoir in which the variable of the system is equal to $x$. The entropy of the system and reservoir is given by $S_{\text{tot}}(x,U_{\text{tot}})=k_B\ln\Omega_{\text{tot}}(x,U_{\text{tot}})$, but we may relate this with the availability via $dS_{\text{tot}}=-dA(x)/T_R$ where $T_R$ is the temperature of the reservoir. hence, $P(x)\propto e^{-A(x)/k_BT_R}$. Expand $A$ about the equilibrium value of $x$, $x_0$:
-$$A(x)=A(x_0)+(x-x_0)\frac{\partial A}{\partial x}\bigg|_{x=x_0}+\frac{1}{2}(x-x_0)^2\frac{\partial^2A}{\partial x^2}\bigg|_{x=x_0}+\dots$$
-but the first derivative is zero since it is a minimum, so the probability distribution within the Gaussian approximation is
-$$P9x)=\frac{1}{\sqrt{2\pi\langle\Delta x^2\rangle}}\exp\bigg[-\frac{\Delta x^2}{2\langle\Delta x^2\rangle}\bigg]$$
-where $\langle\Delta x^2\rangle$ follows.
+Consider a system that can exchange energy and particles with a large reservoir. We wish to calculate the probability distribution $P(x)$ for variable $x$ of the system, when the total internal energy of the system and reservoir is $U_{\text{tot}}$, it is easy to see that $P(x)\propto\Omega_{\text{tot}}(x,U_{\text{tot}})$, where $\Omega_{\text{tot}}(x,U_{\text{tot}})$ is the number of microstates of the system and reservoir in which the variable of the system is equal to $x$. The entropy of the system and reservoir is given by $S_{\text{tot}}(x,U_{\text{tot}})=k_B\ln\Omega_{\text{tot}}(x,U_{\text{tot}})$, but we may relate this with the availability via $dS_{\text{tot}}=-dA(x)/T_R$ where $T_R$ is the temperature of the reservoir. Hence, $P(x)\propto e^{-A(x)/k_BT_R}$. Expand $A$ about the equilibrium value of $x$, $x_0$: $A(x)=A(x_0)+(x-x_0)\frac{\partial A}{\partial x}|_{x=x_0}+\frac{1}{2}(x-x_0)^2\frac{\partial^2A}{\partial x^2}|_{x=x_0}+\dots$, but the first derivative is zero since it is a minimum, so the probability distribution within the Gaussian approximation is $P(x)=\frac{1}{\sqrt{2\pi\langle\Delta x^2\rangle}}\exp[-\frac{(x-x_0)^2}{2\sigma_x^2}]$, where $\sigma_x^2$ follows.
 \end{proof}
 \begin{cor}
-$$\langle\Delta x^2\rangle=k_BT\frac{\partial x}{\partial f}\bigg|_{x=x_0}$$
+\begin{equation}
+\sigma_x^2=k_BT\frac{\partial x}{\partial f}\bigg|_{x=x_0}\label{fluctuation2}
+\end{equation}
 \end{cor}
 \begin{proof}
 The first derivative $\frac{\partial A}{\partial x}$ is equal to the thermodynamic force $f$ conjugate to the variable $x$. 
@@ -2265,28 +2279,22 @@ At constant $V$ and $N$, the availability is the free energy:
 $$dA=dU-T_RdS:=dF\implies\bigg(\frac{\partial F}{\partial U}\bigg)_V=1-T_R\bigg(\frac{\partial S}{\partial U}\bigg)_V=1-\frac{T_R}{T}$$
 which must be zero in equilibrium, so $T=T_R$. Differentiating again, we obtain
 $$\bigg(\frac{\partial^2F}{\partial U^2}\bigg)_V=\frac{T_R}{T^2}\bigg(\frac{\partial T}{\partial U}\bigg)_V=\frac{1}{TC_V}$$
-where $T_R=T$. Using earlier results, we have
-$$\langle\Delta U^2\rangle=\frac{k_BT}{(\partial^2F/\partial U^2)_V}=k_BT^2C_V,\quad P(U)=\frac{1}{\sqrt{2\pi k_BT^2C_V}}\exp\bigg[-\frac{\Delta U^2}{2k_BT^2C_V}\bigg]$$
+where $T_R=T$. Using earlier results, we have $\sigma_U^2=\frac{k_BT}{(\partial^2F/\partial U^2)_V}=k_BT^2C_V$ and $P(U)=\frac{1}{\sqrt{2\pi k_BT^2C_V}}\exp[-\frac{(U-U_0)^2}{2k_BT^2C_V}]$.
 \end{proof}
 \begin{eg}
 1 cm$^3$ of monatomic ideal gas contains $N=\frac{pV}{k_BT}\sim 2.5\times10^{19}$ atoms. Equipartition gives $U=\frac{3}{2}Nk_BT=0.15J$ and the heat capacity at constant volume is $C_V=\frac{3}{2}Nk_B=5.2\times10^{-4}$ J/K, so the root mean square fluctuation is
-$$\langle\Delta U^2\rangle^{1/2}\sim T\sqrt{k_BC_V}\sim 2.5\times10^{-11}J$$
-The fractional fluctuation is $\sqrt{\langle\Delta U^2\rangle}/U\sim 1.6\times10^{-10}$, which is unmeasurably small. 
+$$\sigma_U\sim T\sqrt{k_BC_V}\sim 2.5\times10^{-11}J$$
+The fractional fluctuation is $\sigma_U/U\sim 1.6\times10^{-10}$, which is unmeasurably small. 
 \end{eg}
-\newpage
 \subsection{Near Critical Points}
 \begin{eg}[van der Waals gas]
 In $p$-$V$ coordinates, the critical isotherm has a single point where $\frac{dp}{dV}=0$. Applying the first law, $dU=T_RdS-pdV\implies dA=(p_R-p)dV$, and so differentiating gives
 $$\bigg(\frac{\partial A}{\partial V}\bigg)_T=p_R-p,\quad\bigg(\frac{\partial^2A}{\partial V^2}\bigg)_T=-\bigg(\frac{\partial p}{\partial V}\bigg)_T=\frac{1}{\kappa_TV}$$
-where $\kappa_T$ is the isothermal compressibility, i.e. the linear response coefficient for the conjugate pair of thermodynamic variables $(p,V)$. Hence, 
-$$\langle\Delta V^2\rangle=k_BTV\kappa_T,\quad P(V)=\frac{1}{\sqrt{2\pi k_BTV\kappa_T}}\exp\bigg(-\frac{\Delta V^2}{2k_BTV\kappa_T}\bigg)$$
-The fractional volume fluctuation is
-$$\frac{\sqrt{\langle\Delta V^2\rangle}}{V}=\sqrt{k_BT\kappa_T/V}$$
-$\kappa_T\propto dV/dP$ diverges at the liquid-vapour critical point, and hence the magnitude of the volume fluctuations. We observe this as a `critical opalescence' phenomena - volume of density fluctuations increases to the point they start scattering light. A similar example is seen in the demixing region of a phase-separating mixture, but in $(T,c)$.
+where $\kappa_T$ is the isothermal compressibility, i.e. the linear response coefficient for the conjugate pair of thermodynamic variables $(p,V)$. Hence, $\sigma_V^2=k_BTV\kappa_T$  and $P(V)=\frac{1}{\sqrt{2\pi k_BTV\kappa_T}}\exp(-\frac{(V-V_0)^2}{2k_BTV\kappa_T})$. The fractional volume fluctuation is $\frac{\sigma_V}{V}=\sqrt{k_BT\kappa_T/V}$. $\kappa_T\propto dV/dP$ diverges at the liquid-vapour critical point, and hence the magnitude of the volume fluctuations. We observe this as a `critical opalescence' phenomena - volume of density fluctuations increases to the point they start scattering light. A similar example is seen in the demixing region of a phase-separating mixture, but in $(T,c)$.
 \end{eg}
 \begin{eg}[Ising model]
 The mean square fluctuation of magnetisation is
-$$\langle\Delta M^2\rangle=k_BT\frac{\partial M}{\partial B}$$
+$$\sigma_M^2=k_BT\frac{\partial M}{\partial B}$$
 Evaluated at $B\rightarrow 0$ and in equilibrium $M_0=0$ at $T>T_c$, the derivative is equal to the susceptibility $\chi$, the corresponding linear response coefficient of the $(M,B)$ pair. This susceptibility diverges at the critical point and so must the magnitude of fluctuation in magnetisation. This divergence occurs on both sides of the critical point.
 \end{eg}
 \newpage
@@ -2300,7 +2308,7 @@ The theory of the Brownian motion of a free particle is described by the Langevi
 $$m\frac{d\mathbf{u}}{dt}=-\gamma\mathbf{u}+\xi(t)$$
 where $\mathbf{u}$ denotes the vector of particle velocity. The term $-\gamma\mathbf{u}$ represents the kinetic friction experienced by the particle, which is governed by fluid dynamics. The second contribution is fluctuating, which is the force provided by collisions with molecules of surrounding liquid. This stochastic force has `white noise' properties:
 $$\langle\xi(t)\rangle=0,\quad\langle\xi(t)^2\rangle\neq 0,\quad\langle\xi(t_1)\xi(t_2)\rangle=0\text{ if }t_1\neq t_2$$
-i.e. zero expectation and complete lack of correlation, i.e. $\langle\xi(t)\xi(t')\rangle=\Gamma\delta(t-t')$ where $\Gamma$ is a measure of intensity of the stochastic force.
+i.e. zero expectation and autocorrelation, i.e. $\langle\xi(t)\xi(t')\rangle=\Gamma\delta(t-t')$ where $\Gamma$ is a measure of intensity of the stochastic force.
 \end{defi}
 \begin{prop}
 $$\Gamma=2k_BT\gamma$$
@@ -2313,7 +2321,7 @@ The instantaneous value of $u(t)$ cannot be predicted, but its mean square value
     \langle u^2\rangle&=\bigg\langle u_0^2e^{-2\gamma t/m}+2u_0e^{-\gamma t/m}\int_0^te^{-\gamma(t-t')/m}\frac{\xi(t')}{m}dt'+\int_0^t\int_0^te^{-\gamma(2t-t_1-t_2)/m}\frac{\xi(t_1)\xi(t_2)}{m^2}dt_1dt_2\bigg\rangle\nonumber\\&=u_0^2e^{-2\gamma t/m}+\frac{1}{m^2}\int_0^t\int_0^te^{-\gamma(2t-t_1-t_2)/m}\langle\xi(t_1)\xi(t_2)\rangle dt_1dt_2\nonumber\\&=u_0^2e^{-2\gamma t/m}+\frac{\Gamma}{m^2}e^{-2\gamma t/m}\int_0^te^{2\gamma t_1/m}dt_1\nonumber\\&=u_0^2e^{-2\gamma t/m}+\frac{\Gamma}{2m\gamma}(1-e^{-2\gamma t/m})\nonumber
 \end{align}
 The cross-term, linear in $\langle\xi\rangle$ is dropped out. In the long-time limit, the decaying exponential vanishes, i.e. the transient dies out. Invoking equipartition theorem,
-$$\langle0.5mu^2\rangle=\frac{\Gamma}{4\gamma}=\frac{1}{2}k_BT$$
+$$\frac{1}{2}k_BT=\langle0.5mu^2\rangle=\frac{\Gamma}{4\gamma}$$
 The desired result follows.
 \end{proof}
 \subsection{Diffusion of Free and Confined Particles}
@@ -2351,9 +2359,9 @@ $$\langle x^2\rangle=\frac{\Gamma}{2\alpha\gamma}=\frac{k_BT}{\alpha}$$
 \begin{eg}
 Dissipation leads to fluctuations in electric circuits. Nyquist's argument is as follow: the transmission line is a blackbody with spectrum
 $$E_\omega d\omega=k_BTld\omega/\pi c$$
-Terminate the transmission line with a characteristic impedance $R$. The termination resistor injects noise power $I^2Rd\omega=\frac{k_BT}{2\pi}\omega$. Model int erms of a voltage source injecting noise:
+Terminate the transmission line with a characteristic impedance $R$. The termination resistor injects noise power $I^2Rd\omega=\frac{k_BT}{2\pi}\omega$. Model in terms of a voltage source injecting noise:
 $$I_\omega=\frac{V_\omega}{2R}\implies\frac{V_\omega^2}{4R^2}Rd\omega=k_BTdf $$
-This gives the Johnson noise $V_f^2=4Rk_BT$ injectedby the resistor $R$.
+This gives the Johnson noise $V_f^2=4Rk_BT$ injected by the resistor $R$.
 \end{eg}
 \newpage
 \subsection{Working with probability distributions}
@@ -2366,7 +2374,7 @@ for some $D$. This is the probability that after $N$ such steps the particle rea
 The probability of finding the configuration with $N$ trials out of which $N_+$ are `successful' is
 $$P(N_+,N)=\frac{N!}{N_+!(N-N_+)!}\frac{1}{2^N}=\sqrt{\frac{N}{2\pi N_+(N-N_+)}}e^{N\ln N-N_+\ln N_+-(N-N_+)\ln(N-N_+)-N\ln 2}$$
 where we used Stirling formula $N!\approx e^{-N}N^N\sqrt{2\pi N}$. Expand in terms of $\epsilon=x/aN=x\tau/at$, and keeping terms up to second order in the exponential, gives
-$$P(N_+,N)=\sqrt{\frac{2}{\pi N}}\sqrt{\frac{1}{1-(x/aN)^2}}\exp\bigg[-\frac{x^2}[2a^2N]\bigg]=2a\sqrt{\frac{1}{4\pi Dt}}\exp\bigg[-\frac{x^2}{4Dt}\bigg]$$
+$$P(N_+,N)=\sqrt{\frac{2}{\pi N}}\sqrt{\frac{1}{1-(x/aN)^2}}\exp\bigg[-\frac{x^2}{2a^2N}\bigg]=2a\sqrt{\frac{1}{4\pi Dt}}\exp\bigg[-\frac{x^2}{4Dt}\bigg]$$
 where we used $D=a^2/2\tau$. 
 \end{proof}
 \begin{remarks}
@@ -2401,7 +2409,7 @@ $$\frac{\partial P(x,t)}{\partial t}=-\frac{\partial}{\partial x}\bigg[\frac{1}{
 \begin{proof}
 First, consider the steady state of this process:
 $$0=D\partial_x^2P(x)+C\partial_xP(x)\implies P_{\text{eq}}(x)=P_0e^{-Cx/D}$$
-where at very large $x$, both $P$ and $P'$ have to be zero. The equilibrium probability distribution must have the Boltzmann form, $P_{\text{eq}}\propto\exp[-E(x)/k_BT]$, with $E(x)$ the corresponding potential energy at point $x$. So, $C=\frac{1}{\gamma}\frac{dE(x)}{dx}$. Let $f=-dE/dx$ be the external force, then plug this back and differentiate with respect to $x$ to get the full equation:
+where at very large $x$, both $P$ and $P'$ have to be zero. We had $D=k_BT/\gamma$. The equilibrium probability distribution must have the Boltzmann form, $P_{\text{eq}}\propto\exp[-E(x)/k_BT]$, with $E(x)$ the corresponding potential energy at point $x$. So, $C=\frac{1}{\gamma}\frac{dE(x)}{dx}$. Let $f=-dE/dx$ be the external force, then plug this back and differentiate with respect to $x$ to get the full equation:
 $$\partial_tP(x,t)=\partial_x\bigg(\frac{1}{\gamma}\frac{dE}{dx}+D\frac{\partial}{\partial x}\bigg)P(x,t)$$
 as desired.
 \end{proof}
@@ -2418,7 +2426,7 @@ where $J(x,t)$ represents the diffusion current for the probability $P(x,t)$.
 Kramers' problem describes the escape of particles over potential barriers. Suppose the particles are initially caught in the metastable state at A, and we wish to find the rate at which the particles will escape from this state over the potential (of energy barrier $\Delta E$ before reaching a global minimum behind it at B), as a result of thermal motion. When steady current of particles is established in the long-time limit,
 $$J\int_A^Be^{\beta E(s)}ds=-D\bigg[e^{\beta E(x)}P(x)\bigg]_A^B$$
 Approximate the potential near the metastable equilibrium point A as $E(x)\approx E_A+\frac{1}{2}K_Ax^2$. The number of particles in the vicinity of A can be estimated by taking
-$$dN_A=P(x_A)e^{-\beta E_A}dx\implies N_A\approx P(x_A)\int_{-\infty}^\infty e^{-\beta K_Ax^2/2}dx=P(x_A)\sqrt{\frac{2\pi k_BT}{k_A}}$$
+$$dN_A=P(x_A)e^{-\beta E_A}dx\implies N_A\approx P(x_A)\int_{-\infty}^\infty e^{-\beta K_Ax^2/2}dx=P(x_A)\sqrt{\frac{2\pi k_BT}{K_A}}$$
 Assuming the potential well $E_B(x)$ is deep enough, then the steady state current is
 $$J\approx\frac{DP(x_A)}{\int_A^Be^{\beta E(s)}ds}$$
 and the rate is $J/N_A=D\sqrt{\frac{K_A}{2\pi k_BT}}/\int_A^Be^{\beta E(s)}ds$. The principal contribution to the integral arises only from the very small region near the potential barrier C, with an approximate parabolic form near the maximum, i.e. $E_c\approx\Delta E-0.5K_c(x-x_0)^2$.
@@ -2452,7 +2460,6 @@ where $\delta x=x-\overline{x}=x$ as $\overline{x}=0$ for our damped oscillator.
 $$x_\omega=f_\omega\alpha_\omega\implies\langle x^2_\omega\rangle=\langle|x_\omega|^2\rangle=\langle|\xi_\omega|^2\rangle|\alpha_\omega|^2=\frac{2k_BT}{\omega}\text{Im}[\alpha_\omega]\implies\langle|\xi_\omega|^2\rangle=\frac{2k_BT}{\omega}\frac{\text{Im}[\alpha_\omega]}{|\alpha_\omega|^2}=2k_BT\gamma$$
 i.e. constant.
 \end{proof}
-\newpage
 \bibliographystyle{unsrt}
 \bibliography{reference.bib}
 \end{document}
